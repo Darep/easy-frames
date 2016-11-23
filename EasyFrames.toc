@@ -1,0 +1,7 @@
+## Title: EasyFrames
+## Interface: 70100
+## Notes: Make your unitframes colored.
+## Author: Usoltsev
+## SavedVariables: EasyFramesDB
+
+EasyFrames.lua
