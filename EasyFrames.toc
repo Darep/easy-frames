@@ -26,4 +26,4 @@ EasyFrames.lua
 
 Config.lua
 
-# Modules\Player.lua
+Modules\General.lua

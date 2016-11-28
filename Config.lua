@@ -37,9 +37,18 @@ local function setColor(info, r, g, b)
     EasyFrames.db.profile[ns][key] = color
 end
 
+local function getOptionName(name)
+    return "EasyFrames" .. " - " .. name
+end
+
+local healthFormat = {
+    ["1"] = L["Percent"], --1
+    ["2"] = L["Current + Max"], --2
+    ["3"] = L["Current + Max + Percent"], --3
+}
 
 local generalOptions = {
-    name = "EasyFrames" .. " - " .. L["Main options"],
+    name = getOptionName(L["Main options"]),
     desc = L["Main options"],
     type = "group",
     args = {
@@ -238,7 +247,7 @@ local generalOptions = {
                     name = L["Reset color to default"],
 
                     func = function()
-                        EasyFrames.db.profile.general.friendlyTargetDefaultColors = {0, 1, 0}
+                        EasyFrames:GetModule("General"):resetFriendlyTargetDefaultColors()
                     end,
                 },
 
@@ -257,7 +266,7 @@ local generalOptions = {
                     name = L["Reset color to default"],
 
                     func = function()
-                        EasyFrames.db.profile.general.enemyTargetDefaultColors = {1, 0, 0}
+                        EasyFrames:GetModule("General"):resetEnemyTargetDefaultColors()
                     end,
                 },
 
@@ -266,14 +275,8 @@ local generalOptions = {
     },
 }
 
-local healthFormat = {
-    ["1"] = "Percent", --1
-    ["2"] = "Current + Max", --2
-    ["3"] = "Current + Max + Percent", --3
-}
-
 local playerOptions = {
-    name = "EasyFrames" .. " - " .. L["Player"],
+    name = getOptionName(L["Player"]),
     type = "group",
     get = getOpt,
     set = setOpt,
@@ -345,7 +348,7 @@ local playerOptions = {
 }
 
 local targetOptions = {
-    name = "EasyFrames" .. " - " .. L["Target"],
+    name = getOptionName(L["Target"]),
     type = "group",
     get = getOpt,
     set = setOpt,
@@ -399,6 +402,92 @@ local targetOptions = {
     },
 }
 
+local focusOptions = {
+    name = getOptionName(L["Focus"]),
+    type = "group",
+    get = getOpt,
+    set = setOpt,
+    args = {
+        desc = {
+            type = "description",
+            order = 1,
+            name = L["In focus options you can set scale focus frame, healthbar text format, etc"],
+        },
+
+        scaleFrame = {
+            type = "range",
+            order = 2,
+            name = L["Focus frame scale"],
+            desc = L["Scale of focus unit frame"],
+            min = 0.5,
+            max = 2,
+            arg = "focus"
+        },
+
+        newLine = {
+            type = "description",
+            order = 3,
+            name = "",
+        },
+
+        healthFormat = {
+            type = "select",
+            order = 4,
+            name = L["Focus healthbar text format"],
+            desc = L["Set the focus healthbar text format"],
+            values = healthFormat,
+            arg = "focus"
+        },
+
+        newLine2 = {
+            type = "description",
+            order = 5,
+            name = "",
+        },
+
+        showToTFrame = {
+            type = "toggle",
+            order = 6,
+            width = "double",
+            name = L["Show target of focus frame"],
+            desc = L["Show target of focus frame"],
+            arg = "focus"
+        },
+    },
+}
+
+local petOptions = {
+    name = getOptionName(L["Pet"]),
+    type = "group",
+    get = getOpt,
+    set = setOpt,
+    args = {
+        desc = {
+            type = "description",
+            order = 1,
+            name = L["In pet options you can show/hide pet name, enable/disable pet hit indicators"],
+        },
+
+        showName = {
+            type = "toggle",
+            order = 2,
+            width = "double",
+            name = L["Show pet name"],
+            desc = L["Show pet name"],
+            arg = "pet"
+        },
+
+        showHitIndicator = {
+            type = "toggle",
+            order = 3,
+            width = "double",
+            name = L["Enable hit indicators"],
+            desc = L["Show or hide the damage/heal which your pet take on pet unit frame"],
+            arg = "pet"
+        },
+    },
+}
+
 function EasyFrames:ChatCommand(input)
     if not input or input:trim() == "" then
         InterfaceOptionsFrame_OpenToCategory(EasyFrames.optFrames.Profiles)
@@ -409,18 +498,24 @@ function EasyFrames:ChatCommand(input)
 end
 
 function EasyFrames:SetupOptions()
+    -- Frames in BlizOptions
     self.optFrames = {}
 
     -- General
     AceConfig:RegisterOptionsTable("EasyFrames", generalOptions)
     self.optFrames.EasyFrames = AceConfigDialog:AddToBlizOptions("EasyFrames", "EasyFrames")
---    self:RegisterModuleOptions("EasyFrames", generalOptions)
 
     -- Player
     self:RegisterModuleOptions("Player", playerOptions, L["Player"])
 
     -- Target
     self:RegisterModuleOptions("Target", targetOptions, L["Target"])
+
+    -- Focus
+    self:RegisterModuleOptions("Focus", focusOptions, L["Focus"])
+
+    -- Pet
+    self:RegisterModuleOptions("Pet", petOptions, L["Pet"])
 
     -- Profiles
     self:RegisterModuleOptions("Profiles", LibStub("AceDBOptions-3.0"):GetOptionsTable(self.db))

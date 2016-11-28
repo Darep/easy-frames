@@ -8,12 +8,12 @@ local db
 local defaults = {
     profile = {
         general = {
-            classColored = true,
-            coloredBaseOnCurrentHealth = false,
+            classColored = true, -- classcolorplayer, classcolortarget, classcolorttot, classcolorFocus, classcolorftot
+            coloredBaseOnCurrentHealth = false, -- percentcolorplayer, percentcolortarget, percentcolortargettot, percentcolorfocus, percentcolorfocustot
             customBuffSize = true, -- buffsizebutton
             buffSize = 20, -- buffsize
             selfBuffSizeScale = 1.4, -- scaleselfbuffsize
-            classPortraits = true,
+            classPortraits = true, -- classportraits
             barTexture = "Blizzard", -- bartex
             darkFrameBorder = 0, -- darkentextures
             friendlyTargetDefaultColors = {0, 1, 0},
@@ -22,35 +22,22 @@ local defaults = {
 
         player = {
             scaleFrame = 1.2, -- framescaleplayer
-            healthFormat = "3",
+            healthFormat = "3", -- phformat
             showName = true, -- playername
             showHitIndicator = true, -- playerhitindi
             showSpecialbar = true, -- playerspecialbar
-
-            classColored = true, -- classcolorplayer
-            coloredBaseOnCurrentHealth = false, -- percentcolorplayer
         },
 
         target = {
             scaleFrame = 1.2, -- framescaletarget
-            healthFormat = "3",
+            healthFormat = "3", -- thformat
             showToTFrame = true, -- targetoftarget
-
-            classColored = true, -- classcolortarget
-            classColoredToT = true, -- classcolorttot
-            coloredBaseOnCurrentHealth = false, -- percentcolortarget
-            coloredToTBaseOnCurrentHealth = false, -- percentcolortargettot
         },
 
         focus = {
             scaleFrame = 1.2, -- framescalefocus
-            healthFormat = "3",
-            showFrameToT = true, -- targetoffocus
-
-            classColored = true, -- classcolorFocus
-            classColoredToT = true, -- classcolorftot
-            coloredBaseOnCurrentHealth = false, -- percentcolorfocus
-            coloredToTBaseOnCurrentHealth = false, -- percentcolorfocustot
+            healthFormat = "3", -- fhformat
+            showToTFrame = true, -- targetoffocus
         },
 
         pet = {

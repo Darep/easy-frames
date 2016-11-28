@@ -9,6 +9,10 @@ local L = LibStub("AceLocale-3.0"):NewLocale("EasyFrames", "enUS", true, debug)
 L["Main options"] = true
 L["In main options you can set the global options like colored frames, class portraits, etc"] = true
 
+L["Percent"] = true
+L["Current + Max"] = true
+L["Current + Max + Percent"] = true
+
 L["Frames"] = true
 L["Setting for unit frames"] = true
 
@@ -65,14 +69,21 @@ L["Set the target healthbar text format"] = true
 L["Show target of target frame"] = true
 
 
+L["Focus"] = true
+L["In focus options you can set scale focus frame, healthbar text format, etc"] = true
+L["Focus frame scale"] = true
+L["Scale of focus unit frame"] = true
+L["Focus healthbar text format"] = true
+L["Set the focus healthbar text format"] = true
+L["Show target of focus frame"] = true
 
 
+L["Pet"] = true
+L["In pet options you can show/hide pet name, enable/disable pet hit indicators"] = true
+L["Show pet name"] = true
+L["Show or hide the damage/heal which your pet take on pet unit frame"] = true
 
-L["Bar Texture Style"] = true
-L["Bar Texture Style long tooltip"] = true
-L["Name general"] = true
-L["Name player"] = true
-L["showName"] = true
+
 
 
 
