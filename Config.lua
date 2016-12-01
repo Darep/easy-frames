@@ -247,7 +247,7 @@ local generalOptions = {
                     name = L["Reset color to default"],
 
                     func = function()
-                        EasyFrames:GetModule("General"):resetFriendlyTargetDefaultColors()
+                        EasyFrames:GetModule("General"):ResetFriendlyTargetDefaultColors()
                     end,
                 },
 
@@ -266,7 +266,7 @@ local generalOptions = {
                     name = L["Reset color to default"],
 
                     func = function()
-                        EasyFrames:GetModule("General"):resetEnemyTargetDefaultColors()
+                        EasyFrames:GetModule("General"):ResetEnemyTargetDefaultColors()
                     end,
                 },
 
