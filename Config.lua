@@ -142,7 +142,7 @@ local generalOptions = {
                     min = 0,
                     max = 1,
                     set = function(info, value)
-                        print("darkenTexture value is ", value)
+                        EasyFrames:GetModule("General"):SetDarkFrameBorder(value - 1)
                         setOpt(info, value)
                     end,
                     isPercent = true,

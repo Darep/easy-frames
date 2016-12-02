@@ -29,4 +29,5 @@ EasyFrames.lua
 
 Config.lua
 
+Modules\Core.lua
 Modules\General.lua
