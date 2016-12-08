@@ -15,7 +15,7 @@ local defaults = {
             selfBuffSizeScale = 1.4, -- scaleselfbuffsize
             classPortraits = true, -- classportraits
             barTexture = "Blizzard", -- bartex
-            darkFrameBorder = 0, -- darkentextures
+            brightFrameBorder = 1, -- darkentextures
             friendlyTargetDefaultColors = {0, 1, 0},
             enemyTargetDefaultColors = {1, 0, 0},
         },

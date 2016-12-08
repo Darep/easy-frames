@@ -35,6 +35,8 @@ local function setColor(info, r, g, b)
     local key = info[#info]
     local color = {r, g, b}
     EasyFrames.db.profile[ns][key] = color
+
+    EasyFrames:GetModule("General"):SetFramesColored()
 end
 
 local function getOptionName(name)
@@ -81,13 +83,17 @@ local generalOptions = {
                 classColored = {
                     type = "toggle",
                     order = 3,
+                    name = L["Class colored healthbars"],
+                    desc = L["If checked frames becomes class colored"],
                     disabled = function()
                         if (EasyFrames.db.profile.general.coloredBaseOnCurrentHealth) then
                             return true
                         end
                     end,
-                    name = L["Class colored healthbars"],
-                    desc = L["If checked frames becomes class colored"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("General"):SetFramesColored()
+                    end,
                     arg = "general"
                 },
 
@@ -112,6 +118,10 @@ local generalOptions = {
                     width = "double",
                     name = L["Class portraits"],
                     desc = L["Replaces the unit-frame portrait of player-controlled characters with their class icon"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("General"):SetClassPortraits()
+                    end,
                     arg = "general"
                 },
 
@@ -135,15 +145,15 @@ local generalOptions = {
                     arg = "general"
                 },
 
-                darkFrameBorder = {
+                brightFrameBorder = {
                     type = "range",
-                    name = L["Dark frame border"],
-                    desc = L["You can set frame border bright/dark color. From bright to dark. 0 - bright, 100 - dark."],
+                    name = L["Bright frames border"],
+                    desc = L["You can set frames border bright/dark color. From bright to dark. 0 - dark, 100 - bright"],
                     min = 0,
                     max = 1,
                     set = function(info, value)
-                        EasyFrames:GetModule("General"):SetDarkFrameBorder(value - 1)
                         setOpt(info, value)
+                        EasyFrames:GetModule("General"):SetBrightFramesBorder(value)
                     end,
                     isPercent = true,
                     arg = "general"
@@ -237,7 +247,6 @@ local generalOptions = {
                     width = "double",
                     name = L["Set default friendly healthbar color"],
                     desc = L["You can set the default friendly healthbar color for target frame"],
-
                     arg = "general"
                 },
 
@@ -248,6 +257,7 @@ local generalOptions = {
 
                     func = function()
                         EasyFrames:GetModule("General"):ResetFriendlyTargetDefaultColors()
+                        EasyFrames:GetModule("General"):SetFramesColored()
                     end,
                 },
 
@@ -267,6 +277,7 @@ local generalOptions = {
 
                     func = function()
                         EasyFrames:GetModule("General"):ResetEnemyTargetDefaultColors()
+                        EasyFrames:GetModule("General"):SetFramesColored()
                     end,
                 },
 
@@ -293,6 +304,10 @@ local playerOptions = {
             name = L["Player frame scale"],
             desc = L["Scale of player unit frame"],
             min = 0.5,
+            set = function(info, value)
+                setOpt(info, value)
+                EasyFrames:GetModule("Player"):SetScale(value)
+            end,
             max = 2,
             arg = "player"
         },

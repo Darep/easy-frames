@@ -34,11 +34,12 @@ function Core:OnEnable()
     self:MoveTargetFramesBarsTextString()
     self:MoveFocusFramesBarsTextString()
     --    self:MovePetFramesBarsTextString()
+
+    print("|cff71C671EasyFrames|cffffffff loaded. Options: |cff71C671/ef")
 end
 
 
 function Core:EventHandler()
-    --    self:Print("EventHendler", info, event)
     TargetFrameNameBackground:SetVertexColor(0, 0, 0, 0.0)
     TargetFrameNameBackground:SetHeight(18)
     TargetFrameBackground:SetHeight(41)
@@ -79,6 +80,7 @@ end
 
 function Core:HideFramesElements()
     local noop = function() return end
+
     for _, objname in ipairs({
         "PlayerAttackGlow",
         "PlayerRestGlow",

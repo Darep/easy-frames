@@ -35,8 +35,8 @@ L["Replaces the unit-frame portrait of player-controlled characters with their c
 L["Texture"] = true
 L["Set the frames bar Texture"] = true
 
-L["Dark frame border"] = true
-L["You can set frame border bright/dark color. From bright to dark. 0 - bright, 100 - dark."] = true
+L["Bright frames border"] = true
+L["You can set frames border bright/dark color. From bright to dark. 0 - dark, 100 - bright"] = true
 
 L["Frames colors"] = true
 L["In this section you can set the default colors for friendly/enemy target frames"] = true
