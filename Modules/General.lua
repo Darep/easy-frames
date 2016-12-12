@@ -6,6 +6,10 @@ local MODULE_NAME = "General"
 local General = EasyFrames:NewModule(MODULE_NAME, "AceHook-3.0")
 local db
 
+local GetFramesHealthBar = EasyFrames.Utils.GetFramesHealthBar
+local GetFramesManaBar = EasyFrames.Utils.GetFramesManaBar
+
+
 local function ClassColored(statusbar, unit)
 
     if (UnitIsPlayer(unit) and UnitClass(unit) and db.general.classColored) then
@@ -62,6 +66,10 @@ function General:OnEnable()
     end)
 
     self:SecureHook("UnitFramePortrait_Update", "MakeClassPortraits")
+
+    self:SetFrameBarTexture(db.general.barTexture)
+
+    self:SetBrightFramesBorder(db.general.brightFrameBorder)
 end
 
 
@@ -74,27 +82,10 @@ function General:ResetEnemyTargetDefaultColors()
 end
 
 
-function General:SetBrightFramesBorder(value)
-    for i, t in pairs({
-        PlayerFrameTexture, TargetFrameTextureFrameTexture, TargetFrameToTTextureFrameTexture,
-        PetFrameTexture, FocusFrameTextureFrameTexture, FocusFrameToTTextureFrameTexture
-    }) do
-        t:SetVertexColor(value, value, value)
-    end
-end
-
-
 function General:SetFramesColored()
-    local frames = {
-        PlayerFrameHealthBar,
-        TargetFrameHealthBar,
-        TargetFrameToTHealthBar,
-        FocusFrameHealthBar,
-        FocusFrameToTHealthBar,
-        PetFrameHealthBar,
-    }
+    local healthBars = GetFramesHealthBar()
 
-    for _, statusbar in pairs(frames) do
+    for _, statusbar in pairs(healthBars) do
         if (UnitIsConnected(statusbar.unit)) then
             ClassColored(statusbar, statusbar.unit)
         end
@@ -130,5 +121,33 @@ end
 function General:MakeClassPortraits(frame)
     if frame.portrait then
         ClassPortraits(frame)
+    end
+end
+
+
+function General:SetFrameBarTexture(value)
+    local healthBars = GetFramesHealthBar()
+    local manaBars = GetFramesManaBar()
+
+    for _, healthbar in pairs(healthBars) do
+        if (UnitIsConnected(healthbar.unit)) then
+            healthbar:SetStatusBarTexture(Media:Fetch("bartexture", value))
+        end
+    end
+
+    for _, manabar in pairs(manaBars) do
+        if (UnitIsConnected(manabar.unit)) then
+            manabar:SetStatusBarTexture(Media:Fetch("bartexture", value))
+        end
+    end
+end
+
+
+function General:SetBrightFramesBorder(value)
+    for i, t in pairs({
+        PlayerFrameTexture, TargetFrameTextureFrameTexture, TargetFrameToTTextureFrameTexture,
+        PetFrameTexture, FocusFrameTextureFrameTexture, FocusFrameToTTextureFrameTexture
+    }) do
+        t:SetVertexColor(value, value, value)
     end
 end

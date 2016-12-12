@@ -104,5 +104,26 @@ function EasyFrames.Utils.ReadableNumber(num, places)
     return ret
 end
 
+function EasyFrames.Utils.GetFramesHealthBar()
+    return {
+        PlayerFrameHealthBar,
+        TargetFrameHealthBar,
+        TargetFrameToTHealthBar,
+        FocusFrameHealthBar,
+        FocusFrameToTHealthBar,
+        PetFrameHealthBar,
+    }
+end
+
+function EasyFrames.Utils.GetFramesManaBar()
+    return {
+        PlayerFrameManaBar,
+        TargetFrameManaBar,
+        TargetFrameToTManaBar,
+        FocusFrameManaBar,
+        FocusFrameToTManaBar,
+        PetFrameManaBar,
+    }
+end
 
 

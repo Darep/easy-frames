@@ -139,8 +139,8 @@ local generalOptions = {
                     desc = L["Set the frames bar Texture"],
                     values = Media:HashTable("bartexture"),
                     set = function(info, value)
-                        print("change texture")
                         setOpt(info, value)
+                        EasyFrames:GetModule("General"):SetFrameBarTexture(value)
                     end,
                     arg = "general"
                 },
