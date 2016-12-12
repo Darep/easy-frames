@@ -6,41 +6,48 @@ local MODULE_NAME = "General"
 local General = EasyFrames:NewModule(MODULE_NAME, "AceHook-3.0")
 local db
 
-local function PlayerClassColored(statusbar, unit)
-    local _, class, classColor
+local function ClassColored(statusbar, unit)
 
-    _, class = UnitClass(unit)
-    classColor = CUSTOM_CLASS_COLORS and CUSTOM_CLASS_COLORS[class] or RAID_CLASS_COLORS[class]
+    if (UnitIsPlayer(unit) and UnitClass(unit) and db.general.classColored) then
+        -- player
 
-    statusbar:SetStatusBarColor(classColor.r, classColor.g, classColor.b)
-end
+        local _, class, classColor
 
-local function NonPlayerColored(statusbar, unit)
-    local colors
+        _, class = UnitClass(unit)
+        classColor = CUSTOM_CLASS_COLORS and CUSTOM_CLASS_COLORS[class] or RAID_CLASS_COLORS[class]
 
-    if (UnitIsFriend("player", unit)) then
-        colors = db.general.friendlyTargetDefaultColors
-    end
+        statusbar:SetStatusBarColor(classColor.r, classColor.g, classColor.b)
+    else
+        -- non player
 
-    if (not UnitIsFriend("player", unit)) then
-        colors = db.general.enemyTargetDefaultColors
-    end
+        local colors
 
-    statusbar:SetStatusBarColor(colors[1], colors[2], colors[3])
-end
+        if (UnitIsFriend("player", unit)) then
+            colors = db.general.friendlyTargetDefaultColors
+        end
 
-local function PlayerClassPortraits(frame)
-    local t = CLASS_ICON_TCOORDS[select(2, UnitClass(frame.unit))]
-    if t then
-        frame.portrait:SetTexture("Interface\\TargetingFrame\\UI-Classes-Circles")
-        frame.portrait:SetTexCoord(unpack(t))
+        if (not UnitIsFriend("player", unit)) then
+            colors = db.general.enemyTargetDefaultColors
+        end
+
+        statusbar:SetStatusBarColor(colors[1], colors[2], colors[3])
     end
 end
 
-local function NonPlayerPortraits(frame)
-    frame.portrait:SetTexCoord(0, 1, 0, 1)
-end
 
+local function ClassPortraits(frame)
+    if (UnitIsPlayer(frame.unit) and db.general.classPortraits) then
+        local t = CLASS_ICON_TCOORDS[select(2, UnitClass(frame.unit))]
+
+        if t then
+            frame.portrait:SetTexture("Interface\\TargetingFrame\\UI-Classes-Circles")
+            frame.portrait:SetTexCoord(unpack(t))
+        end
+    else
+        SetPortraitTexture(frame.portrait, frame.unit)
+        frame.portrait:SetTexCoord(0, 0, 0, 1, 1, 0, 1, 1)
+    end
+end
 
 
 function General:OnInitialize()
@@ -56,6 +63,7 @@ function General:OnEnable()
 
     self:SecureHook("UnitFramePortrait_Update", "MakeClassPortraits")
 end
+
 
 function General:ResetFriendlyTargetDefaultColors()
     EasyFrames.db.profile.general.friendlyTargetDefaultColors = {0, 1, 0}
@@ -75,6 +83,7 @@ function General:SetBrightFramesBorder(value)
     end
 end
 
+
 function General:SetFramesColored()
     local frames = {
         PlayerFrameHealthBar,
@@ -87,46 +96,39 @@ function General:SetFramesColored()
 
     for _, statusbar in pairs(frames) do
         if (UnitIsConnected(statusbar.unit)) then
-
-            if (UnitIsPlayer(statusbar.unit) and UnitClass(statusbar.unit) and db.general.classColored) then
-                -- player
-                PlayerClassColored(statusbar, statusbar.unit)
-            else
-                -- non player
-                NonPlayerColored(statusbar, statusbar.unit)
-            end
+            ClassColored(statusbar, statusbar.unit)
         end
     end
 end
 
 function General:MakeFramesColored(statusbar, unit)
     if (unit ~= mouseover) then
-
         if (UnitIsConnected(unit) and unit == statusbar.unit) then
-            if (UnitIsPlayer(unit) and UnitClass(unit) and db.general.classColored) then
-                PlayerClassColored(statusbar, unit)
-            else
-                NonPlayerColored(statusbar, unit)
-            end
-
+            ClassColored(statusbar, unit)
         end
     end
 end
 
+
 function General:SetClassPortraits()
---    if (db.general.classPortraits) then
---        self:SecureHook("UnitFramePortrait_Update", "ClassPortraits")
---    else
---        self:Unhook("UnitFramePortrait_Update", "ClassPortraits")
---    end
+    local frames = {
+        PlayerFrame,
+        TargetFrame,
+        TargetFrameToT,
+        FocusFrame,
+        FocusFrameToT,
+        PetFrame,
+    }
+
+    for _, frame in pairs(frames) do
+        if frame.portrait then
+            ClassPortraits(frame)
+        end
+    end
 end
 
 function General:MakeClassPortraits(frame)
     if frame.portrait then
-        if (UnitIsPlayer(frame.unit) and db.general.classPortraits) then
-            PlayerClassPortraits(frame)
-        else
-            NonPlayerPortraits(frame)
-        end
+        ClassPortraits(frame)
     end
 end
