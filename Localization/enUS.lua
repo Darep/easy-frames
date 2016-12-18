@@ -5,6 +5,7 @@ debug = true
 
 local L = LibStub("AceLocale-3.0"):NewLocale("EasyFrames", "enUS", true, debug)
 
+L["loaded. Options:"] = true
 
 L["Main options"] = true
 L["In main options you can set the global options like colored frames, class portraits, etc"] = true
@@ -39,11 +40,13 @@ L["Bright frames border"] = true
 L["You can set frames border bright/dark color. From bright to dark. 0 - dark, 100 - bright"] = true
 
 L["Frames colors"] = true
-L["In this section you can set the default colors for friendly/enemy target frames"] = true
+L["In this section you can set the default colors for friendly, enemy and neutral frames"] = true
 L["Set default friendly healthbar color"] = true
-L["You can set the default friendly healthbar color for target frame"] = true
+L["You can set the default friendly healthbar color for target and focus frame"] = true
 L["Set default enemy healthbar color"] = true
-L["You can set the default enemy healthbar color for target frame"] = true
+L["You can set the default enemy healthbar color for target and focus frame"] = true
+L["Set default neutral healthbar color"] = true
+L["You can set the default neutral healthbar color for target and focus frame"] = true
 L["Reset color to default"] = true
 
 

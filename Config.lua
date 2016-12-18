@@ -250,7 +250,7 @@ local generalOptions = {
                 description = {
                     type = "description",
                     order = 2,
-                    name = L["In this section you can set the default colors for friendly/enemy target frames"],
+                    name = L["In this section you can set the default colors for friendly, enemy and neutral frames"],
                 },
 
                 friendlyFrameDefaultColors = {
@@ -258,7 +258,7 @@ local generalOptions = {
                     order = 3,
                     width = "double",
                     name = L["Set default friendly healthbar color"],
-                    desc = L["You can set the default friendly healthbar color for target frame"],
+                    desc = L["You can set the default friendly healthbar color for target and focus frame"],
                     arg = "general"
                 },
 
@@ -278,7 +278,7 @@ local generalOptions = {
                     order = 5,
                     width = "double",
                     name = L["Set default enemy healthbar color"],
-                    desc = L["You can set the default enemy healthbar color for target frame"],
+                    desc = L["You can set the default enemy healthbar color for target and focus frame"],
                     arg = "general"
                 },
 
@@ -293,6 +293,25 @@ local generalOptions = {
                     end,
                 },
 
+                neutralFrameDefaultColors = {
+                    type = "color",
+                    order = 7,
+                    width = "double",
+                    name = L["Set default neutral healthbar color"],
+                    desc = L["You can set the default neutral healthbar color for target and focus frame"],
+                    arg = "general"
+                },
+
+                neutralTargetDefaultColorsReset = {
+                    type = "execute",
+                    order = 8,
+                    name = L["Reset color to default"],
+
+                    func = function()
+                        EasyFrames:GetModule("General"):ResetNeutralFrameDefaultColors()
+                        EasyFrames:GetModule("General"):SetFramesColored()
+                    end,
+                },
             }
         },
     },

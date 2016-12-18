@@ -28,10 +28,10 @@ local function ClassColored(statusbar, unit)
 
         if (UnitIsFriend("player", unit)) then
             colors = db.general.friendlyFrameDefaultColors
-        end
-
-        if (not UnitIsFriend("player", unit)) then
+        elseif (UnitIsEnemy("player", unit)) then
             colors = db.general.enemyFrameDefaultColors
+        else
+            colors = db.general.neutralFrameDefaultColors
         end
 
         statusbar:SetStatusBarColor(colors[1], colors[2], colors[3])
@@ -83,6 +83,11 @@ end
 function General:ResetEnemyFrameDefaultColors()
     EasyFrames.db.profile.general.enemyFrameDefaultColors = {1, 0, 0}
 end
+
+function General:ResetNeutralFrameDefaultColors()
+    EasyFrames.db.profile.general.neutralFrameDefaultColors = {1, 1, 0}
+end
+
 
 
 function General:SetFramesColored()
