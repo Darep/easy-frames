@@ -115,7 +115,7 @@ local generalOptions = {
                 classPortraits = {
                     type = "toggle",
                     order = 5,
-                    width = "double",
+--                    width = "double",
                     name = L["Class portraits"],
                     desc = L["Replaces the unit-frame portrait of player-controlled characters with their class icon"],
                     set = function(info, value)
@@ -311,6 +311,36 @@ local generalOptions = {
                         EasyFrames:GetModule("General"):ResetNeutralFrameDefaultColors()
                         EasyFrames:GetModule("General"):SetFramesColored()
                     end,
+                },
+            }
+        },
+
+        otherGroup = {
+            type = "group",
+            order = 5,
+            inline = true,
+            name = "",
+            get = getOpt,
+            set = setOpt,
+            args = {
+                header = {
+                    type = "header",
+                    order = 1,
+                    name = L["Other"],
+                },
+
+                description = {
+                    type = "description",
+                    order = 2,
+                    name = L["In this section you can set the settings like 'show welcome message' etc"],
+                },
+
+                showWelcomeMessage = {
+                    type = "toggle",
+                    order = 3,
+                    name = L["Show welcome message"],
+                    desc = L["Show welcome message when addon is loaded"],
+                    arg = "general"
                 },
             }
         },

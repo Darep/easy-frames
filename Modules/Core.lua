@@ -35,7 +35,9 @@ function Core:OnEnable()
     self:MoveFocusFramesBarsTextString()
     --    self:MovePetFramesBarsTextString()
 
-    print("|cff71C671EasyFrames|cffffffff " .. L["loaded. Options:"] .. " |cff71C671/ef")
+    if (db.general.showWelcomeMessage) then
+        print("|cff0cbd0cEasyFrames|cffffffff " .. L["loaded. Options:"] .. " |cff0cbd0c/ef")
+    end
 end
 
 

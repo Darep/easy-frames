@@ -49,6 +49,11 @@ L["Set default neutral healthbar color"] = true
 L["You can set the default neutral healthbar color for target and focus frame"] = true
 L["Reset color to default"] = true
 
+L["Other"] = true
+L["In this section you can set the settings like 'show welcome message' etc"] = true
+L["Show welcome message"] = true
+L["Show welcome message when addon is loaded"] = true
+
 
 L["Player"] = true
 L["In player options you can set scale player frame, healthbar text format, etc"] = true

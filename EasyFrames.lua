@@ -19,6 +19,7 @@ local defaults = {
             friendlyFrameDefaultColors = {0, 1, 0},
             enemyFrameDefaultColors = {1, 0, 0},
             neutralFrameDefaultColors = {1, 1, 0},
+            showWelcomeMessage = true,
         },
 
         player = {
