@@ -26,8 +26,8 @@ L["Turn on custom buffsize"] = true
 L["Turn on custom target and focustarget buffsize"] = true
 L["Buffsize"] = true
 L["Size of buff"] = true
-L["Self buffsize scale"] = true
-L["Scale of self buffsize"] = true
+L["Self buffsize"] = true
+L["Buffsize that you create"] = true
 
 L["Class portraits"] = true
 L["Replaces the unit-frame portrait of player-controlled characters with their class icon"] = true

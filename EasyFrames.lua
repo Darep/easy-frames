@@ -12,12 +12,13 @@ local defaults = {
             coloredBaseOnCurrentHealth = false, -- percentcolorplayer, percentcolortarget, percentcolortargettot, percentcolorfocus, percentcolorfocustot
             customBuffSize = true, -- buffsizebutton
             buffSize = 20, -- buffsize
-            selfBuffSizeScale = 1.4, -- scaleselfbuffsize
+            selfBuffSize = 28, -- scaleselfbuffsize
             classPortraits = true, -- classportraits
             barTexture = "Blizzard", -- bartex
             brightFrameBorder = 1, -- darkentextures
-            friendlyTargetDefaultColors = {0, 1, 0},
-            enemyTargetDefaultColors = {1, 0, 0},
+            friendlyFrameDefaultColors = {0, 1, 0},
+            enemyFrameDefaultColors = {1, 0, 0},
+            neutralFrameDefaultColors = {1, 1, 0},
         },
 
         player = {

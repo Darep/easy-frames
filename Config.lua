@@ -186,6 +186,10 @@ local generalOptions = {
                     order = 3,
                     name = L["Turn on custom buffsize"],
                     desc = L["Turn on custom target and focustarget buffsize"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("General"):SetCustomBuffSize(value)
+                    end,
                     arg = "general"
                 },
 
@@ -193,8 +197,12 @@ local generalOptions = {
                     type = "range",
                     name = L["Buffsize"],
                     desc = L["Buffsize"],
-                    min = 10,
-                    max = 30,
+                    min = 20,
+                    max = 40,
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("General"):SetCustomBuffSize(true)
+                    end,
                     disabled = function()
                         local hide = EasyFrames.db.profile.general.customBuffSize
                         if (hide == false) then
@@ -204,12 +212,16 @@ local generalOptions = {
                     arg = "general"
                 },
 
-                selfBuffSizeScale = {
+                selfBuffSize = {
                     type = "range",
-                    name = L["Self buffsize scale"],
-                    desc = L["Scale of self buffsize"],
-                    min = 1,
-                    max = 2,
+                    name = L["Self buffsize"],
+                    desc = L["Buffsize that you create"],
+                    min = 20,
+                    max = 40,
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("General"):SetCustomBuffSize(true)
+                    end,
                     disabled = function()
                         local hide = EasyFrames.db.profile.general.customBuffSize
                         if (hide == false) then
@@ -241,7 +253,7 @@ local generalOptions = {
                     name = L["In this section you can set the default colors for friendly/enemy target frames"],
                 },
 
-                friendlyTargetDefaultColors = {
+                friendlyFrameDefaultColors = {
                     type = "color",
                     order = 3,
                     width = "double",
@@ -250,18 +262,18 @@ local generalOptions = {
                     arg = "general"
                 },
 
-                friendlyTargetDefaultColorsReset = {
+                friendlyFrameDefaultColorsReset = {
                     type = "execute",
                     order = 4,
                     name = L["Reset color to default"],
 
                     func = function()
-                        EasyFrames:GetModule("General"):ResetFriendlyTargetDefaultColors()
+                        EasyFrames:GetModule("General"):ResetFriendlyFrameDefaultColors()
                         EasyFrames:GetModule("General"):SetFramesColored()
                     end,
                 },
 
-                enemyTargetDefaultColors = {
+                enemyFrameDefaultColors = {
                     type = "color",
                     order = 5,
                     width = "double",
@@ -276,7 +288,7 @@ local generalOptions = {
                     name = L["Reset color to default"],
 
                     func = function()
-                        EasyFrames:GetModule("General"):ResetEnemyTargetDefaultColors()
+                        EasyFrames:GetModule("General"):ResetEnemyFrameDefaultColors()
                         EasyFrames:GetModule("General"):SetFramesColored()
                     end,
                 },

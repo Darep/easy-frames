@@ -14,11 +14,3 @@ end
 function Focus:OnEnable()
 
 end
-
-function Focus:ResetFriendlyTargetDefaultColors()
-    EasyFrames.db.profile.general.friendlyTargetDefaultColors = {0, 1, 0}
-end
-
-function Focus:ResetEnemyTargetDefaultColors()
-    EasyFrames.db.profile.general.enemyTargetDefaultColors = {1, 0, 0}
-end

@@ -14,11 +14,3 @@ end
 function Target:OnEnable()
 
 end
-
-function Target:ResetFriendlyTargetDefaultColors()
-    EasyFrames.db.profile.general.friendlyTargetDefaultColors = {0, 1, 0}
-end
-
-function Target:ResetEnemyTargetDefaultColors()
-    EasyFrames.db.profile.general.enemyTargetDefaultColors = {1, 0, 0}
-end

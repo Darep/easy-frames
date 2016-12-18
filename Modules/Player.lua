@@ -18,7 +18,3 @@ end
 function Player:SetScale(value)
     PlayerFrame:SetScale(value)
 end
-
-function Player:ResetEnemyTargetDefaultColors()
-    EasyFrames.db.profile.general.enemyTargetDefaultColors = {1, 0, 0}
-end
