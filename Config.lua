@@ -400,6 +400,10 @@ local playerOptions = {
             width = "double",
             name = L["Show player name"],
             desc = L["Show player name"],
+            set = function(info, value)
+                setOpt(info, value)
+                EasyFrames:GetModule("Player"):ShowName(value)
+            end,
             arg = "player"
         },
 
@@ -409,6 +413,10 @@ local playerOptions = {
             width = "double",
             name = L["Enable hit indicators"],
             desc = L["Show or hide the damage/heal which you take on your unit frame"],
+            set = function(info, value)
+                setOpt(info, value)
+                EasyFrames:GetModule("Player"):ShowHitIndicator(value)
+            end,
             arg = "player"
         },
 
@@ -418,6 +426,10 @@ local playerOptions = {
             width = "double",
             name = L["Show player specialbar"],
             desc = L["Show or hide the player specialbar, like Paladin's holy power, Priest's orbs, Monk's harmony or Warlock's soul shards"],
+            set = function(info, value)
+                setOpt(info, value)
+                EasyFrames:GetModule("Player"):ShowSpecialbar(value)
+            end,
             arg = "player"
         },
     },
