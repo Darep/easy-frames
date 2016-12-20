@@ -581,7 +581,9 @@ function EasyFrames:ChatCommand(input)
         InterfaceOptionsFrame_OpenToCategory(EasyFrames.optFrames.Profiles)
         InterfaceOptionsFrame_OpenToCategory(EasyFrames.optFrames.EasyFrames)
     else
-        LibStub("AceConfigCmd-3.0").HandleCommand("ef", "EasyFrames", input)
+--        LibStub("AceConfigCmd-3.0").HandleCommand(EasyFrames, "ef", input)
+        InterfaceOptionsFrame_OpenToCategory(EasyFrames.optFrames.Profiles)
+        InterfaceOptionsFrame_OpenToCategory(EasyFrames.optFrames[input])
     end
 end
 
