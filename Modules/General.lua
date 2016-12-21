@@ -75,6 +75,18 @@ function General:OnEnable()
     self:SetBrightFramesBorder(db.general.brightFrameBorder)
 end
 
+function General:OnProfileChanged(newDB)
+    self.db = newDB
+    db = self.db.profile
+
+    self:SetFramesColored()
+    self:SetClassPortraits()
+    self:SetFrameBarTexture(db.general.barTexture)
+    self:SetBrightFramesBorder(db.general.brightFrameBorder)
+
+    self:SetCustomBuffSize(db.general.customBuffSize)
+end
+
 
 function General:ResetFriendlyFrameDefaultColors()
     EasyFrames.db.profile.general.friendlyFrameDefaultColors = {0, 1, 0}

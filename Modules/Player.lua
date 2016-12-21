@@ -6,6 +6,7 @@ local MODULE_NAME = "Player"
 local Player = EasyFrames:NewModule(MODULE_NAME, "AceHook-3.0")
 local db
 local originalValues = {}
+local UpdateHealthValues = EasyFrames.Utils.UpdateHealthValues
 
 function Player:OnInitialize()
     self.db = EasyFrames.db
@@ -20,7 +21,22 @@ function Player:OnEnable()
     self:ShowName(db.player.showName)
     self:ShowHitIndicator(db.player.showHitIndicator)
     self:ShowSpecialbar(db.player.showSpecialbar)
+
+    self:SecureHook("TextStatusBar_UpdateTextStringWithValues", "UpdateHealthValues")
 end
+
+function Player:OnProfileChanged(newDB)
+    self.db = newDB
+    db = self.db.profile
+
+    self:SetScale(db.player.scaleFrame)
+    self:ShowName(db.player.showName)
+    self:ShowHitIndicator(db.player.showHitIndicator)
+    self:ShowSpecialbar(db.player.showSpecialbar)
+
+    self:UpdateHealthValues()
+end
+
 
 function Player:GetOriginalValues()
     originalValues["PlayerHitIndicator"] = PlayerHitIndicator.SetText
@@ -75,4 +91,11 @@ function Player:ShowSpecialbar(value)
             end
         end
     end
+end
+
+function Player:UpdateHealthValues()
+    local frame = "Player"
+    local healthFormat = db.player.healthFormat
+
+    UpdateHealthValues(frame, healthFormat)
 end

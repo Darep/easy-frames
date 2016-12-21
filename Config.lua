@@ -385,6 +385,10 @@ local playerOptions = {
             name = L["Player healthbar text format"],
             desc = L["Set the player healthbar text format"],
             values = healthFormat,
+            set = function(info, value)
+                setOpt(info, value)
+                EasyFrames:GetModule("Player"):UpdateHealthValues()
+            end,
             arg = "player"
         },
 
