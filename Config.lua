@@ -365,11 +365,11 @@ local playerOptions = {
             name = L["Player frame scale"],
             desc = L["Scale of player unit frame"],
             min = 0.5,
+            max = 2,
             set = function(info, value)
                 setOpt(info, value)
                 EasyFrames:GetModule("Player"):SetScale(value)
             end,
-            max = 2,
             arg = "player"
         },
 
@@ -458,6 +458,10 @@ local targetOptions = {
             desc = L["Scale of target unit frame"],
             min = 0.5,
             max = 2,
+            set = function(info, value)
+                setOpt(info, value)
+                EasyFrames:GetModule("Target"):SetScale(value)
+            end,
             arg = "target"
         },
 
@@ -473,6 +477,10 @@ local targetOptions = {
             name = L["Target healthbar text format"],
             desc = L["Set the target healthbar text format"],
             values = healthFormat,
+            set = function(info, value)
+                setOpt(info, value)
+                EasyFrames:GetModule("Target"):UpdateHealthValues()
+            end,
             arg = "target"
         },
 
@@ -488,6 +496,10 @@ local targetOptions = {
             width = "double",
             name = L["Show target of target frame"],
             desc = L["Show target of target frame"],
+            set = function(info, value)
+                setOpt(info, value)
+                EasyFrames:GetModule("Target"):ShowTargetFrameToT()
+            end,
             arg = "target"
         },
 
