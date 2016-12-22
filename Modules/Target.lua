@@ -13,7 +13,7 @@ function Target:OnInitialize()
 end
 
 function Target:OnEnable()
-    self:SetScale(db.player.scaleFrame)
+    self:SetScale(db.target.scaleFrame)
     self:ShowTargetFrameToT()
 
     self:SecureHook("TextStatusBar_UpdateTextStringWithValues", "UpdateHealthValues")

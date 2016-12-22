@@ -33,3 +33,4 @@ Modules\Core.lua
 Modules\General.lua
 Modules\Player.lua
 Modules\Target.lua
+Modules\Focus.lua

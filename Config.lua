@@ -525,6 +525,10 @@ local focusOptions = {
             desc = L["Scale of focus unit frame"],
             min = 0.5,
             max = 2,
+            set = function(info, value)
+                setOpt(info, value)
+                EasyFrames:GetModule("Focus"):SetScale(value)
+            end,
             arg = "focus"
         },
 
@@ -540,6 +544,10 @@ local focusOptions = {
             name = L["Focus healthbar text format"],
             desc = L["Set the focus healthbar text format"],
             values = healthFormat,
+            set = function(info, value)
+                setOpt(info, value)
+                EasyFrames:GetModule("Focus"):UpdateHealthValues()
+            end,
             arg = "focus"
         },
 
@@ -555,6 +563,10 @@ local focusOptions = {
             width = "double",
             name = L["Show target of focus frame"],
             desc = L["Show target of focus frame"],
+            set = function(info, value)
+                setOpt(info, value)
+                EasyFrames:GetModule("Focus"):ShowFocusFrameToT()
+            end,
             arg = "focus"
         },
     },

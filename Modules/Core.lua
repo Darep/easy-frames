@@ -207,10 +207,10 @@ end
 
 function Core:SetFramesBarsFont()
     PlayerFrameHealthBar.TextString:SetFont(STANDARD_TEXT_FONT, 10, "OUTLINE")
-    TargetFrameHealthBar.TextString:SetFont(STANDARD_TEXT_FONT, 10, "OUTLINE")
-    FocusFrameHealthBar.TextString:SetFont(STANDARD_TEXT_FONT, 10, "OUTLINE")
-    TargetFrameManaBar.TextString:SetFont(STANDARD_TEXT_FONT, 10, "OUTLINE")
     PlayerFrameManaBar.TextString:SetFont(STANDARD_TEXT_FONT, 10, "OUTLINE")
+    TargetFrameHealthBar.TextString:SetFont(STANDARD_TEXT_FONT, 10, "OUTLINE")
+    TargetFrameManaBar.TextString:SetFont(STANDARD_TEXT_FONT, 10, "OUTLINE")
+    FocusFrameHealthBar.TextString:SetFont(STANDARD_TEXT_FONT, 10, "OUTLINE")
     FocusFrameManaBar.TextString:SetFont(STANDARD_TEXT_FONT, 10, "OUTLINE")
 end
 

@@ -179,26 +179,26 @@ function General:SetCustomBuffSize(value)
         FocusFrame
     }
 
-    local DEFAULT_BUFF_SIZE = 21
+    local DEFAULT_BUFF_SIZE = 17
 
     for _, frame in pairs(frames) do
         local LARGE_AURA_SIZE = db.general.selfBuffSize
         local SMALL_AURA_SIZE = db.general.buffSize
 
-        local buffSize
+        local buffSize = DEFAULT_BUFF_SIZE
         local frameName
         local icon
         local caster
         local _
         local selfName = frame:GetName()
 
-        if (frame.unit == 'target') then
-            buffSize = DEFAULT_BUFF_SIZE * db.target.scaleFrame
-        end
+--        if (frame.unit == 'target') then
+--            buffSize = DEFAULT_BUFF_SIZE * db.target.scaleFrame
+--        end
 
-        if (frame.unit == 'focus') then
-            buffSize = DEFAULT_BUFF_SIZE * db.focus.scaleFrame
-        end
+--        if (frame.unit == 'focus') then
+--            buffSize = DEFAULT_BUFF_SIZE * db.focus.scaleFrame
+--        end
 
         for i = 1, MAX_TARGET_BUFFS do
             _, _, icon, _, _, _, _, caster = UnitBuff(frame.unit, i)
