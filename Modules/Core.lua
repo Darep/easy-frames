@@ -122,6 +122,10 @@ function Core:MoveFramesNames()
     FocusFrame.name:ClearAllPoints()
     FocusFrame.name:SetPoint("CENTER", FocusFrame, "CENTER", -45, 35)
     FocusFrame.name.SetPoint = function() end
+
+    PetFrame.name:ClearAllPoints()
+    PetFrame.name:SetPoint("CENTER", PetFrame, "CENTER", 15, 15)
+    PetFrame.name.SetPoint = function() end
 end
 
 function Core:MoveToTFrames()
@@ -188,9 +192,9 @@ end
 
 function Core:MovePetFrameBars()
     --Player Pet bars
-    PetFrameHealthBar:SetHeight(13)
+    PetFrameHealthBar:SetHeight(10)
     PetFrameHealthBar:ClearAllPoints()
-    PetFrameHealthBar:SetPoint("CENTER", PetFrame, "CENTER", 16, 5)
+    PetFrameHealthBar:SetPoint("CENTER", PetFrame, "CENTER", 16, 1)
     PetFrameHealthBar.SetPoint = function() end
 
     PetFrameManaBar:ClearAllPoints()
@@ -212,6 +216,8 @@ function Core:SetFramesBarsFont()
     TargetFrameManaBar.TextString:SetFont(STANDARD_TEXT_FONT, 10, "OUTLINE")
     FocusFrameHealthBar.TextString:SetFont(STANDARD_TEXT_FONT, 10, "OUTLINE")
     FocusFrameManaBar.TextString:SetFont(STANDARD_TEXT_FONT, 10, "OUTLINE")
+    PetFrameHealthBar.TextString:SetFont(STANDARD_TEXT_FONT, 9, "OUTLINE")
+    PetFrameManaBar.TextString:SetFont(STANDARD_TEXT_FONT, 9, "OUTLINE")
 end
 
 function Core:MovePlayerFramesBarsTextString()

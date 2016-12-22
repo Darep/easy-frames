@@ -590,6 +590,10 @@ local petOptions = {
             width = "double",
             name = L["Show pet name"],
             desc = L["Show pet name"],
+            set = function(info, value)
+                setOpt(info, value)
+                EasyFrames:GetModule("Pet"):ShowName(value)
+            end,
             arg = "pet"
         },
 
@@ -599,6 +603,10 @@ local petOptions = {
             width = "double",
             name = L["Enable hit indicators"],
             desc = L["Show or hide the damage/heal which your pet take on pet unit frame"],
+            set = function(info, value)
+                setOpt(info, value)
+                EasyFrames:GetModule("Pet"):ShowHitIndicator(value)
+            end,
             arg = "pet"
         },
     },
