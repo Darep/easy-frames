@@ -12,27 +12,48 @@ local GetFramesManaBar = EasyFrames.Utils.GetFramesManaBar
 
 local function ClassColored(statusbar, unit)
 
-    if (UnitIsPlayer(unit) and UnitClass(unit) and db.general.classColored) then
+    if (UnitIsPlayer(unit) and UnitClass(unit)) then
         -- player
+        if (db.general.classColored) then
+            local _, class, classColor
 
-        local _, class, classColor
+            _, class = UnitClass(unit)
+            classColor = CUSTOM_CLASS_COLORS and CUSTOM_CLASS_COLORS[class] or RAID_CLASS_COLORS[class]
 
-        _, class = UnitClass(unit)
-        classColor = CUSTOM_CLASS_COLORS and CUSTOM_CLASS_COLORS[class] or RAID_CLASS_COLORS[class]
+            statusbar:SetStatusBarColor(classColor.r, classColor.g, classColor.b)
+        else
+            local colors
 
-        statusbar:SetStatusBarColor(classColor.r, classColor.g, classColor.b)
+            if (UnitIsFriend("player", unit)) then
+                colors = db.general.friendlyFrameDefaultColors
+            else
+                colors = db.general.enemyFrameDefaultColors
+            end
+
+            statusbar:SetStatusBarColor(colors[1], colors[2], colors[3])
+        end
     else
         -- non player
 
         local colors
 
-        if (UnitIsFriend("player", unit)) then
+        local red, green, blue = UnitSelectionColor(unit)
+
+        if (red == 0) then
             colors = db.general.friendlyFrameDefaultColors
-        elseif (UnitIsEnemy("player", unit)) then
+        elseif (green == 0) then
             colors = db.general.enemyFrameDefaultColors
         else
             colors = db.general.neutralFrameDefaultColors
         end
+
+--        if (UnitIsFriend("player", unit)) then
+--            colors = db.general.friendlyFrameDefaultColors
+--        elseif (UnitIsEnemy("player", unit)) then
+--            colors = db.general.enemyFrameDefaultColors
+--        else
+--            colors = db.general.neutralFrameDefaultColors
+--        end
 
         statusbar:SetStatusBarColor(colors[1], colors[2], colors[3])
     end
