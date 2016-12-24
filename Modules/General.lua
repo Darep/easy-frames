@@ -124,7 +124,14 @@ end
 
 
 function General:SetFramesColored()
-    local healthBars = GetFramesHealthBar()
+    local healthBars = {
+        PlayerFrameHealthBar,
+        TargetFrameHealthBar,
+        TargetFrameToTHealthBar,
+        FocusFrameHealthBar,
+        FocusFrameToTHealthBar,
+        PetFrameHealthBar,
+    }
 
     for _, statusbar in pairs(healthBars) do
         if (UnitIsConnected(statusbar.unit)) then
@@ -167,19 +174,29 @@ end
 
 
 function General:SetFrameBarTexture(value)
-    local healthBars = GetFramesHealthBar()
+    local texture = Media:Fetch("bartexture", value)
+
+    local healthBars = {
+        PlayerFrameHealthBar,
+        TargetFrameHealthBar,
+        TargetFrameToTHealthBar,
+        FocusFrameHealthBar,
+        FocusFrameToTHealthBar,
+        PetFrameHealthBar,
+    }
+
     local manaBars = GetFramesManaBar()
 
-    for _, healthbar in pairs(healthBars) do
-        if (UnitIsConnected(healthbar.unit)) then
-            healthbar:SetStatusBarTexture(Media:Fetch("bartexture", value))
-        end
+    for i, healthbar in ipairs(healthBars) do
+--        if (UnitIsConnected(healthbar.unit)) then
+            healthbar:SetStatusBarTexture(texture)
+--        end
     end
 
-    for _, manabar in pairs(manaBars) do
-        if (UnitIsConnected(manabar.unit)) then
-            manabar:SetStatusBarTexture(Media:Fetch("bartexture", value))
-        end
+    for ii, manabar in pairs(manaBars) do
+--        if (UnitIsConnected(manabar.unit)) then
+            manabar:SetStatusBarTexture(texture)
+--        end
     end
 end
 
