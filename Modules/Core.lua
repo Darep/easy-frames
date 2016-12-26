@@ -47,6 +47,10 @@ function Core:EventHandler()
     TargetFrameNameBackground:SetHeight(18)
     TargetFrameBackground:SetHeight(41)
 
+    if (UnitPowerType('target') == 1 and UnitMana('target') == 0) then
+        TargetFrameBackground:SetHeight(31)
+    end
+
     FocusFrameNameBackground:SetVertexColor(0, 0, 0, 0.0)
     FocusFrameNameBackground:SetHeight(18)
     FocusFrameBackground:SetHeight(41)
