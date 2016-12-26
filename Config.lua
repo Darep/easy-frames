@@ -117,7 +117,7 @@ local generalOptions = {
                     order = 5,
 --                    width = "double",
                     name = L["Class portraits"],
-                    desc = L["Replaces the unit-frame portrait of player-controlled characters with their class icon"],
+                    desc = L["Replaces the unit-frame portrait with their class icon"],
                     set = function(info, value)
                         setOpt(info, value)
                         EasyFrames:GetModule("General"):SetClassPortraits()
@@ -172,20 +172,20 @@ local generalOptions = {
                 header = {
                     type = "header",
                     order = 1,
-                    name = L["Buffsize"],
+                    name = L["Buffs"],
                 },
 
                 description = {
                     type = "description",
                     order = 2,
-                    name = L["Use custom target and focustarget buffsize"],
+                    name = L["Buffs settings (like custom buffsize, highlight dispelled buffs, etc)"],
                 },
 
                 customBuffSize = {
                     type = "toggle",
                     order = 3,
                     name = L["Turn on custom buffsize"],
-                    desc = L["Turn on custom target and focustarget buffsize"],
+                    desc = L["Turn on custom target and focus frames buffsize"],
                     set = function(info, value)
                         setOpt(info, value)
                         EasyFrames:GetModule("General"):SetCustomBuffSize(value)
@@ -195,6 +195,7 @@ local generalOptions = {
 
                 buffSize = {
                     type = "range",
+                    order = 4,
                     name = L["Buffsize"],
                     desc = L["Buffsize"],
                     min = 20,
@@ -214,6 +215,7 @@ local generalOptions = {
 
                 selfBuffSize = {
                     type = "range",
+                    order = 5,
                     name = L["Self buffsize"],
                     desc = L["Buffsize that you create"],
                     min = 20,
@@ -227,6 +229,18 @@ local generalOptions = {
                         if (hide == false) then
                             return true
                         end
+                    end,
+                    arg = "general"
+                },
+
+                highlightDispelledBuff = {
+                    type = "toggle",
+                    order = 6,
+                    name = L["Highlight dispelled buffs"],
+                    desc = L["Highlight buffs that can be dispelled from target frame"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("General"):SetHighlightDispelledBuff()
                     end,
                     arg = "general"
                 },
@@ -258,7 +272,7 @@ local generalOptions = {
                     order = 3,
                     width = "double",
                     name = L["Set default friendly healthbar color"],
-                    desc = L["You can set the default friendly healthbar color for target and focus frame"],
+                    desc = L["You can set the default friendly healthbar color for frames"],
                     arg = "general"
                 },
 
@@ -278,7 +292,7 @@ local generalOptions = {
                     order = 5,
                     width = "double",
                     name = L["Set default enemy healthbar color"],
-                    desc = L["You can set the default enemy healthbar color for target and focus frame"],
+                    desc = L["You can set the default enemy healthbar color for frames"],
                     arg = "general"
                 },
 
@@ -298,7 +312,7 @@ local generalOptions = {
                     order = 7,
                     width = "double",
                     name = L["Set default neutral healthbar color"],
-                    desc = L["You can set the default neutral healthbar color for target and focus frame"],
+                    desc = L["You can set the default neutral healthbar color for frames"],
                     arg = "general"
                 },
 

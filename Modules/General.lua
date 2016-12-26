@@ -6,7 +6,7 @@ local MODULE_NAME = "General"
 local General = EasyFrames:NewModule(MODULE_NAME, "AceHook-3.0")
 local db
 
-local GetFramesHealthBar = EasyFrames.Utils.GetFramesHealthBar
+--local GetFramesHealthBar = EasyFrames.Utils.GetFramesHealthBar
 local GetFramesManaBar = EasyFrames.Utils.GetFramesManaBar
 
 
@@ -89,7 +89,7 @@ function General:OnEnable()
     self:SecureHook("UnitFramePortrait_Update", "MakeClassPortraits")
 
     self:SecureHook("TargetFrame_UpdateAuraPositions", "MakeCustomBuffSize")
-    self:SecureHook("TargetFrame_UpdateAuras", "ShowStealableBuff")
+    self:SecureHook("TargetFrame_UpdateAuras", "MakeHighlightDispelledBuff")
 
     self:SetFrameBarTexture(db.general.barTexture)
 
@@ -298,25 +298,35 @@ function General:MakeCustomBuffSize(frame, auraName, numAuras, numOppositeAuras,
     end
 end
 
-function General:ShowStealableBuff(frame)
-    local frameStealable, frameName, icon, debuffType, _
-    local selfName = frame:GetName()
-    local isEnemy = UnitIsEnemy(PlayerFrame.unit, frame.unit)
+function General:SetHighlightDispelledBuff()
+    if (db.general.highlightDispelledBuff) then
+        self:MakeHighlightDispelledBuff(TargetFrame)
+    else
+        self:MakeHighlightDispelledBuff(TargetFrame, true)
+    end
+end
 
-    for i = 1, MAX_TARGET_BUFFS do
-        _, _, icon, _, debuffType = UnitBuff(frame.unit, i)
-        frameName = selfName .. 'Buff' .. i
-        if (icon and (not frame.maxBuffs or i <= frame.maxBuffs)) then
-            frameStealable = _G[frameName .. 'Stealable']
-            if (isEnemy and debuffType == 'Magic') then
-                frameStealable:Show()
+function General:MakeHighlightDispelledBuff(frame, forceHide)
+    if (db.general.highlightDispelledBuff or forceHide) then
+        local frameStealable, frameName, icon, debuffType, _
+        local selfName = frame:GetName()
+        local isEnemy = UnitIsEnemy(PlayerFrame.unit, frame.unit)
 
-                if (db.general.customBuffSize) then
-                    frameStealable:SetHeight(db.general.buffSize * 1.4)
-                    frameStealable:SetWidth(db.general.buffSize * 1.4)
+        for i = 1, MAX_TARGET_BUFFS do
+            _, _, icon, _, debuffType = UnitBuff(frame.unit, i)
+            frameName = selfName .. 'Buff' .. i
+            if (icon and (not frame.maxBuffs or i <= frame.maxBuffs)) then
+                frameStealable = _G[frameName .. 'Stealable']
+                if (isEnemy and debuffType == 'Magic' and not forceHide) then
+                    frameStealable:Show()
+
+                    if (db.general.customBuffSize) then
+                        frameStealable:SetHeight(db.general.buffSize * 1.4)
+                        frameStealable:SetWidth(db.general.buffSize * 1.4)
+                    end
+                else
+                    frameStealable:Hide()
                 end
-            else
-                frameStealable:Hide()
             end
         end
     end

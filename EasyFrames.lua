@@ -36,6 +36,7 @@ local defaults = {
             customBuffSize = true, -- buffsizebutton
             buffSize = 20, -- buffsize
             selfBuffSize = 28, -- scaleselfbuffsize
+            highlightDispelledBuff = true,
             classPortraits = true, -- classportraits
             barTexture = "Blizzard", -- bartex
             brightFrameBorder = 1, -- darkentextures

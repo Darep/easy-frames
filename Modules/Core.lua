@@ -14,6 +14,7 @@ end
 function Core:OnEnable()
     self:RegisterEvent("PLAYER_TARGET_CHANGED", "EventHandler")
     self:RegisterEvent("PLAYER_FOCUS_CHANGED", "EventHandler")
+--    self:RegisterEvent("UNIT_FACTION", "EventHandler")
 
     PlayerFrameTexture:SetTexture(Media:Fetch("frames", "default"))
 

@@ -22,16 +22,18 @@ L["Healthbar color based on current health. IN DEVELOPMENT..."] = true
 L["Frames healthbar color based on his current health"] = true
 L["If checked frames becomes class colored"] = true
 L["Custom buffsize"] = true
-L["Use custom target and focustarget buffsize"] = true
+L["Buffs settings (like custom buffsize, highlight dispelled buffs, etc)"] = true
 L["Turn on custom buffsize"] = true
-L["Turn on custom target and focustarget buffsize"] = true
+L["Turn on custom target and focus frames buffsize"] = true
+L["Buffs"] = true
 L["Buffsize"] = true
-L["Size of buff"] = true
 L["Self buffsize"] = true
 L["Buffsize that you create"] = true
+L["Highlight dispelled buffs"] = true
+L["Highlight buffs that can be dispelled from target frame"] = true
 
 L["Class portraits"] = true
-L["Replaces the unit-frame portrait of player-controlled characters with their class icon"] = true
+L["Replaces the unit-frame portrait with their class icon"] = true
 
 L["Texture"] = true
 L["Set the frames bar Texture"] = true
@@ -42,11 +44,11 @@ L["You can set frames border bright/dark color. From bright to dark. 0 - dark, 1
 L["Frames colors"] = true
 L["In this section you can set the default colors for friendly, enemy and neutral frames"] = true
 L["Set default friendly healthbar color"] = true
-L["You can set the default friendly healthbar color for target and focus frame"] = true
+L["You can set the default friendly healthbar color for frames"] = true
 L["Set default enemy healthbar color"] = true
-L["You can set the default enemy healthbar color for target and focus frame"] = true
+L["You can set the default enemy healthbar color for frames"] = true
 L["Set default neutral healthbar color"] = true
-L["You can set the default neutral healthbar color for target and focus frame"] = true
+L["You can set the default neutral healthbar color for frames"] = true
 L["Reset color to default"] = true
 
 L["Other"] = true
