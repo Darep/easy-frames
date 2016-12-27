@@ -45,20 +45,19 @@ end
 function Core:EventHandler()
     TargetFrameNameBackground:SetVertexColor(0, 0, 0, 0.0)
     TargetFrameNameBackground:SetHeight(18)
-    TargetFrameBackground:SetHeight(41)
-
-    if (UnitPowerType('target') == 1 and UnitMana('target') == 0) then
-        TargetFrameBackground:SetHeight(31)
-    end
+--    TargetFrameBackground:SetHeight(41)
 
     FocusFrameNameBackground:SetVertexColor(0, 0, 0, 0.0)
     FocusFrameNameBackground:SetHeight(18)
-    FocusFrameBackground:SetHeight(41)
+--    FocusFrameBackground:SetHeight(41)
 end
 
 
 function Core:CheckClassification(frame, forceNormalTexture)
     local classification = UnitClassification(frame.unit);
+
+    frame.Background:SetHeight(41)
+
     --[[
     frame.nameBackground:Show();
     frame.manabar:Show();
@@ -70,6 +69,7 @@ function Core:CheckClassification(frame, forceNormalTexture)
     elseif (classification == "minus") then
         frame.borderTexture:SetTexture(Media:Fetch("frames", "minus"));
         frame.nameBackground:Hide();
+        frame.Background:SetHeight(31)
         frame.manabar:Hide();
         frame.manabar.TextString:Hide();
         forceNormalTexture = true;
