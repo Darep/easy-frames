@@ -107,9 +107,6 @@ function EasyFrames:OnInitialize()
     self:SetupOptions()
 end
 
-function EasyFrames:OnEnable()
-
-end
 
 function EasyFrames:OnProfileChanged(event, database, newProfileKey)
     self.db = database

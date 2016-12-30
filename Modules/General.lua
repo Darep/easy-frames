@@ -187,16 +187,12 @@ function General:SetFrameBarTexture(value)
 
     local manaBars = GetFramesManaBar()
 
-    for i, healthbar in ipairs(healthBars) do
---        if (UnitIsConnected(healthbar.unit)) then
-            healthbar:SetStatusBarTexture(texture)
---        end
+    for _, healthbar in pairs(healthBars) do
+        healthbar:SetStatusBarTexture(texture)
     end
 
-    for ii, manabar in pairs(manaBars) do
---        if (UnitIsConnected(manabar.unit)) then
-            manabar:SetStatusBarTexture(texture)
---        end
+    for _, manabar in pairs(manaBars) do
+        manabar:SetStatusBarTexture(texture)
     end
 end
 

@@ -15,11 +15,11 @@ L["Frames"] = "Фреймы"
 L["Setting for unit frames"] = "Настройки фреймов"
 
 L["Class colored healthbars"] = "Раскрасить фреймы здоровья в цвет класса"
-L["Healthbar color based on current health. IN DEVELOPMENT..."] = "Цвет фреймов основан на текущем значении здоровья. В РАЗРАБОТКЕ..."
+L["Healthbar color based on current health. IN DEVELOPMENT..."] = "В РАЗРАБОТКЕ... Цвет фреймов основан на текущем значении здоровья"
 L["Frames healthbar color based on his current health"] = "Цвет фреймов основан на текущем значении здоровья"
 L["If checked frames becomes class colored"] = "Если утановлено фреймы раскрашиваются в цвет класса"
 L["Custom buffsize"] = "Собственный размер бафов"
-L["Buffs settings (like custom buffsize, highlight dispelled buffs, etc)"] = "Настройки бафов (таких как использовать собственный размер бафов, подсвечивать бафы, которые могут быть расеяны и другие)"
+L["Buffs settings (like custom buffsize, highlight dispelled buffs, etc)"] = "Настройки бафов (использовать собственный размер бафов, подсвечивать бафы, которые могут быть расеяны и другие)"
 L["Turn on custom buffsize"] = "Собственный размер бафов"
 L["Turn on custom target and focus frames buffsize"] = "Включить собственный размер бафов у цели и фокус фреймов"
 L["Buffs"] = "Бафы"
@@ -32,14 +32,14 @@ L["Highlight buffs that can be dispelled from target frame"] = "Подсвечи
 L["Class portraits"] = "Иконка класса в портрете"
 L["Replaces the unit-frame portrait with their class icon"] = "Заменяет портрет фрейма иконкой класса"
 
-L["Texture"] = true
-L["Set the frames bar Texture"] = true
+L["Texture"] = "Текстура"
+L["Set the frames bar Texture"] = "Установить текстуру фреймов"
 
-L["Bright frames border"] = true
-L["You can set frames border bright/dark color. From bright to dark. 0 - dark, 100 - bright"] = true
+L["Bright frames border"] = "Светлые границы фреймов"
+L["You can set frames border bright/dark color. From bright to dark. 0 - dark, 100 - bright"] = "Вы можете установить свет границ фреймов. От светлого к темному. 0 - темные границы, 100 - светлые"
 
-L["Frames colors"] = true
-L["In this section you can set the default colors for friendly, enemy and neutral frames"] = true
+L["Frames colors"] = "Цвета фреймов"
+L["In this section you can set the default colors for friendly, enemy and neutral frames"] = "В этом разделе можно установить цвета фреймов по умолчанию для дружественных, враждебных или нейтральных целей"
 L["Set default friendly healthbar color"] = true
 L["You can set the default friendly healthbar color for frames"] = true
 L["Set default enemy healthbar color"] = true
