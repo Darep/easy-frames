@@ -12,9 +12,10 @@ function Core:OnInitialize()
 end
 
 function Core:OnEnable()
+    self:RegisterEvent("GROUP_ROSTER_UPDATE", "EventHandler")
     self:RegisterEvent("PLAYER_TARGET_CHANGED", "EventHandler")
     self:RegisterEvent("PLAYER_FOCUS_CHANGED", "EventHandler")
---    self:RegisterEvent("UNIT_FACTION", "EventHandler")
+    self:RegisterEvent("UNIT_FACTION", "EventHandler")
 
     PlayerFrameTexture:SetTexture(Media:Fetch("frames", "default"))
 
@@ -44,6 +45,7 @@ end
 
 function Core:EventHandler()
     TargetFrameNameBackground:SetVertexColor(0, 0, 0, 0.0)
+--!!!!!!! баг""
     TargetFrameNameBackground:SetHeight(18)
 --    TargetFrameBackground:SetHeight(41)
 

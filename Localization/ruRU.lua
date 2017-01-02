@@ -39,22 +39,22 @@ L["Bright frames border"] = "Светлые границы фреймов"
 L["You can set frames border bright/dark color. From bright to dark. 0 - dark, 100 - bright"] = "Вы можете установить свет границ фреймов. От светлого к темному. 0 - темные границы, 100 - светлые"
 
 L["Frames colors"] = "Цвета фреймов"
-L["In this section you can set the default colors for friendly, enemy and neutral frames"] = "В этом разделе можно установить цвета фреймов по умолчанию для дружественных, враждебных или нейтральных целей"
-L["Set default friendly healthbar color"] = true
-L["You can set the default friendly healthbar color for frames"] = true
-L["Set default enemy healthbar color"] = true
-L["You can set the default enemy healthbar color for frames"] = true
-L["Set default neutral healthbar color"] = true
-L["You can set the default neutral healthbar color for frames"] = true
-L["Reset color to default"] = true
+L["In this section you can set the default colors for friendly, enemy and neutral frames"] = "В этом разделе вы можете установить цвета фреймов по умолчанию для дружественных, враждебных или нейтральных целей"
+L["Set default friendly healthbar color"] = "Цвет по умолчанию дружественных целей"
+L["You can set the default friendly healthbar color for frames"] = "Вы можете установить цвет фреймов по умолчанию дружественных к вам целей"
+L["Set default enemy healthbar color"] = "Цвет по умолчанию враждебных целей"
+L["You can set the default enemy healthbar color for frames"] = "Вы можете установить цвет фреймов по умолчанию враждебных к вам целей"
+L["Set default neutral healthbar color"] = "Цвет по умолчанию нейтральных целей"
+L["You can set the default neutral healthbar color for frames"] = "Вы можете установить цвет фреймов по умолчанию нейтральных к вам целей"
+L["Reset color to default"] = "Сбросить цвет"
 
-L["Other"] = true
-L["In this section you can set the settings like 'show welcome message' etc"] = true
-L["Show welcome message"] = true
-L["Show welcome message when addon is loaded"] = true
+L["Other"] = "Другое"
+L["In this section you can set the settings like 'show welcome message' etc"] = "В этом разделе вы можете установить разные настройки не вошедшие в другие разделы (показывать приветственный текст в чате и другие)"
+L["Show welcome message"] = "Показывать приветственный текст в чате"
+L["Show welcome message when addon is loaded"] = "Показывать приветственный текст в чате когда аддон был загружен"
 
 
-L["Player"] = true
+L["Player"] = "Игрок"
 L["In player options you can set scale player frame, healthbar text format, etc"] = true
 L["Show player name"] = true
 L["Player frame scale"] = true
