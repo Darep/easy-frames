@@ -1,6 +1,6 @@
 ## Title: EasyFrames
 ## Interface: 70100
-## Notes: Make your unitframes colored.
+## Notes: Make your unit frames colored and glorious.
 ## Author: Usoltsev
 ## SavedVariables: EasyFramesDB
 ## OptionalDeps: Ace3, LibSharedMedia-3.0

@@ -73,19 +73,19 @@ local defaults = {
     }
 }
 
-Media:Register("bartexture", "Ace", "Interface\\AddOns\\EasyFrames\\Textures\\FramesBarTextures\\Ace")
-Media:Register("bartexture", "Aluminium", "Interface\\AddOns\\EasyFrames\\Textures\\FramesBarTextures\\Aluminium")
-Media:Register("bartexture", "Banto", "Interface\\AddOns\\EasyFrames\\Textures\\FramesBarTextures\\Banto")
-Media:Register("bartexture", "Blizzard", "Interface\\AddOns\\EasyFrames\\Textures\\FramesBarTextures\\Blizzard")
-Media:Register("bartexture", "Charcoal", "Interface\\AddOns\\EasyFrames\\Textures\\FramesBarTextures\\Charcoal")
-Media:Register("bartexture", "Glaze", "Interface\\AddOns\\EasyFrames\\Textures\\FramesBarTextures\\Glaze")
-Media:Register("bartexture", "LiteStep", "Interface\\AddOns\\EasyFrames\\Textures\\FramesBarTextures\\LiteStep")
-Media:Register("bartexture", "Minimalist", "Interface\\AddOns\\EasyFrames\\Textures\\FramesBarTextures\\Minimalist")
-Media:Register("bartexture", "Otravi", "Interface\\AddOns\\EasyFrames\\Textures\\FramesBarTextures\\Otravi")
-Media:Register("bartexture", "Perl", "Interface\\AddOns\\EasyFrames\\Textures\\FramesBarTextures\\Perl")
-Media:Register("bartexture", "Smooth", "Interface\\AddOns\\EasyFrames\\Textures\\FramesBarTextures\\Smooth")
-Media:Register("bartexture", "Striped", "Interface\\AddOns\\EasyFrames\\Textures\\FramesBarTextures\\Striped")
-Media:Register("bartexture", "Swag", "Interface\\AddOns\\EasyFrames\\Textures\\FramesBarTextures\\Swag")
+Media:Register("bartexture", "Ace", "Interface\\AddOns\\EasyFrames\\Textures\\StatusBarTexture\\Ace")
+Media:Register("bartexture", "Aluminium", "Interface\\AddOns\\EasyFrames\\Textures\\StatusBarTexture\\Aluminium")
+Media:Register("bartexture", "Banto", "Interface\\AddOns\\EasyFrames\\Textures\\StatusBarTexture\\banto")
+Media:Register("bartexture", "Blizzard", "Interface\\AddOns\\EasyFrames\\Textures\\StatusBarTexture\\blizzard")
+Media:Register("bartexture", "Charcoal", "Interface\\AddOns\\EasyFrames\\Textures\\StatusBarTexture\\Charcoal")
+Media:Register("bartexture", "Glaze", "Interface\\AddOns\\EasyFrames\\Textures\\StatusBarTexture\\glaze")
+Media:Register("bartexture", "LiteStep", "Interface\\AddOns\\EasyFrames\\Textures\\StatusBarTexture\\LiteStep")
+Media:Register("bartexture", "Minimalist", "Interface\\AddOns\\EasyFrames\\Textures\\StatusBarTexture\\Minimalist")
+Media:Register("bartexture", "Otravi", "Interface\\AddOns\\EasyFrames\\Textures\\StatusBarTexture\\otravi")
+Media:Register("bartexture", "Perl", "Interface\\AddOns\\EasyFrames\\Textures\\StatusBarTexture\\perl")
+Media:Register("bartexture", "Smooth", "Interface\\AddOns\\EasyFrames\\Textures\\StatusBarTexture\\smooth")
+Media:Register("bartexture", "Striped", "Interface\\AddOns\\EasyFrames\\Textures\\StatusBarTexture\\striped")
+Media:Register("bartexture", "Swag", "Interface\\AddOns\\EasyFrames\\Textures\\StatusBarTexture\\swag")
 
 
 Media:Register("frames", "default", "Interface\\AddOns\\EasyFrames\\Textures\\TargetingFrame\\UI-TargetingFrame")

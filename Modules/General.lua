@@ -91,7 +91,7 @@ function General:OnEnable()
     self:SecureHook("TargetFrame_UpdateAuraPositions", "MakeCustomBuffSize")
     self:SecureHook("TargetFrame_UpdateAuras", "MakeHighlightDispelledBuff")
 
-    self:SetFrameBarTexture(db.general.barTexture)
+--    self:SetFrameBarTexture(db.general.barTexture)
 
     self:SetBrightFramesBorder(db.general.brightFrameBorder)
 end
