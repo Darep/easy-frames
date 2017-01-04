@@ -6,7 +6,7 @@ local MODULE_NAME = "General"
 local General = EasyFrames:NewModule(MODULE_NAME, "AceHook-3.0")
 local db
 
---local GetFramesHealthBar = EasyFrames.Utils.GetFramesHealthBar
+local GetFramesHealthBar = EasyFrames.Utils.GetFramesHealthBar
 local GetFramesManaBar = EasyFrames.Utils.GetFramesManaBar
 
 
@@ -91,7 +91,9 @@ function General:OnEnable()
     self:SecureHook("TargetFrame_UpdateAuraPositions", "MakeCustomBuffSize")
     self:SecureHook("TargetFrame_UpdateAuras", "MakeHighlightDispelledBuff")
 
---    self:SetFrameBarTexture(db.general.barTexture)
+    if (db.general.barTexture ~= "Blizzard") then
+        self:SetFrameBarTexture(db.general.barTexture)
+    end
 
     self:SetBrightFramesBorder(db.general.brightFrameBorder)
 end
@@ -102,7 +104,11 @@ function General:OnProfileChanged(newDB)
 
     self:SetFramesColored()
     self:SetClassPortraits()
-    self:SetFrameBarTexture(db.general.barTexture)
+
+    if (db.general.barTexture ~= "Blizzard") then
+        self:SetFrameBarTexture(db.general.barTexture)
+    end
+
     self:SetBrightFramesBorder(db.general.brightFrameBorder)
 
     self:SetCustomBuffSize(db.general.customBuffSize)
@@ -124,14 +130,7 @@ end
 
 
 function General:SetFramesColored()
-    local healthBars = {
-        PlayerFrameHealthBar,
-        TargetFrameHealthBar,
-        TargetFrameToTHealthBar,
-        FocusFrameHealthBar,
-        FocusFrameToTHealthBar,
-        PetFrameHealthBar,
-    }
+    local healthBars = GetFramesHealthBar()
 
     for _, statusbar in pairs(healthBars) do
         if (UnitIsConnected(statusbar.unit)) then
@@ -176,15 +175,7 @@ end
 function General:SetFrameBarTexture(value)
     local texture = Media:Fetch("bartexture", value)
 
-    local healthBars = {
-        PlayerFrameHealthBar,
-        TargetFrameHealthBar,
-        TargetFrameToTHealthBar,
-        FocusFrameHealthBar,
-        FocusFrameToTHealthBar,
-        PetFrameHealthBar,
-    }
-
+    local healthBars = GetFramesHealthBar()
     local manaBars = GetFramesManaBar()
 
     for _, healthbar in pairs(healthBars) do
