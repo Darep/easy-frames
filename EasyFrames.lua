@@ -31,15 +31,15 @@ end
 local defaults = {
     profile = {
         general = {
-            classColored = true, -- classcolorplayer, classcolortarget, classcolorttot, classcolorFocus, classcolorftot
-            coloredBaseOnCurrentHealth = false, -- percentcolorplayer, percentcolortarget, percentcolortargettot, percentcolorfocus, percentcolorfocustot
-            customBuffSize = true, -- buffsizebutton
-            buffSize = 20, -- buffsize
-            selfBuffSize = 28, -- scaleselfbuffsize
+            classColored = true,
+            coloredBaseOnCurrentHealth = false,
+            customBuffSize = true,
+            buffSize = 20,
+            selfBuffSize = 28,
             highlightDispelledBuff = true,
-            classPortraits = true, -- classportraits
-            barTexture = "Blizzard", -- bartex
-            brightFrameBorder = 1, -- darkentextures
+            classPortraits = true,
+            barTexture = "Blizzard",
+            brightFrameBorder = 1,
             friendlyFrameDefaultColors = {0, 1, 0},
             enemyFrameDefaultColors = {1, 0, 0},
             neutralFrameDefaultColors = {1, 1, 0},
@@ -47,28 +47,28 @@ local defaults = {
         },
 
         player = {
-            scaleFrame = 1.2, -- framescaleplayer
-            healthFormat = "3", -- phformat
-            showName = true, -- playername
-            showHitIndicator = true, -- playerhitindi
-            showSpecialbar = true, -- playerspecialbar
+            scaleFrame = 1.2,
+            healthFormat = "3",
+            showName = true,
+            showHitIndicator = true,
+            showSpecialbar = true,
         },
 
         target = {
-            scaleFrame = 1.2, -- framescaletarget
-            healthFormat = "3", -- thformat
-            showToTFrame = true, -- targetoftarget
+            scaleFrame = 1.2,
+            healthFormat = "3",
+            showToTFrame = true,
         },
 
         focus = {
-            scaleFrame = 1.2, -- framescalefocus
-            healthFormat = "3", -- fhformat
-            showToTFrame = true, -- targetoffocus
+            scaleFrame = 1.2,
+            healthFormat = "3",
+            showToTFrame = true,
         },
 
         pet = {
-            showName = true, -- petname
-            showHitIndicator = true, -- pethitindi
+            showName = true,
+            showHitIndicator = true,
         },
     }
 }
