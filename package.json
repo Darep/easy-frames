@@ -1,15 +1,16 @@
 {
   "name": "easy-frames",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "author": "Alexander Usolcev <alexander.usolcev@gmail.com>",
   "repository": {
     "type": "git",
     "url": "https://repos.curseforge.com/wow/easy-frames"
   },
-  "license": "BSD",
+  "license": "MIT",
   "main": "archiver.js",
   "devDependencies": {
-    "archiver": "^1.3.0"
+    "archiver": "^1.3.0",
+    "ncp": "^2.0.0"
   },
   "scripts": {
     "start": "npm --no-git-tag-version version patch && node archiver.js"
