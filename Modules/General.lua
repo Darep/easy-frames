@@ -89,7 +89,7 @@ function General:OnEnable()
     self:SecureHook("UnitFramePortrait_Update", "MakeClassPortraits")
 
     self:SecureHook("TargetFrame_UpdateAuraPositions", "MakeCustomBuffSize")
-    self:SecureHook("TargetFrame_UpdateAuras", "MakeHighlightDispelledBuff")
+    self:SecureHook("TargetFrame_UpdateAuras", "TargetFrame_UpdateAuras")
 
     if (db.general.barTexture ~= "Blizzard") then
         self:SetFrameBarTexture(db.general.barTexture)
@@ -245,7 +245,7 @@ function General:SetCustomBuffSize(value)
     end
 end
 
-function General:MakeCustomBuffSize(frame, auraName, numAuras, numOppositeAuras, largeAuraList, updateFunc, maxRowWidth)
+function General:MakeCustomBuffSize(frame, auraName, numAuras, numOppositeAuras, largeAuraList, updateFunc, maxRowWidth, _, mirrorAurasVertically)
     if (db.general.customBuffSize) then
         local AURA_OFFSET = 2
         local LARGE_AURA_SIZE = db.general.selfBuffSize
@@ -273,13 +273,13 @@ function General:MakeCustomBuffSize(frame, auraName, numAuras, numOppositeAuras,
             end
 
             if (rowWidth > maxRowWidth) then
-                updateFunc(frame, auraName, i, numOppositeAuras, firstBuffOnRow, size, offsetX, offsetY)
+                updateFunc(frame, auraName, i, numOppositeAuras, firstBuffOnRow, size, offsetX, offsetY, mirrorAurasVertically)
                 rowWidth = size
                 frame.auraRows = frame.auraRows + 1
                 firstBuffOnRow = i
                 offsetY = AURA_OFFSET
             else
-                updateFunc(frame, auraName, i, numOppositeAuras, i - 1, size, offsetX, offsetY)
+                updateFunc(frame, auraName, i, numOppositeAuras, i - 1, size, offsetX, offsetY, mirrorAurasVertically)
             end
         end
     end
@@ -287,22 +287,31 @@ end
 
 function General:SetHighlightDispelledBuff()
     if (db.general.highlightDispelledBuff) then
-        self:MakeHighlightDispelledBuff(TargetFrame)
+        self:TargetFrame_UpdateAuras(TargetFrame)
     else
-        self:MakeHighlightDispelledBuff(TargetFrame, true)
+        self:TargetFrame_UpdateAuras(TargetFrame, true)
     end
 end
 
-function General:MakeHighlightDispelledBuff(frame, forceHide)
-    if (db.general.highlightDispelledBuff or forceHide) then
-        local frameStealable, frameName, icon, debuffType, _
-        local selfName = frame:GetName()
-        local isEnemy = UnitIsEnemy(PlayerFrame.unit, frame.unit)
+function General:TargetFrame_UpdateAuras(frame, forceHide)
+    local frameStealable, frameName, icon, debuffType, _
+    local selfName = frame:GetName()
+    local isEnemy = UnitIsEnemy(PlayerFrame.unit, frame.unit)
 
-        for i = 1, MAX_TARGET_BUFFS do
-            _, _, icon, _, debuffType = UnitBuff(frame.unit, i)
-            frameName = selfName .. 'Buff' .. i
-            if (icon and (not frame.maxBuffs or i <= frame.maxBuffs)) then
+    for i = 1, MAX_TARGET_BUFFS do
+        _, _, icon, _, debuffType = UnitBuff(frame.unit, i)
+        frameName = selfName .. 'Buff' .. i
+        if (icon and (not frame.maxBuffs or i <= frame.maxBuffs)) then
+            -- Buffs on top
+            if (i == 1 and frame.buffsOnTop) then
+                local point, relativeTo, relativePoint, xOffset, yOffset = _G[frameName]:GetPoint()
+
+                _G[frameName]:ClearAllPoints()
+                _G[frameName]:SetPoint(point, relativeTo, relativePoint, xOffset, yOffset + 8)
+            end
+
+            -- Stealable buffs
+            if (db.general.highlightDispelledBuff or forceHide) then
                 frameStealable = _G[frameName .. 'Stealable']
                 if (isEnemy and debuffType == 'Magic' and not forceHide) then
                     frameStealable:Show()
