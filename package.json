@@ -1,0 +1,17 @@
+{
+  "name": "easy-frames",
+  "version": "0.0.1",
+  "author": "Alexander Usolcev <alexander.usolcev@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://repos.curseforge.com/wow/easy-frames"
+  },
+  "license": "BSD",
+  "main": "archiver.js",
+  "devDependencies": {
+    "archiver": "^1.3.0"
+  },
+  "scripts": {
+    "start": "node archiver.js"
+  }
+}
