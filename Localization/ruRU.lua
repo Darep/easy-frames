@@ -55,38 +55,38 @@ L["Show welcome message when addon is loaded"] = "Показывать прив�
 
 
 L["Player"] = "Игрок"
-L["In player options you can set scale player frame, healthbar text format, etc"] = true
-L["Show player name"] = true
-L["Player frame scale"] = true
-L["Scale of player unit frame"] = true
-L["Enable hit indicators"] = true
-L["Show or hide the damage/heal which you take on your unit frame"] = true
-L["Player healthbar text format"] = true
-L["Set the player healthbar text format"] = true
-L["Show player specialbar"] = true
-L["Show or hide the player specialbar, like Paladin's holy power, Priest's orbs, Monk's harmony or Warlock's soul shards"] = true
+L["In player options you can set scale player frame, healthbar text format, etc"] = "В разделе Игрок вы можете установить размер (scale) фрейма игрока, установить формат HP и другие"
+L["Show player name"] = "Показывать имя игрока"
+L["Player frame scale"] = "Размер фрейма игрока"
+L["Scale of player unit frame"] = "Размер (scale) фрейма игрока"
+L["Enable hit indicators"] = "Показывать входящий урон и исцеление"
+L["Show or hide the damage/heal which you take on your unit frame"] = "Показывать получаемый урон/исцеление на фрейме игрока"
+L["Player healthbar text format"] = "Формат HP игрока"
+L["Set the player healthbar text format"] = "Установить формат отображения здоровья игрока"
+L["Show player specialbar"] = "Показывать фрейм классового ресурса"
+L["Show or hide the player specialbar, like Paladin's holy power, Priest's orbs, Monk's harmony or Warlock's soul shards"] = "Показывать фрейм классового ресурса, такие как Энергия Света паладинов, Безумие пристов, Ци монахов, Осколки души чернокнижников и другие"
 
 
-L["Target"] = true
-L["In target options you can set scale target frame, healthbar text format, etc"] = true
-L["Target frame scale"] = true
-L["Scale of target unit frame"] = true
-L["Target healthbar text format"] = true
-L["Set the target healthbar text format"] = true
-L["Show target of target frame"] = true
+L["Target"] = "Цель"
+L["In target options you can set scale target frame, healthbar text format, etc"] = "В разделе Цель вы можете установить размер (scale) фрейма цели, установить формат HP и другие"
+L["Target frame scale"] = "Размер фрейма цели"
+L["Scale of target unit frame"] = "Размер (scale) фрейма цели"
+L["Target healthbar text format"] = "Формат HP цели"
+L["Set the target healthbar text format"] = "Установить формат отображения здоровья цели"
+L["Show target of target frame"] = "Показывать цель цели"
 
 
-L["Focus"] = true
-L["In focus options you can set scale focus frame, healthbar text format, etc"] = true
-L["Focus frame scale"] = true
-L["Scale of focus unit frame"] = true
-L["Focus healthbar text format"] = true
-L["Set the focus healthbar text format"] = true
-L["Show target of focus frame"] = true
+L["Focus"] = "Фокус"
+L["In focus options you can set scale focus frame, healthbar text format, etc"] = "В разделе Фокус вы можете установить размер (scale) фокус фрейма, установить формат HP и другие"
+L["Focus frame scale"] = "Размер фокус фрейма"
+L["Scale of focus unit frame"] = "Размер (scale) фокус фрейма"
+L["Focus healthbar text format"] = "Формат HP фокус фрейма"
+L["Set the focus healthbar text format"] = "Установить формат отображения здоровья фокус фрейма"
+L["Show target of focus frame"] = "Показывать цель фокус фрейма"
 
 
-L["Pet"] = true
-L["In pet options you can show/hide pet name, enable/disable pet hit indicators"] = true
-L["Show pet name"] = true
-L["Show or hide the damage/heal which your pet take on pet unit frame"] = true
+L["Pet"] = "Питомец"
+L["In pet options you can show/hide pet name, enable/disable pet hit indicators"] = "В разделе Питомец вы можете установить показывать/скрывать имя питомца, включить/выключить отображение входящего урон и исцеления питомца"
+L["Show pet name"] = "Показывать имя питомца"
+L["Show or hide the damage/heal which your pet take on pet unit frame"] = "Показывать получаемый урон/исцеление на фрейме питомца"
 
