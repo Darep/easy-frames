@@ -17,9 +17,9 @@ L["Setting for unit frames"] = "Настройки фреймов"
 L["Class colored healthbars"] = "Раскрасить фреймы здоровья в цвет класса"
 L["Healthbar color based on current health. IN DEVELOPMENT..."] = "В РАЗРАБОТКЕ... Цвет фреймов основан на текущем значении здоровья"
 L["Frames healthbar color based on his current health"] = "Цвет фреймов основан на текущем значении здоровья"
-L["If checked frames becomes class colored"] = "Если утановлено фреймы раскрашиваются в цвет класса"
+L["If checked frames becomes class colored"] = "Если установлено фреймы раскрашиваются в цвет класса"
 L["Custom buffsize"] = "Собственный размер бафов"
-L["Buffs settings (like custom buffsize, highlight dispelled buffs, etc)"] = "Настройки бафов (использовать собственный размер бафов, подсвечивать бафы, которые могут быть расеяны и другие)"
+L["Buffs settings (like custom buffsize, highlight dispelled buffs, etc)"] = "Настройки бафов (использовать собственный размер бафов, подсвечивать бафы, которые могут быть рассеяны и другие)"
 L["Turn on custom buffsize"] = "Собственный размер бафов"
 L["Turn on custom target and focus frames buffsize"] = "Включить собственный размер бафов у цели и фокус фреймов"
 L["Buffs"] = "Бафы"
@@ -86,7 +86,7 @@ L["Show target of focus frame"] = "Показывать цель фокус фр
 
 
 L["Pet"] = "Питомец"
-L["In pet options you can show/hide pet name, enable/disable pet hit indicators"] = "В разделе Питомец вы можете установить показывать/скрывать имя питомца, включить/выключить отображение входящего урон и исцеления питомца"
+L["In pet options you can show/hide pet name, enable/disable pet hit indicators"] = "В разделе Питомец вы можете установить такие настройки как Показывать имя питомца, включить отображение входящего урона и исцеления питомца"
 L["Show pet name"] = "Показывать имя питомца"
 L["Show or hide the damage/heal which your pet take on pet unit frame"] = "Показывать получаемый урон/исцеление на фрейме питомца"
 
