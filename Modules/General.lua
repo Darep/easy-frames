@@ -9,6 +9,8 @@ local db
 local GetFramesHealthBar = EasyFrames.Utils.GetFramesHealthBar
 local GetFramesManaBar = EasyFrames.Utils.GetFramesManaBar
 
+local DEFAULT_BUFF_SIZE = 17
+
 
 local function ClassColored(statusbar, unit)
 
@@ -204,8 +206,6 @@ function General:SetCustomBuffSize(value)
         FocusFrame
     }
 
-    local DEFAULT_BUFF_SIZE = 17
-
     for _, frame in pairs(frames) do
         local LARGE_AURA_SIZE = db.general.selfBuffSize
         local SMALL_AURA_SIZE = db.general.buffSize
@@ -294,7 +294,7 @@ function General:SetHighlightDispelledBuff()
 end
 
 function General:TargetFrame_UpdateAuras(frame, forceHide)
-    local frameStealable, frameName, icon, debuffType, _
+    local buffFrame, frameStealable, frameName, icon, debuffType, _
     local selfName = frame:GetName()
     local isEnemy = UnitIsEnemy(PlayerFrame.unit, frame.unit)
 
@@ -302,25 +302,36 @@ function General:TargetFrame_UpdateAuras(frame, forceHide)
         _, _, icon, _, debuffType = UnitBuff(frame.unit, i)
         frameName = selfName .. 'Buff' .. i
         if (icon and (not frame.maxBuffs or i <= frame.maxBuffs)) then
+            buffFrame = _G[frameName]
+
             -- Buffs on top
             if (i == 1 and frame.buffsOnTop) then
-                local point, relativeTo, relativePoint, xOffset, yOffset = _G[frameName]:GetPoint()
+                local point, relativeTo, relativePoint, xOffset, yOffset = buffFrame:GetPoint()
 
-                _G[frameName]:ClearAllPoints()
-                _G[frameName]:SetPoint(point, relativeTo, relativePoint, xOffset, yOffset + 8)
+                buffFrame:ClearAllPoints()
+                buffFrame:SetPoint(point, relativeTo, relativePoint, xOffset, yOffset + 8)
             end
 
             -- Stealable buffs
             if (db.general.highlightDispelledBuff or forceHide) then
                 frameStealable = _G[frameName .. 'Stealable']
+
                 if (isEnemy and debuffType == 'Magic' and not forceHide) then
-                    frameStealable:Show()
+                    local buffSize
 
                     if (db.general.customBuffSize) then
-                        frameStealable:SetHeight(db.general.buffSize * 1.4)
-                        frameStealable:SetWidth(db.general.buffSize * 1.4)
+                        buffSize = db.general.buffSize * db.general.dispelledBuffScale
+                    else
+                        buffSize = DEFAULT_BUFF_SIZE * db.general.dispelledBuffScale
                     end
-                else
+
+                    buffFrame:SetHeight(buffSize)
+                    buffFrame:SetWidth(buffSize)
+
+                    frameStealable:Show()
+                    frameStealable:SetHeight(buffSize * 1.4)
+                    frameStealable:SetWidth(buffSize * 1.4)
+                elseif (forceHide) then
                     frameStealable:Hide()
                 end
             end

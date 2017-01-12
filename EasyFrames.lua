@@ -37,6 +37,7 @@ local defaults = {
             buffSize = 22,
             selfBuffSize = 28,
             highlightDispelledBuff = true,
+            dispelledBuffScale = 1,
             classPortraits = true,
             barTexture = "Blizzard",
             brightFrameBorder = 1,

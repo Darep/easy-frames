@@ -28,6 +28,8 @@ L["Self buffsize"] = "Размер своих бафов"
 L["Buffsize that you create"] = "Размер бафов, которые вы создаете"
 L["Highlight dispelled buffs"] = "Подсвечивать бафы, которые могут быть рассеяны"
 L["Highlight buffs that can be dispelled from target frame"] = "Подсвечивать бафы у цели, которые могут быть рассеяны"
+L["Dispelled buff scale"] = "Размер (scale) бафов"
+L["Dispelled buff scale that can be dispelled from target frame"] = "Размер (scale) бафов, которые могут быть рассеяны"
 
 L["Class portraits"] = "Иконка класса в портрете"
 L["Replaces the unit-frame portrait with their class icon"] = "Заменяет портрет фрейма иконкой класса"

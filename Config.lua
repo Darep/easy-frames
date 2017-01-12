@@ -161,7 +161,7 @@ local generalOptions = {
             }
         },
 
-        customBuffSizeGroup = {
+        buffsGroup = {
             type = "group",
             order = 3,
             inline = true,
@@ -241,6 +241,26 @@ local generalOptions = {
                     set = function(info, value)
                         setOpt(info, value)
                         EasyFrames:GetModule("General"):SetHighlightDispelledBuff()
+                    end,
+                    arg = "general"
+                },
+
+                dispelledBuffScale = {
+                    type = "range",
+                    order = 7,
+                    name = L["Dispelled buff scale"],
+                    desc = L["Dispelled buff scale that can be dispelled from target frame"],
+                    min = 1,
+                    max = 1.5,
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("General"):TargetFrame_UpdateAuras(TargetFrame)
+                    end,
+                    disabled = function()
+                        local hide = EasyFrames.db.profile.general.highlightDispelledBuff
+                        if (hide == false) then
+                            return true
+                        end
                     end,
                     arg = "general"
                 },

@@ -31,6 +31,8 @@ L["Self buffsize"] = true
 L["Buffsize that you create"] = true
 L["Highlight dispelled buffs"] = true
 L["Highlight buffs that can be dispelled from target frame"] = true
+L["Dispelled buff scale"] = true
+L["Dispelled buff scale that can be dispelled from target frame"] = true
 
 L["Class portraits"] = true
 L["Replaces the unit-frame portrait with their class icon"] = true
