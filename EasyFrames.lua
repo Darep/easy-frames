@@ -53,6 +53,8 @@ local defaults = {
             showName = true,
             showHitIndicator = true,
             showSpecialbar = true,
+            showRestIcon = false,
+
         },
 
         target = {
@@ -94,6 +96,9 @@ Media:Register("frames", "minus", "Interface\\AddOns\\EasyFrames\\Textures\\Targ
 Media:Register("frames", "elite", "Interface\\AddOns\\EasyFrames\\Textures\\TargetingFrame\\UI-TargetingFrame-Elite")
 Media:Register("frames", "rareelite", "Interface\\AddOns\\EasyFrames\\Textures\\TargetingFrame\\UI-TargetingFrame-Rare-Elite")
 Media:Register("frames", "rare", "Interface\\AddOns\\EasyFrames\\Textures\\TargetingFrame\\UI-TargetingFrame-Rare")
+
+Media:Register("misc", "player-status", "Interface\\AddOns\\EasyFrames\\Textures\\TargetingFrame\\UI-Player-Status")
+--Media:Register("frames", "target-nomana", "Interface\\AddOns\\EasyFrames\\Textures\\TargetingFrame\\UI-SmallTargetingFramex-NoMana")
 
 
 function EasyFrames:OnInitialize()

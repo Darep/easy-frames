@@ -8,6 +8,7 @@ local db
 local originalValues = {}
 local UpdateHealthValues = EasyFrames.Utils.UpdateHealthValues
 
+
 function Player:OnInitialize()
     self.db = EasyFrames.db
     db = self.db.profile
@@ -21,6 +22,7 @@ function Player:OnEnable()
     self:ShowName(db.player.showName)
     self:ShowHitIndicator(db.player.showHitIndicator)
     self:ShowSpecialbar(db.player.showSpecialbar)
+    self:ShowRestIcon(db.player.showRestIcon)
 
     self:SecureHook("TextStatusBar_UpdateTextStringWithValues", "UpdateHealthValues")
 end
@@ -33,6 +35,7 @@ function Player:OnProfileChanged(newDB)
     self:ShowName(db.player.showName)
     self:ShowHitIndicator(db.player.showHitIndicator)
     self:ShowSpecialbar(db.player.showSpecialbar)
+    self:ShowRestIcon(db.player.showRestIcon)
 
     self:UpdateHealthValues()
 end
@@ -40,6 +43,11 @@ end
 
 function Player:GetOriginalValues()
     originalValues["PlayerHitIndicator"] = PlayerHitIndicator.SetText
+
+    originalValues["PlayerRestGlow"] = PlayerRestGlow.Show
+    originalValues["PlayerRestIcon"] = PlayerRestIcon.Show
+    originalValues["PlayerStatusGlow"] = PlayerStatusGlow.Show
+    originalValues["PlayerStatusTexture"] = PlayerStatusTexture.Show
 end
 
 function Player:SetScale(value)
@@ -98,4 +106,29 @@ function Player:UpdateHealthValues()
     local healthFormat = db.player.healthFormat
 
     UpdateHealthValues(frame, healthFormat)
+end
+
+function Player:ShowRestIcon(value)
+    local noop = function() return end
+
+    for _, frame in pairs({
+        PlayerRestGlow,
+        PlayerRestIcon,
+
+        PlayerStatusGlow,
+        PlayerStatusTexture,
+    }) do
+        if frame then
+            if (value) then
+                frame.Show = originalValues[frame:GetName()]
+
+                if (IsResting("player")) then
+                    frame:Show()
+                end
+            else
+                frame:Hide()
+                frame.Show = noop
+            end
+        end
+    end
 end

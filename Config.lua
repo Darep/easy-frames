@@ -470,6 +470,20 @@ local playerOptions = {
             end,
             arg = "player"
         },
+
+        showRestIcon = {
+            type = "toggle",
+            order = 9,
+            width = "double",
+            name = L["Show player resting icon"],
+            desc = L["Show or hide the player resting icon when player is resting (e.g. in the tavern or in the capital)"],
+            set = function(info, value)
+                setOpt(info, value)
+                EasyFrames:GetModule("Player"):ShowRestIcon(value)
+            end,
+            arg = "player"
+        },
+
     },
 }
 

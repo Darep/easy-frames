@@ -18,6 +18,7 @@ function Core:OnEnable()
     self:RegisterEvent("UNIT_FACTION", "EventHandler")
 
     PlayerFrameTexture:SetTexture(Media:Fetch("frames", "default"))
+    PlayerStatusTexture:SetTexture(Media:Fetch("misc", "player-status"))
 
     self:SecureHook("TargetFrame_CheckClassification", "CheckClassification")
     self:SecureHook("TextStatusBar_UpdateTextStringWithValues", "UpdateTextStringWithValues")
@@ -45,7 +46,6 @@ end
 
 function Core:EventHandler()
     TargetFrameNameBackground:SetVertexColor(0, 0, 0, 0.0)
---!!!!!!! баг""
     TargetFrameNameBackground:SetHeight(18)
 --    TargetFrameBackground:SetHeight(41)
 
@@ -91,12 +91,15 @@ function Core:HideFramesElements()
     local noop = function() return end
 
     for _, objname in ipairs({
-        "PlayerAttackGlow",
-        "PlayerRestGlow",
-        "PlayerRestIcon",
-        "PlayerStatusGlow",
-        "PlayerStatusTexture",
-        "PlayerAttackBackground",
+--        "PlayerRestGlow",
+--        "PlayerRestIcon",
+
+--        "PlayerStatusGlow",
+--        "PlayerStatusTexture",
+
+--        "PlayerAttackGlow",
+--        "PlayerAttackBackground",
+
         "PlayerFrameGroupIndicator",
         "PlayerFrameFlash",
         "PlayerFrameRoleIcon",

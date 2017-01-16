@@ -67,6 +67,8 @@ L["Player healthbar text format"] = "Формат HP игрока"
 L["Set the player healthbar text format"] = "Установить формат отображения здоровья игрока"
 L["Show player specialbar"] = "Показывать фрейм классового ресурса"
 L["Show or hide the player specialbar, like Paladin's holy power, Priest's orbs, Monk's harmony or Warlock's soul shards"] = "Показывать фрейм классового ресурса, такие как Энергия Света паладинов, Безумие пристов, Ци монахов, Осколки души чернокнижников и другие"
+L["Show player resting icon"] = "Показывать иконку отдыха игрока"
+L["Show or hide the player resting icon when player is resting (e.g. in the tavern or in the capital)"] = "Показывать иконку отдыха игрока когда он отдыхает (например, в таверне или в столице)"
 
 
 L["Target"] = "Цель"
