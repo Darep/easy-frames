@@ -54,7 +54,7 @@ local defaults = {
             showHitIndicator = true,
             showSpecialbar = true,
             showRestIcon = false,
-
+            showStatusTexture = false,
         },
 
         target = {

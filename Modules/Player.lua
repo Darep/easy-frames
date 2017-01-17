@@ -23,6 +23,7 @@ function Player:OnEnable()
     self:ShowHitIndicator(db.player.showHitIndicator)
     self:ShowSpecialbar(db.player.showSpecialbar)
     self:ShowRestIcon(db.player.showRestIcon)
+    self:ShowStatusTexture(db.player.showStatusTexture)
 
     self:SecureHook("TextStatusBar_UpdateTextStringWithValues", "UpdateHealthValues")
 end
@@ -36,6 +37,7 @@ function Player:OnProfileChanged(newDB)
     self:ShowHitIndicator(db.player.showHitIndicator)
     self:ShowSpecialbar(db.player.showSpecialbar)
     self:ShowRestIcon(db.player.showRestIcon)
+    self:ShowStatusTexture(db.player.showStatusTexture)
 
     self:UpdateHealthValues()
 end
@@ -114,7 +116,26 @@ function Player:ShowRestIcon(value)
     for _, frame in pairs({
         PlayerRestGlow,
         PlayerRestIcon,
+    }) do
+        if frame then
+            if (value) then
+                frame.Show = originalValues[frame:GetName()]
 
+                if (IsResting("player")) then
+                    frame:Show()
+                end
+            else
+                frame:Hide()
+                frame.Show = noop
+            end
+        end
+    end
+end
+
+function Player:ShowStatusTexture(value)
+    local noop = function() return end
+
+    for _, frame in pairs({
         PlayerStatusGlow,
         PlayerStatusTexture,
     }) do

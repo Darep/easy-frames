@@ -484,6 +484,19 @@ local playerOptions = {
             arg = "player"
         },
 
+        showStatusTexture = {
+            type = "toggle",
+            order = 10,
+            width = "double",
+            name = L["Show player status texture"],
+            desc = L["Show or hide the player status texture (blinking glow in the frame when player is resting or in combat)"],
+            set = function(info, value)
+                setOpt(info, value)
+                EasyFrames:GetModule("Player"):ShowStatusTexture(value)
+            end,
+            arg = "player"
+        },
+
     },
 }
 
