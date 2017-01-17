@@ -13,6 +13,7 @@
     "ncp": "^2.0.0"
   },
   "scripts": {
-    "start": "npm --no-git-tag-version version patch && node archiver.js"
+    "build": "npm --no-git-tag-version version patch && node archiver.js",
+    "archive": "node archiver.js"
   }
 }

@@ -97,9 +97,9 @@ function Core:HideFramesElements()
 --        "PlayerStatusGlow",
 --        "PlayerStatusTexture",
 
-        "PlayerAttackGlow",
-        "PlayerAttackBackground",
-        "PlayerFrameFlash",
+--        "PlayerAttackGlow",
+--        "PlayerAttackBackground",
+--        "PlayerFrameFlash",
 
         "PlayerFrameGroupIndicator",
         "PlayerFrameRoleIcon",

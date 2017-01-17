@@ -24,6 +24,7 @@ function Player:OnEnable()
     self:ShowSpecialbar(db.player.showSpecialbar)
     self:ShowRestIcon(db.player.showRestIcon)
     self:ShowStatusTexture(db.player.showStatusTexture)
+    self:ShowAttackBackground(db.player.showAttackBackground)
 
     self:SecureHook("TextStatusBar_UpdateTextStringWithValues", "UpdateHealthValues")
 end
@@ -38,6 +39,7 @@ function Player:OnProfileChanged(newDB)
     self:ShowSpecialbar(db.player.showSpecialbar)
     self:ShowRestIcon(db.player.showRestIcon)
     self:ShowStatusTexture(db.player.showStatusTexture)
+    self:ShowAttackBackground(db.player.showAttackBackground)
 
     self:UpdateHealthValues()
 end
@@ -48,8 +50,13 @@ function Player:GetOriginalValues()
 
     originalValues["PlayerRestGlow"] = PlayerRestGlow.Show
     originalValues["PlayerRestIcon"] = PlayerRestIcon.Show
+
     originalValues["PlayerStatusGlow"] = PlayerStatusGlow.Show
     originalValues["PlayerStatusTexture"] = PlayerStatusTexture.Show
+
+    originalValues["PlayerAttackGlow"] = PlayerAttackGlow.Show
+    originalValues["PlayerAttackBackground"] = PlayerAttackBackground.Show
+    originalValues["PlayerFrameFlash"] = PlayerFrameFlash.Show
 end
 
 function Player:SetScale(value)
@@ -143,7 +150,31 @@ function Player:ShowStatusTexture(value)
             if (value) then
                 frame.Show = originalValues[frame:GetName()]
 
-                if (IsResting("player")) then
+                if (IsResting("player") or UnitAffectingCombat("player")) then
+                    frame:Show()
+                end
+            else
+                frame:Hide()
+                frame.Show = noop
+            end
+        end
+    end
+end
+
+
+function Player:ShowAttackBackground(value)
+    local noop = function() return end
+
+    for _, frame in pairs({
+        PlayerAttackGlow,
+        PlayerAttackBackground,
+        PlayerFrameFlash,
+    }) do
+        if frame then
+            if (value) then
+                frame.Show = originalValues[frame:GetName()]
+
+                if (UnitAffectingCombat("player")) then
                     frame:Show()
                 end
             else

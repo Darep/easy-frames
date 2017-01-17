@@ -55,6 +55,7 @@ local defaults = {
             showSpecialbar = true,
             showRestIcon = false,
             showStatusTexture = false,
+            showAttackBackground = false,
         },
 
         target = {
