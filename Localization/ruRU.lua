@@ -71,8 +71,8 @@ L["Show player resting icon"] = "Показывать иконку отдыха 
 L["Show or hide player resting icon when player is resting (e.g. in the tavern or in the capital)"] = "Показывать иконку отдыха игрока когда он отдыхает (например, в таверне или в столице)"
 L["Show player status texture (inside the frame)"] = "Показывать статус текстуру игрока (внутри фрейма)"
 L["Show or hide player status texture (blinking glow inside the frame when player is resting or in combat)"] = "Показывать статус текстуру игрока (мигающая рамка внутри фрейма во время отдыха или боя)"
-L["Show player combat texture (outside the frame)"] = "Показывать красную текстуру игрока в бою (снаружи фрейма)"
-L["Show or hide player red background texture (blinking red glow outside the frame in combat)"] = "Показывать красную текстуру в бою (мигающая рамка снаружи фрейма в бою)"
+L["Show player combat texture (outside the frame)"] = "Показывать фоновую текстуру игрока (снаружи фрейма)"
+L["Show or hide player red background texture (blinking red glow outside the frame in combat)"] = "Показывать красную текстуру в бою (мигающая рамка снаружи фрейма во время боя)"
 
 
 L["Target"] = "Цель"
