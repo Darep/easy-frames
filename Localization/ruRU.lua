@@ -68,11 +68,11 @@ L["Set the player healthbar text format"] = "Установить формат �
 L["Show player specialbar"] = "Показывать фрейм классового ресурса"
 L["Show or hide the player specialbar, like Paladin's holy power, Priest's orbs, Monk's harmony or Warlock's soul shards"] = "Показывать фрейм классового ресурса, такие как Энергия Света паладинов, Безумие пристов, Ци монахов, Осколки души чернокнижников и другие"
 L["Show player resting icon"] = "Показывать иконку отдыха игрока"
-L["Show or hide the player resting icon when player is resting (e.g. in the tavern or in the capital)"] = "Показывать иконку отдыха игрока когда он отдыхает (например, в таверне или в столице)"
-L["Show player status texture (inside frame)"] = "Показывать статус текстуру игрока (внутри фрейма)"
-L["Show or hide the player status texture (blinking glow inside the frame when player is resting or in combat)"] = "Показывать статус текстуру игрока (мигающая рамка внутри фрейма во время отдыха или боя)"
-L["Show player combat texture (outside frame)"] = "Показывать красную текстуру игрока в бою (снаружи фрейма)"
-L["Show or hide the player red background texture (blinking red glow outside frame in combat)"] = "Показывать красную текстуру в бою (мигающая рамка снаружи фрейма в бою)"
+L["Show or hide player resting icon when player is resting (e.g. in the tavern or in the capital)"] = "Показывать иконку отдыха игрока когда он отдыхает (например, в таверне или в столице)"
+L["Show player status texture (inside the frame)"] = "Показывать статус текстуру игрока (внутри фрейма)"
+L["Show or hide player status texture (blinking glow inside the frame when player is resting or in combat)"] = "Показывать статус текстуру игрока (мигающая рамка внутри фрейма во время отдыха или боя)"
+L["Show player combat texture (outside the frame)"] = "Показывать красную текстуру игрока в бою (снаружи фрейма)"
+L["Show or hide player red background texture (blinking red glow outside the frame in combat)"] = "Показывать красную текстуру в бою (мигающая рамка снаружи фрейма в бою)"
 
 
 L["Target"] = "Цель"

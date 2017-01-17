@@ -476,7 +476,7 @@ local playerOptions = {
             order = 9,
             width = "double",
             name = L["Show player resting icon"],
-            desc = L["Show or hide the player resting icon when player is resting (e.g. in the tavern or in the capital)"],
+            desc = L["Show or hide player resting icon when player is resting (e.g. in the tavern or in the capital)"],
             set = function(info, value)
                 setOpt(info, value)
                 EasyFrames:GetModule("Player"):ShowRestIcon(value)
@@ -488,8 +488,8 @@ local playerOptions = {
             type = "toggle",
             order = 10,
             width = "double",
-            name = L["Show player status texture (inside frame)"],
-            desc = L["Show or hide the player status texture (blinking glow inside the frame when player is resting or in combat)"],
+            name = L["Show player status texture (inside the frame)"],
+            desc = L["Show or hide player status texture (blinking glow inside the frame when player is resting or in combat)"],
             set = function(info, value)
                 setOpt(info, value)
                 EasyFrames:GetModule("Player"):ShowStatusTexture(value)
@@ -501,8 +501,8 @@ local playerOptions = {
             type = "toggle",
             order = 11,
             width = "double",
-            name = L["Show player combat texture (outside frame)"],
-            desc = L["Show or hide the player red background texture (blinking red glow outside frame in combat)"],
+            name = L["Show player combat texture (outside the frame)"],
+            desc = L["Show or hide player red background texture (blinking red glow outside the frame in combat)"],
             set = function(info, value)
                 setOpt(info, value)
                 EasyFrames:GetModule("Player"):ShowAttackBackground(value)

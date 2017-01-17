@@ -71,11 +71,11 @@ L["Set the player healthbar text format"] = true
 L["Show player specialbar"] = true
 L["Show or hide the player specialbar, like Paladin's holy power, Priest's orbs, Monk's harmony or Warlock's soul shards"] = true
 L["Show player resting icon"] = true
-L["Show or hide the player resting icon when player is resting (e.g. in the tavern or in the capital)"] = true
-L["Show player status texture (inside frame)"] = true
-L["Show or hide the player status texture (blinking glow inside the frame when player is resting or in combat)"] = true
-L["Show player combat texture (outside frame)"] = true
-L["Show or hide the player red background texture (blinking red glow outside frame in combat)"] = true
+L["Show or hide player resting icon when player is resting (e.g. in the tavern or in the capital)"] = true
+L["Show player status texture (inside the frame)"] = true
+L["Show or hide player status texture (blinking glow inside the frame when player is resting or in combat)"] = true
+L["Show player combat texture (outside the frame)"] = true
+L["Show or hide player red background texture (blinking red glow outside the frame in combat)"] = true
 
 
 L["Target"] = true
