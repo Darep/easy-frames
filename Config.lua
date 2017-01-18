@@ -745,7 +745,7 @@ local petOptions = {
                 setOpt(info, value)
                 EasyFrames:GetModule("Pet"):ShowAttackBackground(value)
             end,
-            arg = "focus"
+            arg = "pet"
         },
     },
 }

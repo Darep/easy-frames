@@ -71,12 +71,13 @@ local defaults = {
             scaleFrame = 1.2,
             healthFormat = "3",
             showToTFrame = true,
-            showAttackBackground = true,
+            showAttackBackground = false,
         },
 
         pet = {
             showName = true,
             showHitIndicator = true,
+            showAttackBackground = true,
         },
     }
 }
