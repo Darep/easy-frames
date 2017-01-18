@@ -602,6 +602,19 @@ local targetOptions = {
             arg = "target"
         },
 
+        showAttackBackground = {
+            type = "toggle",
+            order = 7,
+            width = "double",
+            name = L["Show target combat texture (outside the frame)"],
+            desc = L["Show or hide target red background texture (blinking red glow outside the frame in combat)"],
+            set = function(info, value)
+                setOpt(info, value)
+                EasyFrames:GetModule("Target"):ShowAttackBackground(value)
+            end,
+            arg = "target"
+        },
+
     },
 }
 

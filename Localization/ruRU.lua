@@ -86,6 +86,8 @@ L["Scale of target unit frame"] = "Размер (scale) фрейма цели"
 L["Target healthbar text format"] = "Формат HP цели"
 L["Set the target healthbar text format"] = "Установить формат отображения здоровья цели"
 L["Show target of target frame"] = "Показывать цель цели"
+L["Show target combat texture (outside the frame)"] = "Показывать фоновую текстуру цели (снаружи фрейма)"
+L["Show or hide target red background texture (blinking red glow outside the frame in combat)"] = "Показывать красную текстуру в бою (мигающая рамка снаружи фрейма во время боя)"
 
 
 L["Focus"] = "Фокус"

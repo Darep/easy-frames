@@ -104,7 +104,7 @@ function Core:HideFramesElements()
 --        "PlayerFrameGroupIndicator",
 --        "PlayerFrameRoleIcon",
 
-        "TargetFrameFlash",
+--        "TargetFrameFlash",
 
         "FocusFrameFlash",
 

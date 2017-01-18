@@ -53,7 +53,7 @@ local defaults = {
             showName = true,
             showHitIndicator = true,
             showSpecialbar = true,
-            showRestIcon = false,
+            showRestIcon = true,
             showStatusTexture = false,
             showAttackBackground = false,
             showGroupIndicator = true,
@@ -64,6 +64,7 @@ local defaults = {
             scaleFrame = 1.2,
             healthFormat = "3",
             showToTFrame = true,
+            showAttackBackground = false,
         },
 
         focus = {

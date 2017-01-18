@@ -5,6 +5,7 @@ local Media = LibStub("LibSharedMedia-3.0")
 local MODULE_NAME = "Target"
 local Target = EasyFrames:NewModule(MODULE_NAME, "AceHook-3.0")
 local db
+local originalValues = {}
 local UpdateHealthValues = EasyFrames.Utils.UpdateHealthValues
 
 function Target:OnInitialize()
@@ -13,8 +14,12 @@ function Target:OnInitialize()
 end
 
 function Target:OnEnable()
+    self:GetOriginalValues()
+
     self:SetScale(db.target.scaleFrame)
     self:ShowTargetFrameToT()
+
+    self:ShowAttackBackground(db.target.showAttackBackground)
 
     self:SecureHook("TextStatusBar_UpdateTextStringWithValues", "UpdateHealthValues")
 end
@@ -26,7 +31,13 @@ function Target:OnProfileChanged(newDB)
     self:SetScale(db.target.scaleFrame)
     self:ShowTargetFrameToT()
 
+    self:ShowAttackBackground(db.target.showAttackBackground)
+
     self:UpdateHealthValues()
+end
+
+function Target:GetOriginalValues()
+    originalValues["TargetFrameFlash"] = TargetFrameFlash.Show
 end
 
 
@@ -46,5 +57,24 @@ function Target:ShowTargetFrameToT()
         TargetFrameToT:SetAlpha(100)
     else
         TargetFrameToT:SetAlpha(0)
+    end
+end
+
+function Target:ShowAttackBackground(value)
+    local noop = function() return end
+
+    local frame = TargetFrameFlash
+
+    if frame then
+        if (value) then
+            frame.Show = originalValues[frame:GetName()]
+
+            if (UnitAffectingCombat("target")) then
+                frame:Show()
+            end
+        else
+            frame:Hide()
+            frame.Show = noop
+        end
     end
 end
