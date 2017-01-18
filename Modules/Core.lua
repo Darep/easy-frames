@@ -101,7 +101,7 @@ function Core:HideFramesElements()
 --        "PlayerAttackBackground",
 --        "PlayerFrameFlash",
 
-        "PlayerFrameGroupIndicator",
+--        "PlayerFrameGroupIndicator",
         "PlayerFrameRoleIcon",
 
         "TargetFrameFlash",
@@ -159,6 +159,13 @@ function Core:MovePlayerFrameBars()
     PlayerFrameManaBar.SetPoint = function() end
 
     PlayerStatusTexture:SetHeight(69)
+
+    PlayerFrameGroupIndicator:ClearAllPoints()
+    PlayerFrameGroupIndicator:SetPoint("TOPLEFT", 34, 15)
+    PlayerFrameGroupIndicatorLeft:SetAlpha(0)
+    PlayerFrameGroupIndicatorRight:SetAlpha(0)
+    PlayerFrameGroupIndicatorMiddle:SetAlpha(0)
+
 end
 
 function Core:MoveTargetFrameBars()

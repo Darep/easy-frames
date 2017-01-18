@@ -509,6 +509,19 @@ local playerOptions = {
             end,
             arg = "player"
         },
+
+        showGroupIndicator = {
+            type = "toggle",
+            order = 12,
+            width = "double",
+            name = L["Show player group number"],
+            desc = L["Show or hide player group number when player is in a raid group (over portrait)"],
+            set = function(info, value)
+                setOpt(info, value)
+                EasyFrames:GetModule("Player"):ShowGroupIndicator(value)
+            end,
+            arg = "player"
+        },
     },
 }
 

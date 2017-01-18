@@ -57,6 +57,8 @@ function Player:GetOriginalValues()
     originalValues["PlayerAttackGlow"] = PlayerAttackGlow.Show
     originalValues["PlayerAttackBackground"] = PlayerAttackBackground.Show
     originalValues["PlayerFrameFlash"] = PlayerFrameFlash.Show
+
+    originalValues["PlayerFrameGroupIndicator"] = PlayerFrameGroupIndicator.Show
 end
 
 function Player:SetScale(value)
@@ -175,6 +177,27 @@ function Player:ShowAttackBackground(value)
                 frame.Show = originalValues[frame:GetName()]
 
                 if (UnitAffectingCombat("player")) then
+                    frame:Show()
+                end
+            else
+                frame:Hide()
+                frame.Show = noop
+            end
+        end
+    end
+end
+
+function Player:ShowGroupIndicator(value)
+    local noop = function() return end
+
+    for _, frame in pairs({
+        PlayerFrameGroupIndicator
+    }) do
+        if frame then
+            if (value) then
+                frame.Show = originalValues[frame:GetName()]
+
+                if (IsInRaid("player")) then
                     frame:Show()
                 end
             else
