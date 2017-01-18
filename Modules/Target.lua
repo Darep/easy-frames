@@ -36,10 +36,10 @@ function Target:OnProfileChanged(newDB)
     self:UpdateHealthValues()
 end
 
+
 function Target:GetOriginalValues()
     originalValues["TargetFrameFlash"] = TargetFrameFlash.Show
 end
-
 
 function Target:SetScale(value)
     TargetFrame:SetScale(value)

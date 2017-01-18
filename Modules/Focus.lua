@@ -5,6 +5,7 @@ local Media = LibStub("LibSharedMedia-3.0")
 local MODULE_NAME = "Focus"
 local Focus = EasyFrames:NewModule(MODULE_NAME, "AceHook-3.0")
 local db
+local originalValues = {}
 local UpdateHealthValues = EasyFrames.Utils.UpdateHealthValues
 
 function Focus:OnInitialize()
@@ -13,8 +14,12 @@ function Focus:OnInitialize()
 end
 
 function Focus:OnEnable()
+    self:GetOriginalValues()
+
     self:SetScale(db.focus.scaleFrame)
     self:ShowFocusFrameToT()
+
+    self:ShowAttackBackground(db.focus.showAttackBackground)
 
     self:SecureHook("TextStatusBar_UpdateTextStringWithValues", "UpdateHealthValues")
 end
@@ -26,9 +31,15 @@ function Focus:OnProfileChanged(newDB)
     self:ShowFocusFrameToT()
     self:SetScale(db.focus.scaleFrame)
 
+    self:ShowAttackBackground(db.focus.showAttackBackground)
+
     self:UpdateHealthValues()
 end
 
+
+function Focus:GetOriginalValues()
+    originalValues["FocusFrameFlash"] = FocusFrameFlash.Show
+end
 
 function Focus:SetScale(value)
     FocusFrame:SetScale(value)
@@ -46,5 +57,24 @@ function Focus:ShowFocusFrameToT()
         FocusFrameToT:SetAlpha(100)
     else
         FocusFrameToT:SetAlpha(0)
+    end
+end
+
+function Focus:ShowAttackBackground(value)
+    local noop = function() return end
+
+    local frame = FocusFrameFlash
+
+    if frame then
+        if (value) then
+            frame.Show = originalValues[frame:GetName()]
+
+            if (UnitAffectingCombat("focus")) then
+                frame:Show()
+            end
+        else
+            frame:Hide()
+            frame.Show = noop
+        end
     end
 end

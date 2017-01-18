@@ -106,7 +106,7 @@ function Core:HideFramesElements()
 
 --        "TargetFrameFlash",
 
-        "FocusFrameFlash",
+--        "FocusFrameFlash",
 
         "PetAttackModeTexture",
         "PetFrameFlash",

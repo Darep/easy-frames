@@ -71,6 +71,7 @@ local defaults = {
             scaleFrame = 1.2,
             healthFormat = "3",
             showToTFrame = true,
+            showAttackBackground = false,
         },
 
         pet = {

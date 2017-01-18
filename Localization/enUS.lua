@@ -100,6 +100,8 @@ L["Scale of focus unit frame"] = true
 L["Focus healthbar text format"] = true
 L["Set the focus healthbar text format"] = true
 L["Show target of focus frame"] = true
+L["Show focus combat texture (outside the frame)"] = true
+L["Show or hide focus red background texture (blinking red glow outside the frame in combat)"] = true
 
 
 L["Pet"] = true

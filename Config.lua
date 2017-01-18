@@ -681,6 +681,19 @@ local focusOptions = {
             end,
             arg = "focus"
         },
+
+        showAttackBackground = {
+            type = "toggle",
+            order = 7,
+            width = "double",
+            name = L["Show focus combat texture (outside the frame)"],
+            desc = L["Show or hide focus red background texture (blinking red glow outside the frame in combat)"],
+            set = function(info, value)
+                setOpt(info, value)
+                EasyFrames:GetModule("Focus"):ShowAttackBackground(value)
+            end,
+            arg = "focus"
+        },
     },
 }
 
