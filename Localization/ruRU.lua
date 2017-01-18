@@ -105,4 +105,6 @@ L["Pet"] = "Питомец"
 L["In pet options you can show/hide pet name, enable/disable pet hit indicators"] = "В разделе Питомец вы можете установить такие настройки как Показывать имя питомца, включить отображение входящего урона и исцеления питомца"
 L["Show pet name"] = "Показывать имя питомца"
 L["Show or hide the damage/heal which your pet take on pet unit frame"] = "Показывать получаемый урон/исцеление на фрейме питомца"
+L["Show pet combat texture (inside the frame)"] = "Показывать фоновую текстуру фрейма питомца (внутри фрейма)"
+L["Show or hide pet red background texture (blinking red glow inside the frame in combat)"] = "Показывать красную текстуру в бою (мигающая рамка внутри фрейма во время боя)"
 

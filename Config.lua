@@ -734,6 +734,19 @@ local petOptions = {
             end,
             arg = "pet"
         },
+
+        showAttackBackground = {
+            type = "toggle",
+            order = 4,
+            width = "double",
+            name = L["Show pet combat texture (inside the frame)"],
+            desc = L["Show or hide pet red background texture (blinking red glow inside the frame in combat)"],
+            set = function(info, value)
+                setOpt(info, value)
+                EasyFrames:GetModule("Pet"):ShowAttackBackground(value)
+            end,
+            arg = "focus"
+        },
     },
 }
 

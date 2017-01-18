@@ -55,7 +55,7 @@ local defaults = {
             showSpecialbar = true,
             showRestIcon = true,
             showStatusTexture = false,
-            showAttackBackground = false,
+            showAttackBackground = true,
             showGroupIndicator = true,
             showRoleIcon = false,
         },
@@ -71,7 +71,7 @@ local defaults = {
             scaleFrame = 1.2,
             healthFormat = "3",
             showToTFrame = true,
-            showAttackBackground = false,
+            showAttackBackground = true,
         },
 
         pet = {

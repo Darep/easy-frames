@@ -15,6 +15,8 @@ end
 function Pet:OnEnable()
     self:ShowName(db.pet.showName)
     self:ShowHitIndicator(db.pet.showHitIndicator)
+
+    self:ShowAttackBackground(db.pet.showAttackBackground)
 end
 
 function Pet:OnProfileChanged(newDB)
@@ -23,11 +25,16 @@ function Pet:OnProfileChanged(newDB)
 
     self:ShowName(db.pet.showName)
     self:ShowHitIndicator(db.pet.showHitIndicator)
+
+    self:ShowAttackBackground(db.pet.showAttackBackground)
 end
 
 
 function Pet:GetOriginalValues()
     originalValues["PetHitIndicator"] = PetHitIndicator.SetText
+
+    originalValues["PetAttackModeTexture"] = PetAttackModeTexture.Show
+    originalValues["PetFrameFlash"] = PetFrameFlash.Show
 end
 
 function Pet:ShowName(value)
@@ -44,5 +51,27 @@ function Pet:ShowHitIndicator(value)
     else
         PetHitIndicator:SetText(nil)
         PetHitIndicator.SetText = function() end
+    end
+end
+
+function Pet:ShowAttackBackground(value)
+    local noop = function() return end
+
+    for _, frame in pairs({
+        PetAttackModeTexture,
+        PetFrameFlash,
+    }) do
+        if frame then
+            if (value) then
+                frame.Show = originalValues[frame:GetName()]
+
+                if (UnitAffectingCombat("player")) then
+                    frame:Show()
+                end
+            else
+                frame:Hide()
+                frame.Show = noop
+            end
+        end
     end
 end
