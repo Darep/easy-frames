@@ -23,8 +23,6 @@ function Core:OnEnable()
     self:SecureHook("TargetFrame_CheckClassification", "CheckClassification")
     self:SecureHook("TextStatusBar_UpdateTextStringWithValues", "UpdateTextStringWithValues")
 
-    self:HideFramesElements()
-
     self:MoveFramesNames()
     self:MoveToTFrames()
     self:MovePlayerFrameBars()
@@ -84,38 +82,6 @@ function Core:CheckClassification(frame, forceNormalTexture)
     else
         frame.borderTexture:SetTexture(Media:Fetch("frames", "default"));
         forceNormalTexture = true;
-    end
-end
-
-function Core:HideFramesElements()
-    local noop = function() return end
-
-    for _, objname in ipairs({
---        "PlayerRestGlow",
---        "PlayerRestIcon",
-
---        "PlayerStatusGlow",
---        "PlayerStatusTexture",
-
---        "PlayerAttackGlow",
---        "PlayerAttackBackground",
---        "PlayerFrameFlash",
-
---        "PlayerFrameGroupIndicator",
---        "PlayerFrameRoleIcon",
-
---        "TargetFrameFlash",
-
---        "FocusFrameFlash",
-
-        "PetAttackModeTexture",
-        "PetFrameFlash",
-    }) do
-        local obj = _G[objname]
-        if obj then
-            obj:Hide()
-            obj.Show = noop
-        end
     end
 end
 
