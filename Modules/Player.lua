@@ -25,6 +25,8 @@ function Player:OnEnable()
     self:ShowRestIcon(db.player.showRestIcon)
     self:ShowStatusTexture(db.player.showStatusTexture)
     self:ShowAttackBackground(db.player.showAttackBackground)
+    self:ShowGroupIndicator(db.player.showGroupIndicator)
+    self:ShowRoleIcon(db.player.showRoleIcon)
 
     self:SecureHook("TextStatusBar_UpdateTextStringWithValues", "UpdateHealthValues")
 end
@@ -40,6 +42,9 @@ function Player:OnProfileChanged(newDB)
     self:ShowRestIcon(db.player.showRestIcon)
     self:ShowStatusTexture(db.player.showStatusTexture)
     self:ShowAttackBackground(db.player.showAttackBackground)
+    self:ShowGroupIndicator(db.player.showGroupIndicator)
+    self:ShowRoleIcon(db.player.showRoleIcon)
+
 
     self:UpdateHealthValues()
 end
@@ -59,6 +64,8 @@ function Player:GetOriginalValues()
     originalValues["PlayerFrameFlash"] = PlayerFrameFlash.Show
 
     originalValues["PlayerFrameGroupIndicator"] = PlayerFrameGroupIndicator.Show
+
+    originalValues["PlayerFrameRoleIcon"] = PlayerFrameRoleIcon.Show
 end
 
 function Player:SetScale(value)
@@ -198,6 +205,27 @@ function Player:ShowGroupIndicator(value)
                 frame.Show = originalValues[frame:GetName()]
 
                 if (IsInRaid("player")) then
+                    frame:Show()
+                end
+            else
+                frame:Hide()
+                frame.Show = noop
+            end
+        end
+    end
+end
+
+function Player:ShowRoleIcon(value)
+    local noop = function() return end
+
+    for _, frame in pairs({
+        PlayerFrameRoleIcon
+    }) do
+        if frame then
+            if (value) then
+                frame.Show = originalValues[frame:GetName()]
+
+                if (IsInGroup("player")) then
                     frame:Show()
                 end
             else

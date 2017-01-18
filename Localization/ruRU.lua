@@ -75,6 +75,8 @@ L["Show player combat texture (outside the frame)"] = "Показывать фо
 L["Show or hide player red background texture (blinking red glow outside the frame in combat)"] = "Показывать красную текстуру в бою (мигающая рамка снаружи фрейма во время боя)"
 L["Show player group number"] = "Показывать номер группы"
 L["Show or hide player group number when player is in a raid group (over portrait)"] = "Показывать номер группы когда игрок в рейде (над портретом)"
+L["Show player role icon"] = "Показывать иконку роли игрока"
+L["Show or hide player role icon when player is in a group"] = "Показывать иконку роли когда игрок в группе"
 
 
 L["Target"] = "Цель"

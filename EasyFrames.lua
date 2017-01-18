@@ -57,6 +57,7 @@ local defaults = {
             showStatusTexture = false,
             showAttackBackground = false,
             showGroupIndicator = true,
+            showRoleIcon = false,
         },
 
         target = {

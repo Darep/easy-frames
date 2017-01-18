@@ -78,6 +78,8 @@ L["Show player combat texture (outside the frame)"] = true
 L["Show or hide player red background texture (blinking red glow outside the frame in combat)"] = true
 L["Show player group number"] = true
 L["Show or hide player group number when player is in a raid group (over portrait)"] = true
+L["Show player role icon"] = true
+L["Show or hide player role icon when player is in a group"] = true
 
 
 L["Target"] = true

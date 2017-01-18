@@ -522,6 +522,19 @@ local playerOptions = {
             end,
             arg = "player"
         },
+
+        showRoleIcon = {
+            type = "toggle",
+            order = 13,
+            width = "double",
+            name = L["Show player role icon"],
+            desc = L["Show or hide player role icon when player is in a group"],
+            set = function(info, value)
+                setOpt(info, value)
+                EasyFrames:GetModule("Player"):ShowRoleIcon(value)
+            end,
+            arg = "player"
+        },
     },
 }
 
