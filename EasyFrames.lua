@@ -50,6 +50,7 @@ local defaults = {
         player = {
             scaleFrame = 1.2,
             healthFormat = "3",
+            customHealthFormat = "%CURRENT% / %MAX% (%PERCENT%%)",
             showName = true,
             showHitIndicator = true,
             showSpecialbar = true,
@@ -155,7 +156,7 @@ function EasyFrames.Utils.UpdateHealthValues(frame, healthFormat)
 
             _G[frame .. "FrameHealthBar"].TextString:SetText(ReadableNumber(Health) .. " / " .. ReadableNumber(HealthMax));
         end
-    else
+    elseif (healthFormat == "3") then
         -- Current + Max + Percent
 
         if (UnitHealth(frame) > 0) then
@@ -165,6 +166,28 @@ function EasyFrames.Utils.UpdateHealthValues(frame, healthFormat)
 
             _G[frame .. "FrameHealthBar"].TextString:SetText(ReadableNumber(Health) .. " / " .. ReadableNumber(HealthMax) .. " (" .. string.format("%.0f", HealthPercent) .. "%)");
         end
+
+    elseif (healthFormat == "4") then
+        -- Current + Percent
+
+        if (UnitHealth(frame) > 0) then
+            local Health = UnitHealth(frame)
+            local HealthPercent = (UnitHealth(frame) / UnitHealthMax(frame)) * 100
+
+            _G[frame .. "FrameHealthBar"].TextString:SetText(ReadableNumber(Health) .. " (" .. string.format("%.0f", HealthPercent) .. "%)");
+        end
+
+    elseif (healthFormat == "custom") then
+        -- Own format
+
+        if (UnitHealth(frame) > 0) then
+            local Health = UnitHealth(frame)
+            local HealthMax = UnitHealthMax(frame)
+            local HealthPercent = (UnitHealth(frame) / UnitHealthMax(frame)) * 100
+
+            _G[frame .. "FrameHealthBar"].TextString:SetText(ReadableNumber(Health) .. " / " .. ReadableNumber(HealthMax) .. " (" .. string.format("%.0f", HealthPercent) .. "%)");
+        end
+
     end
 end
 

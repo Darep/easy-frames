@@ -47,6 +47,8 @@ local healthFormat = {
     ["1"] = L["Percent"], --1
     ["2"] = L["Current + Max"], --2
     ["3"] = L["Current + Max + Percent"], --3
+    ["4"] = L["Current + Percent"], --4
+    ["custom"] = L["Custom format"], --9
 }
 
 local generalOptions = {
@@ -115,7 +117,6 @@ local generalOptions = {
                 classPortraits = {
                     type = "toggle",
                     order = 5,
---                    width = "double",
                     name = L["Class portraits"],
                     desc = L["Replaces the unit-frame portrait with their class icon"],
                     set = function(info, value)
@@ -426,15 +427,46 @@ local playerOptions = {
             arg = "player"
         },
 
+        HPFormat = {
+            type = "group",
+            order = 5,
+            inline = true,
+            name = "",
+            hidden = function()
+                local healthFormat = EasyFrames.db.profile.player.healthFormat
+                if (healthFormat == "custom") then
+                    return false
+                end
+
+                return true
+            end,
+            args = {
+                desc = {
+                    type = "description",
+                    order = 1,
+                    name = L["You can set custom HP format"],
+                },
+
+                customHealthFormat = {
+                    type = "input",
+                    order = 2,
+                    width = "double",
+                    name = L["HP format"],
+                    desc = L["HP format"],
+                    arg = "player"
+                },
+            }
+        },
+
         newLine2 = {
             type = "description",
-            order = 5,
+            order = 6,
             name = "",
         },
 
         showName = {
             type = "toggle",
-            order = 6,
+            order = 7,
             width = "double",
             name = L["Show player name"],
             desc = L["Show player name"],
@@ -447,7 +479,7 @@ local playerOptions = {
 
         showHitIndicator = {
             type = "toggle",
-            order = 7,
+            order = 8,
             width = "double",
             name = L["Enable hit indicators"],
             desc = L["Show or hide the damage/heal which you take on your unit frame"],
@@ -460,7 +492,7 @@ local playerOptions = {
 
         showSpecialbar = {
             type = "toggle",
-            order = 8,
+            order = 9,
             width = "double",
             name = L["Show player specialbar"],
             desc = L["Show or hide the player specialbar, like Paladin's holy power, Priest's orbs, Monk's harmony or Warlock's soul shards"],
@@ -473,7 +505,7 @@ local playerOptions = {
 
         showRestIcon = {
             type = "toggle",
-            order = 9,
+            order = 10,
             width = "double",
             name = L["Show player resting icon"],
             desc = L["Show or hide player resting icon when player is resting (e.g. in the tavern or in the capital)"],
@@ -486,7 +518,7 @@ local playerOptions = {
 
         showStatusTexture = {
             type = "toggle",
-            order = 10,
+            order = 11,
             width = "double",
             name = L["Show player status texture (inside the frame)"],
             desc = L["Show or hide player status texture (blinking glow inside the frame when player is resting or in combat)"],
@@ -499,7 +531,7 @@ local playerOptions = {
 
         showAttackBackground = {
             type = "toggle",
-            order = 11,
+            order = 12,
             width = "double",
             name = L["Show player combat texture (outside the frame)"],
             desc = L["Show or hide player red background texture (blinking red glow outside the frame in combat)"],
@@ -512,7 +544,7 @@ local playerOptions = {
 
         attackBackgroundOpacity = {
             type = "range",
-            order = 12,
+            order = 13,
             name = L["Opacity"],
             desc = L["Opacity of combat texture"],
             min = 0.1,
@@ -533,7 +565,7 @@ local playerOptions = {
 
         showGroupIndicator = {
             type = "toggle",
-            order = 13,
+            order = 14,
             width = "double",
             name = L["Show player group number"],
             desc = L["Show or hide player group number when player is in a raid group (over portrait)"],
@@ -546,7 +578,7 @@ local playerOptions = {
 
         showRoleIcon = {
             type = "toggle",
-            order = 14,
+            order = 15,
             width = "double",
             name = L["Show player role icon"],
             desc = L["Show or hide player role icon when player is in a group"],

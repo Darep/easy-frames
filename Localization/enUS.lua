@@ -16,6 +16,11 @@ L["In main options you can set the global options like colored frames, class por
 L["Percent"] = true
 L["Current + Max"] = true
 L["Current + Max + Percent"] = true
+L["Current + Percent"] = true
+L["Custom format"] = true
+
+L["You can set custom HP format"] = true
+L["HP format"] = true
 
 L["Frames"] = true
 L["Setting for unit frames"] = true

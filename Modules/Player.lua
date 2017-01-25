@@ -197,27 +197,24 @@ function Player:ShowAttackBackground(value)
 end
 
 function Player:SetAttackBackgroundOpacity(value)
-    print(value)
     PlayerFrameFlash:SetAlpha(value)
 end
 
 function Player:ShowGroupIndicator(value)
     local noop = function() return end
 
-    for _, frame in pairs({
-        PlayerFrameGroupIndicator
-    }) do
-        if frame then
-            if (value) then
-                frame.Show = originalValues[frame:GetName()]
+    local frame = PlayerFrameGroupIndicator
 
-                if (IsInRaid("player")) then
-                    frame:Show()
-                end
-            else
-                frame:Hide()
-                frame.Show = noop
+    if frame then
+        if (value) then
+            frame.Show = originalValues[frame:GetName()]
+
+            if (IsInRaid("player")) then
+                frame:Show()
             end
+        else
+            frame:Hide()
+            frame.Show = noop
         end
     end
 end
@@ -225,20 +222,18 @@ end
 function Player:ShowRoleIcon(value)
     local noop = function() return end
 
-    for _, frame in pairs({
-        PlayerFrameRoleIcon
-    }) do
-        if frame then
-            if (value) then
-                frame.Show = originalValues[frame:GetName()]
+    local frame = PlayerFrameRoleIcon
 
-                if (IsInGroup("player")) then
-                    frame:Show()
-                end
-            else
-                frame:Hide()
-                frame.Show = noop
+    if frame then
+        if (value) then
+            frame.Show = originalValues[frame:GetName()]
+
+            if (IsInGroup("player")) then
+                frame:Show()
             end
+        else
+            frame:Hide()
+            frame.Show = noop
         end
     end
 end
