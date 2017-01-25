@@ -20,6 +20,7 @@ function Target:OnEnable()
     self:ShowTargetFrameToT()
 
     self:ShowAttackBackground(db.target.showAttackBackground)
+    self:SetAttackBackgroundOpacity(db.target.attackBackgroundOpacity)
 
     self:SecureHook("TextStatusBar_UpdateTextStringWithValues", "UpdateHealthValues")
 end
@@ -32,6 +33,7 @@ function Target:OnProfileChanged(newDB)
     self:ShowTargetFrameToT()
 
     self:ShowAttackBackground(db.target.showAttackBackground)
+    self:SetAttackBackgroundOpacity(db.target.attackBackgroundOpacity)
 
     self:UpdateHealthValues()
 end
@@ -77,4 +79,8 @@ function Target:ShowAttackBackground(value)
             frame.Show = noop
         end
     end
+end
+
+function Target:SetAttackBackgroundOpacity(value)
+    TargetFrameFlash:SetAlpha(value)
 end

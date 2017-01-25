@@ -157,7 +157,7 @@ local generalOptions = {
                     end,
                     isPercent = true,
                     arg = "general"
-                }
+                },
             }
         },
 
@@ -205,8 +205,8 @@ local generalOptions = {
                         EasyFrames:GetModule("General"):SetCustomBuffSize(true)
                     end,
                     disabled = function()
-                        local hide = EasyFrames.db.profile.general.customBuffSize
-                        if (hide == false) then
+                        local diabled = EasyFrames.db.profile.general.customBuffSize
+                        if (diabled == false) then
                             return true
                         end
                     end,
@@ -225,8 +225,8 @@ local generalOptions = {
                         EasyFrames:GetModule("General"):SetCustomBuffSize(true)
                     end,
                     disabled = function()
-                        local hide = EasyFrames.db.profile.general.customBuffSize
-                        if (hide == false) then
+                        local diabled = EasyFrames.db.profile.general.customBuffSize
+                        if (diabled == false) then
                             return true
                         end
                     end,
@@ -257,8 +257,8 @@ local generalOptions = {
                         EasyFrames:GetModule("General"):TargetFrame_UpdateAuras(TargetFrame)
                     end,
                     disabled = function()
-                        local hide = EasyFrames.db.profile.general.highlightDispelledBuff
-                        if (hide == false) then
+                        local diabled = EasyFrames.db.profile.general.highlightDispelledBuff
+                        if (diabled == false) then
                             return true
                         end
                     end,
@@ -510,9 +510,30 @@ local playerOptions = {
             arg = "player"
         },
 
+        attackBackgroundOpacity = {
+            type = "range",
+            order = 12,
+            name = L["Opacity"],
+            desc = L["Opacity of combat texture"],
+            min = 0.1,
+            max = 1,
+            set = function(info, value)
+                setOpt(info, value)
+                EasyFrames:GetModule("Player"):SetAttackBackgroundOpacity(value)
+            end,
+            disabled = function()
+                local diabled = EasyFrames.db.profile.player.showAttackBackground
+                if (diabled == false) then
+                    return true
+                end
+            end,
+            isPercent = true,
+            arg = "player"
+        },
+
         showGroupIndicator = {
             type = "toggle",
-            order = 12,
+            order = 13,
             width = "double",
             name = L["Show player group number"],
             desc = L["Show or hide player group number when player is in a raid group (over portrait)"],
@@ -525,7 +546,7 @@ local playerOptions = {
 
         showRoleIcon = {
             type = "toggle",
-            order = 13,
+            order = 14,
             width = "double",
             name = L["Show player role icon"],
             desc = L["Show or hide player role icon when player is in a group"],
@@ -615,6 +636,26 @@ local targetOptions = {
             arg = "target"
         },
 
+        attackBackgroundOpacity = {
+            type = "range",
+            order = 8,
+            name = L["Opacity"],
+            desc = L["Opacity of combat texture"],
+            min = 0.1,
+            max = 1,
+            set = function(info, value)
+                setOpt(info, value)
+                EasyFrames:GetModule("Target"):SetAttackBackgroundOpacity(value)
+            end,
+            disabled = function()
+                local diabled = EasyFrames.db.profile.target.showAttackBackground
+                if (diabled == false) then
+                    return true
+                end
+            end,
+            isPercent = true,
+            arg = "target"
+        },
     },
 }
 
@@ -694,6 +735,27 @@ local focusOptions = {
             end,
             arg = "focus"
         },
+
+        attackBackgroundOpacity = {
+            type = "range",
+            order = 8,
+            name = L["Opacity"],
+            desc = L["Opacity of combat texture"],
+            min = 0.1,
+            max = 1,
+            set = function(info, value)
+                setOpt(info, value)
+                EasyFrames:GetModule("Focus"):SetAttackBackgroundOpacity(value)
+            end,
+            disabled = function()
+                local diabled = EasyFrames.db.profile.focus.showAttackBackground
+                if (diabled == false) then
+                    return true
+                end
+            end,
+            isPercent = true,
+            arg = "focus"
+        },
     },
 }
 
@@ -735,7 +797,7 @@ local petOptions = {
             arg = "pet"
         },
 
-        showAttackBackground = {
+        showStatusTexture = {
             type = "toggle",
             order = 4,
             width = "double",
@@ -743,8 +805,42 @@ local petOptions = {
             desc = L["Show or hide pet red background texture (blinking red glow inside the frame in combat)"],
             set = function(info, value)
                 setOpt(info, value)
+                EasyFrames:GetModule("Pet"):ShowStatusTexture(value)
+            end,
+            arg = "pet"
+        },
+
+        showAttackBackground = {
+            type = "toggle",
+            order = 5,
+            width = "double",
+            name = L["Show pet combat texture (outside the frame)"],
+            desc = L["Show or hide pet red background texture (blinking red glow outside the frame in combat)"],
+            set = function(info, value)
+                setOpt(info, value)
                 EasyFrames:GetModule("Pet"):ShowAttackBackground(value)
             end,
+            arg = "pet"
+        },
+
+        attackBackgroundOpacity = {
+            type = "range",
+            order = 6,
+            name = L["Opacity"],
+            desc = L["Opacity of combat texture"],
+            min = 0.1,
+            max = 1,
+            set = function(info, value)
+                setOpt(info, value)
+                EasyFrames:GetModule("Pet"):SetAttackBackgroundOpacity(value)
+            end,
+            disabled = function()
+                local diabled = EasyFrames.db.profile.pet.showAttackBackground
+                if (diabled == false) then
+                    return true
+                end
+            end,
+            isPercent = true,
             arg = "pet"
         },
     },

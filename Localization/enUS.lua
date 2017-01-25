@@ -7,6 +7,9 @@ local L = LibStub("AceLocale-3.0"):NewLocale("EasyFrames", "enUS", true, debug)
 
 L["loaded. Options:"] = true
 
+L["Opacity"] = true
+L["Opacity of combat texture"] = true
+
 L["Main options"] = true
 L["In main options you can set the global options like colored frames, class portraits, etc"] = true
 
@@ -110,6 +113,8 @@ L["Show pet name"] = true
 L["Show or hide the damage/heal which your pet take on pet unit frame"] = true
 L["Show pet combat texture (inside the frame)"] = true
 L["Show or hide pet red background texture (blinking red glow inside the frame in combat)"] = true
+L["Show pet combat texture (outside the frame)"] = true
+L["Show or hide pet red background texture (blinking red glow outside the frame in combat)"] = true
 
 
 

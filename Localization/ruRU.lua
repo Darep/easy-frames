@@ -4,6 +4,9 @@ if not L then return end
 
 L["loaded. Options:"] = "загружен. Настройки:"
 
+L["Opacity"] = "Прозрачность"
+L["Opacity of combat texture"] = "Прозначность текстуры в бою"
+
 L["Main options"] = "Главные настройки"
 L["In main options you can set the global options like colored frames, class portraits, etc"] = "В окне главных настроек вы можете установить глобальные настройки фреймов, таких как Раскрасить фреймы здоровья в цвет класса, установить иконку класса в портрет и другие"
 
@@ -107,4 +110,6 @@ L["Show pet name"] = "Показывать имя питомца"
 L["Show or hide the damage/heal which your pet take on pet unit frame"] = "Показывать получаемый урон/исцеление на фрейме питомца"
 L["Show pet combat texture (inside the frame)"] = "Показывать фоновую текстуру фрейма питомца (внутри фрейма)"
 L["Show or hide pet red background texture (blinking red glow inside the frame in combat)"] = "Показывать красную текстуру в бою (мигающая рамка внутри фрейма во время боя)"
+L["Show pet combat texture (outside the frame)"] = "Показывать фоновую текстуру фрейма питомца (снаружи фрейма)"
+L["Show or hide pet red background texture (blinking red glow outside the frame in combat)"] = "Показывать красную текстуру в бою (мигающая рамка снаружи фрейма во время боя)"
 

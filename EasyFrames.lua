@@ -56,6 +56,7 @@ local defaults = {
             showRestIcon = true,
             showStatusTexture = false,
             showAttackBackground = true,
+            attackBackgroundOpacity = 0.7,
             showGroupIndicator = true,
             showRoleIcon = false,
         },
@@ -65,6 +66,7 @@ local defaults = {
             healthFormat = "3",
             showToTFrame = true,
             showAttackBackground = false,
+            attackBackgroundOpacity = 0.7,
         },
 
         focus = {
@@ -72,12 +74,15 @@ local defaults = {
             healthFormat = "3",
             showToTFrame = true,
             showAttackBackground = false,
+            attackBackgroundOpacity = 0.7,
         },
 
         pet = {
             showName = true,
             showHitIndicator = true,
+            showStatusTexture = true,
             showAttackBackground = true,
+            attackBackgroundOpacity = 0.7,
         },
     }
 }

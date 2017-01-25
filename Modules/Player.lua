@@ -25,6 +25,7 @@ function Player:OnEnable()
     self:ShowRestIcon(db.player.showRestIcon)
     self:ShowStatusTexture(db.player.showStatusTexture)
     self:ShowAttackBackground(db.player.showAttackBackground)
+    self:SetAttackBackgroundOpacity(db.player.attackBackgroundOpacity)
     self:ShowGroupIndicator(db.player.showGroupIndicator)
     self:ShowRoleIcon(db.player.showRoleIcon)
 
@@ -42,6 +43,7 @@ function Player:OnProfileChanged(newDB)
     self:ShowRestIcon(db.player.showRestIcon)
     self:ShowStatusTexture(db.player.showStatusTexture)
     self:ShowAttackBackground(db.player.showAttackBackground)
+    self:SetAttackBackgroundOpacity(db.player.attackBackgroundOpacity)
     self:ShowGroupIndicator(db.player.showGroupIndicator)
     self:ShowRoleIcon(db.player.showRoleIcon)
 
@@ -192,6 +194,11 @@ function Player:ShowAttackBackground(value)
             end
         end
     end
+end
+
+function Player:SetAttackBackgroundOpacity(value)
+    print(value)
+    PlayerFrameFlash:SetAlpha(value)
 end
 
 function Player:ShowGroupIndicator(value)

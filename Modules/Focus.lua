@@ -20,6 +20,7 @@ function Focus:OnEnable()
     self:ShowFocusFrameToT()
 
     self:ShowAttackBackground(db.focus.showAttackBackground)
+    self:SetAttackBackgroundOpacity(db.focus.attackBackgroundOpacity)
 
     self:SecureHook("TextStatusBar_UpdateTextStringWithValues", "UpdateHealthValues")
 end
@@ -32,6 +33,7 @@ function Focus:OnProfileChanged(newDB)
     self:SetScale(db.focus.scaleFrame)
 
     self:ShowAttackBackground(db.focus.showAttackBackground)
+    self:SetAttackBackgroundOpacity(db.focus.attackBackgroundOpacity)
 
     self:UpdateHealthValues()
 end
@@ -77,4 +79,8 @@ function Focus:ShowAttackBackground(value)
             frame.Show = noop
         end
     end
+end
+
+function Focus:SetAttackBackgroundOpacity(value)
+    FocusFrameFlash:SetAlpha(value)
 end
