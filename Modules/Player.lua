@@ -124,8 +124,9 @@ end
 function Player:UpdateHealthValues()
     local frame = "Player"
     local healthFormat = db.player.healthFormat
+    local customHealthFormat = db.player.customHealthFormat
 
-    UpdateHealthValues(frame, healthFormat)
+    UpdateHealthValues(frame, healthFormat, customHealthFormat)
 end
 
 function Player:ShowRestIcon(value)

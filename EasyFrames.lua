@@ -4,6 +4,29 @@ local L = LibStub("AceLocale-3.0"):GetLocale("EasyFrames")
 local Media = LibStub("LibSharedMedia-3.0")
 local db
 
+local function CstomHealthFormatReadableNumber(num, format)
+    local ret
+
+    if not num then
+        return 0
+    elseif num >= 1000000000 then
+        ret = string.format("%.0f", num / 1000000000) .. "B" -- billion
+    elseif num >= 100000000 then
+        ret = string.format("%.3s", num) .. "M" -- millions > 100
+    elseif num >= 10000000 then
+        ret = string.format("%.2s", num) .. "M" -- million > 10
+    elseif num >= 1000000 then
+        ret = string.format("%.4s", num) .. "T" -- million > 1
+    elseif num >= 100000 then
+        ret = string.format("%.3s", num) .. "T" -- thousand > 100
+    elseif num >= 10000 then
+        ret = string.format("%.0f", num / 1000) .. "T" -- thousand
+    else
+        ret = num -- hundreds
+    end
+    return ret
+end
+
 local function ReadableNumber(num, places)
     local ret
     -- local placeValue = ("%%.%d1f"):format(places or 0)
@@ -50,6 +73,9 @@ local defaults = {
         player = {
             scaleFrame = 1.2,
             healthFormat = "3",
+            customHealthFormatForumlas = {
+                ["lt1000"] = ""
+            },
             customHealthFormat = "%CURRENT% / %MAX% (%PERCENT%%)",
             showName = true,
             showHitIndicator = true,
@@ -138,7 +164,7 @@ function EasyFrames:OnProfileChanged(event, database, newProfileKey)
 end
 
 EasyFrames.Utils = {};
-function EasyFrames.Utils.UpdateHealthValues(frame, healthFormat)
+function EasyFrames.Utils.UpdateHealthValues(frame, healthFormat, customHealthFormat)
     if (healthFormat == "1") then
         -- Percent
         if (UnitHealth(frame) > 0) then
@@ -156,6 +182,7 @@ function EasyFrames.Utils.UpdateHealthValues(frame, healthFormat)
 
             _G[frame .. "FrameHealthBar"].TextString:SetText(ReadableNumber(Health) .. " / " .. ReadableNumber(HealthMax));
         end
+
     elseif (healthFormat == "3") then
         -- Current + Max + Percent
 
@@ -185,7 +212,9 @@ function EasyFrames.Utils.UpdateHealthValues(frame, healthFormat)
             local HealthMax = UnitHealthMax(frame)
             local HealthPercent = (UnitHealth(frame) / UnitHealthMax(frame)) * 100
 
-            _G[frame .. "FrameHealthBar"].TextString:SetText(ReadableNumber(Health) .. " / " .. ReadableNumber(HealthMax) .. " (" .. string.format("%.0f", HealthPercent) .. "%)");
+            local Result = string.gsub(string.gsub(string.gsub(customHealthFormat, "%%PERCENT%%", string.format("%.0f", HealthPercent)), "%%MAX%%", HealthMax), "%%CURRENT%%", Health)
+
+            _G[frame .. "FrameHealthBar"].TextString:SetText( Result );
         end
 
     end

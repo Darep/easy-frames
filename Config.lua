@@ -441,27 +441,37 @@ local playerOptions = {
                 return true
             end,
             args = {
+                header = {
+                    type = "header",
+                    order = 1,
+                    name = L["Custom format of HP"],
+                },
+
                 desc = {
                     type = "description",
-                    order = 1,
-                    name = L["You can set custom HP format"],
+                    order = 2,
+                    name = L["You can set custom HP format. More information about custom HP format you can read on project site"],
                 },
 
                 customHealthFormat = {
                     type = "input",
-                    order = 2,
+                    order = 3,
                     width = "double",
                     name = L["HP format"],
-                    desc = L["HP format"],
+                    desc = L["You can use patterns:\n\n %CURRENT% - return current health\n %MAX% - return maximum of health\n %PERCENT% - return percent of current/max health"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Player"):UpdateHealthValues()
+                    end,
                     arg = "player"
                 },
             }
         },
 
         newLine2 = {
-            type = "description",
+            type = "header",
             order = 6,
-            name = "",
+            name = L["Show or hide some elements of frame"],
         },
 
         showName = {

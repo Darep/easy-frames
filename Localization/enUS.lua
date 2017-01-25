@@ -19,8 +19,10 @@ L["Current + Max + Percent"] = true
 L["Current + Percent"] = true
 L["Custom format"] = true
 
-L["You can set custom HP format"] = true
+L["Custom format of HP"] = true
+L["You can set custom HP format. More information about custom HP format you can read on project site"] = true
 L["HP format"] = true
+L["You can use patterns:\n\n %CURRENT% - return current health\n %MAX% - return maximum of health\n %PERCENT% - return percent of current/max health"] = true
 
 L["Frames"] = true
 L["Setting for unit frames"] = true
@@ -69,6 +71,7 @@ L["Show welcome message when addon is loaded"] = true
 
 L["Player"] = true
 L["In player options you can set scale player frame, healthbar text format, etc"] = true
+L["Show or hide some elements of frame"] = true
 L["Show player name"] = true
 L["Player frame scale"] = true
 L["Scale of player unit frame"] = true

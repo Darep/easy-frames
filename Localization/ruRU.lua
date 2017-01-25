@@ -13,6 +13,8 @@ L["In main options you can set the global options like colored frames, class por
 L["Percent"] = "Проценты"
 L["Current + Max"] = "Текущее + Макс"
 L["Current + Max + Percent"] = "Текущее + Макс + Проценты"
+L["Current + Percent"] = "Текущее + Проценты"
+L["Custom format"] = "Свой формат"
 
 L["Frames"] = "Фреймы"
 L["Setting for unit frames"] = "Настройки фреймов"
@@ -61,6 +63,7 @@ L["Show welcome message when addon is loaded"] = "Показывать прив�
 
 L["Player"] = "Игрок"
 L["In player options you can set scale player frame, healthbar text format, etc"] = "В разделе Игрок вы можете установить размер (scale) фрейма игрока, установить формат HP и другие"
+L["Show or hide some elements of frame"] = "Показать или скрыть некоторые элементы фрейма"
 L["Show player name"] = "Показывать имя игрока"
 L["Player frame scale"] = "Размер фрейма игрока"
 L["Scale of player unit frame"] = "Размер (scale) фрейма игрока"
