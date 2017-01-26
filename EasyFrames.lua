@@ -1,28 +1,42 @@
+--[[
+    Copyright (c) <2016-2017>, Usoltsev <alexander.usolcev@gmail.com> All rights reserved.
+
+    Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+    Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+    Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+    Neither the name of the <EasyFrames> nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+    THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+    INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+    OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+    OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+--]]
 
 local EasyFrames = LibStub("AceAddon-3.0"):NewAddon("EasyFrames", "AceConsole-3.0")
 local L = LibStub("AceLocale-3.0"):GetLocale("EasyFrames")
 local Media = LibStub("LibSharedMedia-3.0")
 local db
 
-local function CstomHealthFormatReadableNumber(num, format)
+local function CstomHealthFormatReadableNumber(num, format, useFullValues)
     local ret
 
     if not num then
         return 0
     elseif num >= 1000000000 then
-        ret = string.format("%.0f", num / 1000000000) .. "B" -- billion
+        ret = string.format(format["gt1B"], num / useFullValues or 1000000000)  -- num > 1 000 000 000
     elseif num >= 100000000 then
-        ret = string.format("%.3s", num) .. "M" -- millions > 100
+        ret = string.format(format["gt100M"], num / useFullValues or 1000000) -- num > 100 000 000
     elseif num >= 10000000 then
-        ret = string.format("%.2s", num) .. "M" -- million > 10
+        ret = string.format(format["gt10M"], num / useFullValues or 1000000) -- num > 10 000 000
     elseif num >= 1000000 then
-        ret = string.format("%.4s", num) .. "T" -- million > 1
+        ret = string.format(format["gt1M"], num / useFullValues or 1000000) -- num > 1 000 000
     elseif num >= 100000 then
-        ret = string.format("%.3s", num) .. "T" -- thousand > 100
-    elseif num >= 10000 then
-        ret = string.format("%.0f", num / 1000) .. "T" -- thousand
+        ret = string.format(format["gt100T"], num / useFullValues or 1000) -- num > 100 000
+    elseif num >= 1000 then
+        ret = string.format(format["gt1T"], num / useFullValues or 1000) -- num > 1000
     else
-        ret = num -- hundreds
+        ret = num -- num < 1000
     end
     return ret
 end
@@ -73,8 +87,13 @@ local defaults = {
         player = {
             scaleFrame = 1.2,
             healthFormat = "3",
-            customHealthFormatForumlas = {
-                ["lt1000"] = ""
+            customHealthFormatFormulas = {
+                ["gt1T"] = "%.fk",
+                ["gt100T"] = "%.fk",
+                ["gt1M"] = "%.1fM",
+                ["gt10M"] = "%.1fM",
+                ["gt100M"] = "%.fM",
+                ["gt1B"] = "%.fB",
             },
             customHealthFormat = "%CURRENT% / %MAX% (%PERCENT%%)",
             showName = true,
