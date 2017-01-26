@@ -468,6 +468,30 @@ local playerOptions = {
                     name = L["You can set custom HP format. More information about custom HP format you can read on project site"],
                 },
 
+                gt1T = {
+                    type = "input",
+                    order = 3,
+                    name = L["gt1T"],
+                    desc = L["You can use patterns:\n\n %CURRENT% - return current health\n %MAX% - return maximum of health\n %PERCENT% - return percent of current/max health"],
+                    set = function(info, value)
+                        setOpt(info, value)
+--                        EasyFrames:GetModule("Player"):UpdateHealthValues()
+                    end,
+                    arg = "player.customHealthFormatFormulas"
+                },
+
+                gt100T = {
+                    type = "input",
+                    order = 3,
+                    name = L["gt100T"],
+                    desc = L["You can use patterns:\n\n %CURRENT% - return current health\n %MAX% - return maximum of health\n %PERCENT% - return percent of current/max health"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        --                        EasyFrames:GetModule("Player"):UpdateHealthValues()
+                    end,
+                    arg = "player.customHealthFormatFormulas"
+                },
+
                 customHealthFormat = {
                     type = "input",
                     order = 3,

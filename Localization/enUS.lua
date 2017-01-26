@@ -21,6 +21,8 @@ L["Custom format"] = true
 
 L["Custom format of HP"] = true
 L["You can set custom HP format. More information about custom HP format you can read on project site"] = true
+L["gt1T"] = true
+L["gt100T"] = true
 L["HP format"] = true
 L["You can use patterns:\n\n %CURRENT% - return current health\n %MAX% - return maximum of health\n %PERCENT% - return percent of current/max health"] = true
 
