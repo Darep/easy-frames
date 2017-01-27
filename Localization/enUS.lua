@@ -120,6 +120,8 @@ L["Set the target healthbar text format"] = true
 L["Show target of target frame"] = true
 L["Show target combat texture (outside the frame)"] = true
 L["Show or hide target red background texture (blinking red glow outside the frame in combat)"] = true
+L["Show blizzard's target castbar"] = true
+L["When you change this option you need to reload your UI (because it's Blizzard config variable). \n\nCommand /reload"] = true
 
 
 L["Focus"] = true

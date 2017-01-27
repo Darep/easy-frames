@@ -921,7 +921,7 @@ local targetOptions = {
 
         showToTFrame = {
             type = "toggle",
-            order = 6,
+            order = 7,
             width = "double",
             name = L["Show target of target frame"],
             desc = L["Show target of target frame"],
@@ -932,9 +932,22 @@ local targetOptions = {
             arg = "target"
         },
 
+        showTargetCastbar = {
+            type = "toggle",
+            order = 8,
+            width = "double",
+            name = L["Show blizzard's target castbar"],
+            desc = L["When you change this option you need to reload your UI (because it's Blizzard config variable). \n\nCommand /reload"],
+            set = function(info, value)
+                setOpt(info, value)
+                SetCVar("showTargetCastbar", value)
+            end,
+            arg = "target"
+        },
+
         showAttackBackground = {
             type = "toggle",
-            order = 7,
+            order = 9,
             width = "double",
             name = L["Show target combat texture (outside the frame)"],
             desc = L["Show or hide target red background texture (blinking red glow outside the frame in combat)"],
@@ -947,7 +960,7 @@ local targetOptions = {
 
         attackBackgroundOpacity = {
             type = "range",
-            order = 8,
+            order = 10,
             name = L["Opacity"],
             desc = L["Opacity of combat texture"],
             min = 0.1,

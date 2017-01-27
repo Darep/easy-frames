@@ -126,6 +126,7 @@ local defaults = {
             showToTFrame = true,
             showAttackBackground = false,
             attackBackgroundOpacity = 0.7,
+            showTargetCastbar = false,
         },
 
         focus = {
