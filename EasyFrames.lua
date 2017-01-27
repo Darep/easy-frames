@@ -1,4 +1,6 @@
 --[[
+    Appreciate what others people do.
+
     Copyright (c) <2016-2017>, Usoltsev <alexander.usolcev@gmail.com> All rights reserved.
 
     Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
@@ -18,23 +20,23 @@ local L = LibStub("AceLocale-3.0"):GetLocale("EasyFrames")
 local Media = LibStub("LibSharedMedia-3.0")
 local db
 
-local function CstomHealthFormatReadableNumber(num, format, useFullValues)
+local function CustomReadableNumber(num, format, useFullValues)
     local ret
 
     if not num then
         return 0
     elseif num >= 1000000000 then
-        ret = string.format(format["gt1B"], num / useFullValues or 1000000000)  -- num > 1 000 000 000
+        ret = string.format(format["gt1B"], num / (useFullValues or 1000000000))  -- num > 1 000 000 000
     elseif num >= 100000000 then
-        ret = string.format(format["gt100M"], num / useFullValues or 1000000) -- num > 100 000 000
+        ret = string.format(format["gt100M"], num / (useFullValues or 1000000)) -- num > 100 000 000
     elseif num >= 10000000 then
-        ret = string.format(format["gt10M"], num / useFullValues or 1000000) -- num > 10 000 000
+        ret = string.format(format["gt10M"], num / (useFullValues or 1000000)) -- num > 10 000 000
     elseif num >= 1000000 then
-        ret = string.format(format["gt1M"], num / useFullValues or 1000000) -- num > 1 000 000
+        ret = string.format(format["gt1M"], num / (useFullValues or 1000000)) -- num > 1 000 000
     elseif num >= 100000 then
-        ret = string.format(format["gt100T"], num / useFullValues or 1000) -- num > 100 000
+        ret = string.format(format["gt100T"], num / (useFullValues or 1000)) -- num > 100 000
     elseif num >= 1000 then
-        ret = string.format(format["gt1T"], num / useFullValues or 1000) -- num > 1000
+        ret = string.format(format["gt1T"], num / (useFullValues or 1000)) -- num > 1000
     else
         ret = num -- num < 1000
     end
@@ -87,11 +89,12 @@ local defaults = {
         player = {
             scaleFrame = 1.2,
             healthFormat = "3",
+            useHealthFormatFullValues = false,
             customHealthFormatFormulas = {
                 ["gt1T"] = "%.fk",
                 ["gt100T"] = "%.fk",
                 ["gt1M"] = "%.1fM",
-                ["gt10M"] = "%.1fM",
+                ["gt10M"] = "%.fM",
                 ["gt100M"] = "%.fM",
                 ["gt1B"] = "%.fB",
             },
@@ -110,6 +113,16 @@ local defaults = {
         target = {
             scaleFrame = 1.2,
             healthFormat = "3",
+            useHealthFormatFullValues = false,
+            customHealthFormatFormulas = {
+                ["gt1T"] = "%.fk",
+                ["gt100T"] = "%.fk",
+                ["gt1M"] = "%.1fM",
+                ["gt10M"] = "%.fM",
+                ["gt100M"] = "%.fM",
+                ["gt1B"] = "%.fB",
+            },
+            customHealthFormat = "%CURRENT% / %MAX% (%PERCENT%%)",
             showToTFrame = true,
             showAttackBackground = false,
             attackBackgroundOpacity = 0.7,
@@ -118,6 +131,16 @@ local defaults = {
         focus = {
             scaleFrame = 1.2,
             healthFormat = "3",
+            useHealthFormatFullValues = false,
+            customHealthFormatFormulas = {
+                ["gt1T"] = "%.fk",
+                ["gt100T"] = "%.fk",
+                ["gt1M"] = "%.1fM",
+                ["gt10M"] = "%.fM",
+                ["gt100M"] = "%.fM",
+                ["gt1B"] = "%.fB",
+            },
+            customHealthFormat = "%CURRENT% / %MAX% (%PERCENT%%)",
             showToTFrame = true,
             showAttackBackground = false,
             attackBackgroundOpacity = 0.7,
@@ -183,7 +206,7 @@ function EasyFrames:OnProfileChanged(event, database, newProfileKey)
 end
 
 EasyFrames.Utils = {};
-function EasyFrames.Utils.UpdateHealthValues(frame, healthFormat, customHealthFormat)
+function EasyFrames.Utils.UpdateHealthValues(frame, healthFormat, customHealthFormat, customHealthFormatFormulas, useHealthFormatFullValues)
     if (healthFormat == "1") then
         -- Percent
         if (UnitHealth(frame) > 0) then
@@ -230,6 +253,14 @@ function EasyFrames.Utils.UpdateHealthValues(frame, healthFormat, customHealthFo
             local Health = UnitHealth(frame)
             local HealthMax = UnitHealthMax(frame)
             local HealthPercent = (UnitHealth(frame) / UnitHealthMax(frame)) * 100
+
+            local useFullValues = false
+            if (useHealthFormatFullValues) then
+                useFullValues = 1
+            end
+
+            Health = CustomReadableNumber(Health, customHealthFormatFormulas, useFullValues)
+            HealthMax = CustomReadableNumber(HealthMax, customHealthFormatFormulas, useFullValues)
 
             local Result = string.gsub(string.gsub(string.gsub(customHealthFormat, "%%PERCENT%%", string.format("%.0f", HealthPercent)), "%%MAX%%", HealthMax), "%%CURRENT%%", Health)
 

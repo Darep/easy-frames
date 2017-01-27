@@ -65,8 +65,11 @@ end
 function Target:UpdateHealthValues()
     local frame = "Target"
     local healthFormat = db.target.healthFormat
+    local customHealthFormat = db.target.customHealthFormat
+    local customHealthFormatFormulas = db.target.customHealthFormatFormulas
+    local useHealthFormatFullValues = db.target.useHealthFormatFullValues
 
-    UpdateHealthValues(frame, healthFormat)
+    UpdateHealthValues(frame, healthFormat, customHealthFormat, customHealthFormatFormulas, useHealthFormatFullValues)
 end
 
 function Target:ShowTargetFrameToT()

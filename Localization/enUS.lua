@@ -20,11 +20,27 @@ L["Current + Percent"] = true
 L["Custom format"] = true
 
 L["Custom format of HP"] = true
-L["You can set custom HP format. More information about custom HP format you can read on project site"] = true
-L["gt1T"] = true
-L["gt100T"] = true
-L["HP format"] = true
-L["You can use patterns:\n\n %CURRENT% - return current health\n %MAX% - return maximum of health\n %PERCENT% - return percent of current/max health"] = true
+L["You can set custom HP format. More information about custom HP format you can read on project site.\n\n" ..
+    "Formulas:"] = true
+L["Use full values of health"] = true
+L["Formula converts the original value to the specified value.\n\n" ..
+    "Description: for example formula is '%.fM'.\n" ..
+    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"] = true
+L["Value greater than 1000"] = true
+L["Value greater than 100 000"] = true
+L["Value greater than 1 000 000"] = true
+L["Value greater than 10 000 000"] = true
+L["Value greater than 100 000 000"] = true
+L["Value greater than 1 000 000 000"] = true
+L["By default all formulas use divider (for value eq 1000 and more it's 1000, for 1 000 000 and more it's 1 000 000, etc).\n" ..
+    "If checked formulas will use full values of HP (without divider)"] = true
+L["Displayed HP by pattern"] = true
+L["You can use patterns:\n\n" ..
+    "%CURRENT% - return current health\n" ..
+    "%MAX% - return maximum of health\n" ..
+    "%PERCENT% - return percent of current/max health\n\n" ..
+    "All values are returned from formulas. For set abbreviation use formulas' fields"] = true
 
 L["Frames"] = true
 L["Setting for unit frames"] = true

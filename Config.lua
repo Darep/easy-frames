@@ -38,7 +38,6 @@ local function setOpt(info, value)
     local ns = info.arg
     local key = info[#info]
     EasyFrames.db.profile[ns][key] = value
-    --        EasyFrames:ApplySettings()
 end
 
 local function getColor(info)
@@ -465,39 +464,121 @@ local playerOptions = {
                 desc = {
                     type = "description",
                     order = 2,
-                    name = L["You can set custom HP format. More information about custom HP format you can read on project site"],
+                    name = L["You can set custom HP format. More information about custom HP format you can read on project site.\n\n" ..
+                            "Formulas:"],
                 },
 
-                gt1T = {
-                    type = "input",
+                customHealthFormatFormulas = {
+                    type = "group",
                     order = 3,
-                    name = L["gt1T"],
-                    desc = L["You can use patterns:\n\n %CURRENT% - return current health\n %MAX% - return maximum of health\n %PERCENT% - return percent of current/max health"],
-                    set = function(info, value)
-                        setOpt(info, value)
---                        EasyFrames:GetModule("Player"):UpdateHealthValues()
+                    inline = true,
+                    name = "",
+                    get = function(info)
+                        local ns, opt = string.split(".", info.arg)
+                        local key = info[#info]
+                        local val = EasyFrames.db.profile[ns][opt][key]
+
+                        return val
                     end,
-                    arg = "player.customHealthFormatFormulas"
+                    set = function(info, value)
+                        local ns, opt = string.split(".", info.arg)
+                        local key = info[#info]
+                        EasyFrames.db.profile[ns][opt][key] = value
+
+                        EasyFrames:GetModule("Player"):UpdateHealthValues()
+                    end,
+                    args = {
+                        gt1T = {
+                            type = "input",
+                            order = 1,
+                            name = L["Value greater than 1000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+
+                            arg = "player.customHealthFormatFormulas"
+                        },
+                        gt100T = {
+                            type = "input",
+                            order = 2,
+                            name = L["Value greater than 100 000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+                            arg = "player.customHealthFormatFormulas"
+                        },
+
+                        gt1M = {
+                            type = "input",
+                            order = 3,
+                            name = L["Value greater than 1 000 000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+                            arg = "player.customHealthFormatFormulas"
+                        },
+
+                        gt10M = {
+                            type = "input",
+                            order = 4,
+                            name = L["Value greater than 10 000 000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+                            arg = "player.customHealthFormatFormulas"
+                        },
+
+                        gt100M = {
+                            type = "input",
+                            order = 5,
+                            name = L["Value greater than 100 000 000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+                            arg = "player.customHealthFormatFormulas"
+                        },
+
+                        gt1B = {
+                            type = "input",
+                            order = 6,
+                            name = L["Value greater than 1 000 000 000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+                            arg = "player.customHealthFormatFormulas"
+                        },
+                    }
                 },
 
-                gt100T = {
-                    type = "input",
-                    order = 3,
-                    name = L["gt100T"],
-                    desc = L["You can use patterns:\n\n %CURRENT% - return current health\n %MAX% - return maximum of health\n %PERCENT% - return percent of current/max health"],
+                useHealthFormatFullValues = {
+                    type = "toggle",
+                    order = 4,
+                    name = L["Use full values of health"],
+                    desc = L["By default all formulas use divider (for value eq 1000 and more it's 1000, for 1 000 000 and more it's 1 000 000, etc).\n" ..
+                            "If checked formulas will use full values of HP (without divider)"],
+                    arg = "player",
                     set = function(info, value)
                         setOpt(info, value)
-                        --                        EasyFrames:GetModule("Player"):UpdateHealthValues()
+                        EasyFrames:GetModule("Player"):UpdateHealthValues()
                     end,
-                    arg = "player.customHealthFormatFormulas"
                 },
 
                 customHealthFormat = {
                     type = "input",
-                    order = 3,
+                    order = 5,
                     width = "double",
-                    name = L["HP format"],
-                    desc = L["You can use patterns:\n\n %CURRENT% - return current health\n %MAX% - return maximum of health\n %PERCENT% - return percent of current/max health"],
+                    name = L["Displayed HP by pattern"],
+                    desc = L["You can use patterns:\n\n" ..
+                            "%CURRENT% - return current health\n" ..
+                            "%MAX% - return maximum of health\n" ..
+                            "%PERCENT% - return percent of current/max health\n\n" ..
+                            "All values are returned from formulas. For set abbreviation use formulas' fields"],
                     set = function(info, value)
                         setOpt(info, value)
                         EasyFrames:GetModule("Player"):UpdateHealthValues()
@@ -685,10 +766,157 @@ local targetOptions = {
             arg = "target"
         },
 
-        newLine2 = {
-            type = "description",
+        HPFormat = {
+            type = "group",
             order = 5,
+            inline = true,
             name = "",
+            hidden = function()
+                local healthFormat = EasyFrames.db.profile.target.healthFormat
+                if (healthFormat == "custom") then
+                    return false
+                end
+
+                return true
+            end,
+            args = {
+                header = {
+                    type = "header",
+                    order = 1,
+                    name = L["Custom format of HP"],
+                },
+
+                desc = {
+                    type = "description",
+                    order = 2,
+                    name = L["You can set custom HP format. More information about custom HP format you can read on project site.\n\n" ..
+                            "Formulas:"],
+                },
+
+                customHealthFormatFormulas = {
+                    type = "group",
+                    order = 3,
+                    inline = true,
+                    name = "",
+                    get = function(info)
+                        local ns, opt = string.split(".", info.arg)
+                        local key = info[#info]
+                        local val = EasyFrames.db.profile[ns][opt][key]
+
+                        return val
+                    end,
+                    set = function(info, value)
+                        local ns, opt = string.split(".", info.arg)
+                        local key = info[#info]
+                        EasyFrames.db.profile[ns][opt][key] = value
+
+                        EasyFrames:GetModule("Target"):UpdateHealthValues()
+                    end,
+                    args = {
+                        gt1T = {
+                            type = "input",
+                            order = 1,
+                            name = L["Value greater than 1000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+
+                            arg = "target.customHealthFormatFormulas"
+                        },
+                        gt100T = {
+                            type = "input",
+                            order = 2,
+                            name = L["Value greater than 100 000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+                            arg = "target.customHealthFormatFormulas"
+                        },
+
+                        gt1M = {
+                            type = "input",
+                            order = 3,
+                            name = L["Value greater than 1 000 000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+                            arg = "target.customHealthFormatFormulas"
+                        },
+
+                        gt10M = {
+                            type = "input",
+                            order = 4,
+                            name = L["Value greater than 10 000 000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+                            arg = "target.customHealthFormatFormulas"
+                        },
+
+                        gt100M = {
+                            type = "input",
+                            order = 5,
+                            name = L["Value greater than 100 000 000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+                            arg = "target.customHealthFormatFormulas"
+                        },
+
+                        gt1B = {
+                            type = "input",
+                            order = 6,
+                            name = L["Value greater than 1 000 000 000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+                            arg = "target.customHealthFormatFormulas"
+                        },
+                    }
+                },
+
+                useHealthFormatFullValues = {
+                    type = "toggle",
+                    order = 4,
+                    name = L["Use full values of health"],
+                    desc = L["By default all formulas use divider (for value eq 1000 and more it's 1000, for 1 000 000 and more it's 1 000 000, etc).\n" ..
+                            "If checked formulas will use full values of HP (without divider)"],
+                    arg = "target",
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Target"):UpdateHealthValues()
+                    end,
+                },
+
+                customHealthFormat = {
+                    type = "input",
+                    order = 5,
+                    width = "double",
+                    name = L["Displayed HP by pattern"],
+                    desc = L["You can use patterns:\n\n" ..
+                            "%CURRENT% - return current health\n" ..
+                            "%MAX% - return maximum of health\n" ..
+                            "%PERCENT% - return percent of current/max health\n\n" ..
+                            "All values are returned from formulas. For set abbreviation use formulas' fields"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Target"):UpdateHealthValues()
+                    end,
+                    arg = "target"
+                },
+            }
+        },
+
+        newLine2 = {
+            type = "header",
+            order = 6,
+            name = L["Show or hide some elements of frame"],
         },
 
         showToTFrame = {
@@ -785,10 +1013,157 @@ local focusOptions = {
             arg = "focus"
         },
 
-        newLine2 = {
-            type = "description",
+        HPFormat = {
+            type = "group",
             order = 5,
+            inline = true,
             name = "",
+            hidden = function()
+                local healthFormat = EasyFrames.db.profile.focus.healthFormat
+                if (healthFormat == "custom") then
+                    return false
+                end
+
+                return true
+            end,
+            args = {
+                header = {
+                    type = "header",
+                    order = 1,
+                    name = L["Custom format of HP"],
+                },
+
+                desc = {
+                    type = "description",
+                    order = 2,
+                    name = L["You can set custom HP format. More information about custom HP format you can read on project site.\n\n" ..
+                            "Formulas:"],
+                },
+
+                customHealthFormatFormulas = {
+                    type = "group",
+                    order = 3,
+                    inline = true,
+                    name = "",
+                    get = function(info)
+                        local ns, opt = string.split(".", info.arg)
+                        local key = info[#info]
+                        local val = EasyFrames.db.profile[ns][opt][key]
+
+                        return val
+                    end,
+                    set = function(info, value)
+                        local ns, opt = string.split(".", info.arg)
+                        local key = info[#info]
+                        EasyFrames.db.profile[ns][opt][key] = value
+
+                        EasyFrames:GetModule("Focus"):UpdateHealthValues()
+                    end,
+                    args = {
+                        gt1T = {
+                            type = "input",
+                            order = 1,
+                            name = L["Value greater than 1000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+
+                            arg = "focus.customHealthFormatFormulas"
+                        },
+                        gt100T = {
+                            type = "input",
+                            order = 2,
+                            name = L["Value greater than 100 000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+                            arg = "focus.customHealthFormatFormulas"
+                        },
+
+                        gt1M = {
+                            type = "input",
+                            order = 3,
+                            name = L["Value greater than 1 000 000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+                            arg = "focus.customHealthFormatFormulas"
+                        },
+
+                        gt10M = {
+                            type = "input",
+                            order = 4,
+                            name = L["Value greater than 10 000 000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+                            arg = "focus.customHealthFormatFormulas"
+                        },
+
+                        gt100M = {
+                            type = "input",
+                            order = 5,
+                            name = L["Value greater than 100 000 000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+                            arg = "focus.customHealthFormatFormulas"
+                        },
+
+                        gt1B = {
+                            type = "input",
+                            order = 6,
+                            name = L["Value greater than 1 000 000 000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+                            arg = "focus.customHealthFormatFormulas"
+                        },
+                    }
+                },
+
+                useHealthFormatFullValues = {
+                    type = "toggle",
+                    order = 4,
+                    name = L["Use full values of health"],
+                    desc = L["By default all formulas use divider (for value eq 1000 and more it's 1000, for 1 000 000 and more it's 1 000 000, etc).\n" ..
+                            "If checked formulas will use full values of HP (without divider)"],
+                    arg = "focus",
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Focus"):UpdateHealthValues()
+                    end,
+                },
+
+                customHealthFormat = {
+                    type = "input",
+                    order = 5,
+                    width = "double",
+                    name = L["Displayed HP by pattern"],
+                    desc = L["You can use patterns:\n\n" ..
+                            "%CURRENT% - return current health\n" ..
+                            "%MAX% - return maximum of health\n" ..
+                            "%PERCENT% - return percent of current/max health\n\n" ..
+                            "All values are returned from formulas. For set abbreviation use formulas' fields"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Focus"):UpdateHealthValues()
+                    end,
+                    arg = "focus"
+                },
+            }
+        },
+
+        newLine2 = {
+            type = "header",
+            order = 6,
+            name = L["Show or hide some elements of frame"],
         },
 
         showToTFrame = {

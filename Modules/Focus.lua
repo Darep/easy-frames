@@ -65,8 +65,11 @@ end
 function Focus:UpdateHealthValues()
     local frame = "Focus"
     local healthFormat = db.focus.healthFormat
+    local customHealthFormat = db.focus.customHealthFormat
+    local customHealthFormatFormulas = db.focus.customHealthFormatFormulas
+    local useHealthFormatFullValues = db.focus.useHealthFormatFullValues
 
-    UpdateHealthValues(frame, healthFormat)
+    UpdateHealthValues(frame, healthFormat, customHealthFormat, customHealthFormatFormulas, useHealthFormatFullValues)
 end
 
 function Focus:ShowFocusFrameToT()
