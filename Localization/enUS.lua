@@ -33,7 +33,7 @@ L["Value greater than 1 000 000"] = true
 L["Value greater than 10 000 000"] = true
 L["Value greater than 100 000 000"] = true
 L["Value greater than 1 000 000 000"] = true
-L["By default all formulas use divider (for value eq 1000 and more it's 1000, for 1 000 000 and more it's 1 000 000, etc).\n" ..
+L["By default all formulas use divider (for value eq 1000 and more it's 1000, for 1 000 000 and more it's 1 000 000, etc).\n\n" ..
     "If checked formulas will use full values of HP (without divider)"] = true
 L["Displayed HP by pattern"] = true
 L["You can use patterns:\n\n" ..

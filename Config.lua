@@ -560,7 +560,7 @@ local playerOptions = {
                     type = "toggle",
                     order = 4,
                     name = L["Use full values of health"],
-                    desc = L["By default all formulas use divider (for value eq 1000 and more it's 1000, for 1 000 000 and more it's 1 000 000, etc).\n" ..
+                    desc = L["By default all formulas use divider (for value eq 1000 and more it's 1000, for 1 000 000 and more it's 1 000 000, etc).\n\n" ..
                             "If checked formulas will use full values of HP (without divider)"],
                     arg = "player",
                     set = function(info, value)
@@ -885,7 +885,7 @@ local targetOptions = {
                     type = "toggle",
                     order = 4,
                     name = L["Use full values of health"],
-                    desc = L["By default all formulas use divider (for value eq 1000 and more it's 1000, for 1 000 000 and more it's 1 000 000, etc).\n" ..
+                    desc = L["By default all formulas use divider (for value eq 1000 and more it's 1000, for 1 000 000 and more it's 1 000 000, etc).\n\n" ..
                             "If checked formulas will use full values of HP (without divider)"],
                     arg = "target",
                     set = function(info, value)
@@ -1145,7 +1145,7 @@ local focusOptions = {
                     type = "toggle",
                     order = 4,
                     name = L["Use full values of health"],
-                    desc = L["By default all formulas use divider (for value eq 1000 and more it's 1000, for 1 000 000 and more it's 1 000 000, etc).\n" ..
+                    desc = L["By default all formulas use divider (for value eq 1000 and more it's 1000, for 1 000 000 and more it's 1 000 000, etc).\n\n" ..
                             "If checked formulas will use full values of HP (without divider)"],
                     arg = "focus",
                     set = function(info, value)
