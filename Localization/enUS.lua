@@ -21,6 +21,8 @@ L["Custom format"] = true
 
 L["Font size"] = true
 L["Healthbar and manabar font size"] = true
+L["Font family"] = true
+L["Healthbar and manabar font family"] = true
 
 L["Custom format of HP"] = true
 L["You can set custom HP format. More information about custom HP format you can read on project site.\n\n" ..
@@ -121,6 +123,7 @@ L["Scale of target unit frame"] = true
 L["Target healthbar text format"] = true
 L["Set the target healthbar text format"] = true
 L["Show target of target frame"] = true
+L["Show target name"] = true
 L["Show target combat texture (outside the frame)"] = true
 L["Show or hide target red background texture (blinking red glow outside the frame in combat)"] = true
 L["Show blizzard's target castbar"] = true

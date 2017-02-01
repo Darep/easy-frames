@@ -33,7 +33,8 @@ function Target:OnEnable()
 
     self:SetScale(db.target.scaleFrame)
     self:ShowTargetFrameToT()
-    self:SetHealthBarsFontSize(db.target.healthBarFontSize)
+    self:ShowName(db.target.showName)
+    self:SetHealthBarsFont()
 
     self:ShowAttackBackground(db.target.showAttackBackground)
     self:SetAttackBackgroundOpacity(db.target.attackBackgroundOpacity)
@@ -47,7 +48,8 @@ function Target:OnProfileChanged(newDB)
 
     self:SetScale(db.target.scaleFrame)
     self:ShowTargetFrameToT()
-    self:SetHealthBarsFontSize(db.target.healthBarFontSize)
+    self:ShowName(db.target.showName)
+    self:SetHealthBarsFont()
 
     self:ShowAttackBackground(db.target.showAttackBackground)
     self:SetAttackBackgroundOpacity(db.target.attackBackgroundOpacity)
@@ -82,9 +84,20 @@ function Target:ShowTargetFrameToT()
     end
 end
 
-function Target:SetHealthBarsFontSize(value)
-    TargetFrameHealthBar.TextString:SetFont(STANDARD_TEXT_FONT, value, "OUTLINE")
-    TargetFrameManaBar.TextString:SetFont(STANDARD_TEXT_FONT, value, "OUTLINE")
+function Target:ShowName(value)
+    if (value) then
+        TargetFrame.name:Show()
+    else
+        TargetFrame.name:Hide()
+    end
+end
+
+function Target:SetHealthBarsFont()
+    local fontSize = db.target.healthBarFontSize
+    local fontFamily = Media:Fetch("font", db.target.healthBarFontFamily)
+
+    TargetFrameHealthBar.TextString:SetFont(fontFamily, fontSize, "OUTLINE")
+    TargetFrameManaBar.TextString:SetFont(fontFamily, fontSize, "OUTLINE")
 end
 
 function Target:ShowAttackBackground(value)

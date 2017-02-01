@@ -62,13 +62,8 @@ local healthFormat = {
     ["2"] = L["Current + Max"], --2
     ["3"] = L["Current + Max + Percent"], --3
     ["4"] = L["Current + Percent"], --4
-    ["custom"] = L["Custom format"], --9
+    ["custom"] = L["Custom format"], --custom
 }
-
-
---for i, f in pairs(Media:HashTable("font")) do
---    print(i, f)
---end
 
 
 local generalOptions = {
@@ -429,9 +424,9 @@ local playerOptions = {
         },
 
         newLine = {
-            type = "description",
+            type = "header",
             order = 3,
-            name = "",
+            name = "HP and MP bars",
         },
 
         healthFormat = {
@@ -447,28 +442,35 @@ local playerOptions = {
             arg = "player"
         },
 
-        healthBarFontSize = {
-            type = "range",
+        healthBarFontFamily = {
             order = 5,
-            name = L["Font size"],
-            desc = L["Healthbar and manabar font size"],
-            min = 7,
-            max = 14,
-            step = 1,
+            name = L["Font family"],
+            desc = L["Healthbar and manabar font family"],
+            type = "select",
+            dialogControl = 'LSM30_Font',
+            values = Media:HashTable("font"),
             set = function(info, value)
                 setOpt(info, value)
-                EasyFrames:GetModule("Player"):SetHealthBarsFontSize(value)
+                EasyFrames:GetModule("Player"):SetHealthBarsFont()
             end,
             arg = "player"
         },
 
---        TimeFont = {
---            order = 52,
---            name = "Font",
---            type = "select",
---            dialogControl = 'LSM30_Font',
---            values = Media:HashTable("font"),
---        },
+        healthBarFontSize = {
+            type = "range",
+            order = 6,
+            name = L["Font size"],
+            desc = L["Healthbar and manabar font size"],
+            min = 7,
+            max = 16,
+            step = 1,
+            set = function(info, value)
+                setOpt(info, value)
+                EasyFrames:GetModule("Player"):SetHealthBarsFont()
+            end,
+            arg = "player"
+        },
+
 
         HPFormat = {
             type = "group",
@@ -795,20 +797,35 @@ local targetOptions = {
             arg = "target"
         },
 
-        healthBarFontSize = {
-            type = "range",
+        healthBarFontFamily = {
             order = 5,
-            name = L["Font size"],
-            desc = L["Healthbar and manabar font size"],
-            min = 7,
-            max = 14,
-            step = 1,
+            name = L["Font family"],
+            desc = L["Healthbar and manabar font family"],
+            type = "select",
+            dialogControl = 'LSM30_Font',
+            values = Media:HashTable("font"),
             set = function(info, value)
                 setOpt(info, value)
-                EasyFrames:GetModule("Target"):SetHealthBarsFontSize(value)
+                EasyFrames:GetModule("Target"):SetHealthBarsFont()
             end,
             arg = "target"
         },
+
+        healthBarFontSize = {
+            type = "range",
+            order = 6,
+            name = L["Font size"],
+            desc = L["Healthbar and manabar font size"],
+            min = 7,
+            max = 16,
+            step = 1,
+            set = function(info, value)
+                setOpt(info, value)
+                EasyFrames:GetModule("Target"):SetHealthBarsFont(value)
+            end,
+            arg = "target"
+        },
+
 
         HPFormat = {
             type = "group",
@@ -976,9 +993,23 @@ local targetOptions = {
             arg = "target"
         },
 
-        showTargetCastbar = {
+        showName = {
             type = "toggle",
             order = 10,
+            width = "double",
+            name = L["Show target name"],
+            desc = L["Show target name"],
+            set = function(info, value)
+                setOpt(info, value)
+                EasyFrames:GetModule("Target"):ShowName()
+            end,
+            arg = "target"
+        },
+
+
+        showTargetCastbar = {
+            type = "toggle",
+            order = 11,
             width = "double",
             name = L["Show blizzard's target castbar"],
             desc = L["When you change this option you need to reload your UI (because it's Blizzard config variable). \n\nCommand /reload"],
@@ -991,7 +1022,7 @@ local targetOptions = {
 
         showAttackBackground = {
             type = "toggle",
-            order = 11,
+            order = 12,
             width = "double",
             name = L["Show target combat texture (outside the frame)"],
             desc = L["Show or hide target red background texture (blinking red glow outside the frame in combat)"],
@@ -1004,7 +1035,7 @@ local targetOptions = {
 
         attackBackgroundOpacity = {
             type = "range",
-            order = 12,
+            order = 13,
             name = L["Opacity"],
             desc = L["Opacity of combat texture"],
             min = 0.1,
@@ -1070,17 +1101,31 @@ local focusOptions = {
             arg = "focus"
         },
 
+        healthBarFontFamily = {
+            order = 5,
+            name = L["Font family"],
+            desc = L["Healthbar and manabar font family"],
+            type = "select",
+            dialogControl = 'LSM30_Font',
+            values = Media:HashTable("font"),
+            set = function(info, value)
+                setOpt(info, value)
+                EasyFrames:GetModule("Focus"):SetHealthBarsFont()
+            end,
+            arg = "focus"
+        },
+
         healthBarFontSize = {
             type = "range",
-            order = 5,
+            order = 6,
             name = L["Font size"],
             desc = L["Healthbar and manabar font size"],
             min = 7,
-            max = 14,
+            max = 16,
             step = 1,
             set = function(info, value)
                 setOpt(info, value)
-                EasyFrames:GetModule("Focus"):SetHealthBarsFontSize(value)
+                EasyFrames:GetModule("Focus"):SetHealthBarsFont(value)
             end,
             arg = "focus"
         },

@@ -35,7 +35,7 @@ function Player:OnEnable()
 
     self:SetScale(db.player.scaleFrame)
     self:ShowName(db.player.showName)
-    self:SetHealthBarsFontSize(db.player.healthBarFontSize)
+    self:SetHealthBarsFont()
     self:ShowHitIndicator(db.player.showHitIndicator)
     self:ShowSpecialbar(db.player.showSpecialbar)
     self:ShowRestIcon(db.player.showRestIcon)
@@ -54,7 +54,7 @@ function Player:OnProfileChanged(newDB)
 
     self:SetScale(db.player.scaleFrame)
     self:ShowName(db.player.showName)
-    self:SetHealthBarsFontSize(db.player.healthBarFontSize)
+    self:SetHealthBarsFont()
     self:ShowHitIndicator(db.player.showHitIndicator)
     self:ShowSpecialbar(db.player.showSpecialbar)
     self:ShowRestIcon(db.player.showRestIcon)
@@ -147,12 +147,15 @@ function Player:UpdateHealthValues()
     UpdateHealthValues(frame, healthFormat, customHealthFormat, customHealthFormatFormulas, useHealthFormatFullValues)
 end
 
-function Player:SetHealthBarsFontSize(value)
-    PlayerFrameHealthBar.TextString:SetFont(STANDARD_TEXT_FONT, value, "OUTLINE")
-    PlayerFrameManaBar.TextString:SetFont(STANDARD_TEXT_FONT, value, "OUTLINE")
+function Player:SetHealthBarsFont()
+    local fontSize = db.player.healthBarFontSize
+    local fontFamily = Media:Fetch("font", db.player.healthBarFontFamily)
 
-    PetFrameHealthBar.TextString:SetFont(STANDARD_TEXT_FONT, value - 1, "OUTLINE")
-    PetFrameManaBar.TextString:SetFont(STANDARD_TEXT_FONT, value - 1, "OUTLINE")
+    PlayerFrameHealthBar.TextString:SetFont(fontFamily, fontSize, "OUTLINE")
+    PlayerFrameManaBar.TextString:SetFont(fontFamily, fontSize, "OUTLINE")
+
+    PetFrameHealthBar.TextString:SetFont(fontFamily, fontSize - 1, "OUTLINE")
+    PetFrameManaBar.TextString:SetFont(fontFamily, fontSize - 1, "OUTLINE")
 end
 
 function Player:ShowRestIcon(value)

@@ -18,6 +18,8 @@ L["Custom format"] = "Свой формат"
 
 L["Font size"] = "Размер шрифта"
 L["Healthbar and manabar font size"] = "Размер шрифта фреймов здоровья и маны"
+L["Font family"] = "Шрифт"
+L["Healthbar and manabar font family"] = "Шрифт фреймов здоровья и маны"
 
 L["Custom format of HP"] = "Свой формат HP"
 L["You can set custom HP format. More information about custom HP format you can read on project site.\n\n" ..
@@ -127,6 +129,7 @@ L["Scale of target unit frame"] = "Размер (scale) фрейма цели"
 L["Target healthbar text format"] = "Формат HP цели"
 L["Set the target healthbar text format"] = "Установить формат отображения здоровья цели"
 L["Show target of target frame"] = "Показывать цель цели"
+L["Show target name"] = "Показывать имя цели"
 L["Show target combat texture (outside the frame)"] = "Показывать фоновую текстуру цели (снаружи фрейма)"
 L["Show or hide target red background texture (blinking red glow outside the frame in combat)"] = "Показывать красную текстуру в бою (мигающая рамка снаружи фрейма во время боя)"
 L["Show blizzard's target castbar"] = "Показывать у цели castbar Blizzard"
