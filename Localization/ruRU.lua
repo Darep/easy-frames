@@ -16,6 +16,9 @@ L["Current + Max + Percent"] = "Текущее + Макс + Проценты"
 L["Current + Percent"] = "Текущее + Проценты"
 L["Custom format"] = "Свой формат"
 
+L["Font size"] = "Размер шрифта"
+L["Healthbar and manabar font size"] = "Размер шрифта фреймов здоровья и маны"
+
 L["Custom format of HP"] = "Свой формат HP"
 L["You can set custom HP format. More information about custom HP format you can read on project site.\n\n" ..
         "Formulas:"] = "Вы можете установить свой формат HP. Больше информации о данном формате HP можно прочитать на сайте проекта.\n\n" ..
