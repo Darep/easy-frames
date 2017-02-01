@@ -33,6 +33,7 @@ function Target:OnEnable()
 
     self:SetScale(db.target.scaleFrame)
     self:ShowTargetFrameToT()
+    self:SetHealthBarsFontSize(db.target.healthBarFontSize)
 
     self:ShowAttackBackground(db.target.showAttackBackground)
     self:SetAttackBackgroundOpacity(db.target.attackBackgroundOpacity)
@@ -46,6 +47,7 @@ function Target:OnProfileChanged(newDB)
 
     self:SetScale(db.target.scaleFrame)
     self:ShowTargetFrameToT()
+    self:SetHealthBarsFontSize(db.target.healthBarFontSize)
 
     self:ShowAttackBackground(db.target.showAttackBackground)
     self:SetAttackBackgroundOpacity(db.target.attackBackgroundOpacity)
@@ -78,6 +80,11 @@ function Target:ShowTargetFrameToT()
     else
         TargetFrameToT:SetAlpha(0)
     end
+end
+
+function Target:SetHealthBarsFontSize(value)
+    TargetFrameHealthBar.TextString:SetFont(STANDARD_TEXT_FONT, value, "OUTLINE")
+    TargetFrameManaBar.TextString:SetFont(STANDARD_TEXT_FONT, value, "OUTLINE")
 end
 
 function Target:ShowAttackBackground(value)

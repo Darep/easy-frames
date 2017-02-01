@@ -19,6 +19,9 @@ L["Current + Max + Percent"] = true
 L["Current + Percent"] = true
 L["Custom format"] = true
 
+L["Font size"] = true
+L["Healthbar and manabar font size"] = true
+
 L["Custom format of HP"] = true
 L["You can set custom HP format. More information about custom HP format you can read on project site.\n\n" ..
     "Formulas:"] = true

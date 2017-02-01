@@ -45,7 +45,6 @@ function Core:OnEnable()
     self:MoveFocusFrameBars()
     self:MovePetFrameBars()
 
-    self:SetFramesBarsFont()
     self:MovePlayerFramesBarsTextString()
     self:MoveTargetFramesBarsTextString()
     self:MoveFocusFramesBarsTextString()
@@ -207,17 +206,6 @@ function Core:MovePetFrameBars()
     PetFrameManaBar.TextString:ClearAllPoints()
     PetFrameManaBar.TextString:SetPoint("CENTER", PetFrameManaBar, "CENTER", 0, 0)
     PetFrameManaBar.TextString.SetPoint = function() end
-end
-
-function Core:SetFramesBarsFont()
-    PlayerFrameHealthBar.TextString:SetFont(STANDARD_TEXT_FONT, 10, "OUTLINE")
-    PlayerFrameManaBar.TextString:SetFont(STANDARD_TEXT_FONT, 10, "OUTLINE")
-    TargetFrameHealthBar.TextString:SetFont(STANDARD_TEXT_FONT, 10, "OUTLINE")
-    TargetFrameManaBar.TextString:SetFont(STANDARD_TEXT_FONT, 10, "OUTLINE")
-    FocusFrameHealthBar.TextString:SetFont(STANDARD_TEXT_FONT, 10, "OUTLINE")
-    FocusFrameManaBar.TextString:SetFont(STANDARD_TEXT_FONT, 10, "OUTLINE")
-    PetFrameHealthBar.TextString:SetFont(STANDARD_TEXT_FONT, 9, "OUTLINE")
-    PetFrameManaBar.TextString:SetFont(STANDARD_TEXT_FONT, 9, "OUTLINE")
 end
 
 function Core:MovePlayerFramesBarsTextString()

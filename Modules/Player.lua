@@ -35,6 +35,7 @@ function Player:OnEnable()
 
     self:SetScale(db.player.scaleFrame)
     self:ShowName(db.player.showName)
+    self:SetHealthBarsFontSize(db.player.healthBarFontSize)
     self:ShowHitIndicator(db.player.showHitIndicator)
     self:ShowSpecialbar(db.player.showSpecialbar)
     self:ShowRestIcon(db.player.showRestIcon)
@@ -53,6 +54,7 @@ function Player:OnProfileChanged(newDB)
 
     self:SetScale(db.player.scaleFrame)
     self:ShowName(db.player.showName)
+    self:SetHealthBarsFontSize(db.player.healthBarFontSize)
     self:ShowHitIndicator(db.player.showHitIndicator)
     self:ShowSpecialbar(db.player.showSpecialbar)
     self:ShowRestIcon(db.player.showRestIcon)
@@ -61,7 +63,6 @@ function Player:OnProfileChanged(newDB)
     self:SetAttackBackgroundOpacity(db.player.attackBackgroundOpacity)
     self:ShowGroupIndicator(db.player.showGroupIndicator)
     self:ShowRoleIcon(db.player.showRoleIcon)
-
 
     self:UpdateHealthValues()
 end
@@ -144,6 +145,14 @@ function Player:UpdateHealthValues()
     local useHealthFormatFullValues = db.player.useHealthFormatFullValues
 
     UpdateHealthValues(frame, healthFormat, customHealthFormat, customHealthFormatFormulas, useHealthFormatFullValues)
+end
+
+function Player:SetHealthBarsFontSize(value)
+    PlayerFrameHealthBar.TextString:SetFont(STANDARD_TEXT_FONT, value, "OUTLINE")
+    PlayerFrameManaBar.TextString:SetFont(STANDARD_TEXT_FONT, value, "OUTLINE")
+
+    PetFrameHealthBar.TextString:SetFont(STANDARD_TEXT_FONT, value - 1, "OUTLINE")
+    PetFrameManaBar.TextString:SetFont(STANDARD_TEXT_FONT, value - 1, "OUTLINE")
 end
 
 function Player:ShowRestIcon(value)

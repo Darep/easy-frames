@@ -65,6 +65,12 @@ local healthFormat = {
     ["custom"] = L["Custom format"], --9
 }
 
+
+--for i, f in pairs(Media:HashTable("font")) do
+--    print(i, f)
+--end
+
+
 local generalOptions = {
     name = getOptionName(L["Main options"]),
     desc = L["Main options"],
@@ -441,9 +447,32 @@ local playerOptions = {
             arg = "player"
         },
 
+        healthBarFontSize = {
+            type = "range",
+            order = 5,
+            name = L["Font size"],
+            desc = L["Healthbar and manabar font size"],
+            min = 7,
+            max = 14,
+            step = 1,
+            set = function(info, value)
+                setOpt(info, value)
+                EasyFrames:GetModule("Player"):SetHealthBarsFontSize(value)
+            end,
+            arg = "player"
+        },
+
+--        TimeFont = {
+--            order = 52,
+--            name = "Font",
+--            type = "select",
+--            dialogControl = 'LSM30_Font',
+--            values = Media:HashTable("font"),
+--        },
+
         HPFormat = {
             type = "group",
-            order = 5,
+            order = 7,
             inline = true,
             name = "",
             hidden = function()
@@ -590,13 +619,13 @@ local playerOptions = {
 
         newLine2 = {
             type = "header",
-            order = 6,
+            order = 8,
             name = L["Show or hide some elements of frame"],
         },
 
         showName = {
             type = "toggle",
-            order = 7,
+            order = 9,
             width = "double",
             name = L["Show player name"],
             desc = L["Show player name"],
@@ -609,7 +638,7 @@ local playerOptions = {
 
         showHitIndicator = {
             type = "toggle",
-            order = 8,
+            order = 10,
             width = "double",
             name = L["Enable hit indicators"],
             desc = L["Show or hide the damage/heal which you take on your unit frame"],
@@ -622,7 +651,7 @@ local playerOptions = {
 
         showSpecialbar = {
             type = "toggle",
-            order = 9,
+            order = 11,
             width = "double",
             name = L["Show player specialbar"],
             desc = L["Show or hide the player specialbar, like Paladin's holy power, Priest's orbs, Monk's harmony or Warlock's soul shards"],
@@ -635,7 +664,7 @@ local playerOptions = {
 
         showRestIcon = {
             type = "toggle",
-            order = 10,
+            order = 12,
             width = "double",
             name = L["Show player resting icon"],
             desc = L["Show or hide player resting icon when player is resting (e.g. in the tavern or in the capital)"],
@@ -648,7 +677,7 @@ local playerOptions = {
 
         showStatusTexture = {
             type = "toggle",
-            order = 11,
+            order = 13,
             width = "double",
             name = L["Show player status texture (inside the frame)"],
             desc = L["Show or hide player status texture (blinking glow inside the frame when player is resting or in combat)"],
@@ -661,7 +690,7 @@ local playerOptions = {
 
         showAttackBackground = {
             type = "toggle",
-            order = 12,
+            order = 14,
             width = "double",
             name = L["Show player combat texture (outside the frame)"],
             desc = L["Show or hide player red background texture (blinking red glow outside the frame in combat)"],
@@ -674,7 +703,7 @@ local playerOptions = {
 
         attackBackgroundOpacity = {
             type = "range",
-            order = 13,
+            order = 15,
             name = L["Opacity"],
             desc = L["Opacity of combat texture"],
             min = 0.1,
@@ -695,7 +724,7 @@ local playerOptions = {
 
         showGroupIndicator = {
             type = "toggle",
-            order = 14,
+            order = 16,
             width = "double",
             name = L["Show player group number"],
             desc = L["Show or hide player group number when player is in a raid group (over portrait)"],
@@ -708,7 +737,7 @@ local playerOptions = {
 
         showRoleIcon = {
             type = "toggle",
-            order = 15,
+            order = 17,
             width = "double",
             name = L["Show player role icon"],
             desc = L["Show or hide player role icon when player is in a group"],
@@ -766,9 +795,24 @@ local targetOptions = {
             arg = "target"
         },
 
+        healthBarFontSize = {
+            type = "range",
+            order = 5,
+            name = L["Font size"],
+            desc = L["Healthbar and manabar font size"],
+            min = 7,
+            max = 14,
+            step = 1,
+            set = function(info, value)
+                setOpt(info, value)
+                EasyFrames:GetModule("Target"):SetHealthBarsFontSize(value)
+            end,
+            arg = "target"
+        },
+
         HPFormat = {
             type = "group",
-            order = 5,
+            order = 7,
             inline = true,
             name = "",
             hidden = function()
@@ -915,13 +959,13 @@ local targetOptions = {
 
         newLine2 = {
             type = "header",
-            order = 6,
+            order = 8,
             name = L["Show or hide some elements of frame"],
         },
 
         showToTFrame = {
             type = "toggle",
-            order = 7,
+            order = 9,
             width = "double",
             name = L["Show target of target frame"],
             desc = L["Show target of target frame"],
@@ -934,7 +978,7 @@ local targetOptions = {
 
         showTargetCastbar = {
             type = "toggle",
-            order = 8,
+            order = 10,
             width = "double",
             name = L["Show blizzard's target castbar"],
             desc = L["When you change this option you need to reload your UI (because it's Blizzard config variable). \n\nCommand /reload"],
@@ -947,7 +991,7 @@ local targetOptions = {
 
         showAttackBackground = {
             type = "toggle",
-            order = 9,
+            order = 11,
             width = "double",
             name = L["Show target combat texture (outside the frame)"],
             desc = L["Show or hide target red background texture (blinking red glow outside the frame in combat)"],
@@ -960,7 +1004,7 @@ local targetOptions = {
 
         attackBackgroundOpacity = {
             type = "range",
-            order = 10,
+            order = 12,
             name = L["Opacity"],
             desc = L["Opacity of combat texture"],
             min = 0.1,
@@ -1026,9 +1070,24 @@ local focusOptions = {
             arg = "focus"
         },
 
+        healthBarFontSize = {
+            type = "range",
+            order = 5,
+            name = L["Font size"],
+            desc = L["Healthbar and manabar font size"],
+            min = 7,
+            max = 14,
+            step = 1,
+            set = function(info, value)
+                setOpt(info, value)
+                EasyFrames:GetModule("Focus"):SetHealthBarsFontSize(value)
+            end,
+            arg = "focus"
+        },
+
         HPFormat = {
             type = "group",
-            order = 5,
+            order = 7,
             inline = true,
             name = "",
             hidden = function()
@@ -1175,13 +1234,13 @@ local focusOptions = {
 
         newLine2 = {
             type = "header",
-            order = 6,
+            order = 8,
             name = L["Show or hide some elements of frame"],
         },
 
         showToTFrame = {
             type = "toggle",
-            order = 6,
+            order = 9,
             width = "double",
             name = L["Show target of focus frame"],
             desc = L["Show target of focus frame"],
@@ -1194,7 +1253,7 @@ local focusOptions = {
 
         showAttackBackground = {
             type = "toggle",
-            order = 7,
+            order = 10,
             width = "double",
             name = L["Show focus combat texture (outside the frame)"],
             desc = L["Show or hide focus red background texture (blinking red glow outside the frame in combat)"],
@@ -1207,7 +1266,7 @@ local focusOptions = {
 
         attackBackgroundOpacity = {
             type = "range",
-            order = 8,
+            order = 11,
             name = L["Opacity"],
             desc = L["Opacity of combat texture"],
             min = 0.1,

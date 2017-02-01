@@ -33,6 +33,7 @@ function Focus:OnEnable()
 
     self:SetScale(db.focus.scaleFrame)
     self:ShowFocusFrameToT()
+    self:SetHealthBarsFontSize(db.focus.healthBarFontSize)
 
     self:ShowAttackBackground(db.focus.showAttackBackground)
     self:SetAttackBackgroundOpacity(db.focus.attackBackgroundOpacity)
@@ -44,8 +45,9 @@ function Focus:OnProfileChanged(newDB)
     self.db = newDB
     db = self.db.profile
 
-    self:ShowFocusFrameToT()
     self:SetScale(db.focus.scaleFrame)
+    self:ShowFocusFrameToT()
+    self:SetHealthBarsFontSize(db.focus.healthBarFontSize)
 
     self:ShowAttackBackground(db.focus.showAttackBackground)
     self:SetAttackBackgroundOpacity(db.focus.attackBackgroundOpacity)
@@ -78,6 +80,11 @@ function Focus:ShowFocusFrameToT()
     else
         FocusFrameToT:SetAlpha(0)
     end
+end
+
+function Focus:SetHealthBarsFontSize(value)
+    FocusFrameHealthBar.TextString:SetFont(STANDARD_TEXT_FONT, value, "OUTLINE")
+    FocusFrameManaBar.TextString:SetFont(STANDARD_TEXT_FONT, value, "OUTLINE")
 end
 
 function Focus:ShowAttackBackground(value)
