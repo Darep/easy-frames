@@ -33,6 +33,7 @@ function Focus:OnEnable()
 
     self:SetScale(db.focus.scaleFrame)
     self:ShowFocusFrameToT()
+    self:ShowName(db.focus.showName)
     self:SetHealthBarsFont()
 
     self:ShowAttackBackground(db.focus.showAttackBackground)
@@ -47,6 +48,7 @@ function Focus:OnProfileChanged(newDB)
 
     self:SetScale(db.focus.scaleFrame)
     self:ShowFocusFrameToT()
+    self:ShowName(db.focus.showName)
     self:SetHealthBarsFont()
 
     self:ShowAttackBackground(db.focus.showAttackBackground)
@@ -79,6 +81,14 @@ function Focus:ShowFocusFrameToT()
         FocusFrameToT:SetAlpha(100)
     else
         FocusFrameToT:SetAlpha(0)
+    end
+end
+
+function Focus:ShowName(value)
+    if (value) then
+        FocusFrame.name:Show()
+    else
+        FocusFrame.name:Hide()
     end
 end
 

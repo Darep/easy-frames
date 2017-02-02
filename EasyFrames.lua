@@ -150,6 +150,7 @@ local defaults = {
             },
             customHealthFormat = "%CURRENT% / %MAX% (%PERCENT%%)",
             showToTFrame = true,
+            showName = true,
             showAttackBackground = false,
             attackBackgroundOpacity = 0.7,
         },

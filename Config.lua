@@ -423,10 +423,10 @@ local playerOptions = {
             arg = "player"
         },
 
-        newLine = {
+        header = {
             type = "header",
             order = 3,
-            name = "HP and MP bars",
+            name = L["HP and MP bars"],
         },
 
         healthFormat = {
@@ -619,7 +619,7 @@ local playerOptions = {
             }
         },
 
-        newLine2 = {
+        header2 = {
             type = "header",
             order = 8,
             name = L["Show or hide some elements of frame"],
@@ -778,10 +778,10 @@ local targetOptions = {
             arg = "target"
         },
 
-        newLine = {
-            type = "description",
+        header = {
+            type = "header",
             order = 3,
-            name = "",
+            name = L["HP and MP bars"],
         },
 
         healthFormat = {
@@ -974,7 +974,7 @@ local targetOptions = {
             }
         },
 
-        newLine2 = {
+        header2 = {
             type = "header",
             order = 8,
             name = L["Show or hide some elements of frame"],
@@ -1001,11 +1001,10 @@ local targetOptions = {
             desc = L["Show target name"],
             set = function(info, value)
                 setOpt(info, value)
-                EasyFrames:GetModule("Target"):ShowName()
+                EasyFrames:GetModule("Target"):ShowName(value)
             end,
             arg = "target"
         },
-
 
         showTargetCastbar = {
             type = "toggle",
@@ -1082,10 +1081,10 @@ local focusOptions = {
             arg = "focus"
         },
 
-        newLine = {
-            type = "description",
+        header = {
+            type = "header",
             order = 3,
-            name = "",
+            name = L["HP and MP bars"],
         },
 
         healthFormat = {
@@ -1277,7 +1276,7 @@ local focusOptions = {
             }
         },
 
-        newLine2 = {
+        header2 = {
             type = "header",
             order = 8,
             name = L["Show or hide some elements of frame"],
@@ -1296,9 +1295,22 @@ local focusOptions = {
             arg = "focus"
         },
 
-        showAttackBackground = {
+        showName = {
             type = "toggle",
             order = 10,
+            width = "double",
+            name = L["Show name of focus frame"],
+            desc = L["Show name of focus frame"],
+            set = function(info, value)
+                setOpt(info, value)
+                EasyFrames:GetModule("Focus"):ShowName(value)
+            end,
+            arg = "focus"
+        },
+
+        showAttackBackground = {
+            type = "toggle",
+            order = 11,
             width = "double",
             name = L["Show focus combat texture (outside the frame)"],
             desc = L["Show or hide focus red background texture (blinking red glow outside the frame in combat)"],
@@ -1311,7 +1323,7 @@ local focusOptions = {
 
         attackBackgroundOpacity = {
             type = "range",
-            order = 11,
+            order = 12,
             name = L["Opacity"],
             desc = L["Opacity of combat texture"],
             min = 0.1,

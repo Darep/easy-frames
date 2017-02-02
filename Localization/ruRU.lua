@@ -16,6 +16,8 @@ L["Current + Max + Percent"] = "Текущее + Макс + Проценты"
 L["Current + Percent"] = "Текущее + Проценты"
 L["Custom format"] = "Свой формат"
 
+L["HP and MP bars"] = "Фреймы здоровья и маны"
+
 L["Font size"] = "Размер шрифта"
 L["Healthbar and manabar font size"] = "Размер шрифта фреймов здоровья и маны"
 L["Font family"] = "Шрифт"
@@ -143,6 +145,7 @@ L["Scale of focus unit frame"] = "Размер (scale) фокус фрейма"
 L["Focus healthbar text format"] = "Формат HP фокус фрейма"
 L["Set the focus healthbar text format"] = "Установить формат отображения здоровья фокус фрейма"
 L["Show target of focus frame"] = "Показывать цель фокус фрейма"
+L["Show name of focus frame"] = "Показывать имя фокус фрейма"
 L["Show focus combat texture (outside the frame)"] = "Показывать фоновую текстуру фокус фрейма (снаружи фрейма)"
 L["Show or hide focus red background texture (blinking red glow outside the frame in combat)"] = "Показывать красную текстуру в бою (мигающая рамка снаружи фрейма во время боя)"
 

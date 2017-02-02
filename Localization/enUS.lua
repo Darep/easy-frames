@@ -19,6 +19,8 @@ L["Current + Max + Percent"] = true
 L["Current + Percent"] = true
 L["Custom format"] = true
 
+L["HP and MP bars"] = true
+
 L["Font size"] = true
 L["Healthbar and manabar font size"] = true
 L["Font family"] = true
@@ -137,6 +139,7 @@ L["Scale of focus unit frame"] = true
 L["Focus healthbar text format"] = true
 L["Set the focus healthbar text format"] = true
 L["Show target of focus frame"] = true
+L["Show name of focus frame"] = true
 L["Show focus combat texture (outside the frame)"] = true
 L["Show or hide focus red background texture (blinking red glow outside the frame in combat)"] = true
 
