@@ -1,4 +1,6 @@
 --[[
+    Appreciate what others people do. (c) Usoltsev
+
     Copyright (c) <2016-2017>, Usoltsev <alexander.usolcev@gmail.com> All rights reserved.
 
     Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
@@ -190,7 +192,7 @@ end
 
 
 function General:SetFrameBarTexture(value)
-    local texture = Media:Fetch("bartexture", value)
+    local texture = Media:Fetch("statusbar", value)
 
     local healthBars = GetFramesHealthBar()
     local manaBars = GetFramesManaBar()
@@ -309,16 +311,17 @@ function General:SetHighlightDispelledBuff()
 end
 
 function General:TargetFrame_UpdateAuras(frame, forceHide)
-    local buffFrame, frameStealable, frameName, icon, debuffType, _
+    local buffFrame, frameStealable, frameName, icon, debuffType, isStealable, _
     local selfName = frame:GetName()
     local isEnemy = UnitIsEnemy(PlayerFrame.unit, frame.unit)
 
     for i = 1, MAX_TARGET_BUFFS do
-        _, _, icon, _, debuffType = UnitBuff(frame.unit, i)
+        _, _, icon, _, debuffType, _, _, _, isStealable = UnitBuff(frame.unit, i)
         frameName = selfName .. 'Buff' .. i
         if (icon and (not frame.maxBuffs or i <= frame.maxBuffs)) then
             buffFrame = _G[frameName]
 
+--            print(_, isStealable)
             -- Buffs on top
             if (i == 1 and frame.buffsOnTop) then
                 local point, relativeTo, relativePoint, xOffset, yOffset = buffFrame:GetPoint()
