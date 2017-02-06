@@ -263,9 +263,27 @@ local generalOptions = {
                     arg = "general"
                 },
 
+                ifPlayerCanDispelBuff = {
+                    type = "toggle",
+                    order = 7,
+                    name = L["Only if player can dispel them"],
+                    desc = L["Highlight dispelled buffs only if player can dispel them"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("General"):SetHighlightDispelledBuff()
+                    end,
+                    disabled = function()
+                        local diabled = EasyFrames.db.profile.general.highlightDispelledBuff
+                        if (diabled == false) then
+                            return true
+                        end
+                    end,
+                    arg = "general"
+                },
+
                 dispelledBuffScale = {
                     type = "range",
-                    order = 7,
+                    order = 8,
                     name = L["Dispelled buff scale"],
                     desc = L["Dispelled buff scale that can be dispelled from target frame"],
                     min = 1,

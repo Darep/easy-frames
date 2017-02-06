@@ -321,7 +321,6 @@ function General:TargetFrame_UpdateAuras(frame, forceHide)
         if (icon and (not frame.maxBuffs or i <= frame.maxBuffs)) then
             buffFrame = _G[frameName]
 
---            print(_, isStealable)
             -- Buffs on top
             if (i == 1 and frame.buffsOnTop) then
                 local point, relativeTo, relativePoint, xOffset, yOffset = buffFrame:GetPoint()
@@ -334,7 +333,12 @@ function General:TargetFrame_UpdateAuras(frame, forceHide)
             if (db.general.highlightDispelledBuff or forceHide) then
                 frameStealable = _G[frameName .. 'Stealable']
 
-                if (isEnemy and debuffType == 'Magic' and not forceHide) then
+                local allCanSteal = true
+                if (db.general.ifPlayerCanDispelBuff) then
+                    allCanSteal = isStealable
+                end
+
+                if (isEnemy and debuffType == 'Magic' and allCanSteal and not forceHide) then
                     local buffSize
 
                     if (db.general.customBuffSize) then

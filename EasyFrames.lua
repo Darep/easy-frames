@@ -77,6 +77,7 @@ local defaults = {
             selfBuffSize = 28,
             highlightDispelledBuff = true,
             dispelledBuffScale = 1,
+            ifPlayerCanDispelBuff = false,
             classPortraits = true,
             barTexture = "Blizzard",
             brightFrameBorder = 1,

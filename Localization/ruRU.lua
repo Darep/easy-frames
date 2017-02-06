@@ -74,6 +74,8 @@ L["Highlight dispelled buffs"] = "Подсвечивать бафы, котор�
 L["Highlight buffs that can be dispelled from target frame"] = "Подсвечивать бафы у цели, которые могут быть рассеяны"
 L["Dispelled buff scale"] = "Размер (scale) бафов (dispelled)"
 L["Dispelled buff scale that can be dispelled from target frame"] = "Размер (scale) бафов, которые могут быть рассеяны"
+L["Only if player can dispel them"] = "Только если игрок может их рассеять"
+L["Highlight dispelled buffs only if player can dispel them"] = "Подсвечивать бафы у цели, которые могут быть рассеяны, только если игрок может их рассеять"
 
 L["Class portraits"] = "Иконка класса в портрете"
 L["Replaces the unit-frame portrait with their class icon"] = "Заменяет портрет фрейма иконкой класса"
