@@ -40,6 +40,8 @@ function Core:OnEnable()
     self:SecureHook("TargetFrame_CheckClassification", "CheckClassification")
     self:SecureHook("TextStatusBar_UpdateTextStringWithValues", "UpdateTextStringWithValues")
 
+    self:SecureHook("PetFrame_Update", "PetFrameUpdate")
+
     self:MoveFramesNames()
     self:MoveToTFrames()
     self:MovePlayerFrameBars()
@@ -116,7 +118,7 @@ function Core:MoveFramesNames()
     FocusFrame.name.SetPoint = function() end
 
     PetFrame.name:ClearAllPoints()
-    PetFrame.name:SetPoint("CENTER", PetFrame, "CENTER", 15, 15)
+    PetFrame.name:SetPoint("CENTER", PetFrame, "CENTER", 15, 19)
     PetFrame.name.SetPoint = function() end
 end
 
@@ -193,9 +195,9 @@ end
 
 function Core:MovePetFrameBars()
     --Player Pet bars
-    PetFrameHealthBar:SetHeight(10)
+    PetFrameHealthBar:SetHeight(13)
     PetFrameHealthBar:ClearAllPoints()
-    PetFrameHealthBar:SetPoint("CENTER", PetFrame, "CENTER", 16, 1)
+    PetFrameHealthBar:SetPoint("CENTER", PetFrame, "CENTER", 16, 4)
     PetFrameHealthBar.SetPoint = function() end
 
     PetFrameManaBar:ClearAllPoints()
@@ -205,6 +207,7 @@ function Core:MovePetFrameBars()
     PetFrameHealthBar.TextString:ClearAllPoints()
     PetFrameHealthBar.TextString:SetPoint("CENTER", PetFrameHealthBar, "CENTER", 0, 0)
     PetFrameHealthBar.TextString.SetPoint = function() end
+
     PetFrameManaBar.TextString:ClearAllPoints()
     PetFrameManaBar.TextString:SetPoint("CENTER", PetFrameManaBar, "CENTER", 0, 0)
     PetFrameManaBar.TextString.SetPoint = function() end
@@ -238,6 +241,32 @@ function Core:MoveFocusFramesBarsTextString()
     FocusFrameManaBar.TextString:ClearAllPoints()
     FocusFrameManaBar.TextString:SetPoint("CENTER", FocusFrame, "CENTER", -50, -7)
     FocusFrameManaBar.TextString.SetPoint = function() end
+end
+
+function Core:PetFrameUpdate(frame, override)
+    if ((not PlayerFrame.animating) or (override)) then
+        if (UnitIsVisible(frame.unit) and PetUsesPetFrame() and not PlayerFrame.vehicleHidesPet) then
+            if (frame:IsShown()) then
+                UnitFrame_Update(frame);
+            else
+                frame:Show();
+            end
+            --frame.flashState = 1;
+            --frame.flashTimer = PET_FLASH_ON_TIME;
+            if (UnitPowerMax(frame.unit) == 0) then
+                PetFrameTexture:SetTexture(Media:Fetch("frames", "nomana"));
+                PetFrameManaBarText:Hide();
+            else
+                print(Media:Fetch("frames", "smalltarget"))
+                PetFrameTexture:SetTexture(Media:Fetch("frames", "smalltarget"));
+            end
+            PetAttackModeTexture:Hide();
+
+            RefreshDebuffs(frame, frame.unit, nil, nil, true);
+        else
+            frame:Hide();
+        end
+    end
 end
 
 local FrameList = { "Target", "Focus", "Player" }

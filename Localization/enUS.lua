@@ -147,7 +147,9 @@ L["Show or hide focus red background texture (blinking red glow outside the fram
 
 
 L["Pet"] = true
-L["In pet options you can show/hide pet name, enable/disable pet hit indicators"] = true
+L["In pet options you can set scale pet frame, show/hide pet name, enable/disable pet hit indicators, etc"] = true
+L["Pet frame scale"] = true
+L["Scale of pet unit frame"] = true
 L["Show pet name"] = true
 L["Show or hide the damage/heal which your pet take on pet unit frame"] = true
 L["Show pet combat texture (inside the frame)"] = true

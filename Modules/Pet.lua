@@ -30,6 +30,7 @@ function Pet:OnInitialize()
 end
 
 function Pet:OnEnable()
+    self:SetScale(db.pet.scaleFrame)
     self:ShowName(db.pet.showName)
     self:ShowHitIndicator(db.pet.showHitIndicator)
 
@@ -42,6 +43,7 @@ function Pet:OnProfileChanged(newDB)
     self.db = newDB
     db = self.db.profile
 
+    self:SetScale(db.pet.scaleFrame)
     self:ShowName(db.pet.showName)
     self:ShowHitIndicator(db.pet.showHitIndicator)
 
@@ -56,6 +58,10 @@ function Pet:GetOriginalValues()
 
     originalValues["PetAttackModeTexture"] = PetAttackModeTexture.Show
     originalValues["PetFrameFlash"] = PetFrameFlash.Show
+end
+
+function Pet:SetScale(value)
+    PetFrame:SetScale(value)
 end
 
 function Pet:ShowName(value)
