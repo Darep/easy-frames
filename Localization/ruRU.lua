@@ -154,8 +154,11 @@ L["Show or hide focus red background texture (blinking red glow outside the fram
 
 L["Pet"] = "Питомец"
 L["In pet options you can set scale pet frame, show/hide pet name, enable/disable pet hit indicators, etc"] = "В разделе Питомец вы можете установить размер (scale) фрейма питомца, Показывать имя питомца, включить отображение входящего урона и исцеления питомца и другие"
-L["Pet frame scale"] = true
-L["Scale of pet unit frame"] = true
+L["Pet frame scale"] = "Размер фрейма питомца"
+L["Scale of pet unit frame"] = "Размер (scale) фрейма питомца"
+L["Lock pet frame"] = "Заблокировать фрейм питомца"
+L["Lock or unlock pet frame. When unlocked you can move frame using your mouse (draggable)"] = "Заблокировать или разблокировать фрейм питомца. Когда разблокировано фрейм можно передвигать (перетаскивать)"
+L["Reset position to default"] = "Сбросить позицию"
 L["Show pet name"] = "Показывать имя питомца"
 L["Show or hide the damage/heal which your pet take on pet unit frame"] = "Показывать получаемый урон/исцеление на фрейме питомца"
 L["Show pet combat texture (inside the frame)"] = "Показывать фоновую текстуру фрейма питомца (внутри фрейма)"

@@ -40,8 +40,6 @@ function Core:OnEnable()
     self:SecureHook("TargetFrame_CheckClassification", "CheckClassification")
     self:SecureHook("TextStatusBar_UpdateTextStringWithValues", "UpdateTextStringWithValues")
 
-    self:SecureHook("PetFrame_Update", "PetFrameUpdate")
-
     self:MoveFramesNames()
     self:MoveToTFrames()
     self:MovePlayerFrameBars()
@@ -241,32 +239,6 @@ function Core:MoveFocusFramesBarsTextString()
     FocusFrameManaBar.TextString:ClearAllPoints()
     FocusFrameManaBar.TextString:SetPoint("CENTER", FocusFrame, "CENTER", -50, -7)
     FocusFrameManaBar.TextString.SetPoint = function() end
-end
-
-function Core:PetFrameUpdate(frame, override)
-    if ((not PlayerFrame.animating) or (override)) then
-        if (UnitIsVisible(frame.unit) and PetUsesPetFrame() and not PlayerFrame.vehicleHidesPet) then
-            if (frame:IsShown()) then
-                UnitFrame_Update(frame);
-            else
-                frame:Show();
-            end
-            --frame.flashState = 1;
-            --frame.flashTimer = PET_FLASH_ON_TIME;
-            if (UnitPowerMax(frame.unit) == 0) then
-                PetFrameTexture:SetTexture(Media:Fetch("frames", "nomana"));
-                PetFrameManaBarText:Hide();
-            else
-                print(Media:Fetch("frames", "smalltarget"))
-                PetFrameTexture:SetTexture(Media:Fetch("frames", "smalltarget"));
-            end
-            PetAttackModeTexture:Hide();
-
-            RefreshDebuffs(frame, frame.unit, nil, nil, true);
-        else
-            frame:Hide();
-        end
-    end
 end
 
 local FrameList = { "Target", "Focus", "Player" }

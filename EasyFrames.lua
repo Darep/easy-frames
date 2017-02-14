@@ -158,6 +158,8 @@ local defaults = {
 
         pet = {
             scaleFrame = 1,
+            lockedMovableFrame = true,
+            customPoints = false,
             showName = true,
             showHitIndicator = true,
             showStatusTexture = true,

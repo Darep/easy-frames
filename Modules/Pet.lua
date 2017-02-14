@@ -31,12 +31,17 @@ end
 
 function Pet:OnEnable()
     self:SetScale(db.pet.scaleFrame)
+    self:PreSetMovable()
+    self:SetMovable(db.pet.lockedMovableFrame)
+
     self:ShowName(db.pet.showName)
     self:ShowHitIndicator(db.pet.showHitIndicator)
 
     self:ShowStatusTexture(db.pet.showStatusTexture)
     self:ShowAttackBackground(db.pet.showAttackBackground)
     self:SetAttackBackgroundOpacity(db.pet.attackBackgroundOpacity)
+
+    self:SecureHook("PetFrame_Update", "PetFrameUpdate")
 end
 
 function Pet:OnProfileChanged(newDB)
@@ -44,6 +49,9 @@ function Pet:OnProfileChanged(newDB)
     db = self.db.profile
 
     self:SetScale(db.pet.scaleFrame)
+    self:PreSetMovable()
+    self:SetMovable(db.pet.lockedMovableFrame)
+
     self:ShowName(db.pet.showName)
     self:ShowHitIndicator(db.pet.showHitIndicator)
 
@@ -60,8 +68,77 @@ function Pet:GetOriginalValues()
     originalValues["PetFrameFlash"] = PetFrameFlash.Show
 end
 
+function Pet:PetFrameUpdate(frame, override)
+    if ((not PlayerFrame.animating) or (override)) then
+        if (UnitIsVisible(frame.unit) and PetUsesPetFrame() and not PlayerFrame.vehicleHidesPet) then
+            if (frame:IsShown()) then
+                UnitFrame_Update(frame);
+            else
+                frame:Show();
+            end
+            --frame.flashState = 1;
+            --frame.flashTimer = PET_FLASH_ON_TIME;
+            if (UnitPowerMax(frame.unit) == 0) then
+                PetFrameTexture:SetTexture(Media:Fetch("frames", "nomana"));
+                PetFrameManaBarText:Hide();
+            else
+                PetFrameTexture:SetTexture(Media:Fetch("frames", "smalltarget"));
+            end
+            PetAttackModeTexture:Hide();
+
+            RefreshDebuffs(frame, frame.unit, nil, nil, true);
+
+
+            if (db.pet.customPoints) then
+                frame:ClearAllPoints()
+                frame:SetPoint(unpack(db.pet.customPoints))
+            end
+        else
+            frame:Hide();
+        end
+    end
+end
+
 function Pet:SetScale(value)
     PetFrame:SetScale(value)
+end
+
+function Pet:PreSetMovable(points)
+    local frame = PetFrame
+
+    frame:SetScript("OnMouseDown", function(frame, button)
+        if not db.pet.lockedMovableFrame and button == "LeftButton" and not frame.isMoving then
+            frame:StartMoving();
+            frame.isMoving = true;
+        end
+    end)
+    frame:SetScript("OnMouseUp", function(frame, button)
+        if not db.pet.lockedMovableFrame and button == "LeftButton" and frame.isMoving then
+            frame:StopMovingOrSizing();
+            frame.isMoving = false;
+
+            db.pet.customPoints = {frame:GetPoint()}
+        end
+    end)
+    frame:SetScript("OnHide", function(frame)
+        if ( not db.pet.lockedMovableFrame and frame.isMoving ) then
+            frame:StopMovingOrSizing();
+            frame.isMoving = false;
+        end
+    end)
+end
+
+function Pet:SetMovable(value)
+    PetFrame:SetMovable(not value)
+end
+
+function Pet:ResetFramePosition()
+    local frame = PetFrame;
+
+    frame:ClearAllPoints()
+    frame:SetPoint("TOPLEFT", PlayerFrame, "TOPLEFT", 60, -90)
+
+    db.pet.customPoints = false
 end
 
 function Pet:ShowName(value)

@@ -1390,15 +1390,36 @@ local petOptions = {
             arg = "pet"
         },
 
+        lockedMovableFrame = {
+            type = "toggle",
+            order = 3,
+            name = L["Lock pet frame"],
+            desc = L["Lock or unlock pet frame. When unlocked you can move frame using your mouse (draggable)"],
+            set = function(info, value)
+                setOpt(info, value)
+                EasyFrames:GetModule("Pet"):SetMovable(value)
+            end,
+            arg = "pet"
+        },
+
+        resetPosition = {
+            type = "execute",
+            order = 4,
+            name = L["Reset position to default"],
+            func = function()
+                EasyFrames:GetModule("Pet"):ResetFramePosition()
+            end,
+        },
+
         header = {
             type = "header",
-            order = 3,
+            order = 5,
             name = L["Show or hide some elements of frame"],
         },
 
         showName = {
             type = "toggle",
-            order = 4,
+            order = 6,
             width = "double",
             name = L["Show pet name"],
             desc = L["Show pet name"],
@@ -1411,7 +1432,7 @@ local petOptions = {
 
         showHitIndicator = {
             type = "toggle",
-            order = 5,
+            order = 7,
             width = "double",
             name = L["Enable hit indicators"],
             desc = L["Show or hide the damage/heal which your pet take on pet unit frame"],
@@ -1424,7 +1445,7 @@ local petOptions = {
 
         showStatusTexture = {
             type = "toggle",
-            order = 6,
+            order = 8,
             width = "double",
             name = L["Show pet combat texture (inside the frame)"],
             desc = L["Show or hide pet red background texture (blinking red glow inside the frame in combat)"],
@@ -1437,7 +1458,7 @@ local petOptions = {
 
         showAttackBackground = {
             type = "toggle",
-            order = 7,
+            order = 9,
             width = "double",
             name = L["Show pet combat texture (outside the frame)"],
             desc = L["Show or hide pet red background texture (blinking red glow outside the frame in combat)"],
@@ -1450,7 +1471,7 @@ local petOptions = {
 
         attackBackgroundOpacity = {
             type = "range",
-            order = 8,
+            order = 10,
             name = L["Opacity"],
             desc = L["Opacity of combat texture"],
             min = 0.1,
