@@ -199,6 +199,7 @@ function General:SetFrameBarTexture(value)
 
     for _, healthbar in pairs(healthBars) do
         healthbar:SetStatusBarTexture(texture)
+        healthbar:GetStatusBarTexture():SetBlendMode("DISABLE")
     end
 
     for _, manabar in pairs(manaBars) do
