@@ -38,6 +38,8 @@ function Focus:OnEnable()
     self:ShowName(db.focus.showName)
     self:SetHealthBarsFont()
 
+    self:ReverseDirectionLosingHP(db.focus.reverseDirectionLosingHP)
+
     self:ShowAttackBackground(db.focus.showAttackBackground)
     self:SetAttackBackgroundOpacity(db.focus.attackBackgroundOpacity)
 
@@ -52,6 +54,8 @@ function Focus:OnProfileChanged(newDB)
     self:ShowFocusFrameToT()
     self:ShowName(db.focus.showName)
     self:SetHealthBarsFont()
+
+    self:ReverseDirectionLosingHP(db.focus.reverseDirectionLosingHP)
 
     self:ShowAttackBackground(db.focus.showAttackBackground)
     self:SetAttackBackgroundOpacity(db.focus.attackBackgroundOpacity)
@@ -100,6 +104,11 @@ function Focus:SetHealthBarsFont()
 
     FocusFrameHealthBar.TextString:SetFont(fontFamily, fontSize, "OUTLINE")
     FocusFrameManaBar.TextString:SetFont(fontFamily, fontSize, "OUTLINE")
+end
+
+function Focus:ReverseDirectionLosingHP(value)
+    FocusFrameHealthBar:SetReverseFill(value)
+    FocusFrameManaBar:SetReverseFill(value)
 end
 
 function Focus:ShowAttackBackground(value)

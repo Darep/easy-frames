@@ -38,6 +38,8 @@ function Target:OnEnable()
     self:ShowName(db.target.showName)
     self:SetHealthBarsFont()
 
+    self:ReverseDirectionLosingHP(db.target.reverseDirectionLosingHP)
+
     self:ShowAttackBackground(db.target.showAttackBackground)
     self:SetAttackBackgroundOpacity(db.target.attackBackgroundOpacity)
 
@@ -52,6 +54,8 @@ function Target:OnProfileChanged(newDB)
     self:ShowTargetFrameToT()
     self:ShowName(db.target.showName)
     self:SetHealthBarsFont()
+
+    self:ReverseDirectionLosingHP(db.target.reverseDirectionLosingHP)
 
     self:ShowAttackBackground(db.target.showAttackBackground)
     self:SetAttackBackgroundOpacity(db.target.attackBackgroundOpacity)
@@ -100,6 +104,11 @@ function Target:SetHealthBarsFont()
 
     TargetFrameHealthBar.TextString:SetFont(fontFamily, fontSize, "OUTLINE")
     TargetFrameManaBar.TextString:SetFont(fontFamily, fontSize, "OUTLINE")
+end
+
+function Target:ReverseDirectionLosingHP(value)
+    TargetFrameHealthBar:SetReverseFill(value)
+    TargetFrameManaBar:SetReverseFill(value)
 end
 
 function Target:ShowAttackBackground(value)

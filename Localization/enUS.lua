@@ -26,6 +26,9 @@ L["Healthbar and manabar font size"] = true
 L["Font family"] = true
 L["Healthbar and manabar font family"] = true
 
+L["Reverse the direction of losing health/mana"] = true
+L["By default direction starting from right to left. If checked direction of losing health/mana will be from left to right"] = true
+
 L["Custom format of HP"] = true
 L["You can set custom HP format. More information about custom HP format you can read on project site.\n\n" ..
     "Formulas:"] = true

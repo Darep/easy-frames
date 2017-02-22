@@ -846,10 +846,23 @@ local targetOptions = {
             arg = "target"
         },
 
+        reverseDirectionLosingHP = {
+            type = "toggle",
+            order = 7,
+            width = "double",
+            name = L["Reverse the direction of losing health/mana"],
+            desc = L["By default direction starting from right to left. If checked direction of losing health/mana will be from left to right"],
+            set = function(info, value)
+                setOpt(info, value)
+                EasyFrames:GetModule("Target"):ReverseDirectionLosingHP(value)
+            end,
+            arg = "target"
+        },
+
 
         HPFormat = {
             type = "group",
-            order = 7,
+            order = 8,
             inline = true,
             name = "",
             hidden = function()
@@ -996,13 +1009,13 @@ local targetOptions = {
 
         header2 = {
             type = "header",
-            order = 8,
+            order = 9,
             name = L["Show or hide some elements of frame"],
         },
 
         showToTFrame = {
             type = "toggle",
-            order = 9,
+            order = 10,
             width = "double",
             name = L["Show target of target frame"],
             desc = L["Show target of target frame"],
@@ -1015,7 +1028,7 @@ local targetOptions = {
 
         showName = {
             type = "toggle",
-            order = 10,
+            order = 11,
             width = "double",
             name = L["Show target name"],
             desc = L["Show target name"],
@@ -1028,7 +1041,7 @@ local targetOptions = {
 
         showTargetCastbar = {
             type = "toggle",
-            order = 11,
+            order = 12,
             width = "double",
             name = L["Show blizzard's target castbar"],
             desc = L["When you change this option you need to reload your UI (because it's Blizzard config variable). \n\nCommand /reload"],
@@ -1041,7 +1054,7 @@ local targetOptions = {
 
         showAttackBackground = {
             type = "toggle",
-            order = 12,
+            order = 13,
             width = "double",
             name = L["Show target combat texture (outside the frame)"],
             desc = L["Show or hide target red background texture (blinking red glow outside the frame in combat)"],
@@ -1054,7 +1067,7 @@ local targetOptions = {
 
         attackBackgroundOpacity = {
             type = "range",
-            order = 13,
+            order = 14,
             name = L["Opacity"],
             desc = L["Opacity of combat texture"],
             min = 0.1,
@@ -1149,9 +1162,22 @@ local focusOptions = {
             arg = "focus"
         },
 
+        reverseDirectionLosingHP = {
+            type = "toggle",
+            order = 7,
+            width = "double",
+            name = L["Reverse the direction of losing health/mana"],
+            desc = L["By default direction starting from right to left. If checked direction of losing health/mana will be from left to right"],
+            set = function(info, value)
+                setOpt(info, value)
+                EasyFrames:GetModule("Focus"):ReverseDirectionLosingHP(value)
+            end,
+            arg = "focus"
+        },
+
         HPFormat = {
             type = "group",
-            order = 7,
+            order = 8,
             inline = true,
             name = "",
             hidden = function()
@@ -1298,13 +1324,13 @@ local focusOptions = {
 
         header2 = {
             type = "header",
-            order = 8,
+            order = 9,
             name = L["Show or hide some elements of frame"],
         },
 
         showToTFrame = {
             type = "toggle",
-            order = 9,
+            order = 10,
             width = "double",
             name = L["Show target of focus frame"],
             desc = L["Show target of focus frame"],
@@ -1317,7 +1343,7 @@ local focusOptions = {
 
         showName = {
             type = "toggle",
-            order = 10,
+            order = 11,
             width = "double",
             name = L["Show name of focus frame"],
             desc = L["Show name of focus frame"],
@@ -1330,7 +1356,7 @@ local focusOptions = {
 
         showAttackBackground = {
             type = "toggle",
-            order = 11,
+            order = 12,
             width = "double",
             name = L["Show focus combat texture (outside the frame)"],
             desc = L["Show or hide focus red background texture (blinking red glow outside the frame in combat)"],
@@ -1343,7 +1369,7 @@ local focusOptions = {
 
         attackBackgroundOpacity = {
             type = "range",
-            order = 12,
+            order = 13,
             name = L["Opacity"],
             desc = L["Opacity of combat texture"],
             min = 0.1,

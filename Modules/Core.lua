@@ -223,7 +223,7 @@ end
 
 function Core:MoveTargetFramesBarsTextString()
     TargetFrameHealthBar.TextString:ClearAllPoints()
-    TargetFrameHealthBar.TextString:SetPoint("CENTER", TargetFrame, "CENTER", -53, 12)
+    TargetFrameHealthBar.TextString:SetPoint("CENTER", TargetFrame, "CENTER", -50, 12)
     TargetFrameHealthBar.TextString.SetPoint = function() end
 
     TargetFrameManaBar.TextString:ClearAllPoints()
@@ -233,7 +233,7 @@ end
 
 function Core:MoveFocusFramesBarsTextString()
     FocusFrameHealthBar.TextString:ClearAllPoints()
-    FocusFrameHealthBar.TextString:SetPoint("CENTER", FocusFrame, "CENTER", -53, 12)
+    FocusFrameHealthBar.TextString:SetPoint("CENTER", FocusFrame, "CENTER", -50, 12)
     FocusFrameHealthBar.TextString.SetPoint = function() end
 
     FocusFrameManaBar.TextString:ClearAllPoints()
