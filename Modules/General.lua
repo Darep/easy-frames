@@ -30,7 +30,7 @@ local DEFAULT_BUFF_SIZE = 17
 
 
 local function ClassColored(statusbar, unit)
-    if (db.general.coloredBaseOnCurrentHealth) then
+    if (db.general.colorBasedOnCurrentHealth) then
         local value = UnitHealth(unit)
         local min, max = statusbar:GetMinMaxValues()
 

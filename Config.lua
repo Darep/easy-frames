@@ -106,7 +106,7 @@ local generalOptions = {
                     desc = L["If checked frames becomes class colored.\n\n" ..
                             "This option excludes the option 'Healthbar color is based on the current health value'"],
                     disabled = function()
-                        if (EasyFrames.db.profile.general.coloredBaseOnCurrentHealth) then
+                        if (EasyFrames.db.profile.general.colorBasedOnCurrentHealth) then
                             return true
                         end
                     end,
@@ -117,7 +117,7 @@ local generalOptions = {
                     arg = "general"
                 },
 
-                coloredBaseOnCurrentHealth = {
+                colorBasedOnCurrentHealth = {
                     type = "toggle",
                     order = 4,
                     disabled = function()
@@ -316,7 +316,7 @@ local generalOptions = {
             get = getColor,
             set = setColor,
             disabled = function()
-                if (EasyFrames.db.profile.general.coloredBaseOnCurrentHealth) then
+                if (EasyFrames.db.profile.general.colorBasedOnCurrentHealth) then
                     return true
                 end
             end,
