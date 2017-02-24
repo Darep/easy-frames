@@ -212,6 +212,14 @@ function Core:MovePetFrameBars()
 end
 
 function Core:MovePlayerFramesBarsTextString()
+    PlayerFrameHealthBar.RightText:ClearAllPoints();
+    PlayerFrameHealthBar.RightText:SetPoint("RIGHT", PlayerFrame, "RIGHT", -8, 12);
+    PlayerFrameHealthBar.RightText.SetPoint = function() end
+
+    PlayerFrameHealthBar.LeftText:ClearAllPoints();
+    PlayerFrameHealthBar.LeftText:SetPoint("LEFT", PlayerFrame, "LEFT", 110, 12);
+    PlayerFrameHealthBar.LeftText.SetPoint = function() end
+
     PlayerFrameHealthBar.TextString:ClearAllPoints()
     PlayerFrameHealthBar.TextString:SetPoint("CENTER", PlayerFrame, "CENTER", 53, 12)
     PlayerFrameHealthBar.TextString.SetPoint = function() end
@@ -222,6 +230,14 @@ function Core:MovePlayerFramesBarsTextString()
 end
 
 function Core:MoveTargetFramesBarsTextString()
+    TargetFrameHealthBar.RightText:ClearAllPoints();
+    TargetFrameHealthBar.RightText:SetPoint("RIGHT", TargetFrame, "RIGHT", -110, 12);
+    TargetFrameHealthBar.RightText.SetPoint = function() end
+
+    TargetFrameHealthBar.LeftText:ClearAllPoints();
+    TargetFrameHealthBar.LeftText:SetPoint("LEFT", TargetFrame, "LEFT", 8, 12);
+    TargetFrameHealthBar.LeftText.SetPoint = function() end
+
     TargetFrameHealthBar.TextString:ClearAllPoints()
     TargetFrameHealthBar.TextString:SetPoint("CENTER", TargetFrame, "CENTER", -50, 12)
     TargetFrameHealthBar.TextString.SetPoint = function() end
@@ -232,6 +248,14 @@ function Core:MoveTargetFramesBarsTextString()
 end
 
 function Core:MoveFocusFramesBarsTextString()
+    FocusFrameHealthBar.RightText:ClearAllPoints();
+    FocusFrameHealthBar.RightText:SetPoint("RIGHT", FocusFrame, "RIGHT", -110, 12);
+    FocusFrameHealthBar.RightText.SetPoint = function() end
+
+    FocusFrameHealthBar.LeftText:ClearAllPoints();
+    FocusFrameHealthBar.LeftText:SetPoint("LEFT", FocusFrame, "LEFT", 8, 12);
+    FocusFrameHealthBar.LeftText.SetPoint = function() end
+
     FocusFrameHealthBar.TextString:ClearAllPoints()
     FocusFrameHealthBar.TextString:SetPoint("CENTER", FocusFrame, "CENTER", -50, 12)
     FocusFrameHealthBar.TextString.SetPoint = function() end
