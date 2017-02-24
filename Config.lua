@@ -103,7 +103,8 @@ local generalOptions = {
                     type = "toggle",
                     order = 3,
                     name = L["Class colored healthbars"],
-                    desc = L["If checked frames becomes class colored"],
+                    desc = L["If checked frames becomes class colored.\n\n" ..
+                            "This option excludes the option 'Healthbar color is based on the current health value'"],
                     disabled = function()
                         if (EasyFrames.db.profile.general.coloredBaseOnCurrentHealth) then
                             return true
@@ -120,14 +121,18 @@ local generalOptions = {
                     type = "toggle",
                     order = 4,
                     disabled = function()
-                        return true
---                        if (EasyFrames.db.profile.general.classColored) then
---                            return true
---                        end
+                        if (EasyFrames.db.profile.general.classColored) then
+                            return true
+                        end
+                    end,
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("General"):SetFramesColored()
                     end,
                     width = "double",
-                    name = L["Healthbar color based on current health. IN DEVELOPMENT..."],
-                    desc = L["Frames healthbar color based on his current health"],
+                    name = L["Healthbar color is based on the current health value"],
+                    desc = L["Healthbar color is based on the current health value.\n\n" ..
+                            "This option excludes the option 'Class colored healthbars'"],
                     arg = "general"
                 },
 
@@ -310,6 +315,11 @@ local generalOptions = {
             name = "",
             get = getColor,
             set = setColor,
+            disabled = function()
+                if (EasyFrames.db.profile.general.coloredBaseOnCurrentHealth) then
+                    return true
+                end
+            end,
             args = {
                 header = {
                     type = "header",

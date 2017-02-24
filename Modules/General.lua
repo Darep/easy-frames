@@ -30,6 +30,34 @@ local DEFAULT_BUFF_SIZE = 17
 
 
 local function ClassColored(statusbar, unit)
+    if (db.general.coloredBaseOnCurrentHealth) then
+        local value = UnitHealth(unit)
+        local min, max = statusbar:GetMinMaxValues()
+
+        local r, g
+
+        if ((value < min) or (value > max)) then
+            return
+        end
+
+        if ((max - min) > 0) then
+            value = (value - min) / (max - min)
+        else
+            value = 0
+        end
+
+        if (value > 0.5) then
+            r = (1.0 - value) * 2
+            g = 1.0
+        else
+            r = 1.0
+            g = value * 2
+        end
+
+        statusbar:SetStatusBarColor(r, g, 0.0)
+
+        return
+    end
 
     if (UnitIsPlayer(unit) and UnitClass(unit)) then
         -- player
@@ -65,14 +93,6 @@ local function ClassColored(statusbar, unit)
         else
             colors = db.general.neutralFrameDefaultColors
         end
-
---        if (UnitIsFriend("player", unit)) then
---            colors = db.general.friendlyFrameDefaultColors
---        elseif (UnitIsEnemy("player", unit)) then
---            colors = db.general.enemyFrameDefaultColors
---        else
---            colors = db.general.neutralFrameDefaultColors
---        end
 
         statusbar:SetStatusBarColor(colors[1], colors[2], colors[3])
     end

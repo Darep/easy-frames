@@ -43,9 +43,9 @@ local function CustomReadableNumber(num, format, useFullValues)
     return ret
 end
 
-local function ReadableNumber(num, places)
+local function ReadableNumber(num)
     local ret
-    -- local placeValue = ("%%.%d1f"):format(places or 0)
+
     if not num then
         return 0
     elseif num >= 1000000000 then

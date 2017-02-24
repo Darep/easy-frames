@@ -62,9 +62,13 @@ L["Frames"] = "Фреймы"
 L["Setting for unit frames"] = "Настройки фреймов"
 
 L["Class colored healthbars"] = "Раскрасить фреймы здоровья в цвет класса"
-L["Healthbar color based on current health. IN DEVELOPMENT..."] = "В РАЗРАБОТКЕ... Цвет фреймов основан на текущем значении здоровья"
-L["Frames healthbar color based on his current health"] = "Цвет фреймов основан на текущем значении здоровья"
-L["If checked frames becomes class colored"] = "Если установлено фреймы раскрашиваются в цвет класса"
+L["If checked frames becomes class colored.\n\n" ..
+    "This option excludes the option 'Healthbar color is based on the current health value'"] = "Если установлено фреймы раскрашиваются в цвет класса.\n\n" ..
+        "Эта настройка исключает настройку 'Цвет фреймов основан на текущем значении здоровья'"
+L["Healthbar color is based on the current health value"] = "Цвет фреймов основан на текущем значении здоровья"
+L["Healthbar color is based on the current health value.\n\n" ..
+    "This option excludes the option 'Class colored healthbars'"] = "Цвет фреймов основан на текущем значении здоровья.\n\n" ..
+        "Эта настройка исключает настройку 'Раскрасить фреймы здоровья в цвет класса'"
 L["Custom buffsize"] = "Собственный размер бафов"
 L["Buffs settings (like custom buffsize, highlight dispelled buffs, etc)"] = "Настройки бафов (использовать собственный размер бафов, подсвечивать бафы, которые могут быть рассеяны и другие)"
 L["Turn on custom buffsize"] = "Собственный размер бафов"

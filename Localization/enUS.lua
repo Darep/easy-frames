@@ -56,9 +56,11 @@ L["Frames"] = true
 L["Setting for unit frames"] = true
 
 L["Class colored healthbars"] = true
-L["Healthbar color based on current health. IN DEVELOPMENT..."] = true
-L["Frames healthbar color based on his current health"] = true
-L["If checked frames becomes class colored"] = true
+L["If checked frames becomes class colored.\n\n" ..
+    "This option excludes the option 'Healthbar color is based on the current health value'"] = true
+L["Healthbar color is based on the current health value"] = true
+L["Healthbar color is based on the current health value.\n\n"..
+    "This option excludes the option 'Class colored healthbars'"] = true
 L["Custom buffsize"] = true
 L["Buffs settings (like custom buffsize, highlight dispelled buffs, etc)"] = true
 L["Turn on custom buffsize"] = true
