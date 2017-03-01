@@ -84,7 +84,7 @@ local function ClassColored(statusbar, unit)
 
         local colors
 
-        local red, green, blue = UnitSelectionColor(unit)
+        local red, green, _ = UnitSelectionColor(unit)
 
         if (red == 0) then
             colors = db.general.friendlyFrameDefaultColors
@@ -219,8 +219,9 @@ function General:SetFrameBarTexture(value)
 
     for _, healthbar in pairs(healthBars) do
         healthbar:SetStatusBarTexture(texture)
-        healthbar:GetStatusBarTexture():SetBlendMode("DISABLE")
     end
+
+    PlayerFrameHealthBar.AnimatedLossBar:SetStatusBarTexture(texture) -- fix for blinking red texture
 
     for _, manabar in pairs(manaBars) do
         manabar:SetStatusBarTexture(texture)
@@ -229,7 +230,7 @@ end
 
 
 function General:SetBrightFramesBorder(value)
-    for i, t in pairs({
+    for _, t in pairs({
         PlayerFrameTexture, TargetFrameTextureFrameTexture, TargetFrameToTTextureFrameTexture,
         PetFrameTexture, FocusFrameTextureFrameTexture, FocusFrameToTTextureFrameTexture
     }) do
