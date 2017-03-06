@@ -81,6 +81,7 @@ local defaults = {
             classPortraits = true,
             barTexture = "Blizzard",
             brightFrameBorder = 1,
+            lightTexture = false,
             friendlyFrameDefaultColors = {0, 1, 0},
             enemyFrameDefaultColors = {1, 0, 0},
             neutralFrameDefaultColors = {1, 1, 0},
@@ -193,6 +194,15 @@ Media:Register("frames", "rareelite", "Interface\\AddOns\\EasyFrames\\Textures\\
 Media:Register("frames", "rare", "Interface\\AddOns\\EasyFrames\\Textures\\TargetingFrame\\UI-TargetingFrame-Rare")
 Media:Register("frames", "smalltarget", "Interface\\AddOns\\EasyFrames\\Textures\\TargetingFrame\\UI-SmallTargetingFramex")
 Media:Register("frames", "nomana", "Interface\\AddOns\\EasyFrames\\Textures\\TargetingFrame\\UI-SmallTargetingFramex-NoMana")
+
+--Media:Register("frames", "default-light", "Interface\\AddOns\\EasyFrames\\Textures\\TargetingFrame\\UI-TargetingFrame-Light")
+--Media:Register("frames", "minus-light", "Interface\\AddOns\\EasyFrames\\Textures\\TargetingFrame\\UI-TargetingFrame-Minus-Light")
+--Media:Register("frames", "elite-light", "Interface\\AddOns\\EasyFrames\\Textures\\TargetingFrame\\UI-TargetingFrame-Elite-Light")
+--Media:Register("frames", "rareelite-light", "Interface\\AddOns\\EasyFrames\\Textures\\TargetingFrame\\UI-TargetingFrame-Rare-Elite-Light")
+--Media:Register("frames", "rare-light", "Interface\\AddOns\\EasyFrames\\Textures\\TargetingFrame\\UI-TargetingFrame-Rare-Light")
+--Media:Register("frames", "smalltarget-light", "Interface\\AddOns\\EasyFrames\\Textures\\TargetingFrame\\UI-SmallTargetingFramex-Light")
+--Media:Register("frames", "nomana-light", "Interface\\AddOns\\EasyFrames\\Textures\\TargetingFrame\\UI-SmallTargetingFramex-NoMana-Light")
+
 
 Media:Register("misc", "player-status", "Interface\\AddOns\\EasyFrames\\Textures\\TargetingFrame\\UI-Player-Status")
 

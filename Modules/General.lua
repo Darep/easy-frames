@@ -120,6 +120,8 @@ function General:OnInitialize()
 end
 
 function General:OnEnable()
+    self:SetLightTexture(db.general.lightTexture)
+
     self:SecureHook("UnitFrameHealthBar_Update", "MakeFramesColored")
     self:SecureHook("HealthBar_OnValueChanged", function(statusbar)
         self:MakeFramesColored(statusbar, statusbar.unit)
@@ -140,6 +142,8 @@ end
 function General:OnProfileChanged(newDB)
     self.db = newDB
     db = self.db.profile
+
+    self:SetLightTexture(db.general.lightTexture)
 
     self:SetFramesColored()
     self:SetClassPortraits()
@@ -236,6 +240,43 @@ function General:SetBrightFramesBorder(value)
     }) do
         t:SetVertexColor(value, value, value)
     end
+end
+
+function General:SetTexture()
+    -- Player
+    PlayerFrameTexture:SetTexture(Media:Fetch("frames", "default"))
+    PlayerStatusTexture:SetTexture(Media:Fetch("misc", "player-status"))
+
+    -- Target, Focus
+    local frames = {
+        TargetFrame,
+        FocusFrame,
+    }
+
+    for _, frame in pairs(frames) do
+        EasyFrames:GetModule("Core"):CheckClassification(frame)
+    end
+
+    -- Pet
+    if (UnitPowerMax("pet") == 0) then
+        PetFrameTexture:SetTexture(Media:Fetch("frames", "nomana"));
+    else
+        PetFrameTexture:SetTexture(Media:Fetch("frames", "smalltarget"));
+    end
+end
+
+function General:SetLightTexture(value)
+    for key, data in pairs(Media:HashTable("frames")) do
+        if (value) then
+            Media:HashTable("frames")[key] = data .. "-Light"
+        else
+            if (string.find(data, "-Light", -7)) then
+                Media:HashTable("frames")[key] = string.sub(data, 0, -7)
+            end
+        end
+    end
+
+    self:SetTexture()
 end
 
 function General:SetCustomBuffSize(value)

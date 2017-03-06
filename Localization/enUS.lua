@@ -81,9 +81,10 @@ L["Replaces the unit-frame portrait with their class icon"] = true
 
 L["Texture"] = true
 L["Set the frames bar Texture"] = true
-
 L["Bright frames border"] = true
 L["You can set frames border bright/dark color. From bright to dark. 0 - dark, 100 - bright"] = true
+L["Use a light texture"] = true
+L["Use a brighter texture (like Blizzard's default texture)"] = true
 
 L["Frames colors"] = true
 L["In this section you can set the default colors for friendly, enemy and neutral frames"] = true

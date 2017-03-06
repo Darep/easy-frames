@@ -34,9 +34,6 @@ function Core:OnEnable()
     self:RegisterEvent("PLAYER_FOCUS_CHANGED", "EventHandler")
     self:RegisterEvent("UNIT_FACTION", "EventHandler")
 
-    PlayerFrameTexture:SetTexture(Media:Fetch("frames", "default"))
-    PlayerStatusTexture:SetTexture(Media:Fetch("misc", "player-status"))
-
     self:SecureHook("TargetFrame_CheckClassification", "CheckClassification")
     self:SecureHook("TextStatusBar_UpdateTextStringWithValues", "UpdateTextStringWithValues")
 

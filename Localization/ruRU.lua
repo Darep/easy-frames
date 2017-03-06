@@ -89,7 +89,8 @@ L["Replaces the unit-frame portrait with their class icon"] = "Заменяет 
 
 L["Texture"] = "Текстура"
 L["Set the frames bar Texture"] = "Установить текстуру фреймов"
-
+L["Use a light texture"] = "Использовать светлые текстуры"
+L["Use a brighter texture (like Blizzard's default texture)"] = "Использовать светлые текстуры (как текстуры Blizzard по умолчанию)"
 L["Bright frames border"] = "Светлые границы фреймов"
 L["You can set frames border bright/dark color. From bright to dark. 0 - dark, 100 - bright"] = "Вы можете установить свет границ фреймов. От светлого к темному. 0 - темные границы, 100 - светлые"
 

@@ -168,8 +168,21 @@ local generalOptions = {
                     arg = "general"
                 },
 
+                lightTexture = {
+                    type = "toggle",
+                    order = 8,
+                    name = L["Use a light texture"],
+                    desc = L["Use a brighter texture (like Blizzard's default texture)"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("General"):SetLightTexture(value)
+                    end,
+                    arg = "general"
+                },
+
                 brightFrameBorder = {
                     type = "range",
+                    order = 9,
                     name = L["Bright frames border"],
                     desc = L["You can set frames border bright/dark color. From bright to dark. 0 - dark, 100 - bright"],
                     min = 0,
