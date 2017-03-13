@@ -310,6 +310,7 @@ end
 function EasyFrames.Utils.GetFramesManaBar()
     return {
         PlayerFrameManaBar,
+        PlayerFrameAlternateManaBar,
         TargetFrameManaBar,
         TargetFrameToTManaBar,
         FocusFrameManaBar,

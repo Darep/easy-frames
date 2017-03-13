@@ -23,6 +23,7 @@ Libs\LibSharedMedia-3.0\lib.xml
 
 Localization\enUS.lua
 Localization\ruRU.lua
+Localization\koKR.lua
 
 
 EasyFrames.lua
