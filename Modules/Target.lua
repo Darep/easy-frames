@@ -96,6 +96,32 @@ function Target:ShowName(value)
     else
         TargetFrame.name:Hide()
     end
+
+    self:ShowNameInsideFrame(db.target.showNameInsideFrame)
+end
+
+function Target:ShowNameInsideFrame(value)
+    local Core = EasyFrames:GetModule("Core")
+
+    local HealthBarTexts = {
+        TargetFrameHealthBar.RightText,
+        TargetFrameHealthBar.LeftText,
+        TargetFrameHealthBar.TextString
+    }
+
+    for _, healthBar in pairs(HealthBarTexts) do
+        local point, relativeTo, relativePoint, xOffset, yOffset = healthBar:GetPoint()
+
+        if (value and db.player.showName) then
+            Core:MoveTargetFrameName(nil, nil, nil, nil, 20)
+
+            Core:MoveRegion(healthBar, point, relativeTo, relativePoint, xOffset, yOffset - 4)
+        else
+            Core:MoveTargetFrameName()
+
+            Core:MoveRegion(healthBar, point, relativeTo, relativePoint, xOffset, 12)
+        end
+    end
 end
 
 function Target:SetHealthBarsFont()

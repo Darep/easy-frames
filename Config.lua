@@ -234,7 +234,7 @@ local generalOptions = {
                     order = 4,
                     name = L["Buffsize"],
                     desc = L["Buffsize"],
-                    min = 20,
+                    min = 10,
                     max = 40,
                     set = function(info, value)
                         setOpt(info, value)
@@ -254,7 +254,7 @@ local generalOptions = {
                     order = 5,
                     name = L["Self buffsize"],
                     desc = L["Buffsize that you create"],
-                    min = 20,
+                    min = 10,
                     max = 40,
                     set = function(info, value)
                         setOpt(info, value)
@@ -671,7 +671,6 @@ local playerOptions = {
         showName = {
             type = "toggle",
             order = 9,
-            width = "double",
             name = L["Show player name"],
             desc = L["Show player name"],
             set = function(info, value)
@@ -681,9 +680,27 @@ local playerOptions = {
             arg = "player"
         },
 
-        showHitIndicator = {
+        showNameInsideFrame = {
             type = "toggle",
             order = 10,
+            name = L["Show player name inside the frame"],
+            desc = L["Show player name inside the frame"],
+            set = function(info, value)
+                setOpt(info, value)
+                EasyFrames:GetModule("Player"):ShowNameInsideFrame(value)
+            end,
+            disabled = function()
+                local diabled = EasyFrames.db.profile.player.showName
+                if (diabled == false) then
+                    return true
+                end
+            end,
+            arg = "player"
+        },
+
+        showHitIndicator = {
+            type = "toggle",
+            order = 11,
             width = "double",
             name = L["Enable hit indicators"],
             desc = L["Show or hide the damage/heal which you take on your unit frame"],
@@ -696,7 +713,7 @@ local playerOptions = {
 
         showSpecialbar = {
             type = "toggle",
-            order = 11,
+            order = 12,
             width = "double",
             name = L["Show player specialbar"],
             desc = L["Show or hide the player specialbar, like Paladin's holy power, Priest's orbs, Monk's harmony or Warlock's soul shards"],
@@ -709,7 +726,7 @@ local playerOptions = {
 
         showRestIcon = {
             type = "toggle",
-            order = 12,
+            order = 13,
             width = "double",
             name = L["Show player resting icon"],
             desc = L["Show or hide player resting icon when player is resting (e.g. in the tavern or in the capital)"],
@@ -722,7 +739,7 @@ local playerOptions = {
 
         showStatusTexture = {
             type = "toggle",
-            order = 13,
+            order = 14,
             width = "double",
             name = L["Show player status texture (inside the frame)"],
             desc = L["Show or hide player status texture (blinking glow inside the frame when player is resting or in combat)"],
@@ -735,7 +752,7 @@ local playerOptions = {
 
         showAttackBackground = {
             type = "toggle",
-            order = 14,
+            order = 15,
             width = "double",
             name = L["Show player combat texture (outside the frame)"],
             desc = L["Show or hide player red background texture (blinking red glow outside the frame in combat)"],
@@ -748,7 +765,7 @@ local playerOptions = {
 
         attackBackgroundOpacity = {
             type = "range",
-            order = 15,
+            order = 16,
             name = L["Opacity"],
             desc = L["Opacity of combat texture"],
             min = 0.1,
@@ -769,7 +786,7 @@ local playerOptions = {
 
         showGroupIndicator = {
             type = "toggle",
-            order = 16,
+            order = 17,
             width = "double",
             name = L["Show player group number"],
             desc = L["Show or hide player group number when player is in a raid group (over portrait)"],
@@ -782,7 +799,7 @@ local playerOptions = {
 
         showRoleIcon = {
             type = "toggle",
-            order = 17,
+            order = 18,
             width = "double",
             name = L["Show player role icon"],
             desc = L["Show or hide player role icon when player is in a group"],
@@ -1049,10 +1066,15 @@ local targetOptions = {
             arg = "target"
         },
 
+        newLine = {
+            type = "description",
+            order = 11,
+            name = "",
+        },
+
         showName = {
             type = "toggle",
-            order = 11,
-            width = "double",
+            order = 12,
             name = L["Show target name"],
             desc = L["Show target name"],
             set = function(info, value)
@@ -1062,9 +1084,27 @@ local targetOptions = {
             arg = "target"
         },
 
+        showNameInsideFrame = {
+            type = "toggle",
+            order = 13,
+            name = L["Show target name inside the frame"],
+            desc = L["Show target name inside the frame"],
+            set = function(info, value)
+                setOpt(info, value)
+                EasyFrames:GetModule("Target"):ShowNameInsideFrame(value)
+            end,
+            disabled = function()
+                local diabled = EasyFrames.db.profile.target.showName
+                if (diabled == false) then
+                    return true
+                end
+            end,
+            arg = "target"
+        },
+
         showTargetCastbar = {
             type = "toggle",
-            order = 12,
+            order = 14,
             width = "double",
             name = L["Show blizzard's target castbar"],
             desc = L["When you change this option you need to reload your UI (because it's Blizzard config variable). \n\nCommand /reload"],
@@ -1077,7 +1117,7 @@ local targetOptions = {
 
         showAttackBackground = {
             type = "toggle",
-            order = 13,
+            order = 15,
             width = "double",
             name = L["Show target combat texture (outside the frame)"],
             desc = L["Show or hide target red background texture (blinking red glow outside the frame in combat)"],
@@ -1090,7 +1130,7 @@ local targetOptions = {
 
         attackBackgroundOpacity = {
             type = "range",
-            order = 14,
+            order = 16,
             name = L["Opacity"],
             desc = L["Opacity of combat texture"],
             min = 0.1,
@@ -1364,10 +1404,15 @@ local focusOptions = {
             arg = "focus"
         },
 
+        newLine = {
+            type = "description",
+            order = 11,
+            name = "",
+        },
+
         showName = {
             type = "toggle",
-            order = 11,
-            width = "double",
+            order = 12,
             name = L["Show name of focus frame"],
             desc = L["Show name of focus frame"],
             set = function(info, value)
@@ -1377,9 +1422,27 @@ local focusOptions = {
             arg = "focus"
         },
 
+        showNameInsideFrame = {
+            type = "toggle",
+            order = 13,
+            name = L["Show name of focus frame inside the frame"],
+            desc = L["Show name of focus frame inside the frame"],
+            set = function(info, value)
+                setOpt(info, value)
+                EasyFrames:GetModule("Focus"):ShowNameInsideFrame(value)
+            end,
+            disabled = function()
+                local diabled = EasyFrames.db.profile.focus.showName
+                if (diabled == false) then
+                    return true
+                end
+            end,
+            arg = "focus"
+        },
+
         showAttackBackground = {
             type = "toggle",
-            order = 12,
+            order = 14,
             width = "double",
             name = L["Show focus combat texture (outside the frame)"],
             desc = L["Show or hide focus red background texture (blinking red glow outside the frame in combat)"],
@@ -1392,7 +1455,7 @@ local focusOptions = {
 
         attackBackgroundOpacity = {
             type = "range",
-            order = 13,
+            order = 15,
             name = L["Opacity"],
             desc = L["Opacity of combat texture"],
             min = 0.1,
