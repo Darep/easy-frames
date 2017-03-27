@@ -1,6 +1,6 @@
 {
   "name": "easy-frames",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "author": "Alexander Usolcev <alexander.usolcev@gmail.com>",
   "repository": {
     "type": "git",
@@ -13,7 +13,7 @@
     "ncp": "^2.0.0"
   },
   "scripts": {
-    "build": "npm --no-git-tag-version version patch && node archiver.js",
-    "prod": "node archiver.js"
+    "prod": "npm --no-git-tag-version version patch && node archiver.js",
+    "build": "node archiver.js"
   }
 }
