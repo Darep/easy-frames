@@ -1,5 +1,5 @@
 ## Title: EasyFrames
-## Interface: 70100
+## Interface: 70200
 ## Notes: Make your unit frames colored and glorious.
 ## Author: Usoltsev
 ## SavedVariables: EasyFramesDB
