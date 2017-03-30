@@ -50,7 +50,6 @@ function Core:OnEnable()
     self:MovePlayerFramesBarsTextString()
     self:MoveTargetFramesBarsTextString()
     self:MoveFocusFramesBarsTextString()
-    --    self:MovePetFramesBarsTextString()
 
     if (db.general.showWelcomeMessage) then
         print("|cff0cbd0cEasyFrames|cffffffff " .. L["loaded. Options:"] .. " |cff0cbd0c/ef")
@@ -287,12 +286,14 @@ local FrameList = { "Target", "Focus", "Player" }
 function Core:UpdateTextStringWithValues()
     for i = 1, select("#", unpack(FrameList)) do
         local FrameName = (select(i, unpack(FrameList)))
+
         if (UnitPowerType(FrameName) == 0) then --mana
-            _G[FrameName .. "FrameManaBar"].TextString:SetText(string.format("%.0f%%", (UnitMana(FrameName) / UnitManaMax(FrameName)) * 100))
+            _G[FrameName .. "FrameManaBar"].TextString:SetText(string.format("%.0f%%", (UnitPower(FrameName) / UnitPowerMax(FrameName)) * 100))
         elseif (UnitPowerType(FrameName) == 1 or UnitPowerType(FrameName) == 2 or UnitPowerType(FrameName) == 3 or UnitPowerType(FrameName) == 6) then
-            _G[FrameName .. "FrameManaBar"].TextString:SetText(AbbreviateLargeNumbers(UnitMana(FrameName)))
+            _G[FrameName .. "FrameManaBar"].TextString:SetText(AbbreviateLargeNumbers(UnitPower(FrameName)))
         end
-        if (UnitManaMax(FrameName) == 0) then
+
+        if (UnitPowerMax(FrameName) == 0) then
             _G[FrameName .. "FrameManaBar"].TextString:SetText(" ")
         end
     end
