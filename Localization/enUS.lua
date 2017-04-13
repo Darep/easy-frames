@@ -19,12 +19,18 @@ L["Current + Max + Percent"] = true
 L["Current + Percent"] = true
 L["Custom format"] = true
 
+L["None"] = true
+L["Outline"] = true
+L["Thickoutline"] = true
+L["Monochrome"] = true
+
 L["HP and MP bars"] = true
 
 L["Font size"] = true
 L["Healthbar and manabar font size"] = true
 L["Font family"] = true
 L["Healthbar and manabar font family"] = true
+L["Font style"] = true
 
 L["Reverse the direction of losing health/mana"] = true
 L["By default direction starting from right to left. If checked direction of losing health/mana will be from left to right"] = true
@@ -104,6 +110,10 @@ L["Show welcome message when addon is loaded"] = true
 
 L["Player"] = true
 L["In player options you can set scale player frame, healthbar text format, etc"] = true
+L["Player name"] = true
+L["Player name font family"] = true
+L["Player name font size"] = true
+L["Player name font style"] = true
 L["Show or hide some elements of frame"] = true
 L["Show player name"] = true
 L["Show player name inside the frame"] = true
@@ -129,13 +139,17 @@ L["Show or hide player role icon when player is in a group"] = true
 
 L["Target"] = true
 L["In target options you can set scale target frame, healthbar text format, etc"] = true
+L["Target name"] = true
+L["Target name font family"] = true
+L["Target name font size"] = true
+L["Target name font style"] = true
 L["Target frame scale"] = true
 L["Scale of target unit frame"] = true
 L["Target healthbar text format"] = true
 L["Set the target healthbar text format"] = true
-L["Show target of target frame"] = true
 L["Show target name"] = true
 L["Show target name inside the frame"] = true
+L["Show target of target frame"] = true
 L["Show target combat texture (outside the frame)"] = true
 L["Show or hide target red background texture (blinking red glow outside the frame in combat)"] = true
 L["Show blizzard's target castbar"] = true
@@ -144,6 +158,10 @@ L["When you change this option you need to reload your UI (because it's Blizzard
 
 L["Focus"] = true
 L["In focus options you can set scale focus frame, healthbar text format, etc"] = true
+L["Focus name"] = true
+L["Focus name font family"] = true
+L["Focus name font size"] = true
+L["Focus name font style"] = true
 L["Focus frame scale"] = true
 L["Scale of focus unit frame"] = true
 L["Focus healthbar text format"] = true
@@ -157,6 +175,10 @@ L["Show or hide focus red background texture (blinking red glow outside the fram
 
 L["Pet"] = true
 L["In pet options you can set scale pet frame, show/hide pet name, enable/disable pet hit indicators, etc"] = true
+L["Pet name"] = true
+L["Pet name font family"] = true
+L["Pet name font size"] = true
+L["Pet name font style"] = true
 L["Pet frame scale"] = true
 L["Scale of pet unit frame"] = true
 L["Lock pet frame"] = true

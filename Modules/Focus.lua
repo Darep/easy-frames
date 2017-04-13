@@ -36,6 +36,7 @@ function Focus:OnEnable()
     self:SetScale(db.focus.scaleFrame)
     self:ShowFocusFrameToT()
     self:ShowName(db.focus.showName)
+    self:SetFrameNameFont()
     self:SetHealthBarsFont()
 
     self:ReverseDirectionLosingHP(db.focus.reverseDirectionLosingHP)
@@ -53,6 +54,7 @@ function Focus:OnProfileChanged(newDB)
     self:SetScale(db.focus.scaleFrame)
     self:ShowFocusFrameToT()
     self:ShowName(db.focus.showName)
+    self:SetFrameNameFont()
     self:SetHealthBarsFont()
 
     self:ReverseDirectionLosingHP(db.focus.reverseDirectionLosingHP)
@@ -112,7 +114,7 @@ function Focus:ShowNameInsideFrame(value)
     for _, healthBar in pairs(HealthBarTexts) do
         local point, relativeTo, relativePoint, xOffset, yOffset = healthBar:GetPoint()
 
-        if (value and db.player.showName) then
+        if (value and db.focus.showName) then
             Core:MoveFocusFrameName(nil, nil, nil, nil, 20)
 
             Core:MoveRegion(healthBar, point, relativeTo, relativePoint, xOffset, yOffset - 4)
@@ -130,6 +132,14 @@ function Focus:SetHealthBarsFont()
 
     FocusFrameHealthBar.TextString:SetFont(fontFamily, fontSize, "OUTLINE")
     FocusFrameManaBar.TextString:SetFont(fontFamily, fontSize, "OUTLINE")
+end
+
+function Focus:SetFrameNameFont()
+    local fontFamily = Media:Fetch("font", db.focus.focusNameFontFamily)
+    local fontSize = db.focus.focusNameFontSize
+    local fontStyle = db.focus.focusNameFontStyle
+
+    FocusFrame.name:SetFont(fontFamily, fontSize, fontStyle)
 end
 
 function Focus:ReverseDirectionLosingHP(value)

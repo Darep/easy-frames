@@ -35,6 +35,7 @@ function Pet:OnEnable()
     self:SetMovable(db.pet.lockedMovableFrame)
 
     self:ShowName(db.pet.showName)
+    self:SetFrameNameFont()
     self:ShowHitIndicator(db.pet.showHitIndicator)
 
     self:ShowStatusTexture(db.pet.showStatusTexture)
@@ -53,6 +54,7 @@ function Pet:OnProfileChanged(newDB)
     self:SetMovable(db.pet.lockedMovableFrame)
 
     self:ShowName(db.pet.showName)
+    self:SetFrameNameFont()
     self:ShowHitIndicator(db.pet.showHitIndicator)
 
     self:ShowStatusTexture(db.pet.showStatusTexture)
@@ -149,6 +151,14 @@ function Pet:ShowName(value)
     end
 end
 
+function Pet:SetFrameNameFont()
+    local fontFamily = Media:Fetch("font", db.pet.petNameFontFamily)
+    local fontSize = db.pet.petNameFontSize
+    local fontStyle = db.pet.petNameFontStyle
+
+    PetName:SetFont(fontFamily, fontSize, fontStyle)
+end
+
 function Pet:ShowHitIndicator(value)
     if (value) then
         PetHitIndicator.SetText = originalValues["PetHitIndicator"]
@@ -164,17 +174,15 @@ function Pet:ShowStatusTexture(value)
     local frame = PetAttackModeTexture
 
     if frame then
-        if frame then
-            if (value) then
-                frame.Show = originalValues[frame:GetName()]
+        if (value) then
+            frame.Show = originalValues[frame:GetName()]
 
-                if (UnitAffectingCombat("player")) then
-                    frame:Show()
-                end
-            else
-                frame:Hide()
-                frame.Show = noop
+            if (UnitAffectingCombat("player")) then
+                frame:Show()
             end
+        else
+            frame:Hide()
+            frame.Show = noop
         end
     end
 end

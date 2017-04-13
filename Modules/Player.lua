@@ -37,6 +37,7 @@ function Player:OnEnable()
 
     self:SetScale(db.player.scaleFrame)
     self:ShowName(db.player.showName)
+    self:SetFrameNameFont()
     self:SetHealthBarsFont()
     self:ShowHitIndicator(db.player.showHitIndicator)
     self:ShowSpecialbar(db.player.showSpecialbar)
@@ -56,6 +57,7 @@ function Player:OnProfileChanged(newDB)
 
     self:SetScale(db.player.scaleFrame)
     self:ShowName(db.player.showName)
+    self:SetFrameNameFont()
     self:SetHealthBarsFont()
     self:ShowHitIndicator(db.player.showHitIndicator)
     self:ShowSpecialbar(db.player.showSpecialbar)
@@ -184,6 +186,14 @@ function Player:SetHealthBarsFont()
 
     PetFrameHealthBar.TextString:SetFont(fontFamily, fontSize - 1, "OUTLINE")
     PetFrameManaBar.TextString:SetFont(fontFamily, fontSize - 1, "OUTLINE")
+end
+
+function Player:SetFrameNameFont()
+    local fontFamily = Media:Fetch("font", db.player.playerNameFontFamily)
+    local fontSize = db.player.playerNameFontSize
+    local fontStyle = db.player.playerNameFontStyle
+
+    PlayerName:SetFont(fontFamily, fontSize, fontStyle)
 end
 
 function Player:ShowRestIcon(value)

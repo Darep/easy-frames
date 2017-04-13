@@ -67,6 +67,16 @@ local healthFormat = {
     ["custom"] = L["Custom format"], --custom
 }
 
+local fontStyle = {
+    ["NONE"] = L["None"],
+    ["OUTLINE"] = L["Outline"],
+    ["THICKOUTLINE"] = L["Thickoutline"],
+    ["MONOCHROME"] = L["Monochrome"]
+}
+
+local MIN_RANGE = 6
+local MAX_RANGE = 18
+
 
 local generalOptions = {
     name = getOptionName(L["Main options"]),
@@ -504,8 +514,8 @@ local playerOptions = {
             order = 6,
             name = L["Font size"],
             desc = L["Healthbar and manabar font size"],
-            min = 7,
-            max = 16,
+            min = MIN_RANGE,
+            max = MAX_RANGE,
             step = 1,
             set = function(info, value)
                 setOpt(info, value)
@@ -662,45 +672,126 @@ local playerOptions = {
             }
         },
 
+        frameName = {
+            type = "group",
+            order = 8,
+            inline = true,
+            name = "",
+            args = {
+                header = {
+                    type = "header",
+                    order = 1,
+                    name = L["Player name"],
+                },
+
+                showName = {
+                    type = "toggle",
+                    order = 2,
+                    name = L["Show player name"],
+                    desc = L["Show player name"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Player"):ShowName(value)
+                    end,
+                    arg = "player"
+                },
+
+                showNameInsideFrame = {
+                    type = "toggle",
+                    order = 3,
+                    name = L["Show player name inside the frame"],
+                    desc = L["Show player name inside the frame"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Player"):ShowNameInsideFrame(value)
+                    end,
+                    disabled = function()
+                        local diabled = EasyFrames.db.profile.player.showName
+                        if (diabled == false) then
+                            return true
+                        end
+                    end,
+                    arg = "player"
+                },
+
+                newLine = {
+                    type = "description",
+                    order = 4,
+                    name = "",
+                },
+
+                playerNameFontStyle = {
+                    type = "select",
+                    order = 5,
+                    name = L["Font style"],
+                    desc = L["Player name font style"],
+                    values = fontStyle,
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Player"):SetFrameNameFont()
+                    end,
+                    disabled = function()
+                        local diabled = EasyFrames.db.profile.player.showName
+                        if (diabled == false) then
+                            return true
+                        end
+                    end,
+                    arg = "player"
+                },
+
+                playerNameFontFamily = {
+                    order = 6,
+                    name = L["Font family"],
+                    desc = L["Player name font family"],
+                    type = "select",
+                    dialogControl = 'LSM30_Font',
+                    values = Media:HashTable("font"),
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Player"):SetFrameNameFont()
+                    end,
+                    disabled = function()
+                        local diabled = EasyFrames.db.profile.player.showName
+                        if (diabled == false) then
+                            return true
+                        end
+                    end,
+                    arg = "player"
+                },
+
+                playerNameFontSize = {
+                    type = "range",
+                    order = 7,
+                    name = L["Font size"],
+                    desc = L["Player name font size"],
+                    min = MIN_RANGE,
+                    max = MAX_RANGE,
+                    step = 1,
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Player"):SetFrameNameFont()
+                    end,
+                    disabled = function()
+                        local diabled = EasyFrames.db.profile.player.showName
+                        if (diabled == false) then
+                            return true
+                        end
+                    end,
+                    arg = "player"
+                },
+
+            }
+        },
+
         header2 = {
             type = "header",
-            order = 8,
-            name = L["Show or hide some elements of frame"],
-        },
-
-        showName = {
-            type = "toggle",
             order = 9,
-            name = L["Show player name"],
-            desc = L["Show player name"],
-            set = function(info, value)
-                setOpt(info, value)
-                EasyFrames:GetModule("Player"):ShowName(value)
-            end,
-            arg = "player"
-        },
-
-        showNameInsideFrame = {
-            type = "toggle",
-            order = 10,
-            name = L["Show player name inside the frame"],
-            desc = L["Show player name inside the frame"],
-            set = function(info, value)
-                setOpt(info, value)
-                EasyFrames:GetModule("Player"):ShowNameInsideFrame(value)
-            end,
-            disabled = function()
-                local diabled = EasyFrames.db.profile.player.showName
-                if (diabled == false) then
-                    return true
-                end
-            end,
-            arg = "player"
+            name = L["Show or hide some elements of frame"],
         },
 
         showHitIndicator = {
             type = "toggle",
-            order = 11,
+            order = 10,
             width = "double",
             name = L["Enable hit indicators"],
             desc = L["Show or hide the damage/heal which you take on your unit frame"],
@@ -713,7 +804,7 @@ local playerOptions = {
 
         showSpecialbar = {
             type = "toggle",
-            order = 12,
+            order = 11,
             width = "double",
             name = L["Show player specialbar"],
             desc = L["Show or hide the player specialbar, like Paladin's holy power, Priest's orbs, Monk's harmony or Warlock's soul shards"],
@@ -726,7 +817,7 @@ local playerOptions = {
 
         showRestIcon = {
             type = "toggle",
-            order = 13,
+            order = 12,
             width = "double",
             name = L["Show player resting icon"],
             desc = L["Show or hide player resting icon when player is resting (e.g. in the tavern or in the capital)"],
@@ -739,7 +830,7 @@ local playerOptions = {
 
         showStatusTexture = {
             type = "toggle",
-            order = 14,
+            order = 13,
             width = "double",
             name = L["Show player status texture (inside the frame)"],
             desc = L["Show or hide player status texture (blinking glow inside the frame when player is resting or in combat)"],
@@ -752,7 +843,7 @@ local playerOptions = {
 
         showAttackBackground = {
             type = "toggle",
-            order = 15,
+            order = 14,
             width = "double",
             name = L["Show player combat texture (outside the frame)"],
             desc = L["Show or hide player red background texture (blinking red glow outside the frame in combat)"],
@@ -765,7 +856,7 @@ local playerOptions = {
 
         attackBackgroundOpacity = {
             type = "range",
-            order = 16,
+            order = 15,
             name = L["Opacity"],
             desc = L["Opacity of combat texture"],
             min = 0.1,
@@ -786,7 +877,7 @@ local playerOptions = {
 
         showGroupIndicator = {
             type = "toggle",
-            order = 17,
+            order = 16,
             width = "double",
             name = L["Show player group number"],
             desc = L["Show or hide player group number when player is in a raid group (over portrait)"],
@@ -799,7 +890,7 @@ local playerOptions = {
 
         showRoleIcon = {
             type = "toggle",
-            order = 18,
+            order = 17,
             width = "double",
             name = L["Show player role icon"],
             desc = L["Show or hide player role icon when player is in a group"],
@@ -876,8 +967,8 @@ local targetOptions = {
             order = 6,
             name = L["Font size"],
             desc = L["Healthbar and manabar font size"],
-            min = 7,
-            max = 16,
+            min = MIN_RANGE,
+            max = MAX_RANGE,
             step = 1,
             set = function(info, value)
                 setOpt(info, value)
@@ -1047,6 +1138,117 @@ local targetOptions = {
             }
         },
 
+        frameName = {
+            type = "group",
+            order = 9,
+            inline = true,
+            name = "",
+            args = {
+                header = {
+                    type = "header",
+                    order = 1,
+                    name = L["Target name"],
+                },
+
+                showName = {
+                    type = "toggle",
+                    order = 2,
+                    name = L["Show target name"],
+                    desc = L["Show target name"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Target"):ShowName(value)
+                    end,
+                    arg = "target"
+                },
+
+                showNameInsideFrame = {
+                    type = "toggle",
+                    order = 3,
+                    name = L["Show target name inside the frame"],
+                    desc = L["Show target name inside the frame"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Target"):ShowNameInsideFrame(value)
+                    end,
+                    disabled = function()
+                        local diabled = EasyFrames.db.profile.target.showName
+                        if (diabled == false) then
+                            return true
+                        end
+                    end,
+                    arg = "target"
+                },
+
+                newLine = {
+                    type = "description",
+                    order = 4,
+                    name = "",
+                },
+
+                targetNameFontStyle = {
+                    type = "select",
+                    order = 5,
+                    name = L["Font style"],
+                    desc = L["Target name font style"],
+                    values = fontStyle,
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Target"):SetFrameNameFont()
+                    end,
+                    disabled = function()
+                        local diabled = EasyFrames.db.profile.target.showName
+                        if (diabled == false) then
+                            return true
+                        end
+                    end,
+                    arg = "target"
+                },
+
+                targetNameFontFamily = {
+                    order = 6,
+                    name = L["Font family"],
+                    desc = L["Target name font family"],
+                    type = "select",
+                    dialogControl = 'LSM30_Font',
+                    values = Media:HashTable("font"),
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Target"):SetFrameNameFont()
+                    end,
+                    disabled = function()
+                        local diabled = EasyFrames.db.profile.target.showName
+                        if (diabled == false) then
+                            return true
+                        end
+                    end,
+                    arg = "target"
+                },
+
+                targetNameFontSize = {
+                    type = "range",
+                    order = 7,
+                    name = L["Font size"],
+                    desc = L["Target name font size"],
+                    min = MIN_RANGE,
+                    max = MAX_RANGE,
+                    step = 1,
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Target"):SetFrameNameFont()
+                    end,
+                    disabled = function()
+                        local diabled = EasyFrames.db.profile.target.showName
+                        if (diabled == false) then
+                            return true
+                        end
+                    end,
+                    arg = "target"
+                },
+
+            }
+        },
+
         header2 = {
             type = "header",
             order = 9,
@@ -1066,45 +1268,9 @@ local targetOptions = {
             arg = "target"
         },
 
-        newLine = {
-            type = "description",
-            order = 11,
-            name = "",
-        },
-
-        showName = {
-            type = "toggle",
-            order = 12,
-            name = L["Show target name"],
-            desc = L["Show target name"],
-            set = function(info, value)
-                setOpt(info, value)
-                EasyFrames:GetModule("Target"):ShowName(value)
-            end,
-            arg = "target"
-        },
-
-        showNameInsideFrame = {
-            type = "toggle",
-            order = 13,
-            name = L["Show target name inside the frame"],
-            desc = L["Show target name inside the frame"],
-            set = function(info, value)
-                setOpt(info, value)
-                EasyFrames:GetModule("Target"):ShowNameInsideFrame(value)
-            end,
-            disabled = function()
-                local diabled = EasyFrames.db.profile.target.showName
-                if (diabled == false) then
-                    return true
-                end
-            end,
-            arg = "target"
-        },
-
         showTargetCastbar = {
             type = "toggle",
-            order = 14,
+            order = 11,
             width = "double",
             name = L["Show blizzard's target castbar"],
             desc = L["When you change this option you need to reload your UI (because it's Blizzard config variable). \n\nCommand /reload"],
@@ -1117,7 +1283,7 @@ local targetOptions = {
 
         showAttackBackground = {
             type = "toggle",
-            order = 15,
+            order = 12,
             width = "double",
             name = L["Show target combat texture (outside the frame)"],
             desc = L["Show or hide target red background texture (blinking red glow outside the frame in combat)"],
@@ -1130,7 +1296,7 @@ local targetOptions = {
 
         attackBackgroundOpacity = {
             type = "range",
-            order = 16,
+            order = 13,
             name = L["Opacity"],
             desc = L["Opacity of combat texture"],
             min = 0.1,
@@ -1215,8 +1381,8 @@ local focusOptions = {
             order = 6,
             name = L["Font size"],
             desc = L["Healthbar and manabar font size"],
-            min = 7,
-            max = 16,
+            min = MIN_RANGE,
+            max = MAX_RANGE,
             step = 1,
             set = function(info, value)
                 setOpt(info, value)
@@ -1385,6 +1551,117 @@ local focusOptions = {
             }
         },
 
+        frameName = {
+            type = "group",
+            order = 9,
+            inline = true,
+            name = "",
+            args = {
+                header = {
+                    type = "header",
+                    order = 1,
+                    name = L["Focus name"],
+                },
+
+                showName = {
+                    type = "toggle",
+                    order = 2,
+                    name = L["Show name of focus frame"],
+                    desc = L["Show name of focus frame"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Focus"):ShowName(value)
+                    end,
+                    arg = "focus"
+                },
+
+                showNameInsideFrame = {
+                    type = "toggle",
+                    order = 3,
+                    name = L["Show name of focus frame inside the frame"],
+                    desc = L["Show name of focus frame inside the frame"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Focus"):ShowNameInsideFrame(value)
+                    end,
+                    disabled = function()
+                        local diabled = EasyFrames.db.profile.focus.showName
+                        if (diabled == false) then
+                            return true
+                        end
+                    end,
+                    arg = "focus"
+                },
+
+                newLine = {
+                    type = "description",
+                    order = 4,
+                    name = "",
+                },
+
+                focusNameFontStyle = {
+                    type = "select",
+                    order = 5,
+                    name = L["Font style"],
+                    desc = L["Focus name font style"],
+                    values = fontStyle,
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Focus"):SetFrameNameFont()
+                    end,
+                    disabled = function()
+                        local diabled = EasyFrames.db.profile.focus.showName
+                        if (diabled == false) then
+                            return true
+                        end
+                    end,
+                    arg = "focus"
+                },
+
+                focusNameFontFamily = {
+                    order = 6,
+                    name = L["Font family"],
+                    desc = L["Focus name font family"],
+                    type = "select",
+                    dialogControl = 'LSM30_Font',
+                    values = Media:HashTable("font"),
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Focus"):SetFrameNameFont()
+                    end,
+                    disabled = function()
+                        local diabled = EasyFrames.db.profile.focus.showName
+                        if (diabled == false) then
+                            return true
+                        end
+                    end,
+                    arg = "focus"
+                },
+
+                focusNameFontSize = {
+                    type = "range",
+                    order = 7,
+                    name = L["Font size"],
+                    desc = L["Focus name font size"],
+                    min = MIN_RANGE,
+                    max = MAX_RANGE,
+                    step = 1,
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Focus"):SetFrameNameFont()
+                    end,
+                    disabled = function()
+                        local diabled = EasyFrames.db.profile.focus.showName
+                        if (diabled == false) then
+                            return true
+                        end
+                    end,
+                    arg = "focus"
+                },
+
+            }
+        },
+
         header2 = {
             type = "header",
             order = 9,
@@ -1404,45 +1681,9 @@ local focusOptions = {
             arg = "focus"
         },
 
-        newLine = {
-            type = "description",
-            order = 11,
-            name = "",
-        },
-
-        showName = {
-            type = "toggle",
-            order = 12,
-            name = L["Show name of focus frame"],
-            desc = L["Show name of focus frame"],
-            set = function(info, value)
-                setOpt(info, value)
-                EasyFrames:GetModule("Focus"):ShowName(value)
-            end,
-            arg = "focus"
-        },
-
-        showNameInsideFrame = {
-            type = "toggle",
-            order = 13,
-            name = L["Show name of focus frame inside the frame"],
-            desc = L["Show name of focus frame inside the frame"],
-            set = function(info, value)
-                setOpt(info, value)
-                EasyFrames:GetModule("Focus"):ShowNameInsideFrame(value)
-            end,
-            disabled = function()
-                local diabled = EasyFrames.db.profile.focus.showName
-                if (diabled == false) then
-                    return true
-                end
-            end,
-            arg = "focus"
-        },
-
         showAttackBackground = {
             type = "toggle",
-            order = 14,
+            order = 11,
             width = "double",
             name = L["Show focus combat texture (outside the frame)"],
             desc = L["Show or hide focus red background texture (blinking red glow outside the frame in combat)"],
@@ -1455,7 +1696,7 @@ local focusOptions = {
 
         attackBackgroundOpacity = {
             type = "range",
-            order = 15,
+            order = 12,
             name = L["Opacity"],
             desc = L["Opacity of combat texture"],
             min = 0.1,
@@ -1523,23 +1764,104 @@ local petOptions = {
             end,
         },
 
+        frameName = {
+            type = "group",
+            order = 5,
+            inline = true,
+            name = "",
+            args = {
+                header = {
+                    type = "header",
+                    order = 1,
+                    name = L["Pet name"],
+                },
+
+                showName = {
+                    type = "toggle",
+                    order = 2,
+                    width = "double",
+                    name = L["Show pet name"],
+                    desc = L["Show pet name"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Pet"):ShowName(value)
+                    end,
+                    arg = "pet"
+                },
+
+                newLine = {
+                    type = "description",
+                    order = 3,
+                    name = "",
+                },
+
+                petNameFontStyle = {
+                    type = "select",
+                    order = 4,
+                    name = L["Font style"],
+                    desc = L["Pet name font style"],
+                    values = fontStyle,
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Pet"):SetFrameNameFont()
+                    end,
+                    disabled = function()
+                        local diabled = EasyFrames.db.profile.pet.showName
+                        if (diabled == false) then
+                            return true
+                        end
+                    end,
+                    arg = "pet"
+                },
+
+                petNameFontFamily = {
+                    order = 5,
+                    name = L["Font family"],
+                    desc = L["Pet name font family"],
+                    type = "select",
+                    dialogControl = 'LSM30_Font',
+                    values = Media:HashTable("font"),
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Pet"):SetFrameNameFont()
+                    end,
+                    disabled = function()
+                        local diabled = EasyFrames.db.profile.pet.showName
+                        if (diabled == false) then
+                            return true
+                        end
+                    end,
+                    arg = "pet"
+                },
+
+                petNameFontSize = {
+                    type = "range",
+                    order = 6,
+                    name = L["Font size"],
+                    desc = L["Pet name font size"],
+                    min = MIN_RANGE,
+                    max = MAX_RANGE,
+                    step = 1,
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Pet"):SetFrameNameFont()
+                    end,
+                    disabled = function()
+                        local diabled = EasyFrames.db.profile.pet.showName
+                        if (diabled == false) then
+                            return true
+                        end
+                    end,
+                    arg = "pet"
+                },
+
+            }
+        },
+
         header = {
             type = "header",
             order = 5,
             name = L["Show or hide some elements of frame"],
-        },
-
-        showName = {
-            type = "toggle",
-            order = 6,
-            width = "double",
-            name = L["Show pet name"],
-            desc = L["Show pet name"],
-            set = function(info, value)
-                setOpt(info, value)
-                EasyFrames:GetModule("Pet"):ShowName(value)
-            end,
-            arg = "pet"
         },
 
         showHitIndicator = {
@@ -1609,9 +1931,8 @@ function EasyFrames:ChatCommand(input)
         InterfaceOptionsFrame_OpenToCategory(EasyFrames.optFrames.Profiles)
         InterfaceOptionsFrame_OpenToCategory(EasyFrames.optFrames.EasyFrames)
     else
---        LibStub("AceConfigCmd-3.0").HandleCommand(EasyFrames, "ef", input)
         InterfaceOptionsFrame_OpenToCategory(EasyFrames.optFrames.Profiles)
-        InterfaceOptionsFrame_OpenToCategory(EasyFrames.optFrames[input])
+        InterfaceOptionsFrame_OpenToCategory(EasyFrames.optFrames[input] or EasyFrames.optFrames.EasyFrames)
     end
 end
 

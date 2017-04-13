@@ -36,6 +36,7 @@ function Target:OnEnable()
     self:SetScale(db.target.scaleFrame)
     self:ShowTargetFrameToT()
     self:ShowName(db.target.showName)
+    self:SetFrameNameFont()
     self:SetHealthBarsFont()
 
     self:ReverseDirectionLosingHP(db.target.reverseDirectionLosingHP)
@@ -53,6 +54,7 @@ function Target:OnProfileChanged(newDB)
     self:SetScale(db.target.scaleFrame)
     self:ShowTargetFrameToT()
     self:ShowName(db.target.showName)
+    self:SetFrameNameFont()
     self:SetHealthBarsFont()
 
     self:ReverseDirectionLosingHP(db.target.reverseDirectionLosingHP)
@@ -112,7 +114,7 @@ function Target:ShowNameInsideFrame(value)
     for _, healthBar in pairs(HealthBarTexts) do
         local point, relativeTo, relativePoint, xOffset, yOffset = healthBar:GetPoint()
 
-        if (value and db.player.showName) then
+        if (value and db.target.showName) then
             Core:MoveTargetFrameName(nil, nil, nil, nil, 20)
 
             Core:MoveRegion(healthBar, point, relativeTo, relativePoint, xOffset, yOffset - 4)
@@ -130,6 +132,14 @@ function Target:SetHealthBarsFont()
 
     TargetFrameHealthBar.TextString:SetFont(fontFamily, fontSize, "OUTLINE")
     TargetFrameManaBar.TextString:SetFont(fontFamily, fontSize, "OUTLINE")
+end
+
+function Target:SetFrameNameFont()
+    local fontFamily = Media:Fetch("font", db.target.targetNameFontFamily)
+    local fontSize = db.target.targetNameFontSize
+    local fontStyle = db.target.targetNameFontStyle
+
+    TargetFrame.name:SetFont(fontFamily, fontSize, fontStyle)
 end
 
 function Target:ReverseDirectionLosingHP(value)
