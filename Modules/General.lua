@@ -21,6 +21,7 @@ local Media = LibStub("LibSharedMedia-3.0")
 
 local MODULE_NAME = "General"
 local General = EasyFrames:NewModule(MODULE_NAME, "AceHook-3.0")
+
 local db
 
 local GetFramesHealthBar = EasyFrames.Utils.GetFramesHealthBar
@@ -194,11 +195,19 @@ end
 function General:SetClassPortraits()
     local frames = {
         PlayerFrame,
+
         TargetFrame,
         TargetFrameToT,
+
         FocusFrame,
         FocusFrameToT,
+
         PetFrame,
+
+        PartyMemberFrame1,
+        PartyMemberFrame2,
+        PartyMemberFrame3,
+        PartyMemberFrame4,
     }
 
     for _, frame in pairs(frames) do
@@ -248,12 +257,12 @@ function General:SetTexture()
     PlayerStatusTexture:SetTexture(Media:Fetch("misc", "player-status"))
 
     -- Target, Focus
-    local frames = {
+    local targetFrames = {
         TargetFrame,
         FocusFrame,
     }
 
-    for _, frame in pairs(frames) do
+    for _, frame in pairs(targetFrames) do
         EasyFrames:GetModule("Core"):CheckClassification(frame)
     end
 
@@ -263,6 +272,12 @@ function General:SetTexture()
     else
         PetFrameTexture:SetTexture(Media:Fetch("frames", "smalltarget"));
     end
+
+    -- Party
+    for i = 1, 4 do
+        _G["PartyMemberFrame" .. i .. "Texture"]:SetTexture(Media:Fetch("frames", "smalltarget"))
+    end
+
 end
 
 function General:SetLightTexture(value)

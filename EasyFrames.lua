@@ -175,6 +175,19 @@ local defaults = {
             scaleFrame = 1,
             lockedMovableFrame = true,
             customPoints = false,
+            healthFormat = "2",
+            healthBarFontFamily = "Friz Quadrata TT",
+            healthBarFontSize = 9,
+            useHealthFormatFullValues = false,
+            customHealthFormatFormulas = {
+                ["gt1T"] = "%.fk",
+                ["gt100T"] = "%.fk",
+                ["gt1M"] = "%.1fM",
+                ["gt10M"] = "%.fM",
+                ["gt100M"] = "%.fM",
+                ["gt1B"] = "%.fB",
+            },
+            customHealthFormat = "%CURRENT% / %MAX% (%PERCENT%%)",
             showName = true,
             petNameFontFamily = "Friz Quadrata TT",
             petNameFontSize = 10,
@@ -183,6 +196,28 @@ local defaults = {
             showStatusTexture = true,
             showAttackBackground = true,
             attackBackgroundOpacity = 0.7,
+        },
+
+        party = {
+            scaleFrame = 1.2,
+            healthFormat = "2",
+            healthBarFontFamily = "Friz Quadrata TT",
+            healthBarFontSize = 9,
+            useHealthFormatFullValues = false,
+            customHealthFormatFormulas = {
+                ["gt1T"] = "%.fk",
+                ["gt100T"] = "%.fk",
+                ["gt1M"] = "%.1fM",
+                ["gt10M"] = "%.fM",
+                ["gt100M"] = "%.fM",
+                ["gt1B"] = "%.fB",
+            },
+            customHealthFormat = "%CURRENT% / %MAX% (%PERCENT%%)",
+            showName = true,
+            partyNameFontFamily = "Friz Quadrata TT",
+            partyNameFontSize = 10,
+            partyNameFontStyle = "NONE",
+            showPetFrames = true,
         },
     }
 }
@@ -248,52 +283,57 @@ end
 
 EasyFrames.Utils = {};
 function EasyFrames.Utils.UpdateHealthValues(frame, healthFormat, customHealthFormat, customHealthFormatFormulas, useHealthFormatFullValues)
+    local unit = frame.unit
+    local healthbar = frame:GetParent().healthbar
+
+    print(frame:GetName(), unit, healthbar)
+
     if (healthFormat == "1") then
         -- Percent
-        if (UnitHealth(frame) > 0) then
-            local HealthPercent = (UnitHealth(frame) / UnitHealthMax(frame)) * 100
+        if (UnitHealth(unit) > 0) then
+            local HealthPercent = (UnitHealth(unit) / UnitHealthMax(unit)) * 100
 
-            _G[frame .. "FrameHealthBar"].TextString:SetText(format("%.0f", HealthPercent) .. "%")
+            healthbar.TextString:SetText(format("%.0f", HealthPercent) .. "%")
         end
 
     elseif (healthFormat == "2") then
         -- Current + Max
 
-        if (UnitHealth(frame) > 0) then
-            local Health = UnitHealth(frame)
-            local HealthMax = UnitHealthMax(frame)
+        if (UnitHealth(unit) > 0) then
+            local Health = UnitHealth(unit)
+            local HealthMax = UnitHealthMax(unit)
 
-            _G[frame .. "FrameHealthBar"].TextString:SetText(ReadableNumber(Health) .. " / " .. ReadableNumber(HealthMax));
+            healthbar.TextString:SetText(ReadableNumber(Health) .. " / " .. ReadableNumber(HealthMax));
         end
 
     elseif (healthFormat == "3") then
         -- Current + Max + Percent
 
-        if (UnitHealth(frame) > 0) then
-            local Health = UnitHealth(frame)
-            local HealthMax = UnitHealthMax(frame)
-            local HealthPercent = (UnitHealth(frame) / UnitHealthMax(frame)) * 100
+        if (UnitHealth(unit) > 0) then
+            local Health = UnitHealth(unit)
+            local HealthMax = UnitHealthMax(unit)
+            local HealthPercent = (UnitHealth(unit) / UnitHealthMax(unit)) * 100
 
-            _G[frame .. "FrameHealthBar"].TextString:SetText(ReadableNumber(Health) .. " / " .. ReadableNumber(HealthMax) .. " (" .. string.format("%.0f", HealthPercent) .. "%)");
+            healthbar.TextString:SetText(ReadableNumber(Health) .. " / " .. ReadableNumber(HealthMax) .. " (" .. string.format("%.0f", HealthPercent) .. "%)");
         end
 
     elseif (healthFormat == "4") then
         -- Current + Percent
 
-        if (UnitHealth(frame) > 0) then
-            local Health = UnitHealth(frame)
-            local HealthPercent = (UnitHealth(frame) / UnitHealthMax(frame)) * 100
+        if (UnitHealth(unit) > 0) then
+            local Health = UnitHealth(unit)
+            local HealthPercent = (UnitHealth(unit) / UnitHealthMax(unit)) * 100
 
-            _G[frame .. "FrameHealthBar"].TextString:SetText(ReadableNumber(Health) .. " (" .. string.format("%.0f", HealthPercent) .. "%)");
+            healthbar.TextString:SetText(ReadableNumber(Health) .. " (" .. string.format("%.0f", HealthPercent) .. "%)");
         end
 
     elseif (healthFormat == "custom") then
         -- Own format
 
-        if (UnitHealth(frame) > 0) then
-            local Health = UnitHealth(frame)
-            local HealthMax = UnitHealthMax(frame)
-            local HealthPercent = (UnitHealth(frame) / UnitHealthMax(frame)) * 100
+        if (UnitHealth(unit) > 0) then
+            local Health = UnitHealth(unit)
+            local HealthMax = UnitHealthMax(unit)
+            local HealthPercent = (UnitHealth(unit) / UnitHealthMax(unit)) * 100
 
             local useFullValues = false
             if (useHealthFormatFullValues) then
@@ -305,7 +345,7 @@ function EasyFrames.Utils.UpdateHealthValues(frame, healthFormat, customHealthFo
 
             local Result = string.gsub(string.gsub(string.gsub(customHealthFormat, "%%PERCENT%%", string.format("%.0f", HealthPercent)), "%%MAX%%", HealthMax), "%%CURRENT%%", Health)
 
-            _G[frame .. "FrameHealthBar"].TextString:SetText( Result );
+            healthbar.TextString:SetText( Result );
         end
 
     end
@@ -332,6 +372,26 @@ function EasyFrames.Utils.GetFramesManaBar()
         FocusFrameToTManaBar,
         PetFrameManaBar,
     }
+end
+
+function EasyFrames.Utils.GetPartyFrames()
+    return {
+        PartyMemberFrame1,
+        PartyMemberFrame2,
+        PartyMemberFrame3,
+        PartyMemberFrame4
+    }
+end
+
+EasyFrames.Helpers = {};
+function EasyFrames.Helpers.Iterator(object)
+    local iterator = function(callback)
+        for _, value in pairs(object) do
+            callback(value)
+        end
+    end
+
+    return iterator
 end
 
 

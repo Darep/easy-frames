@@ -21,8 +21,12 @@ local Media = LibStub("LibSharedMedia-3.0")
 
 local MODULE_NAME = "Pet"
 local Pet = EasyFrames:NewModule(MODULE_NAME, "AceHook-3.0")
+
 local db
 local originalValues = {}
+
+local UpdateHealthValues = EasyFrames.Utils.UpdateHealthValues
+
 
 function Pet:OnInitialize()
     self.db = EasyFrames.db
@@ -34,6 +38,8 @@ function Pet:OnEnable()
     self:PreSetMovable()
     self:SetMovable(db.pet.lockedMovableFrame)
 
+    self:SetHealthBarsFont()
+
     self:ShowName(db.pet.showName)
     self:SetFrameNameFont()
     self:ShowHitIndicator(db.pet.showHitIndicator)
@@ -43,6 +49,7 @@ function Pet:OnEnable()
     self:SetAttackBackgroundOpacity(db.pet.attackBackgroundOpacity)
 
     self:SecureHook("PetFrame_Update", "PetFrameUpdate")
+    self:SecureHook("TextStatusBar_UpdateTextStringWithValues", "UpdateHealthValues")
 end
 
 function Pet:OnProfileChanged(newDB)
@@ -53,6 +60,8 @@ function Pet:OnProfileChanged(newDB)
     self:PreSetMovable()
     self:SetMovable(db.pet.lockedMovableFrame)
 
+    self:SetHealthBarsFont()
+
     self:ShowName(db.pet.showName)
     self:SetFrameNameFont()
     self:ShowHitIndicator(db.pet.showHitIndicator)
@@ -60,6 +69,8 @@ function Pet:OnProfileChanged(newDB)
     self:ShowStatusTexture(db.pet.showStatusTexture)
     self:ShowAttackBackground(db.pet.showAttackBackground)
     self:SetAttackBackgroundOpacity(db.pet.attackBackgroundOpacity)
+
+    self:UpdateHealthValues()
 end
 
 
@@ -141,6 +152,29 @@ function Pet:ResetFramePosition()
     frame:SetPoint("TOPLEFT", PlayerFrame, "TOPLEFT", 60, -90)
 
     db.pet.customPoints = false
+end
+
+function Pet:UpdateHealthValues(statusBar)
+    local frame = statusBar or PetFrameHealthBar
+
+    if (frame.unit == "pet") then
+        print("Pet module, udpate in ", frame.unit)
+
+        local healthFormat = db.pet.healthFormat
+        local customHealthFormat = db.pet.customHealthFormat
+        local customHealthFormatFormulas = db.pet.customHealthFormatFormulas
+        local useHealthFormatFullValues = db.pet.useHealthFormatFullValues
+
+        UpdateHealthValues(frame, healthFormat, customHealthFormat, customHealthFormatFormulas, useHealthFormatFullValues)
+    end
+end
+
+function Pet:SetHealthBarsFont()
+    local fontSize = db.pet.healthBarFontSize
+    local fontFamily = Media:Fetch("font", db.pet.healthBarFontFamily)
+
+    PetFrameHealthBar.TextString:SetFont(fontFamily, fontSize, "OUTLINE")
+    PetFrameManaBar.TextString:SetFont(fontFamily, fontSize, "OUTLINE")
 end
 
 function Pet:ShowName(value)

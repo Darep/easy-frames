@@ -476,58 +476,65 @@ local playerOptions = {
             arg = "player"
         },
 
-        header = {
-            type = "header",
+        HPFormatOptions = {
+            type = "group",
             order = 3,
-            name = L["HP and MP bars"],
-        },
+            inline = true,
+            name = "",
+            args = {
+                header = {
+                    type = "header",
+                    order = 1,
+                    name = L["HP and MP bars"],
+                },
 
-        healthFormat = {
-            type = "select",
-            order = 4,
-            name = L["Player healthbar text format"],
-            desc = L["Set the player healthbar text format"],
-            values = healthFormat,
-            set = function(info, value)
-                setOpt(info, value)
-                EasyFrames:GetModule("Player"):UpdateHealthValues()
-            end,
-            arg = "player"
-        },
+                healthFormat = {
+                    type = "select",
+                    order = 2,
+                    name = L["Player healthbar text format"],
+                    desc = L["Set the player healthbar text format"],
+                    values = healthFormat,
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Player"):UpdateHealthValues()
+                    end,
+                    arg = "player"
+                },
 
-        healthBarFontFamily = {
-            order = 5,
-            name = L["Font family"],
-            desc = L["Healthbar and manabar font family"],
-            type = "select",
-            dialogControl = 'LSM30_Font',
-            values = Media:HashTable("font"),
-            set = function(info, value)
-                setOpt(info, value)
-                EasyFrames:GetModule("Player"):SetHealthBarsFont()
-            end,
-            arg = "player"
-        },
+                healthBarFontFamily = {
+                    order = 3,
+                    name = L["Font family"],
+                    desc = L["Healthbar and manabar font family"],
+                    type = "select",
+                    dialogControl = 'LSM30_Font',
+                    values = Media:HashTable("font"),
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Player"):SetHealthBarsFont()
+                    end,
+                    arg = "player"
+                },
 
-        healthBarFontSize = {
-            type = "range",
-            order = 6,
-            name = L["Font size"],
-            desc = L["Healthbar and manabar font size"],
-            min = MIN_RANGE,
-            max = MAX_RANGE,
-            step = 1,
-            set = function(info, value)
-                setOpt(info, value)
-                EasyFrames:GetModule("Player"):SetHealthBarsFont()
-            end,
-            arg = "player"
+                healthBarFontSize = {
+                    type = "range",
+                    order = 4,
+                    name = L["Font size"],
+                    desc = L["Healthbar and manabar font size"],
+                    min = MIN_RANGE,
+                    max = MAX_RANGE,
+                    step = 1,
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Player"):SetHealthBarsFont()
+                    end,
+                    arg = "player"
+                },
+            }
         },
-
 
         HPFormat = {
             type = "group",
-            order = 7,
+            order = 4,
             inline = true,
             name = "",
             hidden = function()
@@ -674,7 +681,7 @@ local playerOptions = {
 
         frameName = {
             type = "group",
-            order = 8,
+            order = 5,
             inline = true,
             name = "",
             args = {
@@ -785,13 +792,13 @@ local playerOptions = {
 
         header2 = {
             type = "header",
-            order = 9,
+            order = 6,
             name = L["Show or hide some elements of frame"],
         },
 
         showHitIndicator = {
             type = "toggle",
-            order = 10,
+            order = 7,
             width = "double",
             name = L["Enable hit indicators"],
             desc = L["Show or hide the damage/heal which you take on your unit frame"],
@@ -804,7 +811,7 @@ local playerOptions = {
 
         showSpecialbar = {
             type = "toggle",
-            order = 11,
+            order = 8,
             width = "double",
             name = L["Show player specialbar"],
             desc = L["Show or hide the player specialbar, like Paladin's holy power, Priest's orbs, Monk's harmony or Warlock's soul shards"],
@@ -817,7 +824,7 @@ local playerOptions = {
 
         showRestIcon = {
             type = "toggle",
-            order = 12,
+            order = 9,
             width = "double",
             name = L["Show player resting icon"],
             desc = L["Show or hide player resting icon when player is resting (e.g. in the tavern or in the capital)"],
@@ -830,7 +837,7 @@ local playerOptions = {
 
         showStatusTexture = {
             type = "toggle",
-            order = 13,
+            order = 10,
             width = "double",
             name = L["Show player status texture (inside the frame)"],
             desc = L["Show or hide player status texture (blinking glow inside the frame when player is resting or in combat)"],
@@ -843,7 +850,7 @@ local playerOptions = {
 
         showAttackBackground = {
             type = "toggle",
-            order = 14,
+            order = 11,
             width = "double",
             name = L["Show player combat texture (outside the frame)"],
             desc = L["Show or hide player red background texture (blinking red glow outside the frame in combat)"],
@@ -856,7 +863,7 @@ local playerOptions = {
 
         attackBackgroundOpacity = {
             type = "range",
-            order = 15,
+            order = 12,
             name = L["Opacity"],
             desc = L["Opacity of combat texture"],
             min = 0.1,
@@ -877,7 +884,7 @@ local playerOptions = {
 
         showGroupIndicator = {
             type = "toggle",
-            order = 16,
+            order = 13,
             width = "double",
             name = L["Show player group number"],
             desc = L["Show or hide player group number when player is in a raid group (over portrait)"],
@@ -890,7 +897,7 @@ local playerOptions = {
 
         showRoleIcon = {
             type = "toggle",
-            order = 17,
+            order = 14,
             width = "double",
             name = L["Show player role icon"],
             desc = L["Show or hide player role icon when player is in a group"],
@@ -972,7 +979,7 @@ local targetOptions = {
             step = 1,
             set = function(info, value)
                 setOpt(info, value)
-                EasyFrames:GetModule("Target"):SetHealthBarsFont(value)
+                EasyFrames:GetModule("Target"):SetHealthBarsFont()
             end,
             arg = "target"
         },
@@ -1386,7 +1393,7 @@ local focusOptions = {
             step = 1,
             set = function(info, value)
                 setOpt(info, value)
-                EasyFrames:GetModule("Focus"):SetHealthBarsFont(value)
+                EasyFrames:GetModule("Focus"):SetHealthBarsFont()
             end,
             arg = "focus"
         },
@@ -1764,9 +1771,213 @@ local petOptions = {
             end,
         },
 
-        frameName = {
+        HPFormatOptions = {
             type = "group",
             order = 5,
+            inline = true,
+            name = "",
+            args = {
+                header = {
+                    type = "header",
+                    order = 1,
+                    name = L["HP and MP bars"],
+                },
+
+                healthFormat = {
+                    type = "select",
+                    order = 2,
+                    name = L["Pet healthbar text format"],
+                    desc = L["Set the pet healthbar text format"],
+                    values = healthFormat,
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Pet"):UpdateHealthValues()
+                    end,
+                    arg = "pet"
+                },
+
+                healthBarFontFamily = {
+                    order = 3,
+                    name = L["Font family"],
+                    desc = L["Healthbar and manabar font family"],
+                    type = "select",
+                    dialogControl = 'LSM30_Font',
+                    values = Media:HashTable("font"),
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Pet"):SetHealthBarsFont()
+                    end,
+                    arg = "pet"
+                },
+
+                healthBarFontSize = {
+                    type = "range",
+                    order = 4,
+                    name = L["Font size"],
+                    desc = L["Healthbar and manabar font size"],
+                    min = MIN_RANGE,
+                    max = MAX_RANGE,
+                    step = 1,
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Pet"):SetHealthBarsFont()
+                    end,
+                    arg = "pet"
+                },
+            }
+        },
+
+        HPFormat = {
+            type = "group",
+            order = 6,
+            inline = true,
+            name = "",
+            hidden = function()
+                local healthFormat = EasyFrames.db.profile.pet.healthFormat
+                if (healthFormat == "custom") then
+                    return false
+                end
+
+                return true
+            end,
+            args = {
+                header = {
+                    type = "header",
+                    order = 1,
+                    name = L["Custom format of HP"],
+                },
+
+                desc = {
+                    type = "description",
+                    order = 2,
+                    name = L["You can set custom HP format. More information about custom HP format you can read on project site.\n\n" ..
+                            "Formulas:"],
+                },
+
+                customHealthFormatFormulas = {
+                    type = "group",
+                    order = 3,
+                    inline = true,
+                    name = "",
+                    get = function(info)
+                        local ns, opt = string.split(".", info.arg)
+                        local key = info[#info]
+                        local val = EasyFrames.db.profile[ns][opt][key]
+
+                        return val
+                    end,
+                    set = function(info, value)
+                        local ns, opt = string.split(".", info.arg)
+                        local key = info[#info]
+                        EasyFrames.db.profile[ns][opt][key] = value
+
+                        EasyFrames:GetModule("Pet"):UpdateHealthValues()
+                    end,
+                    args = {
+                        gt1T = {
+                            type = "input",
+                            order = 1,
+                            name = L["Value greater than 1000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+
+                            arg = "pet.customHealthFormatFormulas"
+                        },
+                        gt100T = {
+                            type = "input",
+                            order = 2,
+                            name = L["Value greater than 100 000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+                            arg = "pet.customHealthFormatFormulas"
+                        },
+
+                        gt1M = {
+                            type = "input",
+                            order = 3,
+                            name = L["Value greater than 1 000 000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+                            arg = "pet.customHealthFormatFormulas"
+                        },
+
+                        gt10M = {
+                            type = "input",
+                            order = 4,
+                            name = L["Value greater than 10 000 000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+                            arg = "pet.customHealthFormatFormulas"
+                        },
+
+                        gt100M = {
+                            type = "input",
+                            order = 5,
+                            name = L["Value greater than 100 000 000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+                            arg = "pet.customHealthFormatFormulas"
+                        },
+
+                        gt1B = {
+                            type = "input",
+                            order = 6,
+                            name = L["Value greater than 1 000 000 000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+                            arg = "pet.customHealthFormatFormulas"
+                        },
+                    }
+                },
+
+                useHealthFormatFullValues = {
+                    type = "toggle",
+                    order = 4,
+                    name = L["Use full values of health"],
+                    desc = L["By default all formulas use divider (for value eq 1000 and more it's 1000, for 1 000 000 and more it's 1 000 000, etc).\n\n" ..
+                            "If checked formulas will use full values of HP (without divider)"],
+                    arg = "pet",
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Pet"):UpdateHealthValues()
+                    end,
+                },
+
+                customHealthFormat = {
+                    type = "input",
+                    order = 5,
+                    width = "double",
+                    name = L["Displayed HP by pattern"],
+                    desc = L["You can use patterns:\n\n" ..
+                            "%CURRENT% - return current health\n" ..
+                            "%MAX% - return maximum of health\n" ..
+                            "%PERCENT% - return percent of current/max health\n\n" ..
+                            "All values are returned from formulas. For set abbreviation use formulas' fields"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Pet"):UpdateHealthValues()
+                    end,
+                    arg = "pet"
+                },
+            }
+        },
+
+
+        frameName = {
+            type = "group",
+            order = 7,
             inline = true,
             name = "",
             args = {
@@ -1860,13 +2071,13 @@ local petOptions = {
 
         header = {
             type = "header",
-            order = 5,
+            order = 8,
             name = L["Show or hide some elements of frame"],
         },
 
         showHitIndicator = {
             type = "toggle",
-            order = 7,
+            order = 9,
             width = "double",
             name = L["Enable hit indicators"],
             desc = L["Show or hide the damage/heal which your pet take on pet unit frame"],
@@ -1879,7 +2090,7 @@ local petOptions = {
 
         showStatusTexture = {
             type = "toggle",
-            order = 8,
+            order = 10,
             width = "double",
             name = L["Show pet combat texture (inside the frame)"],
             desc = L["Show or hide pet red background texture (blinking red glow inside the frame in combat)"],
@@ -1892,7 +2103,7 @@ local petOptions = {
 
         showAttackBackground = {
             type = "toggle",
-            order = 9,
+            order = 11,
             width = "double",
             name = L["Show pet combat texture (outside the frame)"],
             desc = L["Show or hide pet red background texture (blinking red glow outside the frame in combat)"],
@@ -1905,7 +2116,7 @@ local petOptions = {
 
         attackBackgroundOpacity = {
             type = "range",
-            order = 10,
+            order = 12,
             name = L["Opacity"],
             desc = L["Opacity of combat texture"],
             min = 0.1,
@@ -1923,6 +2134,375 @@ local petOptions = {
             isPercent = true,
             arg = "pet"
         },
+    },
+}
+
+local partyOptions = {
+    name = getOptionName(L["Party"]),
+    type = "group",
+    get = getOpt,
+    set = setOpt,
+    args = {
+        desc = {
+            type = "description",
+            order = 1,
+            name = L["In party options you can set scale party frames, healthbar text format, etc"],
+        },
+
+        scaleFrame = {
+            type = "range",
+            order = 2,
+            name = L["Party frames scale"],
+            desc = L["Scale of party unit frames"],
+            min = 0.5,
+            max = 2,
+            set = function(info, value)
+                setOpt(info, value)
+                EasyFrames:GetModule("Party"):SetScale(value)
+            end,
+            arg = "party"
+        },
+
+        header = {
+            type = "header",
+            order = 3,
+            name = L["HP and MP bars"],
+        },
+
+        healthFormat = {
+            type = "select",
+            order = 4,
+            name = L["Party healthbar text format"],
+            desc = L["Set the party healthbar text format"],
+            values = healthFormat,
+            set = function(info, value)
+                setOpt(info, value)
+                EasyFrames:GetModule("Party"):UpdateHealthValues()
+            end,
+            arg = "party"
+        },
+
+        healthBarFontFamily = {
+            order = 5,
+            name = L["Font family"],
+            desc = L["Healthbar and manabar font family"],
+            type = "select",
+            dialogControl = 'LSM30_Font',
+            values = Media:HashTable("font"),
+            set = function(info, value)
+                setOpt(info, value)
+                EasyFrames:GetModule("Party"):SetHealthBarsFont()
+            end,
+            arg = "party"
+        },
+
+        healthBarFontSize = {
+            type = "range",
+            order = 6,
+            name = L["Font size"],
+            desc = L["Healthbar and manabar font size"],
+            min = MIN_RANGE,
+            max = MAX_RANGE,
+            step = 1,
+            set = function(info, value)
+                setOpt(info, value)
+                EasyFrames:GetModule("Party"):SetHealthBarsFont()
+            end,
+            arg = "party"
+        },
+
+        HPFormat = {
+            type = "group",
+            order = 7,
+            inline = true,
+            name = "",
+            hidden = function()
+                local healthFormat = EasyFrames.db.profile.party.healthFormat
+                if (healthFormat == "custom") then
+                    return false
+                end
+
+                return true
+            end,
+            args = {
+                header = {
+                    type = "header",
+                    order = 1,
+                    name = L["Custom format of HP"],
+                },
+
+                desc = {
+                    type = "description",
+                    order = 2,
+                    name = L["You can set custom HP format. More information about custom HP format you can read on project site.\n\n" ..
+                            "Formulas:"],
+                },
+
+                customHealthFormatFormulas = {
+                    type = "group",
+                    order = 3,
+                    inline = true,
+                    name = "",
+                    get = function(info)
+                        local ns, opt = string.split(".", info.arg)
+                        local key = info[#info]
+                        local val = EasyFrames.db.profile[ns][opt][key]
+
+                        return val
+                    end,
+                    set = function(info, value)
+                        local ns, opt = string.split(".", info.arg)
+                        local key = info[#info]
+                        EasyFrames.db.profile[ns][opt][key] = value
+
+                        EasyFrames:GetModule("Party"):UpdateHealthValues()
+                    end,
+                    args = {
+                        gt1T = {
+                            type = "input",
+                            order = 1,
+                            name = L["Value greater than 1000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+
+                            arg = "party.customHealthFormatFormulas"
+                        },
+                        gt100T = {
+                            type = "input",
+                            order = 2,
+                            name = L["Value greater than 100 000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+                            arg = "party.customHealthFormatFormulas"
+                        },
+
+                        gt1M = {
+                            type = "input",
+                            order = 3,
+                            name = L["Value greater than 1 000 000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+                            arg = "party.customHealthFormatFormulas"
+                        },
+
+                        gt10M = {
+                            type = "input",
+                            order = 4,
+                            name = L["Value greater than 10 000 000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+                            arg = "party.customHealthFormatFormulas"
+                        },
+
+                        gt100M = {
+                            type = "input",
+                            order = 5,
+                            name = L["Value greater than 100 000 000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+                            arg = "party.customHealthFormatFormulas"
+                        },
+
+                        gt1B = {
+                            type = "input",
+                            order = 6,
+                            name = L["Value greater than 1 000 000 000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+                            arg = "party.customHealthFormatFormulas"
+                        },
+                    }
+                },
+
+                useHealthFormatFullValues = {
+                    type = "toggle",
+                    order = 4,
+                    name = L["Use full values of health"],
+                    desc = L["By default all formulas use divider (for value eq 1000 and more it's 1000, for 1 000 000 and more it's 1 000 000, etc).\n\n" ..
+                            "If checked formulas will use full values of HP (without divider)"],
+                    arg = "party",
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Party"):UpdateHealthValues()
+                    end,
+                },
+
+                customHealthFormat = {
+                    type = "input",
+                    order = 5,
+                    width = "double",
+                    name = L["Displayed HP by pattern"],
+                    desc = L["You can use patterns:\n\n" ..
+                            "%CURRENT% - return current health\n" ..
+                            "%MAX% - return maximum of health\n" ..
+                            "%PERCENT% - return percent of current/max health\n\n" ..
+                            "All values are returned from formulas. For set abbreviation use formulas' fields"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Party"):UpdateHealthValues()
+                    end,
+                    arg = "party"
+                },
+            }
+        },
+
+        frameName = {
+            type = "group",
+            order = 9,
+            inline = true,
+            name = "",
+            args = {
+                header = {
+                    type = "header",
+                    order = 1,
+                    name = L["Party frames names"],
+                },
+
+                showName = {
+                    type = "toggle",
+                    order = 2,
+                    name = L["Show names of party frames"],
+                    desc = L["Show names of party frames"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Party"):ShowName(value)
+                    end,
+                    arg = "party"
+                },
+
+                newLine = {
+                    type = "description",
+                    order = 4,
+                    name = "",
+                },
+
+                partyNameFontStyle = {
+                    type = "select",
+                    order = 5,
+                    name = L["Font style"],
+                    desc = L["Party names font style"],
+                    values = fontStyle,
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Party"):SetFrameNameFont()
+                    end,
+                    disabled = function()
+                        local diabled = EasyFrames.db.profile.party.showName
+                        if (diabled == false) then
+                            return true
+                        end
+                    end,
+                    arg = "party"
+                },
+
+                partyNameFontFamily = {
+                    order = 6,
+                    name = L["Font family"],
+                    desc = L["Party names font family"],
+                    type = "select",
+                    dialogControl = 'LSM30_Font',
+                    values = Media:HashTable("font"),
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Party"):SetFrameNameFont()
+                    end,
+                    disabled = function()
+                        local diabled = EasyFrames.db.profile.party.showName
+                        if (diabled == false) then
+                            return true
+                        end
+                    end,
+                    arg = "party"
+                },
+
+                partyNameFontSize = {
+                    type = "range",
+                    order = 7,
+                    name = L["Font size"],
+                    desc = L["Party names font size"],
+                    min = MIN_RANGE,
+                    max = MAX_RANGE,
+                    step = 1,
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Party"):SetFrameNameFont()
+                    end,
+                    disabled = function()
+                        local diabled = EasyFrames.db.profile.party.showName
+                        if (diabled == false) then
+                            return true
+                        end
+                    end,
+                    arg = "party"
+                },
+
+            }
+        },
+
+        header2 = {
+            type = "header",
+            order = 9,
+            name = L["Show or hide some elements of frame"],
+        },
+
+        showPetFrames = {
+            type = "toggle",
+            order = 10,
+            width = "double",
+            name = L["Show party pet frames"],
+            desc = L["Show party pet frames"],
+            set = function(info, value)
+                setOpt(info, value)
+                EasyFrames:GetModule("Party"):ShowPetFrames()
+            end,
+            arg = "party"
+        },
+
+--        showAttackBackground = {
+--            type = "toggle",
+--            order = 11,
+--            width = "double",
+--            name = L["Show party combat texture (outside the frame)"],
+--            desc = L["Show or hide party red background texture (blinking red glow outside the frame in combat)"],
+--            set = function(info, value)
+--                setOpt(info, value)
+--                EasyFrames:GetModule("Party"):ShowAttackBackground(value)
+--            end,
+--            arg = "party"
+--        },
+
+--        attackBackgroundOpacity = {
+--            type = "range",
+--            order = 12,
+--            name = L["Opacity"],
+--            desc = L["Opacity of combat texture"],
+--            min = 0.1,
+--            max = 1,
+--            set = function(info, value)
+--                setOpt(info, value)
+--                EasyFrames:GetModule("Party"):SetAttackBackgroundOpacity(value)
+--            end,
+--            disabled = function()
+--                local diabled = EasyFrames.db.profile.party.showAttackBackground
+--                if (diabled == false) then
+--                    return true
+--                end
+--            end,
+--            isPercent = true,
+--            arg = "party"
+--        },
     },
 }
 
@@ -1955,6 +2535,9 @@ function EasyFrames:SetupOptions()
 
     -- Pet
     self:RegisterModuleOptions("Pet", petOptions, L["Pet"])
+
+    -- Party
+    self:RegisterModuleOptions("Party", partyOptions, L["Party"])
 
     -- Profiles
     self:RegisterModuleOptions("Profiles", LibStub("AceDBOptions-3.0"):GetOptionsTable(self.db))

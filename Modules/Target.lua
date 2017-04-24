@@ -21,9 +21,12 @@ local Media = LibStub("LibSharedMedia-3.0")
 
 local MODULE_NAME = "Target"
 local Target = EasyFrames:NewModule(MODULE_NAME, "AceHook-3.0")
+
 local db
 local originalValues = {}
+
 local UpdateHealthValues = EasyFrames.Utils.UpdateHealthValues
+
 
 function Target:OnInitialize()
     self.db = EasyFrames.db
@@ -74,14 +77,19 @@ function Target:SetScale(value)
     TargetFrame:SetScale(value)
 end
 
-function Target:UpdateHealthValues()
-    local frame = "Target"
-    local healthFormat = db.target.healthFormat
-    local customHealthFormat = db.target.customHealthFormat
-    local customHealthFormatFormulas = db.target.customHealthFormatFormulas
-    local useHealthFormatFullValues = db.target.useHealthFormatFullValues
+function Target:UpdateHealthValues(statusBar)
+    local frame = statusBar or TargetFrameHealthBar
 
-    UpdateHealthValues(frame, healthFormat, customHealthFormat, customHealthFormatFormulas, useHealthFormatFullValues)
+    if (frame.unit == "target") then
+        print("Target module, udpate in ", frame.unit)
+
+        local healthFormat = db.target.healthFormat
+        local customHealthFormat = db.target.customHealthFormat
+        local customHealthFormatFormulas = db.target.customHealthFormatFormulas
+        local useHealthFormatFullValues = db.target.useHealthFormatFullValues
+
+        UpdateHealthValues(frame, healthFormat, customHealthFormat, customHealthFormatFormulas, useHealthFormatFullValues)
+    end
 end
 
 function Target:ShowTargetFrameToT()

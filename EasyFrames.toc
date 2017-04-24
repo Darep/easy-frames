@@ -36,3 +36,4 @@ Modules\Player.lua
 Modules\Target.lua
 Modules\Focus.lua
 Modules\Pet.lua
+Modules\Party.lua

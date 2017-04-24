@@ -21,8 +21,10 @@ local Media = LibStub("LibSharedMedia-3.0")
 
 local MODULE_NAME = "Focus"
 local Focus = EasyFrames:NewModule(MODULE_NAME, "AceHook-3.0")
+
 local db
 local originalValues = {}
+
 local UpdateHealthValues = EasyFrames.Utils.UpdateHealthValues
 
 function Focus:OnInitialize()
@@ -74,14 +76,19 @@ function Focus:SetScale(value)
     FocusFrame:SetScale(value)
 end
 
-function Focus:UpdateHealthValues()
-    local frame = "Focus"
-    local healthFormat = db.focus.healthFormat
-    local customHealthFormat = db.focus.customHealthFormat
-    local customHealthFormatFormulas = db.focus.customHealthFormatFormulas
-    local useHealthFormatFullValues = db.focus.useHealthFormatFullValues
+function Focus:UpdateHealthValues(statusBar)
+    local frame = statusBar or FocusFrameHealthBar
 
-    UpdateHealthValues(frame, healthFormat, customHealthFormat, customHealthFormatFormulas, useHealthFormatFullValues)
+    if (frame.unit == "focus") then
+        print("Focus module, udpate in ", frame.unit)
+
+        local healthFormat = db.focus.healthFormat
+        local customHealthFormat = db.focus.customHealthFormat
+        local customHealthFormatFormulas = db.focus.customHealthFormatFormulas
+        local useHealthFormatFullValues = db.focus.useHealthFormatFullValues
+
+        UpdateHealthValues(frame, healthFormat, customHealthFormat, customHealthFormatFormulas, useHealthFormatFullValues)
+    end
 end
 
 function Focus:ShowFocusFrameToT()

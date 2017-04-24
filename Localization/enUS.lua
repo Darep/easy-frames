@@ -184,6 +184,8 @@ L["Scale of pet unit frame"] = true
 L["Lock pet frame"] = true
 L["Lock or unlock pet frame. When unlocked you can move frame using your mouse (draggable)"] = true
 L["Reset position to default"] = true
+L["Pet healthbar text format"] = true
+L["Set the pet healthbar text format"] = true
 L["Show pet name"] = true
 L["Show or hide the damage/heal which your pet take on pet unit frame"] = true
 L["Show pet combat texture (inside the frame)"] = true
@@ -192,6 +194,15 @@ L["Show pet combat texture (outside the frame)"] = true
 L["Show or hide pet red background texture (blinking red glow outside the frame in combat)"] = true
 
 
-
-
-
+L["Party"] = true
+L["In party options you can set scale party frames, healthbar text format, etc"] = true
+L["Party frames scale"] = true
+L["Scale of party unit frames"] = true
+L["Party healthbar text format"] = true
+L["Set the party healthbar text format"] = true
+L["Party frames names"] = true
+L["Show names of party frames"] = true
+L["Party names font style"] = true
+L["Party names font family"] = true
+L["Party names font size"] = true
+L["Show party pet frames"] = true

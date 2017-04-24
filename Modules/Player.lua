@@ -21,8 +21,10 @@ local Media = LibStub("LibSharedMedia-3.0")
 
 local MODULE_NAME = "Player"
 local Player = EasyFrames:NewModule(MODULE_NAME, "AceHook-3.0")
+
 local db
 local originalValues = {}
+
 local UpdateHealthValues = EasyFrames.Utils.UpdateHealthValues
 
 
@@ -167,14 +169,19 @@ function Player:ShowSpecialbar(value)
     end
 end
 
-function Player:UpdateHealthValues()
-    local frame = "Player"
-    local healthFormat = db.player.healthFormat
-    local customHealthFormat = db.player.customHealthFormat
-    local customHealthFormatFormulas = db.player.customHealthFormatFormulas
-    local useHealthFormatFullValues = db.player.useHealthFormatFullValues
+function Player:UpdateHealthValues(statusBar)
+    local frame = statusBar or PlayerFrameHealthBar
 
-    UpdateHealthValues(frame, healthFormat, customHealthFormat, customHealthFormatFormulas, useHealthFormatFullValues)
+    if (frame.unit == "player") then
+        print("Player module, udpate in ", frame.unit)
+
+        local healthFormat = db.player.healthFormat
+        local customHealthFormat = db.player.customHealthFormat
+        local customHealthFormatFormulas = db.player.customHealthFormatFormulas
+        local useHealthFormatFullValues = db.player.useHealthFormatFullValues
+
+        UpdateHealthValues(frame, healthFormat, customHealthFormat, customHealthFormatFormulas, useHealthFormatFullValues)
+    end
 end
 
 function Player:SetHealthBarsFont()
@@ -183,9 +190,6 @@ function Player:SetHealthBarsFont()
 
     PlayerFrameHealthBar.TextString:SetFont(fontFamily, fontSize, "OUTLINE")
     PlayerFrameManaBar.TextString:SetFont(fontFamily, fontSize, "OUTLINE")
-
-    PetFrameHealthBar.TextString:SetFont(fontFamily, fontSize - 1, "OUTLINE")
-    PetFrameManaBar.TextString:SetFont(fontFamily, fontSize - 1, "OUTLINE")
 end
 
 function Player:SetFrameNameFont()

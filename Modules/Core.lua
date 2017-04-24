@@ -21,8 +21,10 @@ local Media = LibStub("LibSharedMedia-3.0")
 
 local MODULE_NAME = "Core"
 local Core = EasyFrames:NewModule(MODULE_NAME, "AceConsole-3.0", "AceEvent-3.0", "AceHook-3.0")
+
 local db
 local originalValues = {}
+local PartyIterator = EasyFrames.Helpers.Iterator(EasyFrames.Utils.GetPartyFrames())
 
 function Core:OnInitialize()
     self.db = EasyFrames.db
@@ -46,6 +48,7 @@ function Core:OnEnable()
     self:MoveTargetFrameBars()
     self:MoveFocusFrameBars()
     self:MovePetFrameBars()
+    self:MovePartyFrameBars()
 
     self:MovePlayerFramesBarsTextString()
     self:MoveTargetFramesBarsTextString()
@@ -57,29 +60,44 @@ function Core:OnEnable()
 end
 
 function Core:GetOriginalValues()
-    originalValues["PlayerNameSetPoint"] = PlayerName.SetPoint
-    originalValues["TargetFrameTextureFrameNameSetPoint"] = TargetFrame.name.SetPoint
-    originalValues["FocusFrameTextureFrameNameSetPoint"] = TargetFrame.name.SetPoint
+--    originalValues["PlayerNameSetPoint"] = PlayerName.SetPoint
 
-    originalValues["PlayerFrameHealthBarTextRightSetPoint"] = PlayerFrameHealthBar.RightText.SetPoint
-    originalValues["PlayerFrameHealthBarTextLeftSetPoint"] = PlayerFrameHealthBar.LeftText.SetPoint
-    originalValues["PlayerFrameHealthBarTextSetPoint"] =  PlayerFrameHealthBar.TextString.SetPoint
+--    originalValues["TargetFrameTextureFrameNameSetPoint"] = TargetFrame.name.SetPoint
+--    originalValues["FocusFrameTextureFrameNameSetPoint"] = TargetFrame.name.SetPoint
 
-    originalValues["PlayerFrameManaBarTextSetPoint"] =  PlayerFrameManaBar.TextString.SetPoint
+--    originalValues["PlayerFrameHealthBarTextRightSetPoint"] = PlayerFrameHealthBar.RightText.SetPoint
+--    originalValues["PlayerFrameHealthBarTextLeftSetPoint"] = PlayerFrameHealthBar.LeftText.SetPoint
+--    originalValues["PlayerFrameHealthBarTextSetPoint"] = PlayerFrameHealthBar.TextString.SetPoint
 
-
-    originalValues["TargetFrameTextureFrameHealthBarTextRightSetPoint"] = TargetFrameHealthBar.RightText.SetPoint
-    originalValues["TargetFrameTextureFrameHealthBarTextLeftSetPoint"] = TargetFrameHealthBar.LeftText.SetPoint
-    originalValues["TargetFrameTextureFrameHealthBarTextSetPoint"] =  TargetFrameHealthBar.TextString.SetPoint
-
-    originalValues["TargetFrameTextureFrameManaBarTextSetPoint"] =  TargetFrameManaBar.TextString.SetPoint
+--    originalValues["PlayerFrameManaBarTextSetPoint"] = PlayerFrameManaBar.TextString.SetPoint
 
 
-    originalValues["FocusFrameTextureFrameHealthBarTextRightSetPoint"] = FocusFrameHealthBar.RightText.SetPoint
-    originalValues["FocusFrameTextureFrameHealthBarTextLeftSetPoint"] = FocusFrameHealthBar.LeftText.SetPoint
-    originalValues["FocusFrameTextureFrameHealthBarTextSetPoint"] =  FocusFrameHealthBar.TextString.SetPoint
+--    originalValues["TargetFrameTextureFrameHealthBarTextRightSetPoint"] = TargetFrameHealthBar.RightText.SetPoint
+--    originalValues["TargetFrameTextureFrameHealthBarTextLeftSetPoint"] = TargetFrameHealthBar.LeftText.SetPoint
+--    originalValues["TargetFrameTextureFrameHealthBarTextSetPoint"] =  TargetFrameHealthBar.TextString.SetPoint
+--
+--    originalValues["TargetFrameTextureFrameManaBarTextSetPoint"] = TargetFrameManaBar.TextString.SetPoint
 
-    originalValues["FocusFrameTextureFrameManaBarTextSetPoint"] =  FocusFrameManaBar.TextString.SetPoint
+
+--    originalValues["FocusFrameTextureFrameHealthBarTextRightSetPoint"] = FocusFrameHealthBar.RightText.SetPoint
+--    originalValues["FocusFrameTextureFrameHealthBarTextLeftSetPoint"] = FocusFrameHealthBar.LeftText.SetPoint
+--    originalValues["FocusFrameTextureFrameHealthBarTextSetPoint"] = FocusFrameHealthBar.TextString.SetPoint
+--
+--    originalValues["FocusFrameTextureFrameManaBarTextSetPoint"] = FocusFrameManaBar.TextString.SetPoint
+
+
+    for i = 1, 4 do
+--        originalValues["PartyMemberFrame".. i .. "HealthBarSetPoint"] = _G["PartyMemberFrame" .. i .. "HealthBar"].SetPoint
+--        originalValues["PartyMemberFrame".. i .. "HealthBarTextSetPoint"] = _G["PartyMemberFrame" .. i .. "HealthBar"].TextString.SetPoint
+--        originalValues["PartyMemberFrame".. i .. "HealthBarTextRightSetPoint"] = _G["PartyMemberFrame" .. i .. "HealthBar"].RightText.SetPoint
+--        originalValues["PartyMemberFrame".. i .. "HealthBarTextLeftSetPoint"] = _G["PartyMemberFrame" .. i .. "HealthBar"].LeftText.SetPoint
+--
+--        originalValues["PartyMemberFrame".. i .. "ManaBarSetPoint"] = _G["PartyMemberFrame" .. i .. "ManaBar"].SetPoint
+--        originalValues["PartyMemberFrame".. i .. "ManaBarTextSetPoint"] = _G["PartyMemberFrame" .. i .. "ManaBar"].TextString.SetPoint
+--        originalValues["PartyMemberFrame".. i .. "ManaBarTextRightSetPoint"] = _G["PartyMemberFrame" .. i .. "ManaBar"].RightText.SetPoint
+--        originalValues["PartyMemberFrame".. i .. "ManaBarTextLeftSetPoint"] = _G["PartyMemberFrame" .. i .. "ManaBar"].LeftText.SetPoint
+    end
+
 end
 
 
@@ -153,9 +171,13 @@ function Core:MoveFramesNames()
     self:MoveTargetFrameName()
     self:MoveFocusFrameName()
 
-    PetFrame.name:ClearAllPoints()
-    PetFrame.name:SetPoint("CENTER", PetFrame, "CENTER", 15, 19)
-    PetFrame.name.SetPoint = function() end
+    self:MoveRegion(PetFrame.name, "CENTER", PetFrame, "CENTER", 15, 19)
+
+    PartyIterator(function(frame)
+        local point, relativeTo, relativePoint, xOffset, yOffset = frame.name:GetPoint()
+
+        Core:MoveRegion(frame.name, point, relativeTo, relativePoint, xOffset, yOffset - 3)
+    end)
 end
 
 function Core:MoveToTFrames()
@@ -230,32 +252,34 @@ function Core:MoveFocusFrameBars()
 end
 
 function Core:MovePetFrameBars()
-    --Player Pet bars
-    PetFrameHealthBar:SetHeight(13)
-    PetFrameHealthBar:ClearAllPoints()
-    PetFrameHealthBar:SetPoint("CENTER", PetFrame, "CENTER", 16, 4)
-    PetFrameHealthBar.SetPoint = function() end
+    local healthBar = PetFrameHealthBar
+    local manaBar = PetFrameManaBar
 
-    PetFrameManaBar:ClearAllPoints()
-    PetFrameManaBar:SetPoint("CENTER", PetFrame, "CENTER", 16, -7)
-    PetFrameManaBar.SetPoint = function() end
+    healthBar:SetHeight(13)
+    healthBar:ClearAllPoints()
+    healthBar:SetPoint("CENTER", PetFrame, "CENTER", 16, 3)
+    healthBar.SetPoint = function() end
+
+    manaBar:ClearAllPoints()
+    manaBar:SetPoint("CENTER", PetFrame, "CENTER", 16, -8)
+    manaBar.SetPoint = function() end
 
 
-    PetFrameHealthBar.RightText:ClearAllPoints()
-    PetFrameHealthBar.RightText:SetPoint("RIGHT", PetFrame, "TOPLEFT", 113, -23)
-    PetFrameHealthBar.RightText.SetPoint = function() end
+    healthBar.RightText:ClearAllPoints()
+    healthBar.RightText:SetPoint("RIGHT", PetFrame, "TOPLEFT", 113, -23)
+    healthBar.RightText.SetPoint = function() end
 
-    PetFrameHealthBar.LeftText:ClearAllPoints()
-    PetFrameHealthBar.LeftText:SetPoint("LEFT", PetFrame, "TOPLEFT", 46, -23)
-    PetFrameHealthBar.LeftText.SetPoint = function() end
+    healthBar.LeftText:ClearAllPoints()
+    healthBar.LeftText:SetPoint("LEFT", PetFrame, "TOPLEFT", 46, -23)
+    healthBar.LeftText.SetPoint = function() end
 
-    PetFrameHealthBar.TextString:ClearAllPoints()
-    PetFrameHealthBar.TextString:SetPoint("CENTER", PetFrameHealthBar, "CENTER", 0, 0)
-    PetFrameHealthBar.TextString.SetPoint = function() end
+    healthBar.TextString:ClearAllPoints()
+    healthBar.TextString:SetPoint("CENTER", healthBar, "CENTER", 0, 0)
+    healthBar.TextString.SetPoint = function() end
 
-    PetFrameManaBar.TextString:ClearAllPoints()
-    PetFrameManaBar.TextString:SetPoint("CENTER", PetFrameManaBar, "CENTER", 0, 0)
-    PetFrameManaBar.TextString.SetPoint = function() end
+    manaBar.TextString:ClearAllPoints()
+    manaBar.TextString:SetPoint("CENTER", manaBar, "CENTER", 0, 0)
+    manaBar.TextString.SetPoint = function() end
 end
 
 function Core:MovePlayerFramesBarsTextString()
@@ -263,7 +287,7 @@ function Core:MovePlayerFramesBarsTextString()
     self:MoveRegion(PlayerFrameHealthBar.LeftText, "LEFT", PlayerFrame, "LEFT", 110, 12)
     self:MoveRegion(PlayerFrameHealthBar.TextString, "CENTER", PlayerFrame, "CENTER", 53, 12)
 
-    self:MoveRegion(PlayerFrameManaBar.TextString, "CENTER", PlayerFrame, "CENTER", 53, -7)
+    self:MoveRegion(PlayerFrameManaBar.TextString, "CENTER", PlayerFrame, "CENTER", 53, -8)
 end
 
 function Core:MoveTargetFramesBarsTextString()
@@ -271,7 +295,7 @@ function Core:MoveTargetFramesBarsTextString()
     self:MoveRegion(TargetFrameHealthBar.LeftText, "LEFT", TargetFrame, "LEFT", 8, 12)
     self:MoveRegion(TargetFrameHealthBar.TextString, "CENTER", TargetFrame, "CENTER", -50, 12)
 
-    self:MoveRegion(TargetFrameManaBar.TextString, "CENTER", TargetFrame, "CENTER", -50, -7)
+    self:MoveRegion(TargetFrameManaBar.TextString, "CENTER", TargetFrame, "CENTER", -50, -8)
 end
 
 function Core:MoveFocusFramesBarsTextString()
@@ -279,7 +303,28 @@ function Core:MoveFocusFramesBarsTextString()
     self:MoveRegion(FocusFrameHealthBar.LeftText, "LEFT", FocusFrame, "LEFT", 8, 12)
     self:MoveRegion(FocusFrameHealthBar.TextString, "CENTER", FocusFrame, "CENTER", -50, 12)
 
-    self:MoveRegion(FocusFrameManaBar.TextString, "CENTER", FocusFrame, "CENTER", -50, -7)
+    self:MoveRegion(FocusFrameManaBar.TextString, "CENTER", FocusFrame, "CENTER", -50, -8)
+end
+
+function Core:MovePartyFrameBars()
+    PartyIterator(function(frame)
+        _G[frame:GetName() .. "Background"]:SetVertexColor(0, 0, 0, 0)
+
+        local healthBar = _G[frame:GetName() .. "HealthBar"]
+        local manaBar = _G[frame:GetName() .. "ManaBar"]
+
+        healthBar:SetHeight(13)
+
+        Core:MoveRegion(healthBar, "CENTER", frame, "CENTER", 16, 4)
+        Core:MoveRegion(healthBar.TextString, "CENTER", healthBar, "CENTER", 0, 0)
+        Core:MoveRegion(healthBar.RightText, "RIGHT", frame, "RIGHT", -12, 4)
+        Core:MoveRegion(healthBar.LeftText, "LEFT", frame, "LEFT", 46, 4)
+
+        Core:MoveRegion(manaBar, "CENTER", frame, "CENTER", 16, -8)
+        Core:MoveRegion(manaBar.TextString, "CENTER", manaBar, "CENTER", 0, 0)
+        Core:MoveRegion(manaBar.RightText, "RIGHT", frame, "RIGHT", -12, -8)
+        Core:MoveRegion(manaBar.LeftText, "LEFT", frame, "LEFT", 46, -8)
+    end)
 end
 
 local FrameList = { "Target", "Focus", "Player" }
