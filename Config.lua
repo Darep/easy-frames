@@ -2465,7 +2465,7 @@ local partyOptions = {
             desc = L["Show party pet frames"],
             set = function(info, value)
                 setOpt(info, value)
-                EasyFrames:GetModule("Party"):ShowPetFrames()
+                EasyFrames:GetModule("Party"):ShowPetFrames(value)
             end,
             arg = "party"
         },

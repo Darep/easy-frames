@@ -245,7 +245,9 @@ end
 function General:SetBrightFramesBorder(value)
     for _, t in pairs({
         PlayerFrameTexture, TargetFrameTextureFrameTexture, TargetFrameToTTextureFrameTexture,
-        PetFrameTexture, FocusFrameTextureFrameTexture, FocusFrameToTTextureFrameTexture
+        PetFrameTexture, FocusFrameTextureFrameTexture, FocusFrameToTTextureFrameTexture,
+        PartyMemberFrame1Texture, PartyMemberFrame2Texture, PartyMemberFrame3Texture, PartyMemberFrame4Texture,
+        PartyMemberFrame1PetFrameTexture, PartyMemberFrame2PetFrameTexture, PartyMemberFrame3PetFrameTexture, PartyMemberFrame4PetFrameTexture
     }) do
         t:SetVertexColor(value, value, value)
     end

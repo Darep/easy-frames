@@ -193,3 +193,16 @@ L["Show or hide pet red background texture (blinking red glow inside the frame i
 L["Show pet combat texture (outside the frame)"] = "Показывать фоновую текстуру фрейма питомца (снаружи фрейма)"
 L["Show or hide pet red background texture (blinking red glow outside the frame in combat)"] = "Показывать красную текстуру в бою (мигающая рамка снаружи фрейма во время боя)"
 
+
+L["Party"] = "Группа"
+L["In party options you can set scale party frames, healthbar text format, etc"] = "В разделе Группа вы можете установить размер (scale) фреймов группы, установить формат HP и другие"
+L["Party frames scale"] = "Размер фреймов группы"
+L["Scale of party unit frames"] = "Размер (scale) фреймов группы"
+L["Party healthbar text format"] = "Формат HP фреймов группы"
+L["Set the party healthbar text format"] = "Установить формат отображения здоровья фреймов группы"
+L["Party frames names"] = "Имена фреймов группы"
+L["Show names of party frames"] = "Показывать имена фреймов группы"
+L["Party names font style"] = "Стиль шрифта имени фокус фрейма"
+L["Party names font family"] = "Шрифт имени фреймов группы"
+L["Party names font size"] = "Размер шрифта имени фреймов группы"
+L["Show party pet frames"] = "Показывать питомцев группы"

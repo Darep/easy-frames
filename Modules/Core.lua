@@ -49,10 +49,13 @@ function Core:OnEnable()
     self:MoveFocusFrameBars()
     self:MovePetFrameBars()
     self:MovePartyFrameBars()
+    self:MovePartyPetFrames()
 
     self:MovePlayerFramesBarsTextString()
     self:MoveTargetFramesBarsTextString()
     self:MoveFocusFramesBarsTextString()
+
+    self:MoveLevelText()
 
     if (db.general.showWelcomeMessage) then
         print("|cff0cbd0cEasyFrames|cffffffff " .. L["loaded. Options:"] .. " |cff0cbd0c/ef")
@@ -86,7 +89,7 @@ function Core:GetOriginalValues()
 --    originalValues["FocusFrameTextureFrameManaBarTextSetPoint"] = FocusFrameManaBar.TextString.SetPoint
 
 
-    for i = 1, 4 do
+--    for i = 1, 4 do
 --        originalValues["PartyMemberFrame".. i .. "HealthBarSetPoint"] = _G["PartyMemberFrame" .. i .. "HealthBar"].SetPoint
 --        originalValues["PartyMemberFrame".. i .. "HealthBarTextSetPoint"] = _G["PartyMemberFrame" .. i .. "HealthBar"].TextString.SetPoint
 --        originalValues["PartyMemberFrame".. i .. "HealthBarTextRightSetPoint"] = _G["PartyMemberFrame" .. i .. "HealthBar"].RightText.SetPoint
@@ -96,7 +99,7 @@ function Core:GetOriginalValues()
 --        originalValues["PartyMemberFrame".. i .. "ManaBarTextSetPoint"] = _G["PartyMemberFrame" .. i .. "ManaBar"].TextString.SetPoint
 --        originalValues["PartyMemberFrame".. i .. "ManaBarTextRightSetPoint"] = _G["PartyMemberFrame" .. i .. "ManaBar"].RightText.SetPoint
 --        originalValues["PartyMemberFrame".. i .. "ManaBarTextLeftSetPoint"] = _G["PartyMemberFrame" .. i .. "ManaBar"].LeftText.SetPoint
-    end
+--    end
 
 end
 
@@ -325,6 +328,18 @@ function Core:MovePartyFrameBars()
         Core:MoveRegion(manaBar.RightText, "RIGHT", frame, "RIGHT", -12, -8)
         Core:MoveRegion(manaBar.LeftText, "LEFT", frame, "LEFT", 46, -8)
     end)
+end
+
+function Core:MovePartyPetFrames()
+    PartyIterator(function(frame)
+        Core:MoveRegion(_G[frame:GetName() .. "PetFrame"], "TOPLEFT", frame, "TOPLEFT", 23, -37)
+    end)
+end
+
+function Core:MoveLevelText()
+    Core:MoveRegion(PlayerLevelText, "CENTER", -63, -17)
+    Core:MoveRegion(TargetFrame.levelText, "CENTER", 63, -17)
+    Core:MoveRegion(FocusFrame.levelText, "CENTER", 63, -17)
 end
 
 local FrameList = { "Target", "Focus", "Player" }

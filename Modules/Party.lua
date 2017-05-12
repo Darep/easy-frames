@@ -38,6 +38,7 @@ function Party:OnEnable()
     self:ShowName(db.party.showName)
     self:SetFrameNameFont()
     self:SetHealthBarsFont()
+    self:ShowPetFrames(db.party.showPetFrames)
 
     self:SecureHook("TextStatusBar_UpdateTextStringWithValues", "UpdateHealthValues")
 
@@ -46,6 +47,8 @@ function Party:OnEnable()
     PartyIterator(function(frame)
         frame:Show()
         frame.name:SetText("Мирмидонис")
+
+        _G[frame:GetName() .. "PetFrame"]:Show()
     end)
 
     self:SetScale(2)
@@ -60,6 +63,7 @@ function Party:OnProfileChanged(newDB)
     self:ShowName(db.party.showName)
     self:SetFrameNameFont()
     self:SetHealthBarsFont()
+    self:ShowPetFrames(db.party.showPetFrames)
 
     self:UpdateHealthValues()
 end
@@ -115,5 +119,15 @@ function Party:SetFrameNameFont()
 
     PartyIterator(function(frame)
         frame.name:SetFont(fontFamily, fontSize, fontStyle)
+    end)
+end
+
+function Party:ShowPetFrames(value)
+    PartyIterator(function(frame)
+        if (value) then
+            _G[frame:GetName() .. "PetFrame"]:Show()
+        else
+            _G[frame:GetName() .. "PetFrame"]:Hide()
+        end
     end)
 end

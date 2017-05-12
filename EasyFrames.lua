@@ -18,7 +18,25 @@
 local EasyFrames = LibStub("AceAddon-3.0"):NewAddon("EasyFrames", "AceConsole-3.0")
 local L = LibStub("AceLocale-3.0"):GetLocale("EasyFrames")
 local Media = LibStub("LibSharedMedia-3.0")
+
 local db
+
+local DEFAULT_HEALTHBAR_FONT_FAMILY = "Friz Quadrata TT"
+local DEFAULT_HEALTHBAR_FONT_SIZE = 10
+
+local DEFAULT_CUSTOM_HEALTH_FORMAT = "%CURRENT% / %MAX% (%PERCENT%%)"
+
+local DefaultCustomHealthFormatFormulas = function()
+    return {
+        ["gt1T"] = "%.fk",
+        ["gt100T"] = "%.fk",
+        ["gt1M"] = "%.1fM",
+        ["gt10M"] = "%.fM",
+        ["gt100M"] = "%.fM",
+        ["gt1B"] = "%.fB",
+    }
+end
+
 
 local function CustomReadableNumber(num, format, useFullValues)
     local ret
@@ -91,22 +109,15 @@ local defaults = {
         player = {
             scaleFrame = 1.2,
             healthFormat = "3",
-            healthBarFontFamily = "Friz Quadrata TT",
-            healthBarFontSize = 10,
+            healthBarFontFamily = DEFAULT_HEALTHBAR_FONT_FAMILY,
+            healthBarFontSize = DEFAULT_HEALTHBAR_FONT_SIZE,
             useHealthFormatFullValues = false,
-            customHealthFormatFormulas = {
-                ["gt1T"] = "%.fk",
-                ["gt100T"] = "%.fk",
-                ["gt1M"] = "%.1fM",
-                ["gt10M"] = "%.fM",
-                ["gt100M"] = "%.fM",
-                ["gt1B"] = "%.fB",
-            },
-            customHealthFormat = "%CURRENT% / %MAX% (%PERCENT%%)",
+            customHealthFormatFormulas = DefaultCustomHealthFormatFormulas(),
+            customHealthFormat = DEFAULT_CUSTOM_HEALTH_FORMAT,
             showName = true,
             showNameInsideFrame = false,
-            playerNameFontFamily = "Friz Quadrata TT",
-            playerNameFontSize = 10,
+            playerNameFontFamily = DEFAULT_HEALTHBAR_FONT_FAMILY,
+            playerNameFontSize = DEFAULT_HEALTHBAR_FONT_SIZE,
             playerNameFontStyle = "NONE",
             showHitIndicator = true,
             showSpecialbar = true,
@@ -121,23 +132,16 @@ local defaults = {
         target = {
             scaleFrame = 1.2,
             healthFormat = "3",
-            healthBarFontFamily = "Friz Quadrata TT",
-            healthBarFontSize = 10,
+            healthBarFontFamily = DEFAULT_HEALTHBAR_FONT_FAMILY,
+            healthBarFontSize = DEFAULT_HEALTHBAR_FONT_SIZE,
             useHealthFormatFullValues = false,
             reverseDirectionLosingHP = false,
-            customHealthFormatFormulas = {
-                ["gt1T"] = "%.fk",
-                ["gt100T"] = "%.fk",
-                ["gt1M"] = "%.1fM",
-                ["gt10M"] = "%.fM",
-                ["gt100M"] = "%.fM",
-                ["gt1B"] = "%.fB",
-            },
-            customHealthFormat = "%CURRENT% / %MAX% (%PERCENT%%)",
+            customHealthFormatFormulas = DefaultCustomHealthFormatFormulas(),
+            customHealthFormat = DEFAULT_CUSTOM_HEALTH_FORMAT,
             showName = true,
             showNameInsideFrame = false,
-            targetNameFontFamily = "Friz Quadrata TT",
-            targetNameFontSize = 10,
+            targetNameFontFamily = DEFAULT_HEALTHBAR_FONT_FAMILY,
+            targetNameFontSize = DEFAULT_HEALTHBAR_FONT_SIZE,
             targetNameFontStyle = "NONE",
             showToTFrame = true,
             showAttackBackground = false,
@@ -148,23 +152,16 @@ local defaults = {
         focus = {
             scaleFrame = 1.2,
             healthFormat = "3",
-            healthBarFontFamily = "Friz Quadrata TT",
-            healthBarFontSize = 10,
+            healthBarFontFamily = DEFAULT_HEALTHBAR_FONT_FAMILY,
+            healthBarFontSize = DEFAULT_HEALTHBAR_FONT_SIZE,
             useHealthFormatFullValues = false,
             reverseDirectionLosingHP = false,
-            customHealthFormatFormulas = {
-                ["gt1T"] = "%.fk",
-                ["gt100T"] = "%.fk",
-                ["gt1M"] = "%.1fM",
-                ["gt10M"] = "%.fM",
-                ["gt100M"] = "%.fM",
-                ["gt1B"] = "%.fB",
-            },
-            customHealthFormat = "%CURRENT% / %MAX% (%PERCENT%%)",
+            customHealthFormatFormulas = DefaultCustomHealthFormatFormulas(),
+            customHealthFormat = DEFAULT_CUSTOM_HEALTH_FORMAT,
             showName = true,
             showNameInsideFrame = false,
-            focusNameFontFamily = "Friz Quadrata TT",
-            focusNameFontSize = 10,
+            focusNameFontFamily = DEFAULT_HEALTHBAR_FONT_FAMILY,
+            focusNameFontSize = DEFAULT_HEALTHBAR_FONT_SIZE,
             focusNameFontStyle = "NONE",
             showToTFrame = true,
             showAttackBackground = false,
@@ -176,21 +173,14 @@ local defaults = {
             lockedMovableFrame = true,
             customPoints = false,
             healthFormat = "2",
-            healthBarFontFamily = "Friz Quadrata TT",
+            healthBarFontFamily = DEFAULT_HEALTHBAR_FONT_FAMILY,
             healthBarFontSize = 9,
             useHealthFormatFullValues = false,
-            customHealthFormatFormulas = {
-                ["gt1T"] = "%.fk",
-                ["gt100T"] = "%.fk",
-                ["gt1M"] = "%.1fM",
-                ["gt10M"] = "%.fM",
-                ["gt100M"] = "%.fM",
-                ["gt1B"] = "%.fB",
-            },
-            customHealthFormat = "%CURRENT% / %MAX% (%PERCENT%%)",
+            customHealthFormatFormulas = DefaultCustomHealthFormatFormulas(),
+            customHealthFormat = DEFAULT_CUSTOM_HEALTH_FORMAT,
             showName = true,
-            petNameFontFamily = "Friz Quadrata TT",
-            petNameFontSize = 10,
+            petNameFontFamily = DEFAULT_HEALTHBAR_FONT_FAMILY,
+            petNameFontSize = DEFAULT_HEALTHBAR_FONT_SIZE,
             petNameFontStyle = "NONE",
             showHitIndicator = true,
             showStatusTexture = true,
@@ -201,21 +191,14 @@ local defaults = {
         party = {
             scaleFrame = 1.2,
             healthFormat = "2",
-            healthBarFontFamily = "Friz Quadrata TT",
+            healthBarFontFamily = DEFAULT_HEALTHBAR_FONT_FAMILY,
             healthBarFontSize = 9,
             useHealthFormatFullValues = false,
-            customHealthFormatFormulas = {
-                ["gt1T"] = "%.fk",
-                ["gt100T"] = "%.fk",
-                ["gt1M"] = "%.1fM",
-                ["gt10M"] = "%.fM",
-                ["gt100M"] = "%.fM",
-                ["gt1B"] = "%.fB",
-            },
-            customHealthFormat = "%CURRENT% / %MAX% (%PERCENT%%)",
+            customHealthFormatFormulas = DefaultCustomHealthFormatFormulas(),
+            customHealthFormat = DEFAULT_CUSTOM_HEALTH_FORMAT,
             showName = true,
-            partyNameFontFamily = "Friz Quadrata TT",
-            partyNameFontSize = 10,
+            partyNameFontFamily = DEFAULT_HEALTHBAR_FONT_FAMILY,
+            partyNameFontSize = DEFAULT_HEALTHBAR_FONT_SIZE,
             partyNameFontStyle = "NONE",
             showPetFrames = true,
         },
