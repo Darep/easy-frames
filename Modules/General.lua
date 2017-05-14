@@ -27,6 +27,8 @@ local db
 local GetFramesHealthBar = EasyFrames.Utils.GetFramesHealthBar
 local GetFramesManaBar = EasyFrames.Utils.GetFramesManaBar
 
+local PartyIterator = EasyFrames.Helpers.Iterator(EasyFrames.Utils.GetPartyFrames())
+
 local DEFAULT_BUFF_SIZE = 17
 
 
@@ -270,16 +272,17 @@ function General:SetTexture()
 
     -- Pet
     if (UnitPowerMax("pet") == 0) then
-        PetFrameTexture:SetTexture(Media:Fetch("frames", "nomana"));
+        PetFrameTexture:SetTexture(Media:Fetch("frames", "nomana"))
     else
-        PetFrameTexture:SetTexture(Media:Fetch("frames", "smalltarget"));
+        PetFrameTexture:SetTexture(Media:Fetch("frames", "smalltarget"))
     end
 
     -- Party
-    for i = 1, 4 do
-        _G["PartyMemberFrame" .. i .. "Texture"]:SetTexture(Media:Fetch("frames", "smalltarget"))
-    end
+    PartyIterator(function(frame)
+        _G[frame:GetName() .. "Texture"]:SetTexture(Media:Fetch("frames", "smalltarget"))
 
+--        _G[frame:GetName() .. "PetFrameTexture"]:SetTexture(Media:Fetch("frames", "smalltarget"))
+    end)
 end
 
 function General:SetLightTexture(value)

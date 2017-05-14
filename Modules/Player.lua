@@ -173,8 +173,6 @@ function Player:UpdateHealthValues(statusBar)
     local frame = statusBar or PlayerFrameHealthBar
 
     if (frame.unit == "player") then
-        print("Player module, udpate in ", frame.unit)
-
         local healthFormat = db.player.healthFormat
         local customHealthFormat = db.player.customHealthFormat
         local customHealthFormatFormulas = db.player.customHealthFormatFormulas

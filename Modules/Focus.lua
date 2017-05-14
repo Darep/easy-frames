@@ -80,8 +80,6 @@ function Focus:UpdateHealthValues(statusBar)
     local frame = statusBar or FocusFrameHealthBar
 
     if (frame.unit == "focus") then
-        print("Focus module, udpate in ", frame.unit)
-
         local healthFormat = db.focus.healthFormat
         local customHealthFormat = db.focus.customHealthFormat
         local customHealthFormatFormulas = db.focus.customHealthFormatFormulas

@@ -81,8 +81,6 @@ function Target:UpdateHealthValues(statusBar)
     local frame = statusBar or TargetFrameHealthBar
 
     if (frame.unit == "target") then
-        print("Target module, udpate in ", frame.unit)
-
         local healthFormat = db.target.healthFormat
         local customHealthFormat = db.target.customHealthFormat
         local customHealthFormatFormulas = db.target.customHealthFormatFormulas

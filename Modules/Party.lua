@@ -38,21 +38,9 @@ function Party:OnEnable()
     self:ShowName(db.party.showName)
     self:SetFrameNameFont()
     self:SetHealthBarsFont()
-    self:ShowPetFrames(db.party.showPetFrames)
+--    self:ShowPetFrames(db.party.showPetFrames)
 
     self:SecureHook("TextStatusBar_UpdateTextStringWithValues", "UpdateHealthValues")
-
-
-    -- DEBUG
-    PartyIterator(function(frame)
-        frame:Show()
-        frame.name:SetText("Мирмидонис")
-
-        _G[frame:GetName() .. "PetFrame"]:Show()
-    end)
-
-    self:SetScale(2)
-    -- DEBUG
 end
 
 function Party:OnProfileChanged(newDB)
@@ -63,7 +51,7 @@ function Party:OnProfileChanged(newDB)
     self:ShowName(db.party.showName)
     self:SetFrameNameFont()
     self:SetHealthBarsFont()
-    self:ShowPetFrames(db.party.showPetFrames)
+--    self:ShowPetFrames(db.party.showPetFrames)
 
     self:UpdateHealthValues()
 end
@@ -78,8 +66,6 @@ function Party:UpdateHealthValues(statusBar)
     local frame = statusBar or PartyMemberFrame1HealthBar
 
     if (frame.unit == "party1" or frame.unit == "party2" or frame.unit == "party3" or frame.unit == "party4") then
-        print("Party module, udpate in ", frame.unit)
-
         local healthFormat = db.party.healthFormat
         local customHealthFormat = db.party.customHealthFormat
         local customHealthFormatFormulas = db.party.customHealthFormatFormulas

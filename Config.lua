@@ -2451,56 +2451,22 @@ local partyOptions = {
             }
         },
 
-        header2 = {
-            type = "header",
-            order = 9,
-            name = L["Show or hide some elements of frame"],
-        },
-
-        showPetFrames = {
-            type = "toggle",
-            order = 10,
-            width = "double",
-            name = L["Show party pet frames"],
-            desc = L["Show party pet frames"],
-            set = function(info, value)
-                setOpt(info, value)
-                EasyFrames:GetModule("Party"):ShowPetFrames(value)
-            end,
-            arg = "party"
-        },
-
---        showAttackBackground = {
---            type = "toggle",
---            order = 11,
---            width = "double",
---            name = L["Show party combat texture (outside the frame)"],
---            desc = L["Show or hide party red background texture (blinking red glow outside the frame in combat)"],
---            set = function(info, value)
---                setOpt(info, value)
---                EasyFrames:GetModule("Party"):ShowAttackBackground(value)
---            end,
---            arg = "party"
+--        header2 = {
+--            type = "header",
+--            order = 9,
+--            name = L["Show or hide some elements of frame"],
 --        },
-
---        attackBackgroundOpacity = {
---            type = "range",
---            order = 12,
---            name = L["Opacity"],
---            desc = L["Opacity of combat texture"],
---            min = 0.1,
---            max = 1,
+--
+--        showPetFrames = {
+--            type = "toggle",
+--            order = 10,
+--            width = "double",
+--            name = L["Show party pet frames"],
+--            desc = L["Show party pet frames"],
 --            set = function(info, value)
 --                setOpt(info, value)
---                EasyFrames:GetModule("Party"):SetAttackBackgroundOpacity(value)
+--                EasyFrames:GetModule("Party"):ShowPetFrames(value)
 --            end,
---            disabled = function()
---                local diabled = EasyFrames.db.profile.party.showAttackBackground
---                if (diabled == false) then
---                    return true
---                end
---            end,
---            isPercent = true,
 --            arg = "party"
 --        },
     },

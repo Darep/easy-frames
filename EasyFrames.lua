@@ -269,8 +269,6 @@ function EasyFrames.Utils.UpdateHealthValues(frame, healthFormat, customHealthFo
     local unit = frame.unit
     local healthbar = frame:GetParent().healthbar
 
-    print(frame:GetName(), unit, healthbar)
-
     if (healthFormat == "1") then
         -- Percent
         if (UnitHealth(unit) > 0) then

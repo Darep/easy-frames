@@ -158,8 +158,6 @@ function Pet:UpdateHealthValues(statusBar)
     local frame = statusBar or PetFrameHealthBar
 
     if (frame.unit == "pet") then
-        print("Pet module, udpate in ", frame.unit)
-
         local healthFormat = db.pet.healthFormat
         local customHealthFormat = db.pet.customHealthFormat
         local customHealthFormatFormulas = db.pet.customHealthFormatFormulas
