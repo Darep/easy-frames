@@ -97,6 +97,9 @@ local defaults = {
             dispelledBuffScale = 1,
             ifPlayerCanDispelBuff = false,
             classPortraits = true,
+            hideOutOfCombat = false,
+            hideOutOfCombatWithFullHP = false,
+            hideOutOfCombatOpacity = 0.1,
             barTexture = "Blizzard",
             brightFrameBorder = 1,
             lightTexture = false,
@@ -330,6 +333,27 @@ function EasyFrames.Utils.UpdateHealthValues(frame, healthFormat, customHealthFo
         end
 
     end
+end
+
+
+
+function EasyFrames.Utils.GetAllFrames()
+    return {
+        PlayerFrame,
+
+        TargetFrame,
+        TargetFrameToT,
+
+        FocusFrame,
+        FocusFrameToT,
+
+        PetFrame,
+
+        PartyMemberFrame1,
+        PartyMemberFrame2,
+        PartyMemberFrame3,
+        PartyMemberFrame4,
+    }
 end
 
 function EasyFrames.Utils.GetFramesHealthBar()

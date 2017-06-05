@@ -164,9 +164,66 @@ local generalOptions = {
                     name = "",
                 },
 
+                hideOutOfCombat = {
+                    type = "toggle",
+                    order = 7,
+                    name = L["Hide frames out of combat"],
+                    desc = L["Hide frames out of combat (for example in resting)"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("General"):HideFramesOutOfCombat()
+                    end,
+                    arg = "general"
+                },
+
+--                hideOutOfCombatWithFullHP = {
+--                    type = "toggle",
+--                    order = 8,
+--                    name = L["Only if HP equal to 100%"],
+--                    desc = L["Hide frames out of combat only if HP equal to 100%"],
+--                    set = function(info, value)
+--                        setOpt(info, value)
+--                        EasyFrames:GetModule("General"):HideFramesOutOfCombat()
+--                    end,
+--                    disabled = function()
+--                        local diabled = EasyFrames.db.profile.general.hideOutOfCombat
+--                        if (diabled == false) then
+--                            return true
+--                        end
+--                    end,
+--                    arg = "general"
+--                },
+
+                hideOutOfCombatOpacity = {
+                    type = "range",
+                    order = 8,
+                    name = L["Opacity of frames"],
+                    desc = L["Opacity of frames when frames is hidden (in out of combat)"],
+                    min = 0,
+                    max = 1,
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("General"):HideFramesOutOfCombat()
+                    end,
+                    disabled = function()
+                        local diabled = EasyFrames.db.profile.general.hideOutOfCombat
+                        if (diabled == false) then
+                            return true
+                        end
+                    end,
+                    isPercent = true,
+                    arg = "general"
+                },
+
+                newLine2 = {
+                    type = "description",
+                    order = 9,
+                    name = "",
+                },
+
                 barTexture = {
                     type = "select",
-                    order = 7,
+                    order = 10,
                     dialogControl = "LSM30_Statusbar",
                     name = L["Texture"],
                     desc = L["Set the frames bar Texture"],
@@ -180,7 +237,7 @@ local generalOptions = {
 
                 lightTexture = {
                     type = "toggle",
-                    order = 8,
+                    order = 11,
                     name = L["Use a light texture"],
                     desc = L["Use a brighter texture (like Blizzard's default texture)"],
                     set = function(info, value)
@@ -192,7 +249,7 @@ local generalOptions = {
 
                 brightFrameBorder = {
                     type = "range",
-                    order = 9,
+                    order = 12,
                     name = L["Bright frames border"],
                     desc = L["You can set frames border bright/dark color. From bright to dark. 0 - dark, 100 - bright"],
                     min = 0,

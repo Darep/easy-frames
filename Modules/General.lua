@@ -20,16 +20,20 @@ local L = LibStub("AceLocale-3.0"):GetLocale("EasyFrames")
 local Media = LibStub("LibSharedMedia-3.0")
 
 local MODULE_NAME = "General"
-local General = EasyFrames:NewModule(MODULE_NAME, "AceHook-3.0")
+local General = EasyFrames:NewModule(MODULE_NAME, "AceHook-3.0", "AceEvent-3.0")
 
 local db
 
 local GetFramesHealthBar = EasyFrames.Utils.GetFramesHealthBar
 local GetFramesManaBar = EasyFrames.Utils.GetFramesManaBar
+local GetAllFrames = EasyFrames.Utils.GetAllFrames
 
 local PartyIterator = EasyFrames.Helpers.Iterator(EasyFrames.Utils.GetPartyFrames())
+local AllFramesIterator = EasyFrames.Helpers.Iterator(GetAllFrames())
 
 local DEFAULT_BUFF_SIZE = 17
+
+local registeredCombatEvent = false
 
 
 local function ClassColored(statusbar, unit)
@@ -139,6 +143,12 @@ function General:OnEnable()
         self:SetFrameBarTexture(db.general.barTexture)
     end
 
+    if (db.general.hideOutOfCombat) then
+        self:HideFramesOutOfCombat()
+
+        registeredCombatEvent = true
+    end
+
     self:SetBrightFramesBorder(db.general.brightFrameBorder)
 end
 
@@ -154,6 +164,8 @@ function General:OnProfileChanged(newDB)
     if (db.general.barTexture ~= "Blizzard") then
         self:SetFrameBarTexture(db.general.barTexture)
     end
+
+    self:HideFramesOutOfCombat()
 
     self:SetBrightFramesBorder(db.general.brightFrameBorder)
 
@@ -195,24 +207,7 @@ end
 
 
 function General:SetClassPortraits()
-    local frames = {
-        PlayerFrame,
-
-        TargetFrame,
-        TargetFrameToT,
-
-        FocusFrame,
-        FocusFrameToT,
-
-        PetFrame,
-
-        PartyMemberFrame1,
-        PartyMemberFrame2,
-        PartyMemberFrame3,
-        PartyMemberFrame4,
-    }
-
-    for _, frame in pairs(frames) do
+    for _, frame in pairs(GetAllFrames()) do
         if frame.portrait then
             ClassPortraits(frame)
         end
@@ -222,6 +217,49 @@ end
 function General:MakeClassPortraits(frame)
     if frame.portrait then
         ClassPortraits(frame)
+    end
+end
+
+function General:CombatStatusEvent(event)
+    if (event == 'PLAYER_REGEN_DISABLED') then
+        -- combat
+        self:HideFramesOutOfCombat(true)
+    else
+        -- out of combat
+        self:HideFramesOutOfCombat()
+    end
+end
+
+function General:HideFramesOutOfCombat(forceShow)
+    local hide = db.general.hideOutOfCombat
+    local opacity = db.general.hideOutOfCombatOpacity
+
+    AllFramesIterator(function(frame)
+        if (hide and not forceShow) then
+            frame:SetAlpha(opacity)
+
+            if (opacity == 0) then
+                if (frame:IsShown()) then
+                    frame:Hide()
+                    frame.__hiddenByAddon__ = true
+                end
+            else
+                if (frame.__hiddenByAddon__) then
+                    frame:Show()
+                end
+            end
+        else
+            frame:SetAlpha(1)
+
+            if (frame.__hiddenByAddon__) then
+                frame:Show()
+            end
+        end
+    end)
+
+    if (hide and not registeredCombatEvent) then
+        self:RegisterEvent("PLAYER_REGEN_DISABLED", "CombatStatusEvent")
+        self:RegisterEvent("PLAYER_REGEN_ENABLED", "CombatStatusEvent")
     end
 end
 

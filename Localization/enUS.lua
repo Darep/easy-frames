@@ -84,6 +84,12 @@ L["Highlight dispelled buffs only if player can dispel them"] = true
 
 L["Class portraits"] = true
 L["Replaces the unit-frame portrait with their class icon"] = true
+L["Hide frames out of combat"] = true
+L["Hide frames out of combat (for example in resting)"] = true
+L["Only if HP equal to 100%"] = true
+L["Hide frames out of combat only if HP equal to 100%"] = true
+L["Opacity of frames"] = true
+L["Opacity of frames when frames is hidden (in out of combat)"] = true
 
 L["Texture"] = true
 L["Set the frames bar Texture"] = true

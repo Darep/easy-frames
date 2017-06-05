@@ -86,6 +86,12 @@ L["Highlight dispelled buffs only if player can dispel them"] = "Подсвеч�
 
 L["Class portraits"] = "Иконка класса в портрете"
 L["Replaces the unit-frame portrait with their class icon"] = "Заменяет портрет фрейма иконкой класса"
+L["Hide frames out of combat"] = "Скрывать фреймы вне боя"
+L["Hide frames out of combat (for example in resting)"] = "Скрывать фреймы вне боя (к примеру, во время отдыха)"
+L["Only if HP equal to 100%"] = "Только если HP игрока равно 100%"
+L["Hide frames out of combat only if HP equal to 100%"] = "Скрывать фреймы вне боя только если HP игрока равно 100%"
+L["Opacity of frames"] = "Прозрачность фреймов"
+L["Opacity of frames when frames is hidden (in out of combat)"] = "Прозрачность фреймов когда фреймы скрыты (вне боя)"
 
 L["Texture"] = "Текстура"
 L["Set the frames bar Texture"] = "Установить текстуру фреймов"
