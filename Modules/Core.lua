@@ -221,7 +221,7 @@ function Core:MoveTargetFrameBars()
     TargetFrameHealthBar.SetPoint = function() end
 
     TargetFrameTextureFrameDeadText:ClearAllPoints()
-    TargetFrameTextureFrameDeadText:SetPoint("CENTER", TargetFrameHealthBar, "CENTER", 0, 0)
+    TargetFrameTextureFrameDeadText:SetPoint("CENTER", TargetFrame, "CENTER", -50, 12)
     TargetFrameTextureFrameDeadText.SetPoint = function() end
 
     TargetFrameManaBar:ClearAllPoints()

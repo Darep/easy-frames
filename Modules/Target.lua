@@ -114,7 +114,8 @@ function Target:ShowNameInsideFrame(value)
     local HealthBarTexts = {
         TargetFrameHealthBar.RightText,
         TargetFrameHealthBar.LeftText,
-        TargetFrameHealthBar.TextString
+        TargetFrameHealthBar.TextString,
+        TargetFrameTextureFrameDeadText
     }
 
     for _, healthBar in pairs(HealthBarTexts) do
