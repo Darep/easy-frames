@@ -11,7 +11,7 @@ function deleteFolderRecursive(path) {
     if( fs.existsSync(path) ) {
         files = fs.readdirSync(path);
         files.forEach(function(file,index){
-            const curPath = path + "/" + file;
+            const curPath = path + '/' + file;
             if(fs.lstatSync(curPath).isDirectory()) { // recurse
                 deleteFolderRecursive(curPath);
             } else { // delete file
@@ -31,7 +31,7 @@ output.on('close', function() {
     console.log(archive.pointer() + ' total bytes');
     console.log('archiver has been finalized and the output file descriptor has closed.');
 
-    deleteFolderRecursive("EasyFrames");
+    deleteFolderRecursive('EasyFrames');
 });
 
 // good practice to catch this error explicitly
@@ -39,7 +39,7 @@ archive.on('error', function(err) {
     throw err;
 });
 
-fs.existsSync("EasyFrames") || fs.mkdirSync("EasyFrames");
+fs.existsSync('EasyFrames') || fs.mkdirSync('EasyFrames');
 
 ncp('Libs', './EasyFrames/Libs');
 ncp('Localization', './EasyFrames/Localization');
@@ -53,7 +53,7 @@ ncp('EasyFrames.toc', './EasyFrames/EasyFrames.toc');
 setTimeout(function() {
     archive.pipe(output);
 
-    archive.glob("EasyFrames/**/*");
+    archive.glob('EasyFrames/**/*');
 
     archive.finalize();
 }, 500);
