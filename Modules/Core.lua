@@ -242,7 +242,7 @@ function Core:MoveFocusFrameBars()
     FocusFrameHealthBar.SetPoint = function() end
 
     FocusFrameTextureFrameDeadText:ClearAllPoints()
-    FocusFrameTextureFrameDeadText:SetPoint("CENTER", FocusFrameHealthBar, "CENTER", 0, 0)
+    FocusFrameTextureFrameDeadText:SetPoint("CENTER", FocusFrame, "CENTER", -50, 12)
     FocusFrameTextureFrameDeadText.SetPoint = function() end
 
     FocusFrameManaBar:ClearAllPoints()

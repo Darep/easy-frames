@@ -113,7 +113,8 @@ function Focus:ShowNameInsideFrame(value)
     local HealthBarTexts = {
         FocusFrameHealthBar.RightText,
         FocusFrameHealthBar.LeftText,
-        FocusFrameHealthBar.TextString
+        FocusFrameHealthBar.TextString,
+        FocusFrameTextureFrameDeadText
     }
 
     for _, healthBar in pairs(HealthBarTexts) do
