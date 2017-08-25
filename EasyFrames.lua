@@ -231,14 +231,6 @@ Media:Register("frames", "rare", "Interface\\AddOns\\EasyFrames\\Textures\\Targe
 Media:Register("frames", "smalltarget", "Interface\\AddOns\\EasyFrames\\Textures\\TargetingFrame\\UI-SmallTargetingFramex")
 Media:Register("frames", "nomana", "Interface\\AddOns\\EasyFrames\\Textures\\TargetingFrame\\UI-SmallTargetingFramex-NoMana")
 
---Media:Register("frames", "default-light", "Interface\\AddOns\\EasyFrames\\Textures\\TargetingFrame\\UI-TargetingFrame-Light")
---Media:Register("frames", "minus-light", "Interface\\AddOns\\EasyFrames\\Textures\\TargetingFrame\\UI-TargetingFrame-Minus-Light")
---Media:Register("frames", "elite-light", "Interface\\AddOns\\EasyFrames\\Textures\\TargetingFrame\\UI-TargetingFrame-Elite-Light")
---Media:Register("frames", "rareelite-light", "Interface\\AddOns\\EasyFrames\\Textures\\TargetingFrame\\UI-TargetingFrame-Rare-Elite-Light")
---Media:Register("frames", "rare-light", "Interface\\AddOns\\EasyFrames\\Textures\\TargetingFrame\\UI-TargetingFrame-Rare-Light")
---Media:Register("frames", "smalltarget-light", "Interface\\AddOns\\EasyFrames\\Textures\\TargetingFrame\\UI-SmallTargetingFramex-Light")
---Media:Register("frames", "nomana-light", "Interface\\AddOns\\EasyFrames\\Textures\\TargetingFrame\\UI-SmallTargetingFramex-NoMana-Light")
-
 
 Media:Register("misc", "player-status", "Interface\\AddOns\\EasyFrames\\Textures\\TargetingFrame\\UI-Player-Status")
 
@@ -327,14 +319,25 @@ function EasyFrames.Utils.UpdateHealthValues(frame, healthFormat, customHealthFo
             Health = CustomReadableNumber(Health, customHealthFormatFormulas, useFullValues)
             HealthMax = CustomReadableNumber(HealthMax, customHealthFormatFormulas, useFullValues)
 
-            local Result = string.gsub(string.gsub(string.gsub(customHealthFormat, "%%PERCENT%%", string.format("%.0f", HealthPercent)), "%%MAX%%", HealthMax), "%%CURRENT%%", Health)
+            local Result = string.gsub(
+                string.gsub(
+                    string.gsub(
+                        customHealthFormat,
+                        "%%PERCENT%%",
+                        string.format("%.0f", HealthPercent)
+                    ),
+                    "%%MAX%%",
+                    HealthMax
+                ),
+                "%%CURRENT%%",
+                Health
+            )
 
             healthbar.TextString:SetText( Result );
         end
 
     end
 end
-
 
 
 function EasyFrames.Utils.GetAllFrames()

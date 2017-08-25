@@ -116,7 +116,7 @@ function Pet:SetScale(value)
     PetFrame:SetScale(value)
 end
 
-function Pet:PreSetMovable(points)
+function Pet:PreSetMovable()
     local frame = PetFrame
 
     frame:SetScript("OnMouseDown", function(frame, button)
