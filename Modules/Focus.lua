@@ -46,7 +46,7 @@ function Focus:OnEnable()
     self:ShowAttackBackground(db.focus.showAttackBackground)
     self:SetAttackBackgroundOpacity(db.focus.attackBackgroundOpacity)
 
-    self:SecureHook("TextStatusBar_UpdateTextStringWithValues", "UpdateHealthValues")
+    self:SecureHook("TextStatusBar_UpdateTextStringWithValues", "UpdateTextStringWithValues")
 end
 
 function Focus:OnProfileChanged(newDB)
@@ -64,7 +64,7 @@ function Focus:OnProfileChanged(newDB)
     self:ShowAttackBackground(db.focus.showAttackBackground)
     self:SetAttackBackgroundOpacity(db.focus.attackBackgroundOpacity)
 
-    self:UpdateHealthValues()
+    self:UpdateTextStringWithValues()
 end
 
 
@@ -76,7 +76,7 @@ function Focus:SetScale(value)
     FocusFrame:SetScale(value)
 end
 
-function Focus:UpdateHealthValues(statusBar)
+function Focus:UpdateTextStringWithValues(statusBar)
     local frame = statusBar or FocusFrameHealthBar
 
     if (frame.unit == "focus") then

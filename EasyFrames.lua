@@ -21,12 +21,13 @@ local Media = LibStub("LibSharedMedia-3.0")
 
 local db
 
-local DEFAULT_HEALTHBAR_FONT_FAMILY = "Friz Quadrata TT"
-local DEFAULT_HEALTHBAR_FONT_SIZE = 10
+local DEFAULT_BAR_FONT_FAMILY = "Friz Quadrata TT"
+local DEFAULT_BAR_FONT_SIZE = 10
+local DEFAULT_BAR_SMALL_FONT_SIZE = 9
 
-local DEFAULT_CUSTOM_HEALTH_FORMAT = "%CURRENT% / %MAX% (%PERCENT%%)"
+local DEFAULT_CUSTOM_FORMAT = "%CURRENT% / %MAX% (%PERCENT%%)"
 
-local DefaultCustomHealthFormatFormulas = function()
+local DefaultCustomFormatFormulas = function()
     return {
         ["gt1T"] = "%.fk",
         ["gt100T"] = "%.fk",
@@ -111,16 +112,25 @@ local defaults = {
 
         player = {
             scaleFrame = 1.2,
+            -- Custom HP format.
             healthFormat = "3",
-            healthBarFontFamily = DEFAULT_HEALTHBAR_FONT_FAMILY,
-            healthBarFontSize = DEFAULT_HEALTHBAR_FONT_SIZE,
+            healthBarFontFamily = DEFAULT_BAR_FONT_FAMILY,
+            healthBarFontSize = DEFAULT_BAR_FONT_SIZE,
             useHealthFormatFullValues = false,
-            customHealthFormatFormulas = DefaultCustomHealthFormatFormulas(),
-            customHealthFormat = DEFAULT_CUSTOM_HEALTH_FORMAT,
+            customHealthFormatFormulas = DefaultCustomFormatFormulas(),
+            customHealthFormat = DEFAULT_CUSTOM_FORMAT,
+            -- Custom mana format.
+            manaFormat = "2",
+            manaBarFontFamily = DEFAULT_BAR_FONT_FAMILY,
+            manaBarFontSize = DEFAULT_BAR_FONT_SIZE,
+            useManaFormatFullValues = false,
+            customManaFormatFormulas = DefaultCustomFormatFormulas(),
+            customManaFormat = DEFAULT_CUSTOM_FORMAT,
+            -- Name
             showName = true,
             showNameInsideFrame = false,
-            playerNameFontFamily = DEFAULT_HEALTHBAR_FONT_FAMILY,
-            playerNameFontSize = DEFAULT_HEALTHBAR_FONT_SIZE,
+            playerNameFontFamily = DEFAULT_BAR_FONT_FAMILY,
+            playerNameFontSize = DEFAULT_BAR_FONT_SIZE,
             playerNameFontStyle = "NONE",
             showHitIndicator = true,
             showSpecialbar = true,
@@ -134,17 +144,26 @@ local defaults = {
 
         target = {
             scaleFrame = 1.2,
+            -- Custom HP format.
             healthFormat = "3",
-            healthBarFontFamily = DEFAULT_HEALTHBAR_FONT_FAMILY,
-            healthBarFontSize = DEFAULT_HEALTHBAR_FONT_SIZE,
+            healthBarFontFamily = DEFAULT_BAR_FONT_FAMILY,
+            healthBarFontSize = DEFAULT_BAR_FONT_SIZE,
             useHealthFormatFullValues = false,
             reverseDirectionLosingHP = false,
-            customHealthFormatFormulas = DefaultCustomHealthFormatFormulas(),
-            customHealthFormat = DEFAULT_CUSTOM_HEALTH_FORMAT,
+            customHealthFormatFormulas = DefaultCustomFormatFormulas(),
+            customHealthFormat = DEFAULT_CUSTOM_FORMAT,
+            -- Custom mana format.
+            manaFormat = "2",
+            manaBarFontFamily = DEFAULT_BAR_FONT_FAMILY,
+            manaBarFontSize = DEFAULT_BAR_FONT_SIZE,
+            useManaFormatFullValues = false,
+            customManaFormatFormulas = DefaultCustomFormatFormulas(),
+            customManaFormat = DEFAULT_CUSTOM_FORMAT,
+            -- Name.
             showName = true,
             showNameInsideFrame = false,
-            targetNameFontFamily = DEFAULT_HEALTHBAR_FONT_FAMILY,
-            targetNameFontSize = DEFAULT_HEALTHBAR_FONT_SIZE,
+            targetNameFontFamily = DEFAULT_BAR_FONT_FAMILY,
+            targetNameFontSize = DEFAULT_BAR_FONT_SIZE,
             targetNameFontStyle = "NONE",
             showToTFrame = true,
             showAttackBackground = false,
@@ -154,17 +173,26 @@ local defaults = {
 
         focus = {
             scaleFrame = 1.2,
+            -- Custom HP format.
             healthFormat = "3",
-            healthBarFontFamily = DEFAULT_HEALTHBAR_FONT_FAMILY,
-            healthBarFontSize = DEFAULT_HEALTHBAR_FONT_SIZE,
+            healthBarFontFamily = DEFAULT_BAR_FONT_FAMILY,
+            healthBarFontSize = DEFAULT_BAR_FONT_SIZE,
             useHealthFormatFullValues = false,
             reverseDirectionLosingHP = false,
-            customHealthFormatFormulas = DefaultCustomHealthFormatFormulas(),
-            customHealthFormat = DEFAULT_CUSTOM_HEALTH_FORMAT,
+            customHealthFormatFormulas = DefaultCustomFormatFormulas(),
+            customHealthFormat = DEFAULT_CUSTOM_FORMAT,
+            -- Custom mana format.
+            manaFormat = "2",
+            manaBarFontFamily = DEFAULT_BAR_FONT_FAMILY,
+            manaBarFontSize = DEFAULT_BAR_FONT_SIZE,
+            useManaFormatFullValues = false,
+            customManaFormatFormulas = DefaultCustomFormatFormulas(),
+            customManaFormat = DEFAULT_CUSTOM_FORMAT,
+            -- Name.
             showName = true,
             showNameInsideFrame = false,
-            focusNameFontFamily = DEFAULT_HEALTHBAR_FONT_FAMILY,
-            focusNameFontSize = DEFAULT_HEALTHBAR_FONT_SIZE,
+            focusNameFontFamily = DEFAULT_BAR_FONT_FAMILY,
+            focusNameFontSize = DEFAULT_BAR_FONT_SIZE,
             focusNameFontStyle = "NONE",
             showToTFrame = true,
             showAttackBackground = false,
@@ -175,15 +203,24 @@ local defaults = {
             scaleFrame = 1,
             lockedMovableFrame = true,
             customPoints = false,
+            -- Custom HP format.
             healthFormat = "2",
-            healthBarFontFamily = DEFAULT_HEALTHBAR_FONT_FAMILY,
-            healthBarFontSize = 9,
+            healthBarFontFamily = DEFAULT_BAR_FONT_FAMILY,
+            healthBarFontSize = DEFAULT_BAR_SMALL_FONT_SIZE,
             useHealthFormatFullValues = false,
-            customHealthFormatFormulas = DefaultCustomHealthFormatFormulas(),
-            customHealthFormat = DEFAULT_CUSTOM_HEALTH_FORMAT,
+            customHealthFormatFormulas = DefaultCustomFormatFormulas(),
+            customHealthFormat = DEFAULT_CUSTOM_FORMAT,
+            -- Custom mana format.
+            manaFormat = "2",
+            manaBarFontFamily = DEFAULT_BAR_FONT_FAMILY,
+            manaBarFontSize = DEFAULT_BAR_SMALL_FONT_SIZE,
+            useManaFormatFullValues = false,
+            customManaFormatFormulas = DefaultCustomFormatFormulas(),
+            customManaFormat = DEFAULT_CUSTOM_FORMAT,
+            -- Name.
             showName = true,
-            petNameFontFamily = DEFAULT_HEALTHBAR_FONT_FAMILY,
-            petNameFontSize = DEFAULT_HEALTHBAR_FONT_SIZE,
+            petNameFontFamily = DEFAULT_BAR_FONT_FAMILY,
+            petNameFontSize = DEFAULT_BAR_FONT_SIZE,
             petNameFontStyle = "NONE",
             showHitIndicator = true,
             showStatusTexture = true,
@@ -193,15 +230,24 @@ local defaults = {
 
         party = {
             scaleFrame = 1.2,
+            -- Custom HP format.
             healthFormat = "2",
-            healthBarFontFamily = DEFAULT_HEALTHBAR_FONT_FAMILY,
-            healthBarFontSize = 9,
+            healthBarFontFamily = DEFAULT_BAR_FONT_FAMILY,
+            healthBarFontSize = DEFAULT_BAR_SMALL_FONT_SIZE,
             useHealthFormatFullValues = false,
-            customHealthFormatFormulas = DefaultCustomHealthFormatFormulas(),
-            customHealthFormat = DEFAULT_CUSTOM_HEALTH_FORMAT,
+            customHealthFormatFormulas = DefaultCustomFormatFormulas(),
+            customHealthFormat = DEFAULT_CUSTOM_FORMAT,
+            -- Custom mana format.
+            manaFormat = "2",
+            manaBarFontFamily = DEFAULT_BAR_FONT_FAMILY,
+            manaBarFontSize = DEFAULT_BAR_FONT_SIZE,
+            useManaFormatFullValues = false,
+            customManaFormatFormulas = DefaultCustomFormatFormulas(),
+            customManaFormat = DEFAULT_CUSTOM_FORMAT,
+            -- Name.
             showName = true,
-            partyNameFontFamily = DEFAULT_HEALTHBAR_FONT_FAMILY,
-            partyNameFontSize = DEFAULT_HEALTHBAR_FONT_SIZE,
+            partyNameFontFamily = DEFAULT_BAR_FONT_FAMILY,
+            partyNameFontSize = DEFAULT_BAR_FONT_SIZE,
             partyNameFontStyle = "NONE",
             showPetFrames = true,
         },
@@ -339,6 +385,65 @@ function EasyFrames.Utils.UpdateHealthValues(frame, healthFormat, customHealthFo
     end
 end
 
+function EasyFrames.Utils.UpdateManaValues(frame, manaFormat, customManaFormat, customManaFormatFormulas, useManaFormatFullValues)
+    local unit = frame.unit
+    local manabar = frame
+
+    if (manaFormat == "1") then
+        -- Percent
+        if (UnitPower(unit) > 0) then
+            local ManaPercent = (UnitPower(unit) / UnitPowerMax(unit)) * 100
+
+            manabar.TextString:SetText(format("%.0f", ManaPercent) .. "%")
+        end
+
+    elseif (manaFormat == "2") then
+        -- Smart
+        if (UnitPowerType(unit) == 0) then --mana
+            manabar.TextString:SetText(string.format("%.0f%%", (UnitPower(unit) / UnitPowerMax(unit)) * 100))
+        elseif (UnitPowerType(unit) == 1 or UnitPowerType(unit) == 2 or UnitPowerType(unit) == 3 or UnitPowerType(unit) == 6) then
+            manabar.TextString:SetText(AbbreviateLargeNumbers(UnitPower(unit)))
+        end
+
+        if (UnitPowerMax(unit) == 0) then
+            manabar.TextString:SetText(" ")
+        end
+
+    elseif (manaFormat == "custom") then
+        -- Own format
+
+        if (UnitPower(unit) > 0) then
+            local Mana = UnitPower(unit)
+            local ManaMax = UnitPowerMax(unit)
+            local ManaPercent = (UnitPower(unit) / UnitPowerMax(unit)) * 100
+
+            local useFullValues = false
+            if (useManaFormatFullValues) then
+                useFullValues = 1
+            end
+
+            Mana = CustomReadableNumber(Mana, customManaFormatFormulas, useFullValues)
+            ManaMax = CustomReadableNumber(ManaMax, customManaFormatFormulas, useFullValues)
+
+            local Result = string.gsub(
+                string.gsub(
+                    string.gsub(
+                        customManaFormat,
+                        "%%PERCENT%%",
+                        string.format("%.0f", ManaPercent)
+                    ),
+                    "%%MAX%%",
+                    ManaMax
+                ),
+                "%%CURRENT%%",
+                Mana
+            )
+
+            manabar.TextString:SetText( Result );
+        end
+
+    end
+end
 
 function EasyFrames.Utils.GetAllFrames()
     return {

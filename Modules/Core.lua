@@ -40,7 +40,7 @@ function Core:OnEnable()
     self:RegisterEvent("UNIT_FACTION", "EventHandler")
 
     self:SecureHook("TargetFrame_CheckClassification", "CheckClassification")
-    self:SecureHook("TextStatusBar_UpdateTextStringWithValues", "UpdateTextStringWithValues")
+--    self:SecureHook("TextStatusBar_UpdateTextStringWithValues", "UpdateTextStringWithValues")
 
     self:MoveFramesNames()
     self:MoveToTFrames()

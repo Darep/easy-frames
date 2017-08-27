@@ -26,6 +26,7 @@ local db
 local originalValues = {}
 
 local UpdateHealthValues = EasyFrames.Utils.UpdateHealthValues
+local UpdateManaValues = EasyFrames.Utils.UpdateManaValues
 
 
 function Player:OnInitialize()
@@ -50,7 +51,7 @@ function Player:OnEnable()
     self:ShowGroupIndicator(db.player.showGroupIndicator)
     self:ShowRoleIcon(db.player.showRoleIcon)
 
-    self:SecureHook("TextStatusBar_UpdateTextStringWithValues", "UpdateHealthValues")
+    self:SecureHook("TextStatusBar_UpdateTextStringWithValues", "UpdateTextStringWithValues")
 end
 
 function Player:OnProfileChanged(newDB)
@@ -70,7 +71,7 @@ function Player:OnProfileChanged(newDB)
     self:ShowGroupIndicator(db.player.showGroupIndicator)
     self:ShowRoleIcon(db.player.showRoleIcon)
 
-    self:UpdateHealthValues()
+    self:UpdateTextStringWithValues()
 end
 
 
@@ -169,16 +170,28 @@ function Player:ShowSpecialbar(value)
     end
 end
 
-function Player:UpdateHealthValues(statusBar)
+function Player:UpdateTextStringWithValues(statusBar)
     local frame = statusBar or PlayerFrameHealthBar
 
     if (frame.unit == "player") then
-        local healthFormat = db.player.healthFormat
-        local customHealthFormat = db.player.customHealthFormat
-        local customHealthFormatFormulas = db.player.customHealthFormatFormulas
-        local useHealthFormatFullValues = db.player.useHealthFormatFullValues
+        if (frame == PlayerFrameHealthBar) then
+            local healthFormat = db.player.healthFormat
+            local customHealthFormat = db.player.customHealthFormat
+            local customHealthFormatFormulas = db.player.customHealthFormatFormulas
+            local useHealthFormatFullValues = db.player.useHealthFormatFullValues
 
-        UpdateHealthValues(frame, healthFormat, customHealthFormat, customHealthFormatFormulas, useHealthFormatFullValues)
+            UpdateHealthValues(frame, healthFormat, customHealthFormat, customHealthFormatFormulas, useHealthFormatFullValues)
+        elseif (frame == PlayerFrameManaBar) then
+
+            print('mana')
+
+            local manaFormat = db.player.manaFormat
+            local customManaFormat = db.player.customManaFormat
+            local customManaFormatFormulas = db.player.customManaFormatFormulas
+            local useManaFormatFullValues = db.player.useManaFormatFullValues
+
+            UpdateManaValues(frame, manaFormat, customManaFormat, customManaFormatFormulas, useManaFormatFullValues)
+        end
     end
 end
 

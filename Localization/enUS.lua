@@ -18,6 +18,7 @@ L["Current + Max"] = true
 L["Current + Max + Percent"] = true
 L["Current + Percent"] = true
 L["Custom format"] = true
+L["Smart"] = true
 
 L["None"] = true
 L["Outline"] = true
@@ -27,9 +28,11 @@ L["Monochrome"] = true
 L["HP and MP bars"] = true
 
 L["Font size"] = true
-L["Healthbar and manabar font size"] = true
+L["Healthbar font size"] = true
+L["Manabar font size"] = true
 L["Font family"] = true
-L["Healthbar and manabar font family"] = true
+L["Healthbar font family"] = true
+L["Manabar font family"] = true
 L["Font style"] = true
 
 L["Reverse the direction of losing health/mana"] = true
@@ -57,6 +60,20 @@ L["You can use patterns:\n\n" ..
     "%MAX% - return maximum of health\n" ..
     "%PERCENT% - return percent of current/max health\n\n" ..
     "All values are returned from formulas. For set abbreviation use formulas' fields"] = true
+
+L["Custom format of mana"] = true
+L["You can set custom mana format. More information about custom mana format you can read on project site.\n\n" ..
+        "Formulas:"] = true
+L["Use full values of mana"] = true
+L["By default all formulas use divider (for value eq 1000 and more it's 1000, for 1 000 000 and more it's 1 000 000, etc).\n\n" ..
+        "If checked formulas will use full values of mana (without divider)"] = true
+L["Displayed mana by pattern"] = true
+L["You can use patterns:\n\n" ..
+        "%CURRENT% - return current mana\n" ..
+        "%MAX% - return maximum of mana\n" ..
+        "%PERCENT% - return percent of current/max mana\n\n" ..
+        "All values are returned from formulas. For set abbreviation use formulas' fields"] = true
+
 
 L["Frames"] = true
 L["Setting for unit frames"] = true
@@ -129,6 +146,8 @@ L["Enable hit indicators"] = true
 L["Show or hide the damage/heal which you take on your unit frame"] = true
 L["Player healthbar text format"] = true
 L["Set the player healthbar text format"] = true
+L["Player manabar text format"] = true
+L["Set the player manabar text format"] = true
 L["Show player specialbar"] = true
 L["Show or hide the player specialbar, like Paladin's holy power, Priest's orbs, Monk's harmony or Warlock's soul shards"] = true
 L["Show player resting icon"] = true

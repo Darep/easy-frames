@@ -18,9 +18,9 @@ L["Custom format"] = "체력 임의설정"
 L["HP and MP bars"] = "체력바와 마나바"
 
 L["Font size"] = "글꼴 크기"
-L["Healthbar and manabar font size"] = "체력바와 마나바 글꼴 크기"
+L["Healthbar font size"] = "체력바와 마나바 글꼴 크기"
 L["Font family"] = "글꼴 집합"
-L["Healthbar and manabar font family"] = "체력바와 마나바 글꼴 집합"
+L["Healthbar font family"] = "체력바와 마나바 글꼴 집합"
 
 L["Reverse the direction of losing health/mana"] = "체력이나 마나 손실 방향 반대로 전환"
 L["By default direction starting from right to left. If checked direction of losing health/mana will be from left to right"] = "기본방향은 오른쪽에서 시작해서 왼쪽. 이 설정을 선택하면 체력이나 마나 손실시 왼쪽에서 오른쪽으로 전환"

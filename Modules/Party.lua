@@ -40,7 +40,7 @@ function Party:OnEnable()
     self:SetHealthBarsFont()
 --    self:ShowPetFrames(db.party.showPetFrames)
 
-    self:SecureHook("TextStatusBar_UpdateTextStringWithValues", "UpdateHealthValues")
+    self:SecureHook("TextStatusBar_UpdateTextStringWithValues", "UpdateTextStringWithValues")
 end
 
 function Party:OnProfileChanged(newDB)
@@ -53,7 +53,7 @@ function Party:OnProfileChanged(newDB)
     self:SetHealthBarsFont()
 --    self:ShowPetFrames(db.party.showPetFrames)
 
-    self:UpdateHealthValues()
+    self:UpdateTextStringWithValues()
 end
 
 function Party:SetScale(value)
@@ -62,7 +62,7 @@ function Party:SetScale(value)
     end)
 end
 
-function Party:UpdateHealthValues(statusBar)
+function Party:UpdateTextStringWithValues(statusBar)
     local frame = statusBar or PartyMemberFrame1HealthBar
 
     if (frame.unit == "party1" or frame.unit == "party2" or frame.unit == "party3" or frame.unit == "party4") then

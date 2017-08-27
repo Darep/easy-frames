@@ -18,9 +18,11 @@ L["Custom format"] = "Benutzerdefiniertes Format"
 L["HP and MP bars"] = "Lebens- und Manabalken"
 
 L["Font size"] = "Schriftgröße"
-L["Healthbar and manabar font size"] = "Schriftgröße von Lebens- und Manabalken"
+L["Healthbar font size"] = "Schriftgröße von Lebens"
+L["Manabar font size"] = "Schriftgröße von Manabalken"
 L["Font family"] = "Schriftart"
-L["Healthbar and manabar font family"] = "Schriftart von Lebens- und Manabalken"
+L["Healthbar font family"] = "Schriftart von Lebens"
+L["Manabar font family"] = "Schriftart von Manabalken"
 L["Font style"] = "Schriftstil"
 
 L["Reverse the direction of losing health/mana"] = "Kehre die Richtung von verlorenem Leben/Mana um"

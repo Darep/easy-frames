@@ -49,7 +49,7 @@ function Pet:OnEnable()
     self:SetAttackBackgroundOpacity(db.pet.attackBackgroundOpacity)
 
     self:SecureHook("PetFrame_Update", "PetFrameUpdate")
-    self:SecureHook("TextStatusBar_UpdateTextStringWithValues", "UpdateHealthValues")
+    self:SecureHook("TextStatusBar_UpdateTextStringWithValues", "UpdateTextStringWithValues")
 end
 
 function Pet:OnProfileChanged(newDB)
@@ -70,7 +70,7 @@ function Pet:OnProfileChanged(newDB)
     self:ShowAttackBackground(db.pet.showAttackBackground)
     self:SetAttackBackgroundOpacity(db.pet.attackBackgroundOpacity)
 
-    self:UpdateHealthValues()
+    self:UpdateTextStringWithValues()
 end
 
 
@@ -154,7 +154,7 @@ function Pet:ResetFramePosition()
     db.pet.customPoints = false
 end
 
-function Pet:UpdateHealthValues(statusBar)
+function Pet:UpdateTextStringWithValues(statusBar)
     local frame = statusBar or PetFrameHealthBar
 
     if (frame.unit == "pet") then

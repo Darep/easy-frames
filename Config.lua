@@ -55,6 +55,14 @@ local function setColor(info, r, g, b)
     EasyFrames:GetModule("General"):SetFramesColored()
 end
 
+local function getDeepOpt(info)
+    local ns, opt = string.split(".", info.arg)
+    local key = info[#info]
+    local val = EasyFrames.db.profile[ns][opt][key]
+
+    return val
+end
+
 local function getOptionName(name)
     return "EasyFrames" .. " - " .. name
 end
@@ -64,6 +72,12 @@ local healthFormat = {
     ["2"] = L["Current + Max"], --2
     ["3"] = L["Current + Max + Percent"], --3
     ["4"] = L["Current + Percent"], --4
+    ["custom"] = L["Custom format"], --custom
+}
+
+local manaFormat = {
+    ["1"] = L["Percent"], --1
+    ["2"] = L["Smart"], --2
     ["custom"] = L["Custom format"], --custom
 }
 
@@ -553,7 +567,7 @@ local playerOptions = {
                     values = healthFormat,
                     set = function(info, value)
                         setOpt(info, value)
-                        EasyFrames:GetModule("Player"):UpdateHealthValues()
+                        EasyFrames:GetModule("Player"):UpdateTextStringWithValues()
                     end,
                     arg = "player"
                 },
@@ -561,7 +575,7 @@ local playerOptions = {
                 healthBarFontFamily = {
                     order = 3,
                     name = L["Font family"],
-                    desc = L["Healthbar and manabar font family"],
+                    desc = L["Healthbar font family"],
                     type = "select",
                     dialogControl = 'LSM30_Font',
                     values = Media:HashTable("font"),
@@ -576,7 +590,49 @@ local playerOptions = {
                     type = "range",
                     order = 4,
                     name = L["Font size"],
-                    desc = L["Healthbar and manabar font size"],
+                    desc = L["Healthbar font size"],
+                    min = MIN_RANGE,
+                    max = MAX_RANGE,
+                    step = 1,
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Player"):SetHealthBarsFont()
+                    end,
+                    arg = "player"
+                },
+
+                manaFormat = {
+                    type = "select",
+                    order = 5,
+                    name = L["Player manabar text format"],
+                    desc = L["Set the player manabar text format"],
+                    values = manaFormat,
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Player"):UpdateTextStringWithValues()
+                    end,
+                    arg = "player"
+                },
+
+                manaBarFontFamily = {
+                    order = 6,
+                    name = L["Font family"],
+                    desc = L["Manabar font family"],
+                    type = "select",
+                    dialogControl = 'LSM30_Font',
+                    values = Media:HashTable("font"),
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Player"):SetHealthBarsFont()
+                    end,
+                    arg = "player"
+                },
+
+                manaBarFontSize = {
+                    type = "range",
+                    order = 7,
+                    name = L["Font size"],
+                    desc = L["Manabar font size"],
                     min = MIN_RANGE,
                     max = MAX_RANGE,
                     step = 1,
@@ -621,19 +677,13 @@ local playerOptions = {
                     order = 3,
                     inline = true,
                     name = "",
-                    get = function(info)
-                        local ns, opt = string.split(".", info.arg)
-                        local key = info[#info]
-                        local val = EasyFrames.db.profile[ns][opt][key]
-
-                        return val
-                    end,
+                    get = getDeepOpt,
                     set = function(info, value)
                         local ns, opt = string.split(".", info.arg)
                         local key = info[#info]
                         EasyFrames.db.profile[ns][opt][key] = value
 
-                        EasyFrames:GetModule("Player"):UpdateHealthValues()
+                        EasyFrames:GetModule("Player"):UpdateTextStringWithValues()
                     end,
                     args = {
                         gt1T = {
@@ -713,7 +763,7 @@ local playerOptions = {
                     arg = "player",
                     set = function(info, value)
                         setOpt(info, value)
-                        EasyFrames:GetModule("Player"):UpdateHealthValues()
+                        EasyFrames:GetModule("Player"):UpdateTextStringWithValues()
                     end,
                 },
 
@@ -729,7 +779,148 @@ local playerOptions = {
                             "All values are returned from formulas. For set abbreviation use formulas' fields"],
                     set = function(info, value)
                         setOpt(info, value)
-                        EasyFrames:GetModule("Player"):UpdateHealthValues()
+                        EasyFrames:GetModule("Player"):UpdateTextStringWithValues()
+                    end,
+                    arg = "player"
+                },
+            }
+        },
+
+        manaFormat = {
+            type = "group",
+            order = 5,
+            inline = true,
+            name = "",
+            hidden = function()
+                local manaFormat = EasyFrames.db.profile.player.manaFormat
+                if (manaFormat == "custom") then
+                    return false
+                end
+
+                return true
+            end,
+            args = {
+                header = {
+                    type = "header",
+                    order = 1,
+                    name = L["Custom format of mana"],
+                },
+
+                desc = {
+                    type = "description",
+                    order = 2,
+                    name = L["You can set custom mana format. More information about custom mana format you can read on project site.\n\n" ..
+                            "Formulas:"],
+                },
+
+                customManaFormatFormulas = {
+                    type = "group",
+                    order = 3,
+                    inline = true,
+                    name = "",
+                    get = getDeepOpt,
+                    set = function(info, value)
+                        local ns, opt = string.split(".", info.arg)
+                        local key = info[#info]
+                        EasyFrames.db.profile[ns][opt][key] = value
+
+                        EasyFrames:GetModule("Player"):UpdateTextStringWithValues(PlayerFrameManaBar)
+                    end,
+                    args = {
+                        gt1T = {
+                            type = "input",
+                            order = 1,
+                            name = L["Value greater than 1000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+
+                            arg = "player.customManaFormatFormulas"
+                        },
+                        gt100T = {
+                            type = "input",
+                            order = 2,
+                            name = L["Value greater than 100 000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+                            arg = "player.customManaFormatFormulas"
+                        },
+
+                        gt1M = {
+                            type = "input",
+                            order = 3,
+                            name = L["Value greater than 1 000 000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+                            arg = "player.customManaFormatFormulas"
+                        },
+
+                        gt10M = {
+                            type = "input",
+                            order = 4,
+                            name = L["Value greater than 10 000 000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+                            arg = "player.customManaFormatFormulas"
+                        },
+
+                        gt100M = {
+                            type = "input",
+                            order = 5,
+                            name = L["Value greater than 100 000 000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+                            arg = "player.customManaFormatFormulas"
+                        },
+
+                        gt1B = {
+                            type = "input",
+                            order = 6,
+                            name = L["Value greater than 1 000 000 000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+                            arg = "player.customManaFormatFormulas"
+                        },
+                    }
+                },
+
+                useManaFormatFullValues = {
+                    type = "toggle",
+                    order = 4,
+                    name = L["Use full values of mana"],
+                    desc = L["By default all formulas use divider (for value eq 1000 and more it's 1000, for 1 000 000 and more it's 1 000 000, etc).\n\n" ..
+                            "If checked formulas will use full values of mana (without divider)"],
+                    arg = "player",
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Player"):UpdateTextStringWithValues(PlayerFrameManaBar)
+                    end,
+                },
+
+                customManaFormat = {
+                    type = "input",
+                    order = 5,
+                    width = "double",
+                    name = L["Displayed mana by pattern"],
+                    desc = L["You can use patterns:\n\n" ..
+                            "%CURRENT% - return current mana\n" ..
+                            "%MAX% - return maximum of mana\n" ..
+                            "%PERCENT% - return percent of current/max mana\n\n" ..
+                            "All values are returned from formulas. For set abbreviation use formulas' fields"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Player"):UpdateTextStringWithValues(PlayerFrameManaBar)
                     end,
                     arg = "player"
                 },
@@ -738,7 +929,7 @@ local playerOptions = {
 
         frameName = {
             type = "group",
-            order = 5,
+            order = 6,
             inline = true,
             name = "",
             args = {
@@ -847,122 +1038,131 @@ local playerOptions = {
             }
         },
 
-        header2 = {
-            type = "header",
-            order = 6,
-            name = L["Show or hide some elements of frame"],
-        },
-
-        showHitIndicator = {
-            type = "toggle",
+        showHideElements = {
+            type = "group",
             order = 7,
-            width = "double",
-            name = L["Enable hit indicators"],
-            desc = L["Show or hide the damage/heal which you take on your unit frame"],
-            set = function(info, value)
-                setOpt(info, value)
-                EasyFrames:GetModule("Player"):ShowHitIndicator(value)
-            end,
-            arg = "player"
-        },
+            inline = true,
+            name = "",
+            args = {
+                header = {
+                    type = "header",
+                    order = 1,
+                    name = L["Show or hide some elements of frame"],
+                },
 
-        showSpecialbar = {
-            type = "toggle",
-            order = 8,
-            width = "double",
-            name = L["Show player specialbar"],
-            desc = L["Show or hide the player specialbar, like Paladin's holy power, Priest's orbs, Monk's harmony or Warlock's soul shards"],
-            set = function(info, value)
-                setOpt(info, value)
-                EasyFrames:GetModule("Player"):ShowSpecialbar(value)
-            end,
-            arg = "player"
-        },
+                showHitIndicator = {
+                    type = "toggle",
+                    order = 2,
+                    width = "double",
+                    name = L["Enable hit indicators"],
+                    desc = L["Show or hide the damage/heal which you take on your unit frame"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Player"):ShowHitIndicator(value)
+                    end,
+                    arg = "player"
+                },
 
-        showRestIcon = {
-            type = "toggle",
-            order = 9,
-            width = "double",
-            name = L["Show player resting icon"],
-            desc = L["Show or hide player resting icon when player is resting (e.g. in the tavern or in the capital)"],
-            set = function(info, value)
-                setOpt(info, value)
-                EasyFrames:GetModule("Player"):ShowRestIcon(value)
-            end,
-            arg = "player"
-        },
+                showSpecialbar = {
+                    type = "toggle",
+                    order = 3,
+                    width = "double",
+                    name = L["Show player specialbar"],
+                    desc = L["Show or hide the player specialbar, like Paladin's holy power, Priest's orbs, Monk's harmony or Warlock's soul shards"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Player"):ShowSpecialbar(value)
+                    end,
+                    arg = "player"
+                },
 
-        showStatusTexture = {
-            type = "toggle",
-            order = 10,
-            width = "double",
-            name = L["Show player status texture (inside the frame)"],
-            desc = L["Show or hide player status texture (blinking glow inside the frame when player is resting or in combat)"],
-            set = function(info, value)
-                setOpt(info, value)
-                EasyFrames:GetModule("Player"):ShowStatusTexture(value)
-            end,
-            arg = "player"
-        },
+                showRestIcon = {
+                    type = "toggle",
+                    order = 4,
+                    width = "double",
+                    name = L["Show player resting icon"],
+                    desc = L["Show or hide player resting icon when player is resting (e.g. in the tavern or in the capital)"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Player"):ShowRestIcon(value)
+                    end,
+                    arg = "player"
+                },
 
-        showAttackBackground = {
-            type = "toggle",
-            order = 11,
-            width = "double",
-            name = L["Show player combat texture (outside the frame)"],
-            desc = L["Show or hide player red background texture (blinking red glow outside the frame in combat)"],
-            set = function(info, value)
-                setOpt(info, value)
-                EasyFrames:GetModule("Player"):ShowAttackBackground(value)
-            end,
-            arg = "player"
-        },
+                showStatusTexture = {
+                    type = "toggle",
+                    order = 5,
+                    width = "double",
+                    name = L["Show player status texture (inside the frame)"],
+                    desc = L["Show or hide player status texture (blinking glow inside the frame when player is resting or in combat)"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Player"):ShowStatusTexture(value)
+                    end,
+                    arg = "player"
+                },
 
-        attackBackgroundOpacity = {
-            type = "range",
-            order = 12,
-            name = L["Opacity"],
-            desc = L["Opacity of combat texture"],
-            min = 0.1,
-            max = 1,
-            set = function(info, value)
-                setOpt(info, value)
-                EasyFrames:GetModule("Player"):SetAttackBackgroundOpacity(value)
-            end,
-            disabled = function()
-                local diabled = EasyFrames.db.profile.player.showAttackBackground
-                if (diabled == false) then
-                    return true
-                end
-            end,
-            isPercent = true,
-            arg = "player"
-        },
+                showAttackBackground = {
+                    type = "toggle",
+                    order = 6,
+                    width = "double",
+                    name = L["Show player combat texture (outside the frame)"],
+                    desc = L["Show or hide player red background texture (blinking red glow outside the frame in combat)"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Player"):ShowAttackBackground(value)
+                    end,
+                    arg = "player"
+                },
 
-        showGroupIndicator = {
-            type = "toggle",
-            order = 13,
-            width = "double",
-            name = L["Show player group number"],
-            desc = L["Show or hide player group number when player is in a raid group (over portrait)"],
-            set = function(info, value)
-                setOpt(info, value)
-                EasyFrames:GetModule("Player"):ShowGroupIndicator(value)
-            end,
-            arg = "player"
-        },
+                attackBackgroundOpacity = {
+                    type = "range",
+                    order = 7,
+                    name = L["Opacity"],
+                    desc = L["Opacity of combat texture"],
+                    min = 0.1,
+                    max = 1,
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Player"):SetAttackBackgroundOpacity(value)
+                    end,
+                    disabled = function()
+                        local diabled = EasyFrames.db.profile.player.showAttackBackground
+                        if (diabled == false) then
+                            return true
+                        end
+                    end,
+                    isPercent = true,
+                    arg = "player"
+                },
 
-        showRoleIcon = {
-            type = "toggle",
-            order = 14,
-            width = "double",
-            name = L["Show player role icon"],
-            desc = L["Show or hide player role icon when player is in a group"],
-            set = function(info, value)
-                setOpt(info, value)
-                EasyFrames:GetModule("Player"):ShowRoleIcon(value)
-            end,
-            arg = "player"
+                showGroupIndicator = {
+                    type = "toggle",
+                    order = 8,
+                    width = "double",
+                    name = L["Show player group number"],
+                    desc = L["Show or hide player group number when player is in a raid group (over portrait)"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Player"):ShowGroupIndicator(value)
+                    end,
+                    arg = "player"
+                },
+
+                showRoleIcon = {
+                    type = "toggle",
+                    order = 9,
+                    width = "double",
+                    name = L["Show player role icon"],
+                    desc = L["Show or hide player role icon when player is in a group"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Player"):ShowRoleIcon(value)
+                    end,
+                    arg = "player"
+                },
+
+            }
         },
     },
 }
@@ -1007,7 +1207,7 @@ local targetOptions = {
             values = healthFormat,
             set = function(info, value)
                 setOpt(info, value)
-                EasyFrames:GetModule("Target"):UpdateHealthValues()
+                EasyFrames:GetModule("Target"):UpdateTextStringWithValues()
             end,
             arg = "target"
         },
@@ -1015,7 +1215,7 @@ local targetOptions = {
         healthBarFontFamily = {
             order = 5,
             name = L["Font family"],
-            desc = L["Healthbar and manabar font family"],
+            desc = L["Healthbar font family"],
             type = "select",
             dialogControl = 'LSM30_Font',
             values = Media:HashTable("font"),
@@ -1030,7 +1230,7 @@ local targetOptions = {
             type = "range",
             order = 6,
             name = L["Font size"],
-            desc = L["Healthbar and manabar font size"],
+            desc = L["Healthbar font size"],
             min = MIN_RANGE,
             max = MAX_RANGE,
             step = 1,
@@ -1087,19 +1287,13 @@ local targetOptions = {
                     order = 3,
                     inline = true,
                     name = "",
-                    get = function(info)
-                        local ns, opt = string.split(".", info.arg)
-                        local key = info[#info]
-                        local val = EasyFrames.db.profile[ns][opt][key]
-
-                        return val
-                    end,
+                    get = getDeepOpt,
                     set = function(info, value)
                         local ns, opt = string.split(".", info.arg)
                         local key = info[#info]
                         EasyFrames.db.profile[ns][opt][key] = value
 
-                        EasyFrames:GetModule("Target"):UpdateHealthValues()
+                        EasyFrames:GetModule("Target"):UpdateTextStringWithValues()
                     end,
                     args = {
                         gt1T = {
@@ -1179,7 +1373,7 @@ local targetOptions = {
                     arg = "target",
                     set = function(info, value)
                         setOpt(info, value)
-                        EasyFrames:GetModule("Target"):UpdateHealthValues()
+                        EasyFrames:GetModule("Target"):UpdateTextStringWithValues()
                     end,
                 },
 
@@ -1195,7 +1389,7 @@ local targetOptions = {
                             "All values are returned from formulas. For set abbreviation use formulas' fields"],
                     set = function(info, value)
                         setOpt(info, value)
-                        EasyFrames:GetModule("Target"):UpdateHealthValues()
+                        EasyFrames:GetModule("Target"):UpdateTextStringWithValues()
                     end,
                     arg = "target"
                 },
@@ -1421,7 +1615,7 @@ local focusOptions = {
             values = healthFormat,
             set = function(info, value)
                 setOpt(info, value)
-                EasyFrames:GetModule("Focus"):UpdateHealthValues()
+                EasyFrames:GetModule("Focus"):UpdateTextStringWithValues()
             end,
             arg = "focus"
         },
@@ -1429,7 +1623,7 @@ local focusOptions = {
         healthBarFontFamily = {
             order = 5,
             name = L["Font family"],
-            desc = L["Healthbar and manabar font family"],
+            desc = L["Healthbar font family"],
             type = "select",
             dialogControl = 'LSM30_Font',
             values = Media:HashTable("font"),
@@ -1444,7 +1638,7 @@ local focusOptions = {
             type = "range",
             order = 6,
             name = L["Font size"],
-            desc = L["Healthbar and manabar font size"],
+            desc = L["Healthbar font size"],
             min = MIN_RANGE,
             max = MAX_RANGE,
             step = 1,
@@ -1500,19 +1694,13 @@ local focusOptions = {
                     order = 3,
                     inline = true,
                     name = "",
-                    get = function(info)
-                        local ns, opt = string.split(".", info.arg)
-                        local key = info[#info]
-                        local val = EasyFrames.db.profile[ns][opt][key]
-
-                        return val
-                    end,
+                    get = getDeepOpt,
                     set = function(info, value)
                         local ns, opt = string.split(".", info.arg)
                         local key = info[#info]
                         EasyFrames.db.profile[ns][opt][key] = value
 
-                        EasyFrames:GetModule("Focus"):UpdateHealthValues()
+                        EasyFrames:GetModule("Focus"):UpdateTextStringWithValues()
                     end,
                     args = {
                         gt1T = {
@@ -1592,7 +1780,7 @@ local focusOptions = {
                     arg = "focus",
                     set = function(info, value)
                         setOpt(info, value)
-                        EasyFrames:GetModule("Focus"):UpdateHealthValues()
+                        EasyFrames:GetModule("Focus"):UpdateTextStringWithValues()
                     end,
                 },
 
@@ -1608,7 +1796,7 @@ local focusOptions = {
                             "All values are returned from formulas. For set abbreviation use formulas' fields"],
                     set = function(info, value)
                         setOpt(info, value)
-                        EasyFrames:GetModule("Focus"):UpdateHealthValues()
+                        EasyFrames:GetModule("Focus"):UpdateTextStringWithValues()
                     end,
                     arg = "focus"
                 },
@@ -1848,7 +2036,7 @@ local petOptions = {
                     values = healthFormat,
                     set = function(info, value)
                         setOpt(info, value)
-                        EasyFrames:GetModule("Pet"):UpdateHealthValues()
+                        EasyFrames:GetModule("Pet"):UpdateTextStringWithValues()
                     end,
                     arg = "pet"
                 },
@@ -1856,7 +2044,7 @@ local petOptions = {
                 healthBarFontFamily = {
                     order = 3,
                     name = L["Font family"],
-                    desc = L["Healthbar and manabar font family"],
+                    desc = L["Healthbar font family"],
                     type = "select",
                     dialogControl = 'LSM30_Font',
                     values = Media:HashTable("font"),
@@ -1871,7 +2059,7 @@ local petOptions = {
                     type = "range",
                     order = 4,
                     name = L["Font size"],
-                    desc = L["Healthbar and manabar font size"],
+                    desc = L["Healthbar font size"],
                     min = MIN_RANGE,
                     max = MAX_RANGE,
                     step = 1,
@@ -1916,19 +2104,13 @@ local petOptions = {
                     order = 3,
                     inline = true,
                     name = "",
-                    get = function(info)
-                        local ns, opt = string.split(".", info.arg)
-                        local key = info[#info]
-                        local val = EasyFrames.db.profile[ns][opt][key]
-
-                        return val
-                    end,
+                    get = getDeepOpt,
                     set = function(info, value)
                         local ns, opt = string.split(".", info.arg)
                         local key = info[#info]
                         EasyFrames.db.profile[ns][opt][key] = value
 
-                        EasyFrames:GetModule("Pet"):UpdateHealthValues()
+                        EasyFrames:GetModule("Pet"):UpdateTextStringWithValues()
                     end,
                     args = {
                         gt1T = {
@@ -2008,7 +2190,7 @@ local petOptions = {
                     arg = "pet",
                     set = function(info, value)
                         setOpt(info, value)
-                        EasyFrames:GetModule("Pet"):UpdateHealthValues()
+                        EasyFrames:GetModule("Pet"):UpdateTextStringWithValues()
                     end,
                 },
 
@@ -2024,7 +2206,7 @@ local petOptions = {
                             "All values are returned from formulas. For set abbreviation use formulas' fields"],
                     set = function(info, value)
                         setOpt(info, value)
-                        EasyFrames:GetModule("Pet"):UpdateHealthValues()
+                        EasyFrames:GetModule("Pet"):UpdateTextStringWithValues()
                     end,
                     arg = "pet"
                 },
@@ -2234,7 +2416,7 @@ local partyOptions = {
             values = healthFormat,
             set = function(info, value)
                 setOpt(info, value)
-                EasyFrames:GetModule("Party"):UpdateHealthValues()
+                EasyFrames:GetModule("Party"):UpdateTextStringWithValues()
             end,
             arg = "party"
         },
@@ -2242,7 +2424,7 @@ local partyOptions = {
         healthBarFontFamily = {
             order = 5,
             name = L["Font family"],
-            desc = L["Healthbar and manabar font family"],
+            desc = L["Healthbar font family"],
             type = "select",
             dialogControl = 'LSM30_Font',
             values = Media:HashTable("font"),
@@ -2257,7 +2439,7 @@ local partyOptions = {
             type = "range",
             order = 6,
             name = L["Font size"],
-            desc = L["Healthbar and manabar font size"],
+            desc = L["Healthbar font size"],
             min = MIN_RANGE,
             max = MAX_RANGE,
             step = 1,
@@ -2300,19 +2482,13 @@ local partyOptions = {
                     order = 3,
                     inline = true,
                     name = "",
-                    get = function(info)
-                        local ns, opt = string.split(".", info.arg)
-                        local key = info[#info]
-                        local val = EasyFrames.db.profile[ns][opt][key]
-
-                        return val
-                    end,
+                    get = getDeepOpt,
                     set = function(info, value)
                         local ns, opt = string.split(".", info.arg)
                         local key = info[#info]
                         EasyFrames.db.profile[ns][opt][key] = value
 
-                        EasyFrames:GetModule("Party"):UpdateHealthValues()
+                        EasyFrames:GetModule("Party"):UpdateTextStringWithValues()
                     end,
                     args = {
                         gt1T = {
@@ -2392,7 +2568,7 @@ local partyOptions = {
                     arg = "party",
                     set = function(info, value)
                         setOpt(info, value)
-                        EasyFrames:GetModule("Party"):UpdateHealthValues()
+                        EasyFrames:GetModule("Party"):UpdateTextStringWithValues()
                     end,
                 },
 
@@ -2408,7 +2584,7 @@ local partyOptions = {
                             "All values are returned from formulas. For set abbreviation use formulas' fields"],
                     set = function(info, value)
                         setOpt(info, value)
-                        EasyFrames:GetModule("Party"):UpdateHealthValues()
+                        EasyFrames:GetModule("Party"):UpdateTextStringWithValues()
                     end,
                     arg = "party"
                 },

@@ -14,13 +14,16 @@ L["Current + Max"] = "Текущее + Макс"
 L["Current + Max + Percent"] = "Текущее + Макс + Проценты"
 L["Current + Percent"] = "Текущее + Проценты"
 L["Custom format"] = "Свой формат"
+L["Smart"] = "Умный"
 
 L["HP and MP bars"] = "Фреймы здоровья и маны"
 
 L["Font size"] = "Размер шрифта"
-L["Healthbar and manabar font size"] = "Размер шрифта фреймов здоровья и маны"
+L["Healthbar font size"] = "Размер шрифта фреймов здоровья"
+L["Manabar font size"] = "Размер шрифта фреймов маны"
 L["Font family"] = "Шрифт"
-L["Healthbar and manabar font family"] = "Шрифт фреймов здоровья и маны"
+L["Healthbar font family"] = "Шрифт фреймов здоровья"
+L["Manabar font family"] = "Шрифт фреймов маны"
 L["Font style"] = "Стиль шрифта"
 
 L["Reverse the direction of losing health/mana"] = "Изменить направление потери здоровья/маны"
