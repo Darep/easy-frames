@@ -42,6 +42,7 @@ function Player:OnEnable()
     self:ShowName(db.player.showName)
     self:SetFrameNameFont()
     self:SetHealthBarsFont()
+    self:SetManaBarsFont()
     self:ShowHitIndicator(db.player.showHitIndicator)
     self:ShowSpecialbar(db.player.showSpecialbar)
     self:ShowRestIcon(db.player.showRestIcon)
@@ -62,6 +63,7 @@ function Player:OnProfileChanged(newDB)
     self:ShowName(db.player.showName)
     self:SetFrameNameFont()
     self:SetHealthBarsFont()
+    self:SetManaBarsFont()
     self:ShowHitIndicator(db.player.showHitIndicator)
     self:ShowSpecialbar(db.player.showSpecialbar)
     self:ShowRestIcon(db.player.showRestIcon)
@@ -182,9 +184,6 @@ function Player:UpdateTextStringWithValues(statusBar)
 
             UpdateHealthValues(frame, healthFormat, customHealthFormat, customHealthFormatFormulas, useHealthFormatFullValues)
         elseif (frame == PlayerFrameManaBar) then
-
-            print('mana')
-
             local manaFormat = db.player.manaFormat
             local customManaFormat = db.player.customManaFormat
             local customManaFormatFormulas = db.player.customManaFormatFormulas
@@ -200,6 +199,12 @@ function Player:SetHealthBarsFont()
     local fontFamily = Media:Fetch("font", db.player.healthBarFontFamily)
 
     PlayerFrameHealthBar.TextString:SetFont(fontFamily, fontSize, "OUTLINE")
+end
+
+function Player:SetManaBarsFont()
+    local fontSize = db.player.manaBarFontSize
+    local fontFamily = Media:Fetch("font", db.player.manaBarFontFamily)
+
     PlayerFrameManaBar.TextString:SetFont(fontFamily, fontSize, "OUTLINE")
 end
 

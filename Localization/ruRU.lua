@@ -61,6 +61,24 @@ L["You can use patterns:\n\n" ..
             "%PERCENT% - возвращает проценты от текущее/максимальное значение здоровья\n\n" ..
             "Все значения возвращаются с формул. Для установки аббревиатур используйте поля формул"
 
+L["Custom format of mana"] = "Свой формат маны"
+L["You can set custom mana format. More information about custom mana format you can read on project site.\n\n" ..
+        "Formulas:"] = "Вы можете установить свой формат маны. Больше информации о данном формате маны можно прочитать на сайте проекта.\n\n" ..
+        "Формулы:"
+L["Use full values of mana"] = "Использовать полные значения маны"
+L["By default all formulas use divider (for value eq 1000 and more it's 1000, for 1 000 000 and more it's 1 000 000, etc).\n\n" ..
+        "If checked formulas will use full values of mana (without divider)"] = true
+L["Displayed mana by pattern"] = "Отображение маны по шаблону"
+L["You can use patterns:\n\n" ..
+        "%CURRENT% - return current mana\n" ..
+        "%MAX% - return maximum of mana\n" ..
+        "%PERCENT% - return percent of current/max mana\n\n" ..
+        "All values are returned from formulas. For set abbreviation use formulas' fields"] = "Вы можете использовать шаблоны:\n\n" ..
+        "%CURRENT% - возвращает текущее значение маны\n" ..
+        "%MAX% - возвращает максимальное значение маны\n" ..
+        "%PERCENT% - возвращает проценты от текущее/максимальное значение маны\n\n" ..
+        "Все значения возвращаются с формул. Для установки аббревиатур используйте поля формул"
+
 L["Frames"] = "Фреймы"
 L["Setting for unit frames"] = "Настройки фреймов"
 
@@ -134,6 +152,8 @@ L["Enable hit indicators"] = "Показывать входящий урон и 
 L["Show or hide the damage/heal which you take on your unit frame"] = "Показывать получаемый урон/исцеление на фрейме игрока"
 L["Player healthbar text format"] = "Формат HP игрока"
 L["Set the player healthbar text format"] = "Установить формат отображения здоровья игрока"
+L["Player manabar text format"] = "Формат маны игрока"
+L["Set the player manabar text format"] = "Установить формат отображения маны игрока"
 L["Show player specialbar"] = "Показывать фрейм классового ресурса"
 L["Show or hide the player specialbar, like Paladin's holy power, Priest's orbs, Monk's harmony or Warlock's soul shards"] = "Показывать фрейм классового ресурса, такие как Энергия Света паладинов, Безумие пристов, Ци монахов, Осколки души чернокнижников и другие"
 L["Show player resting icon"] = "Показывать иконку отдыха игрока"

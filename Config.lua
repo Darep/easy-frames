@@ -609,7 +609,7 @@ local playerOptions = {
                     values = manaFormat,
                     set = function(info, value)
                         setOpt(info, value)
-                        EasyFrames:GetModule("Player"):UpdateTextStringWithValues()
+                        EasyFrames:GetModule("Player"):UpdateTextStringWithValues(PlayerFrameManaBar)
                     end,
                     arg = "player"
                 },
@@ -623,7 +623,7 @@ local playerOptions = {
                     values = Media:HashTable("font"),
                     set = function(info, value)
                         setOpt(info, value)
-                        EasyFrames:GetModule("Player"):SetHealthBarsFont()
+                        EasyFrames:GetModule("Player"):SetManaBarsFont()
                     end,
                     arg = "player"
                 },
@@ -638,7 +638,7 @@ local playerOptions = {
                     step = 1,
                     set = function(info, value)
                         setOpt(info, value)
-                        EasyFrames:GetModule("Player"):SetHealthBarsFont()
+                        EasyFrames:GetModule("Player"):SetManaBarsFont()
                     end,
                     arg = "player"
                 },
