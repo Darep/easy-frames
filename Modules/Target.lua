@@ -26,6 +26,7 @@ local db
 local originalValues = {}
 
 local UpdateHealthValues = EasyFrames.Utils.UpdateHealthValues
+local UpdateManaValues = EasyFrames.Utils.UpdateManaValues
 
 
 function Target:OnInitialize()
@@ -41,6 +42,7 @@ function Target:OnEnable()
     self:ShowName(db.target.showName)
     self:SetFrameNameFont()
     self:SetHealthBarsFont()
+    self:SetManaBarsFont()
 
     self:ReverseDirectionLosingHP(db.target.reverseDirectionLosingHP)
 
@@ -59,6 +61,7 @@ function Target:OnProfileChanged(newDB)
     self:ShowName(db.target.showName)
     self:SetFrameNameFont()
     self:SetHealthBarsFont()
+    self:SetManaBarsFont()
 
     self:ReverseDirectionLosingHP(db.target.reverseDirectionLosingHP)
 
@@ -81,12 +84,21 @@ function Target:UpdateTextStringWithValues(statusBar)
     local frame = statusBar or TargetFrameHealthBar
 
     if (frame.unit == "target") then
-        local healthFormat = db.target.healthFormat
-        local customHealthFormat = db.target.customHealthFormat
-        local customHealthFormatFormulas = db.target.customHealthFormatFormulas
-        local useHealthFormatFullValues = db.target.useHealthFormatFullValues
+        if (frame == TargetFrameHealthBar) then
+            local healthFormat = db.target.healthFormat
+            local customHealthFormat = db.target.customHealthFormat
+            local customHealthFormatFormulas = db.target.customHealthFormatFormulas
+            local useHealthFormatFullValues = db.target.useHealthFormatFullValues
 
-        UpdateHealthValues(frame, healthFormat, customHealthFormat, customHealthFormatFormulas, useHealthFormatFullValues)
+            UpdateHealthValues(frame, healthFormat, customHealthFormat, customHealthFormatFormulas, useHealthFormatFullValues)
+        elseif (frame == TargetFrameManaBar) then
+            local manaFormat = db.target.manaFormat
+            local customManaFormat = db.target.customManaFormat
+            local customManaFormatFormulas = db.target.customManaFormatFormulas
+            local useManaFormatFullValues = db.target.useManaFormatFullValues
+
+            UpdateManaValues(frame, manaFormat, customManaFormat, customManaFormatFormulas, useManaFormatFullValues)
+        end
     end
 end
 
@@ -138,6 +150,12 @@ function Target:SetHealthBarsFont()
     local fontFamily = Media:Fetch("font", db.target.healthBarFontFamily)
 
     TargetFrameHealthBar.TextString:SetFont(fontFamily, fontSize, "OUTLINE")
+end
+
+function Target:SetManaBarsFont()
+    local fontSize = db.target.manaBarFontSize
+    local fontFamily = Media:Fetch("font", db.target.manaBarFontFamily)
+
     TargetFrameManaBar.TextString:SetFont(fontFamily, fontSize, "OUTLINE")
 end
 
