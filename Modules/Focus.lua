@@ -26,6 +26,7 @@ local db
 local originalValues = {}
 
 local UpdateHealthValues = EasyFrames.Utils.UpdateHealthValues
+local UpdateManaValues = EasyFrames.Utils.UpdateManaValues
 
 function Focus:OnInitialize()
     self.db = EasyFrames.db
@@ -40,6 +41,7 @@ function Focus:OnEnable()
     self:ShowName(db.focus.showName)
     self:SetFrameNameFont()
     self:SetHealthBarsFont()
+    self:SetManaBarsFont()
 
     self:ReverseDirectionLosingHP(db.focus.reverseDirectionLosingHP)
 
@@ -58,6 +60,7 @@ function Focus:OnProfileChanged(newDB)
     self:ShowName(db.focus.showName)
     self:SetFrameNameFont()
     self:SetHealthBarsFont()
+    self:SetManaBarsFont()
 
     self:ReverseDirectionLosingHP(db.focus.reverseDirectionLosingHP)
 
@@ -80,12 +83,21 @@ function Focus:UpdateTextStringWithValues(statusBar)
     local frame = statusBar or FocusFrameHealthBar
 
     if (frame.unit == "focus") then
-        local healthFormat = db.focus.healthFormat
-        local customHealthFormat = db.focus.customHealthFormat
-        local customHealthFormatFormulas = db.focus.customHealthFormatFormulas
-        local useHealthFormatFullValues = db.focus.useHealthFormatFullValues
+        if (frame == FocusFrameHealthBar) then
+            local healthFormat = db.focus.healthFormat
+            local customHealthFormat = db.focus.customHealthFormat
+            local customHealthFormatFormulas = db.focus.customHealthFormatFormulas
+            local useHealthFormatFullValues = db.focus.useHealthFormatFullValues
 
-        UpdateHealthValues(frame, healthFormat, customHealthFormat, customHealthFormatFormulas, useHealthFormatFullValues)
+            UpdateHealthValues(frame, healthFormat, customHealthFormat, customHealthFormatFormulas, useHealthFormatFullValues)
+        elseif (frame == FocusFrameManaBar) then
+            local manaFormat = db.focus.manaFormat
+            local customManaFormat = db.focus.customManaFormat
+            local customManaFormatFormulas = db.focus.customManaFormatFormulas
+            local useManaFormatFullValues = db.focus.useManaFormatFullValues
+
+            UpdateManaValues(frame, manaFormat, customManaFormat, customManaFormatFormulas, useManaFormatFullValues)
+        end
     end
 end
 
@@ -137,6 +149,12 @@ function Focus:SetHealthBarsFont()
     local fontFamily = Media:Fetch("font", db.focus.healthBarFontFamily)
 
     FocusFrameHealthBar.TextString:SetFont(fontFamily, fontSize, "OUTLINE")
+end
+
+function Focus:SetManaBarsFont()
+    local fontSize = db.focus.manaBarFontSize
+    local fontFamily = Media:Fetch("font", db.focus.manaBarFontFamily)
+
     FocusFrameManaBar.TextString:SetFont(fontFamily, fontSize, "OUTLINE")
 end
 

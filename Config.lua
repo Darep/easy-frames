@@ -1799,70 +1799,120 @@ local focusOptions = {
             arg = "focus"
         },
 
-        header = {
-            type = "header",
+        HPManaFormatOptions = {
+            type = "group",
             order = 3,
-            name = L["HP and MP bars"],
-        },
+            inline = true,
+            name = "",
+            args = {
+                header = {
+                    type = "header",
+                    order = 1,
+                    name = L["HP and MP bars"],
+                },
 
-        healthFormat = {
-            type = "select",
-            order = 4,
-            name = L["Focus healthbar text format"],
-            desc = L["Set the focus healthbar text format"],
-            values = healthFormat,
-            set = function(info, value)
-                setOpt(info, value)
-                EasyFrames:GetModule("Focus"):UpdateTextStringWithValues()
-            end,
-            arg = "focus"
-        },
+                healthFormat = {
+                    type = "select",
+                    order = 2,
+                    name = L["Focus healthbar text format"],
+                    desc = L["Set the focus healthbar text format"],
+                    values = healthFormat,
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Focus"):UpdateTextStringWithValues()
+                    end,
+                    arg = "focus"
+                },
 
-        healthBarFontFamily = {
-            order = 5,
-            name = L["Font family"],
-            desc = L["Healthbar font family"],
-            type = "select",
-            dialogControl = 'LSM30_Font',
-            values = Media:HashTable("font"),
-            set = function(info, value)
-                setOpt(info, value)
-                EasyFrames:GetModule("Focus"):SetHealthBarsFont()
-            end,
-            arg = "focus"
-        },
+                healthBarFontFamily = {
+                    order = 3,
+                    name = L["Font family"],
+                    desc = L["Healthbar font family"],
+                    type = "select",
+                    dialogControl = 'LSM30_Font',
+                    values = Media:HashTable("font"),
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Focus"):SetHealthBarsFont()
+                    end,
+                    arg = "focus"
+                },
 
-        healthBarFontSize = {
-            type = "range",
-            order = 6,
-            name = L["Font size"],
-            desc = L["Healthbar font size"],
-            min = MIN_RANGE,
-            max = MAX_RANGE,
-            step = 1,
-            set = function(info, value)
-                setOpt(info, value)
-                EasyFrames:GetModule("Focus"):SetHealthBarsFont()
-            end,
-            arg = "focus"
-        },
+                healthBarFontSize = {
+                    type = "range",
+                    order = 4,
+                    name = L["Font size"],
+                    desc = L["Healthbar font size"],
+                    min = MIN_RANGE,
+                    max = MAX_RANGE,
+                    step = 1,
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Focus"):SetHealthBarsFont()
+                    end,
+                    arg = "focus"
+                },
 
-        reverseDirectionLosingHP = {
-            type = "toggle",
-            order = 7,
-            width = "double",
-            name = L["Reverse the direction of losing health/mana"],
-            desc = L["By default direction starting from right to left. If checked direction of losing health/mana will be from left to right"],
-            set = function(info, value)
-                setOpt(info, value)
-                EasyFrames:GetModule("Focus"):ReverseDirectionLosingHP(value)
-            end,
-            arg = "focus"
+                manaFormat = {
+                    type = "select",
+                    order = 5,
+                    name = L["Focus manabar text format"],
+                    desc = L["Set the focus manabar text format"],
+                    values = manaFormat,
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Focus"):UpdateTextStringWithValues(FocusFrameManaBar)
+                    end,
+                    arg = "focus"
+                },
+
+                manaBarFontFamily = {
+                    order = 6,
+                    name = L["Font family"],
+                    desc = L["Manabar font family"],
+                    type = "select",
+                    dialogControl = 'LSM30_Font',
+                    values = Media:HashTable("font"),
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Focus"):SetManaBarsFont()
+                    end,
+                    arg = "focus"
+                },
+
+                manaBarFontSize = {
+                    type = "range",
+                    order = 7,
+                    name = L["Font size"],
+                    desc = L["Manabar font size"],
+                    min = MIN_RANGE,
+                    max = MAX_RANGE,
+                    step = 1,
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Focus"):SetManaBarsFont()
+                    end,
+                    arg = "focus"
+                },
+
+                reverseDirectionLosingHP = {
+                    type = "toggle",
+                    order = 8,
+                    width = "double",
+                    name = L["Reverse the direction of losing health/mana"],
+                    desc = L["By default direction starting from right to left. If checked direction of losing health/mana will be from left to right"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Focus"):ReverseDirectionLosingHP(value)
+                    end,
+                    arg = "focus"
+                },
+            },
         },
 
         HPFormat = {
             type = "group",
-            order = 8,
+            order = 4,
             inline = true,
             name = "",
             hidden = function()
@@ -2001,9 +2051,150 @@ local focusOptions = {
             }
         },
 
+        manaFormat = {
+            type = "group",
+            order = 5,
+            inline = true,
+            name = "",
+            hidden = function()
+                local manaFormat = EasyFrames.db.profile.focus.manaFormat
+                if (manaFormat == "custom") then
+                    return false
+                end
+
+                return true
+            end,
+            args = {
+                header = {
+                    type = "header",
+                    order = 1,
+                    name = L["Custom format of mana"],
+                },
+
+                desc = {
+                    type = "description",
+                    order = 2,
+                    name = L["You can set custom mana format. More information about custom mana format you can read on project site.\n\n" ..
+                            "Formulas:"],
+                },
+
+                customManaFormatFormulas = {
+                    type = "group",
+                    order = 3,
+                    inline = true,
+                    name = "",
+                    get = getDeepOpt,
+                    set = function(info, value)
+                        local ns, opt = string.split(".", info.arg)
+                        local key = info[#info]
+                        EasyFrames.db.profile[ns][opt][key] = value
+
+                        EasyFrames:GetModule("Focus"):UpdateTextStringWithValues(FocusFrameManaBar)
+                    end,
+                    args = {
+                        gt1T = {
+                            type = "input",
+                            order = 1,
+                            name = L["Value greater than 1000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+
+                            arg = "focus.customManaFormatFormulas"
+                        },
+                        gt100T = {
+                            type = "input",
+                            order = 2,
+                            name = L["Value greater than 100 000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+                            arg = "focus.customManaFormatFormulas"
+                        },
+
+                        gt1M = {
+                            type = "input",
+                            order = 3,
+                            name = L["Value greater than 1 000 000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+                            arg = "focus.customManaFormatFormulas"
+                        },
+
+                        gt10M = {
+                            type = "input",
+                            order = 4,
+                            name = L["Value greater than 10 000 000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+                            arg = "focus.customManaFormatFormulas"
+                        },
+
+                        gt100M = {
+                            type = "input",
+                            order = 5,
+                            name = L["Value greater than 100 000 000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+                            arg = "focus.customManaFormatFormulas"
+                        },
+
+                        gt1B = {
+                            type = "input",
+                            order = 6,
+                            name = L["Value greater than 1 000 000 000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+                            arg = "focus.customManaFormatFormulas"
+                        },
+                    }
+                },
+
+                useManaFormatFullValues = {
+                    type = "toggle",
+                    order = 4,
+                    name = L["Use full values of mana"],
+                    desc = L["By default all formulas use divider (for value eq 1000 and more it's 1000, for 1 000 000 and more it's 1 000 000, etc).\n\n" ..
+                            "If checked formulas will use full values of mana (without divider)"],
+                    arg = "focus",
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Focus"):UpdateTextStringWithValues(FocusFrameManaBar)
+                    end,
+                },
+
+                customManaFormat = {
+                    type = "input",
+                    order = 5,
+                    width = "double",
+                    name = L["Displayed mana by pattern"],
+                    desc = L["You can use patterns:\n\n" ..
+                            "%CURRENT% - return current mana\n" ..
+                            "%MAX% - return maximum of mana\n" ..
+                            "%PERCENT% - return percent of current/max mana\n\n" ..
+                            "All values are returned from formulas. For set abbreviation use formulas' fields"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Focus"):UpdateTextStringWithValues(FocusFrameManaBar)
+                    end,
+                    arg = "focus"
+                },
+            }
+        },
+
         frameName = {
             type = "group",
-            order = 9,
+            order = 6,
             inline = true,
             name = "",
             args = {
@@ -2112,57 +2303,65 @@ local focusOptions = {
             }
         },
 
-        header2 = {
-            type = "header",
-            order = 9,
-            name = L["Show or hide some elements of frame"],
-        },
+        showHideElements = {
+            type = "group",
+            order = 7,
+            inline = true,
+            name = "",
+            args = {
+                header = {
+                    type = "header",
+                    order = 1,
+                    name = L["Show or hide some elements of frame"],
+                },
 
-        showToTFrame = {
-            type = "toggle",
-            order = 10,
-            width = "double",
-            name = L["Show target of focus frame"],
-            desc = L["Show target of focus frame"],
-            set = function(info, value)
-                setOpt(info, value)
-                EasyFrames:GetModule("Focus"):ShowFocusFrameToT()
-            end,
-            arg = "focus"
-        },
+                showToTFrame = {
+                    type = "toggle",
+                    order = 2,
+                    width = "double",
+                    name = L["Show target of focus frame"],
+                    desc = L["Show target of focus frame"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Focus"):ShowFocusFrameToT()
+                    end,
+                    arg = "focus"
+                },
 
-        showAttackBackground = {
-            type = "toggle",
-            order = 11,
-            width = "double",
-            name = L["Show focus combat texture (outside the frame)"],
-            desc = L["Show or hide focus red background texture (blinking red glow outside the frame in combat)"],
-            set = function(info, value)
-                setOpt(info, value)
-                EasyFrames:GetModule("Focus"):ShowAttackBackground(value)
-            end,
-            arg = "focus"
-        },
+                showAttackBackground = {
+                    type = "toggle",
+                    order = 3,
+                    width = "double",
+                    name = L["Show focus combat texture (outside the frame)"],
+                    desc = L["Show or hide focus red background texture (blinking red glow outside the frame in combat)"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Focus"):ShowAttackBackground(value)
+                    end,
+                    arg = "focus"
+                },
 
-        attackBackgroundOpacity = {
-            type = "range",
-            order = 12,
-            name = L["Opacity"],
-            desc = L["Opacity of combat texture"],
-            min = 0.1,
-            max = 1,
-            set = function(info, value)
-                setOpt(info, value)
-                EasyFrames:GetModule("Focus"):SetAttackBackgroundOpacity(value)
-            end,
-            disabled = function()
-                local diabled = EasyFrames.db.profile.focus.showAttackBackground
-                if (diabled == false) then
-                    return true
-                end
-            end,
-            isPercent = true,
-            arg = "focus"
+                attackBackgroundOpacity = {
+                    type = "range",
+                    order = 4,
+                    name = L["Opacity"],
+                    desc = L["Opacity of combat texture"],
+                    min = 0.1,
+                    max = 1,
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Focus"):SetAttackBackgroundOpacity(value)
+                    end,
+                    disabled = function()
+                        local diabled = EasyFrames.db.profile.focus.showAttackBackground
+                        if (diabled == false) then
+                            return true
+                        end
+                    end,
+                    isPercent = true,
+                    arg = "focus"
+                },
+            },
         },
     },
 }
