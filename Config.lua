@@ -2466,6 +2466,48 @@ local petOptions = {
                     end,
                     arg = "pet"
                 },
+
+                manaFormat = {
+                    type = "select",
+                    order = 5,
+                    name = L["Pet manabar text format"],
+                    desc = L["Set the pet manabar text format"],
+                    values = manaFormat,
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Pet"):UpdateTextStringWithValues(PetFrameManaBar)
+                    end,
+                    arg = "pet"
+                },
+
+                manaBarFontFamily = {
+                    order = 6,
+                    name = L["Font family"],
+                    desc = L["Manabar font family"],
+                    type = "select",
+                    dialogControl = 'LSM30_Font',
+                    values = Media:HashTable("font"),
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Pet"):SetManaBarsFont(PetFrameManaBar)
+                    end,
+                    arg = "pet"
+                },
+
+                manaBarFontSize = {
+                    type = "range",
+                    order = 7,
+                    name = L["Font size"],
+                    desc = L["Manabar font size"],
+                    min = MIN_RANGE,
+                    max = MAX_RANGE,
+                    step = 1,
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Pet"):SetManaBarsFont(PetFrameManaBar)
+                    end,
+                    arg = "pet"
+                },
             }
         },
 
@@ -2610,10 +2652,150 @@ local petOptions = {
             }
         },
 
+        manaFormat = {
+            type = "group",
+            order = 7,
+            inline = true,
+            name = "",
+            hidden = function()
+                local manaFormat = EasyFrames.db.profile.pet.manaFormat
+                if (manaFormat == "custom") then
+                    return false
+                end
+
+                return true
+            end,
+            args = {
+                header = {
+                    type = "header",
+                    order = 1,
+                    name = L["Custom format of mana"],
+                },
+
+                desc = {
+                    type = "description",
+                    order = 2,
+                    name = L["You can set custom mana format. More information about custom mana format you can read on project site.\n\n" ..
+                            "Formulas:"],
+                },
+
+                customManaFormatFormulas = {
+                    type = "group",
+                    order = 3,
+                    inline = true,
+                    name = "",
+                    get = getDeepOpt,
+                    set = function(info, value)
+                        local ns, opt = string.split(".", info.arg)
+                        local key = info[#info]
+                        EasyFrames.db.profile[ns][opt][key] = value
+
+                        EasyFrames:GetModule("Pet"):UpdateTextStringWithValues(PetFrameManaBar)
+                    end,
+                    args = {
+                        gt1T = {
+                            type = "input",
+                            order = 1,
+                            name = L["Value greater than 1000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+
+                            arg = "pet.customManaFormatFormulas"
+                        },
+                        gt100T = {
+                            type = "input",
+                            order = 2,
+                            name = L["Value greater than 100 000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+                            arg = "pet.customManaFormatFormulas"
+                        },
+
+                        gt1M = {
+                            type = "input",
+                            order = 3,
+                            name = L["Value greater than 1 000 000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+                            arg = "pet.customManaFormatFormulas"
+                        },
+
+                        gt10M = {
+                            type = "input",
+                            order = 4,
+                            name = L["Value greater than 10 000 000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+                            arg = "pet.customManaFormatFormulas"
+                        },
+
+                        gt100M = {
+                            type = "input",
+                            order = 5,
+                            name = L["Value greater than 100 000 000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+                            arg = "pet.customManaFormatFormulas"
+                        },
+
+                        gt1B = {
+                            type = "input",
+                            order = 6,
+                            name = L["Value greater than 1 000 000 000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+                            arg = "pet.customManaFormatFormulas"
+                        },
+                    }
+                },
+
+                useManaFormatFullValues = {
+                    type = "toggle",
+                    order = 4,
+                    name = L["Use full values of mana"],
+                    desc = L["By default all formulas use divider (for value eq 1000 and more it's 1000, for 1 000 000 and more it's 1 000 000, etc).\n\n" ..
+                            "If checked formulas will use full values of mana (without divider)"],
+                    arg = "pet",
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Pet"):UpdateTextStringWithValues(PetFrameManaBar)
+                    end,
+                },
+
+                customManaFormat = {
+                    type = "input",
+                    order = 5,
+                    width = "double",
+                    name = L["Displayed mana by pattern"],
+                    desc = L["You can use patterns:\n\n" ..
+                            "%CURRENT% - return current mana\n" ..
+                            "%MAX% - return maximum of mana\n" ..
+                            "%PERCENT% - return percent of current/max mana\n\n" ..
+                            "All values are returned from formulas. For set abbreviation use formulas' fields"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Pet"):UpdateTextStringWithValues(PetFrameManaBar)
+                    end,
+                    arg = "pet"
+                },
+            }
+        },
 
         frameName = {
             type = "group",
-            order = 7,
+            order = 8,
             inline = true,
             name = "",
             args = {
@@ -2705,70 +2887,78 @@ local petOptions = {
             }
         },
 
-        header = {
-            type = "header",
-            order = 8,
-            name = L["Show or hide some elements of frame"],
-        },
-
-        showHitIndicator = {
-            type = "toggle",
+        showHideElements = {
+            type = "group",
             order = 9,
-            width = "double",
-            name = L["Enable hit indicators"],
-            desc = L["Show or hide the damage/heal which your pet take on pet unit frame"],
-            set = function(info, value)
-                setOpt(info, value)
-                EasyFrames:GetModule("Pet"):ShowHitIndicator(value)
-            end,
-            arg = "pet"
-        },
+            inline = true,
+            name = "",
+            args = {
+                header = {
+                    type = "header",
+                    order = 1,
+                    name = L["Show or hide some elements of frame"],
+                },
 
-        showStatusTexture = {
-            type = "toggle",
-            order = 10,
-            width = "double",
-            name = L["Show pet combat texture (inside the frame)"],
-            desc = L["Show or hide pet red background texture (blinking red glow inside the frame in combat)"],
-            set = function(info, value)
-                setOpt(info, value)
-                EasyFrames:GetModule("Pet"):ShowStatusTexture(value)
-            end,
-            arg = "pet"
-        },
+                showHitIndicator = {
+                    type = "toggle",
+                    order = 2,
+                    width = "double",
+                    name = L["Enable hit indicators"],
+                    desc = L["Show or hide the damage/heal which your pet take on pet unit frame"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Pet"):ShowHitIndicator(value)
+                    end,
+                    arg = "pet"
+                },
 
-        showAttackBackground = {
-            type = "toggle",
-            order = 11,
-            width = "double",
-            name = L["Show pet combat texture (outside the frame)"],
-            desc = L["Show or hide pet red background texture (blinking red glow outside the frame in combat)"],
-            set = function(info, value)
-                setOpt(info, value)
-                EasyFrames:GetModule("Pet"):ShowAttackBackground(value)
-            end,
-            arg = "pet"
-        },
+                showStatusTexture = {
+                    type = "toggle",
+                    order = 3,
+                    width = "double",
+                    name = L["Show pet combat texture (inside the frame)"],
+                    desc = L["Show or hide pet red background texture (blinking red glow inside the frame in combat)"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Pet"):ShowStatusTexture(value)
+                    end,
+                    arg = "pet"
+                },
 
-        attackBackgroundOpacity = {
-            type = "range",
-            order = 12,
-            name = L["Opacity"],
-            desc = L["Opacity of combat texture"],
-            min = 0.1,
-            max = 1,
-            set = function(info, value)
-                setOpt(info, value)
-                EasyFrames:GetModule("Pet"):SetAttackBackgroundOpacity(value)
-            end,
-            disabled = function()
-                local diabled = EasyFrames.db.profile.pet.showAttackBackground
-                if (diabled == false) then
-                    return true
-                end
-            end,
-            isPercent = true,
-            arg = "pet"
+                showAttackBackground = {
+                    type = "toggle",
+                    order = 4,
+                    width = "double",
+                    name = L["Show pet combat texture (outside the frame)"],
+                    desc = L["Show or hide pet red background texture (blinking red glow outside the frame in combat)"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Pet"):ShowAttackBackground(value)
+                    end,
+                    arg = "pet"
+                },
+
+                attackBackgroundOpacity = {
+                    type = "range",
+                    order = 5,
+                    name = L["Opacity"],
+                    desc = L["Opacity of combat texture"],
+                    min = 0.1,
+                    max = 1,
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Pet"):SetAttackBackgroundOpacity(value)
+                    end,
+                    disabled = function()
+                        local diabled = EasyFrames.db.profile.pet.showAttackBackground
+                        if (diabled == false) then
+                            return true
+                        end
+                    end,
+                    isPercent = true,
+                    arg = "pet"
+                },
+            },
         },
     },
 }

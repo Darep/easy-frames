@@ -26,6 +26,7 @@ local db
 local originalValues = {}
 
 local UpdateHealthValues = EasyFrames.Utils.UpdateHealthValues
+local UpdateManaValues = EasyFrames.Utils.UpdateManaValues
 
 
 function Pet:OnInitialize()
@@ -42,6 +43,7 @@ function Pet:OnEnable()
 
     self:ShowName(db.pet.showName)
     self:SetFrameNameFont()
+    self:SetManaBarsFont()
     self:ShowHitIndicator(db.pet.showHitIndicator)
 
     self:ShowStatusTexture(db.pet.showStatusTexture)
@@ -64,6 +66,7 @@ function Pet:OnProfileChanged(newDB)
 
     self:ShowName(db.pet.showName)
     self:SetFrameNameFont()
+    self:SetManaBarsFont()
     self:ShowHitIndicator(db.pet.showHitIndicator)
 
     self:ShowStatusTexture(db.pet.showStatusTexture)
@@ -149,7 +152,7 @@ function Pet:ResetFramePosition()
     local frame = PetFrame;
 
     frame:ClearAllPoints()
-    frame:SetPoint("TOPLEFT", PlayerFrame, "TOPLEFT", 60, -90)
+    frame:SetPoint("TOPLEFT", PlayerFrame, "TOPLEFT", 90, -65)
 
     db.pet.customPoints = false
 end
@@ -158,12 +161,21 @@ function Pet:UpdateTextStringWithValues(statusBar)
     local frame = statusBar or PetFrameHealthBar
 
     if (frame.unit == "pet") then
-        local healthFormat = db.pet.healthFormat
-        local customHealthFormat = db.pet.customHealthFormat
-        local customHealthFormatFormulas = db.pet.customHealthFormatFormulas
-        local useHealthFormatFullValues = db.pet.useHealthFormatFullValues
+        if (frame == PetFrameHealthBar) then
+            local healthFormat = db.pet.healthFormat
+            local customHealthFormat = db.pet.customHealthFormat
+            local customHealthFormatFormulas = db.pet.customHealthFormatFormulas
+            local useHealthFormatFullValues = db.pet.useHealthFormatFullValues
 
-        UpdateHealthValues(frame, healthFormat, customHealthFormat, customHealthFormatFormulas, useHealthFormatFullValues)
+            UpdateHealthValues(frame, healthFormat, customHealthFormat, customHealthFormatFormulas, useHealthFormatFullValues)
+        elseif (frame == PetFrameManaBar) then
+            local manaFormat = db.pet.manaFormat
+            local customManaFormat = db.pet.customManaFormat
+            local customManaFormatFormulas = db.pet.customManaFormatFormulas
+            local useManaFormatFullValues = db.pet.useManaFormatFullValues
+
+            UpdateManaValues(frame, manaFormat, customManaFormat, customManaFormatFormulas, useManaFormatFullValues)
+        end
     end
 end
 
@@ -172,6 +184,12 @@ function Pet:SetHealthBarsFont()
     local fontFamily = Media:Fetch("font", db.pet.healthBarFontFamily)
 
     PetFrameHealthBar.TextString:SetFont(fontFamily, fontSize, "OUTLINE")
+end
+
+function Pet:SetManaBarsFont()
+    local fontSize = db.pet.manaBarFontSize
+    local fontFamily = Media:Fetch("font", db.pet.manaBarFontFamily)
+
     PetFrameManaBar.TextString:SetFont(fontFamily, fontSize, "OUTLINE")
 end
 

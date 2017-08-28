@@ -215,6 +215,8 @@ L["Lock or unlock pet frame. When unlocked you can move frame using your mouse (
 L["Reset position to default"] = true
 L["Pet healthbar text format"] = true
 L["Set the pet healthbar text format"] = true
+L["Pet manabar text format"] = true
+L["Set the pet manabar text format"] = true
 L["Show pet name"] = true
 L["Show or hide the damage/heal which your pet take on pet unit frame"] = true
 L["Show pet combat texture (inside the frame)"] = true

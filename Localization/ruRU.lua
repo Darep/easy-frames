@@ -221,6 +221,8 @@ L["Lock or unlock pet frame. When unlocked you can move frame using your mouse (
 L["Reset position to default"] = "Сбросить позицию"
 L["Pet healthbar text format"] = "Формат HP фрейма питомца"
 L["Set the pet healthbar text format"] = "Установить формат отображения здоровья питомца"
+L["Pet manabar text format"] = "Формат маны фрейма питомца"
+L["Set the pet manabar text format"] = "Установить формат отображения маны питомца"
 L["Show pet name"] = "Показывать имя питомца"
 L["Show or hide the damage/heal which your pet take on pet unit frame"] = "Показывать получаемый урон/исцеление на фрейме питомца"
 L["Show pet combat texture (inside the frame)"] = "Показывать фоновую текстуру фрейма питомца (внутри фрейма)"
