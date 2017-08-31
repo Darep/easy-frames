@@ -23,7 +23,6 @@ local MODULE_NAME = "Party"
 local Party = EasyFrames:NewModule(MODULE_NAME, "AceHook-3.0")
 
 local db
-local originalValues = {}
 
 local UpdateHealthValues = EasyFrames.Utils.UpdateHealthValues
 local UpdateManaValues = EasyFrames.Utils.UpdateManaValues
