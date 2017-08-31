@@ -67,7 +67,8 @@ L["You can set custom mana format. More information about custom mana format you
         "Формулы:"
 L["Use full values of mana"] = "Использовать полные значения маны"
 L["By default all formulas use divider (for value eq 1000 and more it's 1000, for 1 000 000 and more it's 1 000 000, etc).\n\n" ..
-        "If checked formulas will use full values of mana (without divider)"] = true
+        "If checked formulas will use full values of mana (without divider)"] = "По умолчанию все формулы используют делитель (для значения 1000 и больше он равен 1000, для 1 000 000 и больше он равен 1 000 000 и т.д.).\n\n" ..
+            "Если установлено формулы используют полные значения маны (без делителя)"
 L["Displayed mana by pattern"] = "Отображение маны по шаблону"
 L["You can use patterns:\n\n" ..
         "%CURRENT% - return current mana\n" ..
@@ -237,6 +238,8 @@ L["Party frames scale"] = "Размер фреймов группы"
 L["Scale of party unit frames"] = "Размер (scale) фреймов группы"
 L["Party healthbar text format"] = "Формат HP фреймов группы"
 L["Set the party healthbar text format"] = "Установить формат отображения здоровья фреймов группы"
+L["Party manabar text format"] = "Формат маны фреймов группы"
+L["Set the party manabar text format"] = "Установить формат отображения маны фреймов группы"
 L["Party frames names"] = "Имена фреймов группы"
 L["Show names of party frames"] = "Показывать имена фреймов группы"
 L["Party names font style"] = "Стиль шрифта имени фокус фрейма"

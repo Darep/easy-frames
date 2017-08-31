@@ -240,7 +240,7 @@ local defaults = {
             -- Custom mana format.
             manaFormat = "2",
             manaBarFontFamily = DEFAULT_BAR_FONT_FAMILY,
-            manaBarFontSize = DEFAULT_BAR_FONT_SIZE,
+            manaBarFontSize = DEFAULT_BAR_SMALL_FONT_SIZE,
             useManaFormatFullValues = false,
             customManaFormatFormulas = DefaultCustomFormatFormulas(),
             customManaFormat = DEFAULT_CUSTOM_FORMAT,

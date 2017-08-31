@@ -26,6 +26,7 @@ local db
 local originalValues = {}
 
 local UpdateHealthValues = EasyFrames.Utils.UpdateHealthValues
+local UpdateManaValues = EasyFrames.Utils.UpdateManaValues
 local PartyIterator = EasyFrames.Helpers.Iterator(EasyFrames.Utils.GetPartyFrames())
 
 function Party:OnInitialize()
@@ -38,6 +39,7 @@ function Party:OnEnable()
     self:ShowName(db.party.showName)
     self:SetFrameNameFont()
     self:SetHealthBarsFont()
+    self:SetManaBarsFont()
 --    self:ShowPetFrames(db.party.showPetFrames)
 
     self:SecureHook("TextStatusBar_UpdateTextStringWithValues", "UpdateTextStringWithValues")
@@ -51,6 +53,7 @@ function Party:OnProfileChanged(newDB)
     self:ShowName(db.party.showName)
     self:SetFrameNameFont()
     self:SetHealthBarsFont()
+    self:SetManaBarsFont()
 --    self:ShowPetFrames(db.party.showPetFrames)
 
     self:UpdateTextStringWithValues()
@@ -66,12 +69,21 @@ function Party:UpdateTextStringWithValues(statusBar)
     local frame = statusBar or PartyMemberFrame1HealthBar
 
     if (frame.unit == "party1" or frame.unit == "party2" or frame.unit == "party3" or frame.unit == "party4") then
-        local healthFormat = db.party.healthFormat
-        local customHealthFormat = db.party.customHealthFormat
-        local customHealthFormatFormulas = db.party.customHealthFormatFormulas
-        local useHealthFormatFullValues = db.party.useHealthFormatFullValues
+        if (string.find(frame:GetName(), 'HealthBar')) then
+            local healthFormat = db.party.healthFormat
+            local customHealthFormat = db.party.customHealthFormat
+            local customHealthFormatFormulas = db.party.customHealthFormatFormulas
+            local useHealthFormatFullValues = db.party.useHealthFormatFullValues
 
-        UpdateHealthValues(frame, healthFormat, customHealthFormat, customHealthFormatFormulas, useHealthFormatFullValues)
+            UpdateHealthValues(frame, healthFormat, customHealthFormat, customHealthFormatFormulas, useHealthFormatFullValues)
+        elseif (string.find(frame:GetName(), 'ManaBar')) then
+            local manaFormat = db.party.manaFormat
+            local customManaFormat = db.party.customManaFormat
+            local customManaFormatFormulas = db.party.customManaFormatFormulas
+            local useManaFormatFullValues = db.party.useManaFormatFullValues
+
+            UpdateManaValues(frame, manaFormat, customManaFormat, customManaFormatFormulas, useManaFormatFullValues)
+        end
     end
 end
 
@@ -91,9 +103,18 @@ function Party:SetHealthBarsFont()
 
     PartyIterator(function(frame)
         local healthBar = _G[frame:GetName() .. "HealthBar"]
-        local manaBar = _G[frame:GetName() .. "ManaBar"]
 
         healthBar.TextString:SetFont(fontFamily, fontSize, "OUTLINE")
+    end)
+end
+
+function Party:SetManaBarsFont()
+    local fontSize = db.party.manaBarFontSize
+    local fontFamily = Media:Fetch("font", db.party.manaBarFontFamily)
+
+    PartyIterator(function(frame)
+        local manaBar = _G[frame:GetName() .. "ManaBar"]
+
         manaBar.TextString:SetFont(fontFamily, fontSize, "OUTLINE")
     end)
 end

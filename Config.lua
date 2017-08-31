@@ -2989,57 +2989,107 @@ local partyOptions = {
             arg = "party"
         },
 
-        header = {
-            type = "header",
+        HPManaFormatOptions = {
+            type = "group",
             order = 3,
-            name = L["HP and MP bars"],
-        },
+            inline = true,
+            name = "",
+            args = {
+                header = {
+                    type = "header",
+                    order = 1,
+                    name = L["HP and MP bars"],
+                },
 
-        healthFormat = {
-            type = "select",
-            order = 4,
-            name = L["Party healthbar text format"],
-            desc = L["Set the party healthbar text format"],
-            values = healthFormat,
-            set = function(info, value)
-                setOpt(info, value)
-                EasyFrames:GetModule("Party"):UpdateTextStringWithValues()
-            end,
-            arg = "party"
-        },
+                healthFormat = {
+                    type = "select",
+                    order = 2,
+                    name = L["Party healthbar text format"],
+                    desc = L["Set the party healthbar text format"],
+                    values = healthFormat,
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Party"):UpdateTextStringWithValues()
+                    end,
+                    arg = "party"
+                },
 
-        healthBarFontFamily = {
-            order = 5,
-            name = L["Font family"],
-            desc = L["Healthbar font family"],
-            type = "select",
-            dialogControl = 'LSM30_Font',
-            values = Media:HashTable("font"),
-            set = function(info, value)
-                setOpt(info, value)
-                EasyFrames:GetModule("Party"):SetHealthBarsFont()
-            end,
-            arg = "party"
-        },
+                healthBarFontFamily = {
+                    order = 3,
+                    name = L["Font family"],
+                    desc = L["Healthbar font family"],
+                    type = "select",
+                    dialogControl = 'LSM30_Font',
+                    values = Media:HashTable("font"),
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Party"):SetHealthBarsFont()
+                    end,
+                    arg = "party"
+                },
 
-        healthBarFontSize = {
-            type = "range",
-            order = 6,
-            name = L["Font size"],
-            desc = L["Healthbar font size"],
-            min = MIN_RANGE,
-            max = MAX_RANGE,
-            step = 1,
-            set = function(info, value)
-                setOpt(info, value)
-                EasyFrames:GetModule("Party"):SetHealthBarsFont()
-            end,
-            arg = "party"
+                healthBarFontSize = {
+                    type = "range",
+                    order = 4,
+                    name = L["Font size"],
+                    desc = L["Healthbar font size"],
+                    min = MIN_RANGE,
+                    max = MAX_RANGE,
+                    step = 1,
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Party"):SetHealthBarsFont()
+                    end,
+                    arg = "party"
+                },
+
+                manaFormat = {
+                    type = "select",
+                    order = 5,
+                    name = L["Party manabar text format"],
+                    desc = L["Set the party manabar text format"],
+                    values = manaFormat,
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Party"):UpdateTextStringWithValues(PartyMemberFrame1ManaBar)
+                    end,
+                    arg = "party"
+                },
+
+                manaBarFontFamily = {
+                    order = 6,
+                    name = L["Font family"],
+                    desc = L["Manabar font family"],
+                    type = "select",
+                    dialogControl = 'LSM30_Font',
+                    values = Media:HashTable("font"),
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Party"):SetManaBarsFont()
+                    end,
+                    arg = "party"
+                },
+
+                manaBarFontSize = {
+                    type = "range",
+                    order = 7,
+                    name = L["Font size"],
+                    desc = L["Manabar font size"],
+                    min = MIN_RANGE,
+                    max = MAX_RANGE,
+                    step = 1,
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Party"):SetManaBarsFont()
+                    end,
+                    arg = "party"
+                },
+            },
         },
 
         HPFormat = {
             type = "group",
-            order = 7,
+            order = 4,
             inline = true,
             name = "",
             hidden = function()
@@ -3178,9 +3228,150 @@ local partyOptions = {
             }
         },
 
+        manaFormat = {
+            type = "group",
+            order = 5,
+            inline = true,
+            name = "",
+            hidden = function()
+                local manaFormat = EasyFrames.db.profile.party.manaFormat
+                if (manaFormat == "custom") then
+                    return false
+                end
+
+                return true
+            end,
+            args = {
+                header = {
+                    type = "header",
+                    order = 1,
+                    name = L["Custom format of mana"],
+                },
+
+                desc = {
+                    type = "description",
+                    order = 2,
+                    name = L["You can set custom mana format. More information about custom mana format you can read on project site.\n\n" ..
+                            "Formulas:"],
+                },
+
+                customManaFormatFormulas = {
+                    type = "group",
+                    order = 3,
+                    inline = true,
+                    name = "",
+                    get = getDeepOpt,
+                    set = function(info, value)
+                        local ns, opt = string.split(".", info.arg)
+                        local key = info[#info]
+                        EasyFrames.db.profile[ns][opt][key] = value
+
+                        EasyFrames:GetModule("Party"):UpdateTextStringWithValues(PartyMemberFrame1ManaBar)
+                    end,
+                    args = {
+                        gt1T = {
+                            type = "input",
+                            order = 1,
+                            name = L["Value greater than 1000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+
+                            arg = "party.customManaFormatFormulas"
+                        },
+                        gt100T = {
+                            type = "input",
+                            order = 2,
+                            name = L["Value greater than 100 000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+                            arg = "party.customManaFormatFormulas"
+                        },
+
+                        gt1M = {
+                            type = "input",
+                            order = 3,
+                            name = L["Value greater than 1 000 000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+                            arg = "party.customManaFormatFormulas"
+                        },
+
+                        gt10M = {
+                            type = "input",
+                            order = 4,
+                            name = L["Value greater than 10 000 000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+                            arg = "party.customManaFormatFormulas"
+                        },
+
+                        gt100M = {
+                            type = "input",
+                            order = 5,
+                            name = L["Value greater than 100 000 000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+                            arg = "party.customManaFormatFormulas"
+                        },
+
+                        gt1B = {
+                            type = "input",
+                            order = 6,
+                            name = L["Value greater than 1 000 000 000"],
+                            desc = L["Formula converts the original value to the specified value.\n\n" ..
+                                    "Description: for example formula is '%.fM'.\n" ..
+                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+                            arg = "party.customManaFormatFormulas"
+                        },
+                    }
+                },
+
+                useManaFormatFullValues = {
+                    type = "toggle",
+                    order = 4,
+                    name = L["Use full values of mana"],
+                    desc = L["By default all formulas use divider (for value eq 1000 and more it's 1000, for 1 000 000 and more it's 1 000 000, etc).\n\n" ..
+                            "If checked formulas will use full values of mana (without divider)"],
+                    arg = "party",
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Party"):UpdateTextStringWithValues(PartyMemberFrame1ManaBar)
+                    end,
+                },
+
+                customManaFormat = {
+                    type = "input",
+                    order = 5,
+                    width = "double",
+                    name = L["Displayed mana by pattern"],
+                    desc = L["You can use patterns:\n\n" ..
+                            "%CURRENT% - return current mana\n" ..
+                            "%MAX% - return maximum of mana\n" ..
+                            "%PERCENT% - return percent of current/max mana\n\n" ..
+                            "All values are returned from formulas. For set abbreviation use formulas' fields"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Party"):UpdateTextStringWithValues(PartyMemberFrame1ManaBar)
+                    end,
+                    arg = "party"
+                },
+            }
+        },
+
         frameName = {
             type = "group",
-            order = 9,
+            order = 6,
             inline = true,
             name = "",
             args = {
