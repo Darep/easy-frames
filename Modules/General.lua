@@ -284,7 +284,8 @@ end
 
 function General:SetBrightFramesBorder(value)
     for _, t in pairs({
-        PlayerFrameTexture, TargetFrameTextureFrameTexture, TargetFrameToTTextureFrameTexture,
+        PlayerFrameTexture, PlayerFrameAlternateManaBarBorder, PlayerFrameAlternateManaBarRightBorder, PlayerFrameAlternateManaBarLeftBorder,
+        TargetFrameTextureFrameTexture, TargetFrameToTTextureFrameTexture,
         PetFrameTexture, FocusFrameTextureFrameTexture, FocusFrameToTTextureFrameTexture,
         PartyMemberFrame1Texture, PartyMemberFrame2Texture, PartyMemberFrame3Texture, PartyMemberFrame4Texture,
         PartyMemberFrame1PetFrameTexture, PartyMemberFrame2PetFrameTexture, PartyMemberFrame3PetFrameTexture, PartyMemberFrame4PetFrameTexture

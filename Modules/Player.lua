@@ -206,6 +206,7 @@ function Player:SetManaBarsFont()
     local fontFamily = Media:Fetch("font", db.player.manaBarFontFamily)
 
     PlayerFrameManaBar.TextString:SetFont(fontFamily, fontSize, "OUTLINE")
+    PlayerFrameAlternateManaBar.TextString:SetFont(fontFamily, fontSize, "OUTLINE")
 end
 
 function Player:SetFrameNameFont()

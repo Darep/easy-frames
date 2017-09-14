@@ -203,6 +203,8 @@ function Core:MovePlayerFrameBars()
     PlayerFrameManaBar:SetPoint("CENTER", PlayerFrame, "CENTER", 51, -7)
     PlayerFrameManaBar.SetPoint = function() end
 
+    self:MoveRegion(PlayerFrameAlternateManaBarText, "CENTER", PlayerFrameAlternateManaBar, "CENTER", 0, -1)
+
     PlayerStatusTexture:SetHeight(69)
 
     PlayerFrameGroupIndicator:ClearAllPoints()
