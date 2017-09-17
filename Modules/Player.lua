@@ -143,31 +143,35 @@ function Player:ShowHitIndicator(value)
 end
 
 function Player:ShowSpecialbar(value)
-    local SpecialbarOnShow = function(frame)
-        frame:Hide()
+    local _, englishClass = UnitClass("player")
+    local playerSpec = GetSpecialization()
+    local frame
+
+    if (englishClass == "SHAMAN") then
+        frame = TotemFrame
+    elseif (englishClass == "DEATHKNIGHT") then
+        frame = RuneFrame
+    elseif (englishClass == "MAGE" and playerSpec == SPEC_MAGE_ARCANE) then
+        frame = MageArcaneChargesFrame
+    elseif (englishClass == "MONK" ) then
+        if (playerSpec == SPEC_MONK_BREWMASTER) then
+            frame = MonkStaggerBar
+        elseif (playerSpec == SPEC_MONK_WINDWALKER) then
+            frame = MonkHarmonyBarFrame
+        end
+    elseif (englishClass == "PALADIN" and playerSpec == SPEC_PALADIN_RETRIBUTION) then
+        frame = PaladinPowerBarFrame
+    elseif (englishClass == "ROGUE") then
+        frame = ComboPointPlayerFrame
+    elseif (englishClass == "WARLOCK") then
+        frame = WarlockPowerFrame
     end
 
-    local _, englishClass = UnitClass("player");
-
-    for _, objname in ipairs({
-        "MonkHarmonyBarFrame",
-        "PriestBarFrame",
-        "PaladinPowerBarFrame",
-        "WarlockPowerFrame",
-        "EclipseBarFrame",
-        "TotemFrame",
-        "RuneFrame",
-    }) do
-        local frame = _G[objname]
-
-        if (frame) and (englishClass == frame.class) then
-            if (value) then
-                self:Unhook(frame, "OnShow")
-                frame:Show()
-            else
-                frame:Hide()
-                self:HookScript(frame, "OnShow", SpecialbarOnShow)
-            end
+    if (frame) then
+        if (value) then
+            frame:Show()
+        else
+            frame:Hide()
         end
     end
 end
