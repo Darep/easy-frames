@@ -19,12 +19,14 @@ Libs\AceLocale-3.0\AceLocale-3.0.xml
 Libs\AceHook-3.0\AceHook-3.0.xml
 
 Libs\LibSharedMedia-3.0\lib.xml
+Libs\AceGUI-3.0-SharedMediaWidgets\widget.xml
 #@end-no-lib-strip@
 
 Localization\enUS.lua
 Localization\ruRU.lua
-Localization\koKR.lua
 Localization\deDE.lua
+Localization\koKR.lua
+Localization\zhTW.lua
 
 
 EasyFrames.lua
