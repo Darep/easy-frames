@@ -9,7 +9,7 @@ L["Opacity"] = "불투명도"
 L["Opacity of combat texture"] = "전투메시지 불투명도"
 
 L["Main options"] = "기본설정"
-L["In main options you can set the global options like colored frames, class portraits, etc"] = "기본설정에서 프레임 색상, 직업 초상화 등과 같은 전역변수 설정 가능"
+L["In main options you can set the global options like colored frames, buffs settings, etc"] = "기본설정에서 프레임 색상, 직업 초상화 등과 같은 전역변수 설정 가능"
 
 L["Percent"] = "퍼센트"
 L["Current + Max"] = "현재체력 + 최대체력"

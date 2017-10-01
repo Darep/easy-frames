@@ -7,7 +7,7 @@ L["Opacity"] = "不透明度"
 L["Opacity of combat texture"] = "戰鬥材質的不透明度。"
 
 L["Main options"] = "主要選項"
-L["In main options you can set the global options like colored frames, class portraits, etc"] = "在主要選項中可以設定整體使用的選項，像是彩色框架、職業圖示頭像...等。"
+L["In main options you can set the global options like colored frames, buffs settings, etc"] = "在主要選項中可以設定整體使用的選項，像是彩色框架、職業圖示頭像...等。"
 
 L["Percent"] = "百分比"
 L["Current + Max"] = "目前 + 最大"

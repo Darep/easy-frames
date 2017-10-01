@@ -7,7 +7,7 @@ L["Opacity"] = "Deckkraft"
 L["Opacity of combat texture"] = "Deckkraft von Kampftexturen"
 
 L["Main options"] = "Hauptoptionen"
-L["In main options you can set the global options like colored frames, class portraits, etc"] = "In den Hauptoptionen kannst du globale Optionen wie farbige Rahmen, Klassenportraits usw. einstellen"
+L["In main options you can set the global options like colored frames, buffs settings, etc"] = "In den Hauptoptionen kannst du globale Optionen wie farbige Rahmen, Klassenportraits usw. einstellen"
 
 L["Percent"] = "Prozent"
 L["Current + Max"] = "Aktuell + Max"

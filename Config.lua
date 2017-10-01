@@ -88,6 +88,12 @@ local fontStyle = {
     ["MONOCHROME"] = L["Monochrome"]
 }
 
+local portrait = {
+    ["1"] = L["Default"],
+    ["2"] = L["Class portraits"],
+    ["3"] = L["Hide"],
+}
+
 local MIN_RANGE = 6
 local MAX_RANGE = 18
 
@@ -100,7 +106,7 @@ local generalOptions = {
         desc = {
             type = "description",
             order = 1,
-            name = L["In main options you can set the global options like colored frames, class portraits, etc"],
+            name = L["In main options you can set the global options like colored frames, buffs settings, etc"],
         },
 
         framesGroup = {
@@ -153,80 +159,69 @@ local generalOptions = {
                         setOpt(info, value)
                         EasyFrames:GetModule("General"):SetFramesColored()
                     end,
-                    width = "double",
                     name = L["Healthbar color is based on the current health value"],
                     desc = L["Healthbar color is based on the current health value.\n\n" ..
                             "This option excludes the option 'Class colored healthbars'"],
                     arg = "general"
                 },
 
-                classPortraits = {
-                    type = "toggle",
+                hideOutOfCombatGroup = {
+                    type = "group",
                     order = 5,
-                    name = L["Class portraits"],
-                    desc = L["Replaces the unit-frame portrait with their class icon"],
-                    set = function(info, value)
-                        setOpt(info, value)
-                        EasyFrames:GetModule("General"):SetClassPortraits()
-                    end,
-                    arg = "general"
-                },
-
-                newLine = {
-                    type = "description",
-                    order = 6,
+                    inline = true,
                     name = "",
-                },
+                    args = {
+                        hideOutOfCombat = {
+                            type = "toggle",
+                            order = 1,
+                            name = L["Hide frames out of combat"],
+                            desc = L["Hide frames out of combat (for example in resting)"],
+                            set = function(info, value)
+                                setOpt(info, value)
+                                EasyFrames:GetModule("General"):HideFramesOutOfCombat()
+                            end,
+                            arg = "general"
+                        },
 
-                hideOutOfCombat = {
-                    type = "toggle",
-                    order = 7,
-                    name = L["Hide frames out of combat"],
-                    desc = L["Hide frames out of combat (for example in resting)"],
-                    set = function(info, value)
-                        setOpt(info, value)
-                        EasyFrames:GetModule("General"):HideFramesOutOfCombat()
-                    end,
-                    arg = "general"
-                },
+                        --                hideOutOfCombatWithFullHP = {
+                        --                    type = "toggle",
+                        --                    order = 8,
+                        --                    name = L["Only if HP equal to 100%"],
+                        --                    desc = L["Hide frames out of combat only if HP equal to 100%"],
+                        --                    set = function(info, value)
+                        --                        setOpt(info, value)
+                        --                        EasyFrames:GetModule("General"):HideFramesOutOfCombat()
+                        --                    end,
+                        --                    disabled = function()
+                        --                        local diabled = EasyFrames.db.profile.general.hideOutOfCombat
+                        --                        if (diabled == false) then
+                        --                            return true
+                        --                        end
+                        --                    end,
+                        --                    arg = "general"
+                        --                },
 
---                hideOutOfCombatWithFullHP = {
---                    type = "toggle",
---                    order = 8,
---                    name = L["Only if HP equal to 100%"],
---                    desc = L["Hide frames out of combat only if HP equal to 100%"],
---                    set = function(info, value)
---                        setOpt(info, value)
---                        EasyFrames:GetModule("General"):HideFramesOutOfCombat()
---                    end,
---                    disabled = function()
---                        local diabled = EasyFrames.db.profile.general.hideOutOfCombat
---                        if (diabled == false) then
---                            return true
---                        end
---                    end,
---                    arg = "general"
---                },
-
-                hideOutOfCombatOpacity = {
-                    type = "range",
-                    order = 8,
-                    name = L["Opacity of frames"],
-                    desc = L["Opacity of frames when frames is hidden (in out of combat)"],
-                    min = 0,
-                    max = 1,
-                    set = function(info, value)
-                        setOpt(info, value)
-                        EasyFrames:GetModule("General"):HideFramesOutOfCombat()
-                    end,
-                    disabled = function()
-                        local diabled = EasyFrames.db.profile.general.hideOutOfCombat
-                        if (diabled == false) then
-                            return true
-                        end
-                    end,
-                    isPercent = true,
-                    arg = "general"
+                        hideOutOfCombatOpacity = {
+                            type = "range",
+                            order = 2,
+                            name = L["Opacity of frames"],
+                            desc = L["Opacity of frames when frames is hidden (in out of combat)"],
+                            min = 0,
+                            max = 1,
+                            set = function(info, value)
+                                setOpt(info, value)
+                                EasyFrames:GetModule("General"):HideFramesOutOfCombat()
+                            end,
+                            disabled = function()
+                                local diabled = EasyFrames.db.profile.general.hideOutOfCombat
+                                if (diabled == false) then
+                                    return true
+                                end
+                            end,
+                            isPercent = true,
+                            arg = "general"
+                        },
+                    }
                 },
 
                 newLine2 = {
@@ -547,9 +542,22 @@ local playerOptions = {
             arg = "player"
         },
 
+        portrait = {
+            type = "select",
+            order = 3,
+            name = L["Portrait"],
+            desc = L["Set the player's portrait"],
+            values = portrait,
+            set = function(info, value)
+                setOpt(info, value)
+                EasyFrames:GetModule("Player"):MakeClassPortraits(PlayerFrame)
+            end,
+            arg = "player"
+        },
+
         HPManaFormatOptions = {
             type = "group",
-            order = 3,
+            order = 4,
             inline = true,
             name = "",
             args = {
@@ -647,7 +655,7 @@ local playerOptions = {
 
         HPFormat = {
             type = "group",
-            order = 4,
+            order = 5,
             inline = true,
             name = "",
             hidden = function()
@@ -788,7 +796,7 @@ local playerOptions = {
 
         manaFormat = {
             type = "group",
-            order = 5,
+            order = 6,
             inline = true,
             name = "",
             hidden = function()
@@ -929,7 +937,7 @@ local playerOptions = {
 
         frameName = {
             type = "group",
-            order = 6,
+            order = 7,
             inline = true,
             name = "",
             args = {
@@ -1040,7 +1048,7 @@ local playerOptions = {
 
         showHideElements = {
             type = "group",
-            order = 7,
+            order = 8,
             inline = true,
             name = "",
             args = {

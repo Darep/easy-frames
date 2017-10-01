@@ -112,6 +112,7 @@ local defaults = {
 
         player = {
             scaleFrame = 1.2,
+            portrait = "2",
             -- Custom HP format.
             healthFormat = "3",
             healthBarFontFamily = DEFAULT_BAR_FONT_FAMILY,
@@ -494,6 +495,33 @@ function EasyFrames.Utils.GetPartyFrames()
         PartyMemberFrame3,
         PartyMemberFrame4
     }
+end
+
+function EasyFrames.Utils.ClassPortraits(frame)
+--    if (UnitIsPlayer(frame.unit) and db.general.classPortraits) then
+--        local t = CLASS_ICON_TCOORDS[select(2, UnitClass(frame.unit))]
+--
+--        if t then
+--            frame.portrait:SetTexture("Interface\\TargetingFrame\\UI-Classes-Circles")
+--            frame.portrait:SetTexCoord(unpack(t))
+--        end
+--    else
+--        SetPortraitTexture(frame.portrait, frame.unit)
+--        frame.portrait:SetTexCoord(0, 0, 0, 1, 1, 0, 1, 1)
+--    end
+
+    local _, unitClass = UnitClass(frame.unit)
+    if (unitClass and UnitIsPlayer(frame.unit)) then
+        frame.portrait:SetTexture("Interface\\TargetingFrame\\UI-Classes-Circles")
+        frame.portrait:SetTexCoord(unpack(CLASS_ICON_TCOORDS[unitClass]))
+    else
+        frame.portrait:SetTexCoord(0, 1, 0, 1)
+    end
+end
+
+function EasyFrames.Utils.DefaultPortraits(frame)
+    SetPortraitTexture(frame.portrait, frame.unit)
+    frame.portrait:SetTexCoord(0, 1, 0, 1)
 end
 
 EasyFrames.Helpers = {};

@@ -11,7 +11,7 @@ L["Opacity"] = true
 L["Opacity of combat texture"] = true
 
 L["Main options"] = true
-L["In main options you can set the global options like colored frames, class portraits, etc"] = true
+L["In main options you can set the global options like colored frames, buffs settings, etc"] = true
 
 L["Percent"] = true
 L["Current + Max"] = true
@@ -24,6 +24,10 @@ L["None"] = true
 L["Outline"] = true
 L["Thickoutline"] = true
 L["Monochrome"] = true
+
+L["Portrait"] = true
+L["Default"] = true
+L["Hide"] = true
 
 L["HP and MP bars"] = true
 
@@ -133,6 +137,7 @@ L["Show welcome message when addon is loaded"] = true
 
 L["Player"] = true
 L["In player options you can set scale player frame, healthbar text format, etc"] = true
+L["Set the player's portrait"] = true
 L["Player name"] = true
 L["Player name font family"] = true
 L["Player name font size"] = true

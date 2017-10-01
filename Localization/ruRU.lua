@@ -7,7 +7,7 @@ L["Opacity"] = "Прозрачность"
 L["Opacity of combat texture"] = "Прозрачность текстуры в бою"
 
 L["Main options"] = "Главные настройки"
-L["In main options you can set the global options like colored frames, class portraits, etc"] = "В окне главных настроек вы можете установить глобальные настройки фреймов, таких как Раскрасить фреймы здоровья в цвет класса, установить иконку класса в портрет и другие"
+L["In main options you can set the global options like colored frames, buffs settings, etc"] = "В окне главных настроек вы можете установить глобальные настройки фреймов, таких как Раскрасить фреймы здоровья в цвет класса, настройки бафов и другие"
 
 L["Percent"] = "Проценты"
 L["Current + Max"] = "Текущее + Макс"
@@ -15,6 +15,9 @@ L["Current + Max + Percent"] = "Текущее + Макс + Проценты"
 L["Current + Percent"] = "Текущее + Проценты"
 L["Custom format"] = "Свой формат"
 L["Smart"] = "Умный"
+
+L["Default"] = "По умолчанию"
+L["Hide"] = "Скрыть"
 
 L["HP and MP bars"] = "Фреймы здоровья и маны"
 

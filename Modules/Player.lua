@@ -27,6 +27,8 @@ local originalValues = {}
 
 local UpdateHealthValues = EasyFrames.Utils.UpdateHealthValues
 local UpdateManaValues = EasyFrames.Utils.UpdateManaValues
+local ClassPortraits = EasyFrames.Utils.ClassPortraits
+local DefaultPortraits = EasyFrames.Utils.DefaultPortraits
 
 
 function Player:OnInitialize()
@@ -53,6 +55,7 @@ function Player:OnEnable()
     self:ShowRoleIcon(db.player.showRoleIcon)
 
     self:SecureHook("TextStatusBar_UpdateTextStringWithValues", "UpdateTextStringWithValues")
+    self:SecureHook("UnitFramePortrait_Update", "MakeClassPortraits")
 end
 
 function Player:OnProfileChanged(newDB)
@@ -97,6 +100,16 @@ end
 
 function Player:SetScale(value)
     PlayerFrame:SetScale(value)
+end
+
+function Player:MakeClassPortraits(frame)
+    if (frame.unit == "player" and frame.portrait) then
+        if (db.player.portrait == "2") then
+            ClassPortraits(frame)
+        else
+            DefaultPortraits(frame)
+        end
+    end
 end
 
 function Player:ShowName(value)
