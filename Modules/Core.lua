@@ -40,7 +40,6 @@ function Core:OnEnable()
     self:RegisterEvent("UNIT_FACTION", "EventHandler")
 
     self:SecureHook("TargetFrame_CheckClassification", "CheckClassification")
---    self:SecureHook("TextStatusBar_UpdateTextStringWithValues", "UpdateTextStringWithValues")
 
     self:MoveFramesNames()
     self:MoveToTFrames()
@@ -63,43 +62,6 @@ function Core:OnEnable()
 end
 
 function Core:GetOriginalValues()
---    originalValues["PlayerNameSetPoint"] = PlayerName.SetPoint
-
---    originalValues["TargetFrameTextureFrameNameSetPoint"] = TargetFrame.name.SetPoint
---    originalValues["FocusFrameTextureFrameNameSetPoint"] = TargetFrame.name.SetPoint
-
---    originalValues["PlayerFrameHealthBarTextRightSetPoint"] = PlayerFrameHealthBar.RightText.SetPoint
---    originalValues["PlayerFrameHealthBarTextLeftSetPoint"] = PlayerFrameHealthBar.LeftText.SetPoint
---    originalValues["PlayerFrameHealthBarTextSetPoint"] = PlayerFrameHealthBar.TextString.SetPoint
-
---    originalValues["PlayerFrameManaBarTextSetPoint"] = PlayerFrameManaBar.TextString.SetPoint
-
-
---    originalValues["TargetFrameTextureFrameHealthBarTextRightSetPoint"] = TargetFrameHealthBar.RightText.SetPoint
---    originalValues["TargetFrameTextureFrameHealthBarTextLeftSetPoint"] = TargetFrameHealthBar.LeftText.SetPoint
---    originalValues["TargetFrameTextureFrameHealthBarTextSetPoint"] =  TargetFrameHealthBar.TextString.SetPoint
---
---    originalValues["TargetFrameTextureFrameManaBarTextSetPoint"] = TargetFrameManaBar.TextString.SetPoint
-
-
---    originalValues["FocusFrameTextureFrameHealthBarTextRightSetPoint"] = FocusFrameHealthBar.RightText.SetPoint
---    originalValues["FocusFrameTextureFrameHealthBarTextLeftSetPoint"] = FocusFrameHealthBar.LeftText.SetPoint
---    originalValues["FocusFrameTextureFrameHealthBarTextSetPoint"] = FocusFrameHealthBar.TextString.SetPoint
---
---    originalValues["FocusFrameTextureFrameManaBarTextSetPoint"] = FocusFrameManaBar.TextString.SetPoint
-
-
---    for i = 1, 4 do
---        originalValues["PartyMemberFrame".. i .. "HealthBarSetPoint"] = _G["PartyMemberFrame" .. i .. "HealthBar"].SetPoint
---        originalValues["PartyMemberFrame".. i .. "HealthBarTextSetPoint"] = _G["PartyMemberFrame" .. i .. "HealthBar"].TextString.SetPoint
---        originalValues["PartyMemberFrame".. i .. "HealthBarTextRightSetPoint"] = _G["PartyMemberFrame" .. i .. "HealthBar"].RightText.SetPoint
---        originalValues["PartyMemberFrame".. i .. "HealthBarTextLeftSetPoint"] = _G["PartyMemberFrame" .. i .. "HealthBar"].LeftText.SetPoint
---
---        originalValues["PartyMemberFrame".. i .. "ManaBarSetPoint"] = _G["PartyMemberFrame" .. i .. "ManaBar"].SetPoint
---        originalValues["PartyMemberFrame".. i .. "ManaBarTextSetPoint"] = _G["PartyMemberFrame" .. i .. "ManaBar"].TextString.SetPoint
---        originalValues["PartyMemberFrame".. i .. "ManaBarTextRightSetPoint"] = _G["PartyMemberFrame" .. i .. "ManaBar"].RightText.SetPoint
---        originalValues["PartyMemberFrame".. i .. "ManaBarTextLeftSetPoint"] = _G["PartyMemberFrame" .. i .. "ManaBar"].LeftText.SetPoint
---    end
 
 end
 
@@ -107,11 +69,9 @@ end
 function Core:EventHandler()
     TargetFrameNameBackground:SetVertexColor(0, 0, 0, 0.0)
     TargetFrameNameBackground:SetHeight(18)
---    TargetFrameBackground:SetHeight(41)
 
     FocusFrameNameBackground:SetVertexColor(0, 0, 0, 0.0)
     FocusFrameNameBackground:SetHeight(18)
---    FocusFrameBackground:SetHeight(41)
 end
 
 
@@ -342,21 +302,4 @@ function Core:MoveLevelText()
     Core:MoveRegion(PlayerLevelText, "CENTER", -63, -17)
     Core:MoveRegion(TargetFrame.levelText, "CENTER", 63, -17)
     Core:MoveRegion(FocusFrame.levelText, "CENTER", 63, -17)
-end
-
-local FrameList = { "Target", "Focus", "Player" }
-function Core:UpdateTextStringWithValues()
-    for i = 1, select("#", unpack(FrameList)) do
-        local FrameName = (select(i, unpack(FrameList)))
-
-        if (UnitPowerType(FrameName) == 0) then --mana
-            _G[FrameName .. "FrameManaBar"].TextString:SetText(string.format("%.0f%%", (UnitPower(FrameName) / UnitPowerMax(FrameName)) * 100))
-        elseif (UnitPowerType(FrameName) == 1 or UnitPowerType(FrameName) == 2 or UnitPowerType(FrameName) == 3 or UnitPowerType(FrameName) == 6) then
-            _G[FrameName .. "FrameManaBar"].TextString:SetText(AbbreviateLargeNumbers(UnitPower(FrameName)))
-        end
-
-        if (UnitPowerMax(FrameName) == 0) then
-            _G[FrameName .. "FrameManaBar"].TextString:SetText(" ")
-        end
-    end
 end
