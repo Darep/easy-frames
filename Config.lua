@@ -1820,9 +1820,22 @@ local focusOptions = {
             arg = "focus"
         },
 
+        portrait = {
+            type = "select",
+            order = 3,
+            name = L["Portrait"],
+            desc = L["Set the focus's portrait"],
+            values = portrait,
+            set = function(info, value)
+                setOpt(info, value)
+                EasyFrames:GetModule("Focus"):MakeClassPortraits(FocusFrame)
+            end,
+            arg = "focus"
+        },
+
         HPManaFormatOptions = {
             type = "group",
-            order = 3,
+            order = 4,
             inline = true,
             name = "",
             args = {
@@ -1933,7 +1946,7 @@ local focusOptions = {
 
         HPFormat = {
             type = "group",
-            order = 4,
+            order = 5,
             inline = true,
             name = "",
             hidden = function()
@@ -2074,7 +2087,7 @@ local focusOptions = {
 
         manaFormat = {
             type = "group",
-            order = 5,
+            order = 6,
             inline = true,
             name = "",
             hidden = function()
@@ -2215,7 +2228,7 @@ local focusOptions = {
 
         frameName = {
             type = "group",
-            order = 6,
+            order = 7,
             inline = true,
             name = "",
             args = {
@@ -2326,7 +2339,7 @@ local focusOptions = {
 
         showHideElements = {
             type = "group",
-            order = 7,
+            order = 8,
             inline = true,
             name = "",
             args = {

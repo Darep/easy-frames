@@ -27,6 +27,8 @@ local originalValues = {}
 
 local UpdateHealthValues = EasyFrames.Utils.UpdateHealthValues
 local UpdateManaValues = EasyFrames.Utils.UpdateManaValues
+local ClassPortraits = EasyFrames.Utils.ClassPortraits
+local DefaultPortraits = EasyFrames.Utils.DefaultPortraits
 
 function Focus:OnInitialize()
     self.db = EasyFrames.db
@@ -49,6 +51,7 @@ function Focus:OnEnable()
     self:SetAttackBackgroundOpacity(db.focus.attackBackgroundOpacity)
 
     self:SecureHook("TextStatusBar_UpdateTextStringWithValues", "UpdateTextStringWithValues")
+    self:SecureHook("UnitFramePortrait_Update", "MakeClassPortraits")
 end
 
 function Focus:OnProfileChanged(newDB)
@@ -56,6 +59,7 @@ function Focus:OnProfileChanged(newDB)
     db = self.db.profile
 
     self:SetScale(db.focus.scaleFrame)
+    self:MakeClassPortraits(FocusFrame)
     self:ShowFocusFrameToT()
     self:ShowName(db.focus.showName)
     self:SetFrameNameFont()
@@ -77,6 +81,16 @@ end
 
 function Focus:SetScale(value)
     FocusFrame:SetScale(value)
+end
+
+function Focus:MakeClassPortraits(frame)
+    if (frame.portrait and (frame.unit == "focus" or frame.unit == "focus-target")) then
+        if (db.focus.portrait == "2") then
+            ClassPortraits(frame)
+        else
+            DefaultPortraits(frame)
+        end
+    end
 end
 
 function Focus:UpdateTextStringWithValues(statusBar)

@@ -85,7 +85,6 @@ function Target:SetScale(value)
 end
 
 function Target:MakeClassPortraits(frame)
---    print(frame.unit targettarget, focus-target)
     if (frame.portrait and (frame.unit == "target" or frame.unit == "targettarget")) then
         if (db.target.portrait == "2") then
             ClassPortraits(frame)

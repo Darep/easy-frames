@@ -191,6 +191,7 @@ L["When you change this option you need to reload your UI (because it's Blizzard
 
 L["Focus"] = true
 L["In focus options you can set scale focus frame, healthbar text format, etc"] = true
+L["Set the focus's portrait"] = true
 L["Focus name"] = true
 L["Focus name font family"] = true
 L["Focus name font size"] = true

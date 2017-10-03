@@ -16,6 +16,7 @@ L["Current + Percent"] = "Текущее + Проценты"
 L["Custom format"] = "Свой формат"
 L["Smart"] = "Умный"
 
+L["Portrait"] = "Портрет"
 L["Default"] = "По умолчанию"
 L["Hide"] = "Скрыть"
 
@@ -197,6 +198,7 @@ L["When you change this option you need to reload your UI (because it's Blizzard
 
 L["Focus"] = "Фокус"
 L["In focus options you can set scale focus frame, healthbar text format, etc"] = "В разделе Фокус вы можете установить размер (scale) фокус фрейма, установить формат HP и другие"
+L["Set the focus's portrait"] = "Установить портрет фокус фрейма"
 L["Focus name"] = "Имя фокус фрейма"
 L["Focus name font family"] = "Шрифт имени фокус фрейма"
 L["Focus name font size"] = "Размер шрифта имени фокус фрейма"
