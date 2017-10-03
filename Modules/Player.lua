@@ -63,6 +63,7 @@ function Player:OnProfileChanged(newDB)
     db = self.db.profile
 
     self:SetScale(db.player.scaleFrame)
+    self:MakeClassPortraits(PlayerFrame)
     self:ShowName(db.player.showName)
     self:SetFrameNameFont()
     self:SetHealthBarsFont()

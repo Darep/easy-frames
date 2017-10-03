@@ -91,7 +91,7 @@ local fontStyle = {
 local portrait = {
     ["1"] = L["Default"],
     ["2"] = L["Class portraits"],
-    ["3"] = L["Hide"],
+--    ["3"] = L["Hide"],
 }
 
 local MIN_RANGE = 6
@@ -1201,9 +1201,22 @@ local targetOptions = {
             arg = "target"
         },
 
+        portrait = {
+            type = "select",
+            order = 3,
+            name = L["Portrait"],
+            desc = L["Set the target's portrait"],
+            values = portrait,
+            set = function(info, value)
+                setOpt(info, value)
+                EasyFrames:GetModule("Target"):MakeClassPortraits(TargetFrame)
+            end,
+            arg = "target"
+        },
+
         HPManaFormatOptions = {
             type = "group",
-            order = 3,
+            order = 4,
             inline = true,
             name = "",
             args = {
@@ -1314,7 +1327,7 @@ local targetOptions = {
 
         HPFormat = {
             type = "group",
-            order = 4,
+            order = 5,
             inline = true,
             name = "",
             hidden = function()
@@ -1455,7 +1468,7 @@ local targetOptions = {
 
         manaFormat = {
             type = "group",
-            order = 5,
+            order = 6,
             inline = true,
             name = "",
             hidden = function()
@@ -1596,7 +1609,7 @@ local targetOptions = {
 
         frameName = {
             type = "group",
-            order = 6,
+            order = 7,
             inline = true,
             name = "",
             args = {
@@ -1707,7 +1720,7 @@ local targetOptions = {
 
         showHideElements = {
             type = "group",
-            order = 7,
+            order = 8,
             inline = true,
             name = "",
             args = {

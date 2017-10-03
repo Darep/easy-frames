@@ -143,6 +143,7 @@ L["Show welcome message when addon is loaded"] = "Показывать прив�
 
 L["Player"] = "Игрок"
 L["In player options you can set scale player frame, healthbar text format, etc"] = "В разделе Игрок вы можете установить размер (scale) фрейма игрока, установить формат HP и другие"
+L["Set the player's portrait"] = "Установить портрет игрока"
 L["Player name"] = "Имя игрока"
 L["Player name font family"] = "Шрифт имени игрока"
 L["Player name font size"] = "Размер шрифта имени игрока"
@@ -174,6 +175,7 @@ L["Show or hide player role icon when player is in a group"] = "Показыва
 
 L["Target"] = "Цель"
 L["In target options you can set scale target frame, healthbar text format, etc"] = "В разделе Цель вы можете установить размер (scale) фрейма цели, установить формат HP и другие"
+L["Set the target's portrait"] = "Установить портрет цели"
 L["Target name"] = "Имя цели"
 L["Target name font family"] = "Шрифт имени цели"
 L["Target name font size"] = "Размер шрифта имени цели"

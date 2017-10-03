@@ -169,6 +169,7 @@ L["Show or hide player role icon when player is in a group"] = true
 
 L["Target"] = true
 L["In target options you can set scale target frame, healthbar text format, etc"] = true
+L["Set the target's portrait"] = true
 L["Target name"] = true
 L["Target name font family"] = true
 L["Target name font size"] = true

@@ -145,6 +145,7 @@ local defaults = {
 
         target = {
             scaleFrame = 1.2,
+            portrait = "2",
             -- Custom HP format.
             healthFormat = "3",
             healthBarFontFamily = DEFAULT_BAR_FONT_FAMILY,

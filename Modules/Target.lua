@@ -27,6 +27,8 @@ local originalValues = {}
 
 local UpdateHealthValues = EasyFrames.Utils.UpdateHealthValues
 local UpdateManaValues = EasyFrames.Utils.UpdateManaValues
+local ClassPortraits = EasyFrames.Utils.ClassPortraits
+local DefaultPortraits = EasyFrames.Utils.DefaultPortraits
 
 
 function Target:OnInitialize()
@@ -50,6 +52,7 @@ function Target:OnEnable()
     self:SetAttackBackgroundOpacity(db.target.attackBackgroundOpacity)
 
     self:SecureHook("TextStatusBar_UpdateTextStringWithValues", "UpdateTextStringWithValues")
+    self:SecureHook("UnitFramePortrait_Update", "MakeClassPortraits")
 end
 
 function Target:OnProfileChanged(newDB)
@@ -57,6 +60,7 @@ function Target:OnProfileChanged(newDB)
     db = self.db.profile
 
     self:SetScale(db.target.scaleFrame)
+    self:MakeClassPortraits(TargetFrame)
     self:ShowTargetFrameToT()
     self:ShowName(db.target.showName)
     self:SetFrameNameFont()
@@ -78,6 +82,17 @@ end
 
 function Target:SetScale(value)
     TargetFrame:SetScale(value)
+end
+
+function Target:MakeClassPortraits(frame)
+--    print(frame.unit targettarget, focus-target)
+    if (frame.portrait and (frame.unit == "target" or frame.unit == "targettarget")) then
+        if (db.target.portrait == "2") then
+            ClassPortraits(frame)
+        else
+            DefaultPortraits(frame)
+        end
+    end
 end
 
 function Target:UpdateTextStringWithValues(statusBar)
