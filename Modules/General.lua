@@ -106,21 +106,6 @@ local function ClassColored(statusbar, unit)
 end
 
 
---local function ClassPortraits(frame)
---    if (UnitIsPlayer(frame.unit) and db.general.classPortraits) then
---        local t = CLASS_ICON_TCOORDS[select(2, UnitClass(frame.unit))]
---
---        if t then
---            frame.portrait:SetTexture("Interface\\TargetingFrame\\UI-Classes-Circles")
---            frame.portrait:SetTexCoord(unpack(t))
---        end
---    else
---        SetPortraitTexture(frame.portrait, frame.unit)
---        frame.portrait:SetTexCoord(0, 0, 0, 1, 1, 0, 1, 1)
---    end
---end
-
-
 function General:OnInitialize()
     self.db = EasyFrames.db
     db = self.db.profile
@@ -133,8 +118,6 @@ function General:OnEnable()
     self:SecureHook("HealthBar_OnValueChanged", function(statusbar)
         self:MakeFramesColored(statusbar, statusbar.unit)
     end)
-
---    self:SecureHook("UnitFramePortrait_Update", "MakeClassPortraits")
 
     self:SecureHook("TargetFrame_UpdateAuraPositions", "MakeCustomBuffSize")
     self:SecureHook("TargetFrame_UpdateAuras", "TargetFrame_UpdateAuras")
@@ -159,7 +142,6 @@ function General:OnProfileChanged(newDB)
     self:SetLightTexture(db.general.lightTexture)
 
     self:SetFramesColored()
---    self:SetClassPortraits()
 
     if (db.general.barTexture ~= "Blizzard") then
         self:SetFrameBarTexture(db.general.barTexture)
@@ -204,21 +186,6 @@ function General:MakeFramesColored(statusbar, unit)
         end
     end
 end
-
-
---function General:SetClassPortraits()
---    for _, frame in pairs(GetAllFrames()) do
---        if frame.portrait then
---            ClassPortraits(frame)
---        end
---    end
---end
---
---function General:MakeClassPortraits(frame)
---    if frame.portrait then
---        ClassPortraits(frame)
---    end
---end
 
 function General:CombatStatusEvent(event)
     if (event == 'PLAYER_REGEN_DISABLED') then
