@@ -157,6 +157,8 @@ function Player:ShowHitIndicator(value)
 end
 
 function Player:ShowSpecialbar(value)
+    local noop = function() return end
+
     local _, englishClass = UnitClass("player")
     local playerSpec = GetSpecialization()
     local frame
@@ -181,11 +183,17 @@ function Player:ShowSpecialbar(value)
         frame = WarlockPowerFrame
     end
 
+    if (not originalValues[frame:GetName()]) then
+        originalValues[frame:GetName()] = frame.Show
+    end
+
     if (frame) then
         if (value) then
+            frame.Show = originalValues[frame:GetName()]
             frame:Show()
         else
             frame:Hide()
+            frame.Show = noop
         end
     end
 end
