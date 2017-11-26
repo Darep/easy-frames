@@ -101,6 +101,10 @@ local function ClassColored(statusbar, unit)
             colors = db.general.neutralFrameDefaultColors
         end
 
+        if (not UnitPlayerControlled(unit) and UnitIsTapDenied(unit)) then
+            colors = {0.5, 0.5, 0.5}
+        end
+
         statusbar:SetStatusBarColor(colors[1], colors[2], colors[3])
     end
 end
