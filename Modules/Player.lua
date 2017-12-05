@@ -183,11 +183,11 @@ function Player:ShowSpecialbar(value)
         frame = WarlockPowerFrame
     end
 
-    if (not originalValues[frame:GetName()]) then
-        originalValues[frame:GetName()] = frame.Show
-    end
-
     if (frame) then
+        if (not originalValues[frame:GetName()]) then
+            originalValues[frame:GetName()] = frame.Show
+        end
+
         if (value) then
             frame.Show = originalValues[frame:GetName()]
             frame:Show()
