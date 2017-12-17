@@ -64,7 +64,7 @@ local function getDeepOpt(info)
 end
 
 local function getOptionName(name)
-    return "EasyFrames" .. " - " .. name
+    return "Easy Frames" .. " - " .. name
 end
 
 local healthFormat = {
@@ -3533,7 +3533,7 @@ function EasyFrames:SetupOptions()
 
     -- General
     AceConfig:RegisterOptionsTable("EasyFrames", generalOptions)
-    self.optFrames.EasyFrames = AceConfigDialog:AddToBlizOptions("EasyFrames", "EasyFrames")
+    self.optFrames.EasyFrames = AceConfigDialog:AddToBlizOptions("EasyFrames", "Easy Frames")
 
     -- Player
     self:RegisterModuleOptions("Player", playerOptions, L["Player"])
@@ -3560,5 +3560,5 @@ end
 
 function EasyFrames:RegisterModuleOptions(name, optTable, displayName)
     AceConfig:RegisterOptionsTable(name, optTable)
-    self.optFrames[name] = AceConfigDialog:AddToBlizOptions(name, displayName or name, "EasyFrames")
+    self.optFrames[name] = AceConfigDialog:AddToBlizOptions(name, displayName or name, "Easy Frames")
 end

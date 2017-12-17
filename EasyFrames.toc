@@ -1,4 +1,4 @@
-## Title: EasyFrames
+## Title: Easy Frames
 ## Interface: 70300
 ## Notes: Make your unit frames colored and glorious.
 ## Author: Usoltsev
