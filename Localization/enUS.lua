@@ -102,6 +102,12 @@ L["Dispelled buff scale"] = true
 L["Dispelled buff scale that can be dispelled from target frame"] = true
 L["Only if player can dispel them"] = true
 L["Highlight dispelled buffs only if player can dispel them"] = true
+L["Show only my debuffs"] = true
+L["Show only my debuffs (which the player creates)"] = true
+L["Max buffs count"] = true
+L["How many buffs you can see on target/focus frames"] = true
+L["Max debuffs count"] = true
+L["How many debuffs you can see on target/focus frames"] = true
 
 L["Class portraits"] = true
 L["Replaces the unit-frame portrait with their class icon"] = true

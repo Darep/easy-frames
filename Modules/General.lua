@@ -137,6 +137,9 @@ function General:OnEnable()
     end
 
     self:SetBrightFramesBorder(db.general.brightFrameBorder)
+
+    self:SetMaxBuffCount(db.general.maxBuffCount)
+    self:SetMaxDebuffCount(db.general.maxDebuffCount)
 end
 
 function General:OnProfileChanged(newDB)
@@ -156,6 +159,9 @@ function General:OnProfileChanged(newDB)
     self:SetBrightFramesBorder(db.general.brightFrameBorder)
 
     self:SetCustomBuffSize(db.general.customBuffSize)
+
+    self:SetMaxBuffCount(db.general.maxBuffCount)
+    self:SetMaxDebuffCount(db.general.maxDebuffCount)
 end
 
 
@@ -404,14 +410,16 @@ function General:SetHighlightDispelledBuff()
 end
 
 function General:TargetFrame_UpdateAuras(frame, forceHide)
-    local buffFrame, frameStealable, frameName, icon, debuffType, isStealable, _
+    local buffFrame, frameStealable, icon, debuffType, isStealable, _
     local selfName = frame:GetName()
     local isEnemy = UnitIsEnemy(PlayerFrame.unit, frame.unit)
 
     for i = 1, MAX_TARGET_BUFFS do
         _, _, icon, _, debuffType, _, _, _, isStealable = UnitBuff(frame.unit, i)
-        frameName = selfName .. 'Buff' .. i
+
         if (icon and (not frame.maxBuffs or i <= frame.maxBuffs)) then
+            local frameName = selfName .. 'Buff' .. i
+
             buffFrame = _G[frameName]
 
             -- Buffs on top
@@ -452,4 +460,14 @@ function General:TargetFrame_UpdateAuras(frame, forceHide)
             end
         end
     end
+end
+
+function General:SetMaxBuffCount(value)
+    TargetFrame.maxBuffs = value
+    FocusFrame.maxBuffs = value
+end
+
+function General:SetMaxDebuffCount(value)
+    TargetFrame.maxDebuffs = value
+    FocusFrame.maxDebuffs = value
 end

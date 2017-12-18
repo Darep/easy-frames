@@ -312,6 +312,7 @@ local generalOptions = {
                     desc = L["Buffsize"],
                     min = 10,
                     max = 40,
+                    step = 1,
                     set = function(info, value)
                         setOpt(info, value)
                         EasyFrames:GetModule("General"):SetCustomBuffSize(true)
@@ -332,6 +333,7 @@ local generalOptions = {
                     desc = L["Buffsize that you create"],
                     min = 10,
                     max = 40,
+                    step = 1,
                     set = function(info, value)
                         setOpt(info, value)
                         EasyFrames:GetModule("General"):SetCustomBuffSize(true)
@@ -391,6 +393,48 @@ local generalOptions = {
                         if (diabled == false) then
                             return true
                         end
+                    end,
+                    arg = "general"
+                },
+
+--                showOnlyMyDebuff = {
+--                    type = "toggle",
+--                    order = 9,
+--                    name = L["Show only my debuffs"],
+--                    desc = L["Show only my debuffs (which the player creates)"],
+--                    set = function(info, value)
+--                        setOpt(info, value)
+--                        EasyFrames:GetModule("General"):TargetFrame_UpdateAuras(TargetFrame)
+--                    end,
+--                    arg = "general"
+--                },
+
+                maxBuffCount = {
+                    type = "range",
+                    order = 9,
+                    name = L["Max buffs count"],
+                    desc = L["How many buffs you can see on target/focus frames"],
+                    min = 0,
+                    max = 32,
+                    step = 1,
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("General"):SetMaxBuffCount(value)
+                    end,
+                    arg = "general"
+                },
+
+                maxDebuffCount = {
+                    type = "range",
+                    order = 10,
+                    name = L["Max debuffs count"],
+                    desc = L["How many debuffs you can see on target/focus frames"],
+                    min = 0,
+                    max = 16,
+                    step = 1,
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("General"):SetMaxDebuffCount(value)
                     end,
                     arg = "general"
                 },

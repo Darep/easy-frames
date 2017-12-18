@@ -91,12 +91,17 @@ local defaults = {
         general = {
             classColored = true,
             colorBasedOnCurrentHealth = false,
+
             customBuffSize = true,
             buffSize = 22,
             selfBuffSize = 28,
             highlightDispelledBuff = true,
-            dispelledBuffScale = 1,
             ifPlayerCanDispelBuff = false,
+            dispelledBuffScale = 1,
+            showOnlyMyDebuff = false,
+            maxBuffCount = 32,
+            maxDebuffCount = 16,
+
             classPortraits = true,
             hideOutOfCombat = false,
             hideOutOfCombatWithFullHP = false,
