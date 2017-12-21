@@ -471,3 +471,25 @@ function General:SetMaxDebuffCount(value)
     TargetFrame.maxDebuffs = value
     FocusFrame.maxDebuffs = value
 end
+
+function General:SaveFramesPoints()
+    db.general.framesPoints = {
+        player = {PlayerFrame:GetPoint()},
+        target = {TargetFrame:GetPoint()},
+        focus = {FocusFrame:GetPoint()},
+    }
+end
+
+function General:RestoreFramesPoints()
+    if (db.general.framesPoints) then
+        for _, frame in pairs({
+            PlayerFrame,
+            TargetFrame,
+            FocusFrame
+        }) do
+            frame:ClearAllPoints()
+            frame:SetPoint(unpack(db.general.framesPoints[frame.unit]))
+            frame:SetUserPlaced(true)
+        end
+    end
+end

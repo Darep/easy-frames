@@ -145,6 +145,11 @@ L["In this section you can set the settings like 'show welcome message' etc"] = 
 L["Show welcome message"] = "Показывать приветственный текст в чате"
 L["Show welcome message when addon is loaded"] = "Показывать приветственный текст в чате когда аддон был загружен"
 
+L["Save positions of frames to current profile"] = "Сохранить позиции фреймов в текущий профиль"
+L["Restore positions of frames from current profile"] = "Восстановить позиции фреймов с текущего профиля"
+L["Saved"] = "Сохранены"
+L["Restored"] = "Восстановлены"
+
 
 L["Player"] = "Игрок"
 L["In player options you can set scale player frame, healthbar text format, etc"] = "В разделе Игрок вы можете установить размер (scale) фрейма игрока, установить формат HP и другие"

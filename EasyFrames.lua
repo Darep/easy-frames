@@ -113,6 +113,7 @@ local defaults = {
             enemyFrameDefaultColors = {1, 0, 0},
             neutralFrameDefaultColors = {1, 1, 0},
             showWelcomeMessage = true,
+            framesPoints = false,
         },
 
         player = {

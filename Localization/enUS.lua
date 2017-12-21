@@ -140,6 +140,11 @@ L["In this section you can set the settings like 'show welcome message' etc"] = 
 L["Show welcome message"] = true
 L["Show welcome message when addon is loaded"] = true
 
+L["Save positions of frames to current profile"] = true
+L["Restore positions of frames from current profile"] = true
+L["Saved"] = true
+L["Restored"] = true
+
 
 L["Player"] = true
 L["In player options you can set scale player frame, healthbar text format, etc"] = true

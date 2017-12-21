@@ -555,6 +555,43 @@ local generalOptions = {
                     desc = L["Show welcome message when addon is loaded"],
                     arg = "general"
                 },
+
+                newLine = {
+                    type = "description",
+                    order = 4,
+                    name = "",
+                },
+
+                saveFramesPoints = {
+                    type = "execute",
+                    order = 5,
+                    name = L["Save positions of frames to current profile"],
+
+                    func = function(info)
+                        info.options.args.otherGroup.args.framesPointsLog.name = L["Saved"]
+
+                        EasyFrames:GetModule("General"):SaveFramesPoints()
+                    end,
+                },
+
+                restoreFramesPoints = {
+                    type = "execute",
+                    order = 6,
+                    name = L["Restore positions of frames from current profile"],
+
+                    func = function(info)
+                        info.options.args.otherGroup.args.framesPointsLog.name = L["Restored"]
+
+                        EasyFrames:GetModule("General"):RestoreFramesPoints()
+                    end,
+                },
+
+                framesPointsLog = {
+                    order = 7,
+                    type = "description",
+                    name = "",
+                    width = "default",
+                },
             }
         },
     },
