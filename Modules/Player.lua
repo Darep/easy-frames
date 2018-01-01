@@ -157,7 +157,9 @@ function Player:ShowHitIndicator(value)
 end
 
 function Player:ShowSpecialbar(value)
-    local noop = function() return end
+    local SpecialbarOnShow = function(frame)
+        frame:Hide()
+    end
 
     local _, englishClass = UnitClass("player")
     local playerSpec = GetSpecialization()
@@ -184,16 +186,14 @@ function Player:ShowSpecialbar(value)
     end
 
     if (frame) then
-        if (not originalValues[frame:GetName()]) then
-            originalValues[frame:GetName()] = frame.Show
-        end
-
         if (value) then
-            frame.Show = originalValues[frame:GetName()]
+            self:Unhook(frame, "OnShow")
+
             frame:Show()
         else
             frame:Hide()
-            frame.Show = noop
+
+            self:HookScript(frame, "OnShow", SpecialbarOnShow)
         end
     end
 end
