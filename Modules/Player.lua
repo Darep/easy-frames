@@ -23,12 +23,21 @@ local MODULE_NAME = "Player"
 local Player = EasyFrames:NewModule(MODULE_NAME, "AceHook-3.0")
 
 local db
-local originalValues = {}
 
 local UpdateHealthValues = EasyFrames.Utils.UpdateHealthValues
 local UpdateManaValues = EasyFrames.Utils.UpdateManaValues
 local ClassPortraits = EasyFrames.Utils.ClassPortraits
 local DefaultPortraits = EasyFrames.Utils.DefaultPortraits
+
+local OnShowHookScript = function(frame)
+    frame:Hide()
+end
+
+local OnSetTextHookScript = function(frame, text, flag)
+    if (flag ~= "EasyFramesHookSetText" and not db.player.showHitIndicator) then
+        frame:SetText(nil, "EasyFramesHookSetText")
+    end
+end
 
 
 function Player:OnInitialize()
@@ -38,8 +47,6 @@ function Player:OnInitialize()
 end
 
 function Player:OnEnable()
-    self:GetOriginalValues()
-
     self:SetScale(db.player.scaleFrame)
     self:ShowName(db.player.showName)
     self:SetFrameNameFont()
@@ -80,24 +87,6 @@ function Player:OnProfileChanged(newDB)
     self:UpdateTextStringWithValues()
 end
 
-
-function Player:GetOriginalValues()
-    originalValues["PlayerHitIndicator"] = PlayerHitIndicator.SetText
-
-    originalValues["PlayerRestGlow"] = PlayerRestGlow.Show
-    originalValues["PlayerRestIcon"] = PlayerRestIcon.Show
-
-    originalValues["PlayerStatusGlow"] = PlayerStatusGlow.Show
-    originalValues["PlayerStatusTexture"] = PlayerStatusTexture.Show
-
-    originalValues["PlayerAttackGlow"] = PlayerAttackGlow.Show
-    originalValues["PlayerAttackBackground"] = PlayerAttackBackground.Show
-    originalValues["PlayerFrameFlash"] = PlayerFrameFlash.Show
-
-    originalValues["PlayerFrameGroupIndicator"] = PlayerFrameGroupIndicator.Show
-
-    originalValues["PlayerFrameRoleIcon"] = PlayerFrameRoleIcon.Show
-end
 
 function Player:SetScale(value)
     PlayerFrame:SetScale(value)
@@ -148,11 +137,15 @@ function Player:ShowNameInsideFrame(value)
 end
 
 function Player:ShowHitIndicator(value)
-    if (value) then
-        PlayerHitIndicator.SetText = originalValues["PlayerHitIndicator"]
-    else
-        PlayerHitIndicator:SetText(nil)
-        PlayerHitIndicator.SetText = function() end
+    local frame = PlayerHitIndicator
+
+    if (not value) then
+        frame:SetText(nil)
+
+        if (not frame.EasyFramesHookSetText) then
+            hooksecurefunc(frame, "SetText", OnSetTextHookScript)
+            frame.EasyFramesHookSetText = true
+        end
     end
 end
 
@@ -244,44 +237,42 @@ function Player:SetFrameNameFont()
 end
 
 function Player:ShowRestIcon(value)
-    local noop = function() return end
-
     for _, frame in pairs({
         PlayerRestGlow,
         PlayerRestIcon,
     }) do
         if frame then
             if (value) then
-                frame.Show = originalValues[frame:GetName()]
+                self:Unhook(frame, "Show")
 
                 if (IsResting("player")) then
                     frame:Show()
                 end
             else
                 frame:Hide()
-                frame.Show = noop
+
+                self:SecureHook(frame, "Show", OnShowHookScript)
             end
         end
     end
 end
 
 function Player:ShowStatusTexture(value)
-    local noop = function() return end
-
     for _, frame in pairs({
         PlayerStatusGlow,
         PlayerStatusTexture,
     }) do
         if frame then
             if (value) then
-                frame.Show = originalValues[frame:GetName()]
+                self:Unhook(frame, "Show")
 
                 if (IsResting("player") or UnitAffectingCombat("player")) then
                     frame:Show()
                 end
             else
                 frame:Hide()
-                frame.Show = noop
+
+                self:SecureHook(frame, "Show", OnShowHookScript)
             end
         end
     end
@@ -289,8 +280,6 @@ end
 
 
 function Player:ShowAttackBackground(value)
-    local noop = function() return end
-
     for _, frame in pairs({
         PlayerAttackGlow,
         PlayerAttackBackground,
@@ -298,14 +287,15 @@ function Player:ShowAttackBackground(value)
     }) do
         if frame then
             if (value) then
-                frame.Show = originalValues[frame:GetName()]
+                self:Unhook(frame, "Show")
 
                 if (UnitAffectingCombat("player")) then
                     frame:Show()
                 end
             else
                 frame:Hide()
-                frame.Show = noop
+
+                self:SecureHook(frame, "Show", OnShowHookScript)
             end
         end
     end
@@ -316,39 +306,37 @@ function Player:SetAttackBackgroundOpacity(value)
 end
 
 function Player:ShowGroupIndicator(value)
-    local noop = function() return end
-
     local frame = PlayerFrameGroupIndicator
 
     if frame then
         if (value) then
-            frame.Show = originalValues[frame:GetName()]
+            self:Unhook(frame, "Show")
 
             if (IsInRaid("player")) then
                 frame:Show()
             end
         else
             frame:Hide()
-            frame.Show = noop
+
+            self:SecureHook(frame, "Show", OnShowHookScript)
         end
     end
 end
 
 function Player:ShowRoleIcon(value)
-    local noop = function() return end
-
     local frame = PlayerFrameRoleIcon
 
     if frame then
         if (value) then
-            frame.Show = originalValues[frame:GetName()]
+            self:Unhook(frame, "Show")
 
             if (IsInGroup("player")) then
                 frame:Show()
             end
         else
             frame:Hide()
-            frame.Show = noop
+
+            self:SecureHook(frame, "Show", OnShowHookScript)
         end
     end
 end

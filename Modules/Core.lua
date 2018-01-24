@@ -23,8 +23,16 @@ local MODULE_NAME = "Core"
 local Core = EasyFrames:NewModule(MODULE_NAME, "AceConsole-3.0", "AceEvent-3.0", "AceHook-3.0")
 
 local db
-local originalValues = {}
 local PartyIterator = EasyFrames.Helpers.Iterator(EasyFrames.Utils.GetPartyFrames())
+
+local OnSetPointHookScript = function(point, relativeTo, relativePoint, xOffset, yOffset)
+    return function(frame, _, _, _, _, _, flag)
+        if flag ~= "EasyFramesHookSetPoint" then
+            frame:ClearAllPoints()
+            frame:SetPoint(point, relativeTo, relativePoint, xOffset, yOffset, "EasyFramesHookSetPoint")
+        end
+    end
+end
 
 function Core:OnInitialize()
     self.db = EasyFrames.db
@@ -32,8 +40,6 @@ function Core:OnInitialize()
 end
 
 function Core:OnEnable()
-    self:GetOriginalValues()
-
     self:RegisterEvent("GROUP_ROSTER_UPDATE", "EventHandler")
     self:RegisterEvent("PLAYER_TARGET_CHANGED", "EventHandler")
     self:RegisterEvent("PLAYER_FOCUS_CHANGED", "EventHandler")
@@ -59,10 +65,6 @@ function Core:OnEnable()
     if (db.general.showWelcomeMessage) then
         print("|cff0cbd0cEasy Frames|cffffffff " .. L["loaded. Options:"] .. " |cff0cbd0c/ef")
     end
-end
-
-function Core:GetOriginalValues()
-
 end
 
 
@@ -107,13 +109,14 @@ function Core:CheckClassification(frame, forceNormalTexture)
     end
 end
 
-function Core:MoveRegion(region, point, relativeTo, relativePoint, xOffset, yOffset)
-    region:ClearAllPoints()
+function Core:MoveRegion(frame, point, relativeTo, relativePoint, xOffset, yOffset)
+    frame:ClearAllPoints()
+    frame:SetPoint(point, relativeTo, relativePoint, xOffset, yOffset, "EasyFramesHookSetPoint")
 
-    region.SetPoint = originalValues[region:GetName() .. "SetPoint"]
-    region:SetPoint(point, relativeTo, relativePoint, xOffset, yOffset)
-
-    region.SetPoint = function() end
+    if (not frame.EasyFramesHookSetPoint) then
+        hooksecurefunc(frame, "SetPoint", OnSetPointHookScript(point, relativeTo, relativePoint, xOffset, yOffset))
+        frame.EasyFramesHookSetPoint = true
+    end
 end
 
 function Core:MovePlayerFrameName(point, relativeTo, relativePoint, xOffset, yOffset)
@@ -129,8 +132,8 @@ function Core:MoveFocusFrameName(point, relativeTo, relativePoint, xOffset, yOff
 end
 
 function Core:MoveFramesNames()
-    --Names
-    self:MovePlayerFrameName()
+    -- Names
+    -- Player's frame will set in Player module (with option "Show player name inside the frame")
     self:MoveTargetFrameName()
     self:MoveFocusFrameName()
 
@@ -144,7 +147,7 @@ function Core:MoveFramesNames()
 end
 
 function Core:MoveToTFrames()
-    --ToT move
+    -- ToT move
     TargetFrameToT:ClearAllPoints()
     TargetFrameToT:SetPoint("CENTER", TargetFrame, "CENTER", 60, -45)
 
@@ -153,98 +156,55 @@ function Core:MoveToTFrames()
 end
 
 function Core:MovePlayerFrameBars()
-    --Player bars
+    -- Player bars
     PlayerFrameHealthBar:SetHeight(27)
-    PlayerFrameHealthBar:ClearAllPoints()
-    PlayerFrameHealthBar:SetPoint("CENTER", PlayerFrame, "CENTER", 50, 14)
-    PlayerFrameHealthBar.SetPoint = function() end
-
-    PlayerFrameManaBar:ClearAllPoints()
-    PlayerFrameManaBar:SetPoint("CENTER", PlayerFrame, "CENTER", 51, -7)
-    PlayerFrameManaBar.SetPoint = function() end
-
-    self:MoveRegion(PlayerFrameAlternateManaBarText, "CENTER", PlayerFrameAlternateManaBar, "CENTER", 0, -1)
-
     PlayerStatusTexture:SetHeight(69)
+
+    self:MoveRegion(PlayerFrameHealthBar, "CENTER", PlayerFrame, "CENTER", 50, 14)
+    self:MoveRegion(PlayerFrameManaBar, "CENTER", PlayerFrame, "CENTER", 51, -7)
+    self:MoveRegion(PlayerFrameAlternateManaBarText, "CENTER", PlayerFrameAlternateManaBar, "CENTER", 0, -1)
 
     PlayerFrameGroupIndicator:ClearAllPoints()
     PlayerFrameGroupIndicator:SetPoint("TOPLEFT", 34, 15)
+
     PlayerFrameGroupIndicatorLeft:SetAlpha(0)
     PlayerFrameGroupIndicatorRight:SetAlpha(0)
     PlayerFrameGroupIndicatorMiddle:SetAlpha(0)
-
 end
 
 function Core:MoveTargetFrameBars()
-    --Target bars
+    -- Target bars
     TargetFrameHealthBar:SetHeight(27)
-    TargetFrameHealthBar:ClearAllPoints()
-    TargetFrameHealthBar:SetPoint("CENTER", TargetFrame, "CENTER", -50, 14)
-    TargetFrameHealthBar.SetPoint = function() end
-
-    TargetFrameTextureFrameDeadText:ClearAllPoints()
-    TargetFrameTextureFrameDeadText:SetPoint("CENTER", TargetFrame, "CENTER", -50, 12)
-    TargetFrameTextureFrameDeadText.SetPoint = function() end
-
-    TargetFrameManaBar:ClearAllPoints()
-    TargetFrameManaBar:SetPoint("CENTER", TargetFrame, "CENTER", -51, -7)
-    TargetFrameManaBar.SetPoint = function() end
-
     TargetFrameNumericalThreat:SetScale(0.9)
-    TargetFrameNumericalThreat:ClearAllPoints()
-    TargetFrameNumericalThreat:SetPoint("CENTER", TargetFrame, "CENTER", 44, 48)
-    TargetFrameNumericalThreat.SetPoint = function() end
+
+    self:MoveRegion(TargetFrameHealthBar, "CENTER", TargetFrame, "CENTER", -50, 14)
+    self:MoveRegion(TargetFrameTextureFrameDeadText, "CENTER", TargetFrame, "CENTER", -50, 12)
+    self:MoveRegion(TargetFrameManaBar, "CENTER", TargetFrame, "CENTER", -51, -7)
+    self:MoveRegion(TargetFrameNumericalThreat, "CENTER", TargetFrame, "CENTER", 44, 48)
 end
 
 function Core:MoveFocusFrameBars()
-    --Focus bars
+    -- Focus bars
     FocusFrameHealthBar:SetHeight(27)
-    FocusFrameHealthBar:ClearAllPoints()
-    FocusFrameHealthBar:SetPoint("CENTER", FocusFrame, "CENTER", -50, 14)
-    FocusFrameHealthBar.SetPoint = function() end
+    FocusFrameNumericalThreat:SetScale(0.9)
 
-    FocusFrameTextureFrameDeadText:ClearAllPoints()
-    FocusFrameTextureFrameDeadText:SetPoint("CENTER", FocusFrame, "CENTER", -50, 12)
-    FocusFrameTextureFrameDeadText.SetPoint = function() end
-
-    FocusFrameManaBar:ClearAllPoints()
-    FocusFrameManaBar:SetPoint("CENTER", FocusFrame, "CENTER", -51, -7)
-    FocusFrameManaBar.SetPoint = function() end
-
-    FocusFrameNumericalThreat:ClearAllPoints()
-    FocusFrameNumericalThreat:SetPoint("CENTER", FocusFrame, "CENTER", 44, 48)
-    FocusFrameNumericalThreat.SetPoint = function() end
+    self:MoveRegion(FocusFrameHealthBar, "CENTER", FocusFrame, "CENTER", -50, 14)
+    self:MoveRegion(FocusFrameTextureFrameDeadText, "CENTER", FocusFrame, "CENTER", -50, 12)
+    self:MoveRegion(FocusFrameManaBar, "CENTER", FocusFrame, "CENTER", -51, -7)
+    self:MoveRegion(FocusFrameNumericalThreat, "CENTER", FocusFrame, "CENTER", 44, 48)
 end
 
 function Core:MovePetFrameBars()
-    local healthBar = PetFrameHealthBar
-    local manaBar = PetFrameManaBar
+    PetFrameHealthBar:SetHeight(13)
 
-    healthBar:SetHeight(13)
-    healthBar:ClearAllPoints()
-    healthBar:SetPoint("CENTER", PetFrame, "CENTER", 16, 3)
-    healthBar.SetPoint = function() end
+    self:MoveRegion(PetFrameHealthBar, "CENTER", PetFrame, "CENTER", 16, 3)
+    self:MoveRegion(PetFrameManaBar, "CENTER", PetFrame, "CENTER", 16, -8)
 
-    manaBar:ClearAllPoints()
-    manaBar:SetPoint("CENTER", PetFrame, "CENTER", 16, -8)
-    manaBar.SetPoint = function() end
+    self:MoveRegion(PetFrameHealthBar.RightText, "RIGHT", PetFrame, "TOPLEFT", 113, -23)
+    self:MoveRegion(PetFrameHealthBar.LeftText, "LEFT", PetFrame, "TOPLEFT", 46, -23)
+    self:MoveRegion(PetFrameHealthBar.TextString, "CENTER", PetFrameHealthBar, "CENTER", 0, 0)
 
-
-    healthBar.RightText:ClearAllPoints()
-    healthBar.RightText:SetPoint("RIGHT", PetFrame, "TOPLEFT", 113, -23)
-    healthBar.RightText.SetPoint = function() end
-
-    healthBar.LeftText:ClearAllPoints()
-    healthBar.LeftText:SetPoint("LEFT", PetFrame, "TOPLEFT", 46, -23)
-    healthBar.LeftText.SetPoint = function() end
-
-    healthBar.TextString:ClearAllPoints()
-    healthBar.TextString:SetPoint("CENTER", healthBar, "CENTER", 0, 0)
-    healthBar.TextString.SetPoint = function() end
-
-    manaBar.TextString:ClearAllPoints()
-    manaBar.TextString:SetPoint("CENTER", manaBar, "CENTER", 0, 0)
-    manaBar.TextString.SetPoint = function() end
+    self:MoveRegion(PetFrameManaBar.TextString, "CENTER", PetFrameManaBar, "CENTER", 0, 0)
 end
 
 function Core:MovePlayerFramesBarsTextString()

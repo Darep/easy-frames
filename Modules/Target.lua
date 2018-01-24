@@ -23,12 +23,15 @@ local MODULE_NAME = "Target"
 local Target = EasyFrames:NewModule(MODULE_NAME, "AceHook-3.0")
 
 local db
-local originalValues = {}
 
 local UpdateHealthValues = EasyFrames.Utils.UpdateHealthValues
 local UpdateManaValues = EasyFrames.Utils.UpdateManaValues
 local ClassPortraits = EasyFrames.Utils.ClassPortraits
 local DefaultPortraits = EasyFrames.Utils.DefaultPortraits
+
+local OnShowHookScript = function(frame)
+    frame:Hide()
+end
 
 
 function Target:OnInitialize()
@@ -37,8 +40,6 @@ function Target:OnInitialize()
 end
 
 function Target:OnEnable()
-    self:GetOriginalValues()
-
     self:SetScale(db.target.scaleFrame)
     self:ShowTargetFrameToT()
     self:ShowName(db.target.showName)
@@ -75,10 +76,6 @@ function Target:OnProfileChanged(newDB)
     self:UpdateTextStringWithValues()
 end
 
-
-function Target:GetOriginalValues()
-    originalValues["TargetFrameFlash"] = TargetFrameFlash.Show
-end
 
 function Target:SetScale(value)
     TargetFrame:SetScale(value)
@@ -187,20 +184,19 @@ function Target:ReverseDirectionLosingHP(value)
 end
 
 function Target:ShowAttackBackground(value)
-    local noop = function() return end
-
     local frame = TargetFrameFlash
 
     if frame then
         if (value) then
-            frame.Show = originalValues[frame:GetName()]
+            self:Unhook(frame, "Show")
 
             if (UnitAffectingCombat("target")) then
                 frame:Show()
             end
         else
             frame:Hide()
-            frame.Show = noop
+
+            self:SecureHook(frame, "Show", OnShowHookScript)
         end
     end
 end

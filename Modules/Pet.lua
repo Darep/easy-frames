@@ -23,10 +23,19 @@ local MODULE_NAME = "Pet"
 local Pet = EasyFrames:NewModule(MODULE_NAME, "AceHook-3.0")
 
 local db
-local originalValues = {}
 
 local UpdateHealthValues = EasyFrames.Utils.UpdateHealthValues
 local UpdateManaValues = EasyFrames.Utils.UpdateManaValues
+
+local OnShowHookScript = function(frame)
+    frame:Hide()
+end
+
+local OnSetTextHookScript = function(frame, text, flag)
+    if (flag ~= "EasyFramesHookSetText" and not db.pet.showHitIndicator) then
+        frame:SetText(nil, "EasyFramesHookSetText")
+    end
+end
 
 
 function Pet:OnInitialize()
@@ -76,13 +85,6 @@ function Pet:OnProfileChanged(newDB)
     self:UpdateTextStringWithValues()
 end
 
-
-function Pet:GetOriginalValues()
-    originalValues["PetHitIndicator"] = PetHitIndicator.SetText
-
-    originalValues["PetAttackModeTexture"] = PetAttackModeTexture.Show
-    originalValues["PetFrameFlash"] = PetFrameFlash.Show
-end
 
 function Pet:PetFrameUpdate(frame, override)
     if ((not PlayerFrame.animating) or (override)) then
@@ -210,48 +212,50 @@ function Pet:SetFrameNameFont()
 end
 
 function Pet:ShowHitIndicator(value)
-    if (value) then
-        PetHitIndicator.SetText = originalValues["PetHitIndicator"]
-    else
-        PetHitIndicator:SetText(nil)
-        PetHitIndicator.SetText = function() end
+    local frame = PetHitIndicator
+
+    if (not value) then
+        frame:SetText(nil)
+
+        if (not frame.EasyFramesHookSetText) then
+            hooksecurefunc(frame, "SetText", OnSetTextHookScript)
+            frame.EasyFramesHookSetText = true
+        end
     end
 end
 
 function Pet:ShowStatusTexture(value)
-    local noop = function() return end
-
     local frame = PetAttackModeTexture
 
     if frame then
         if (value) then
-            frame.Show = originalValues[frame:GetName()]
+            self:Unhook(frame, "Show")
 
             if (UnitAffectingCombat("player")) then
                 frame:Show()
             end
         else
             frame:Hide()
-            frame.Show = noop
+
+            self:SecureHook(frame, "Show", OnShowHookScript)
         end
     end
 end
 
 function Pet:ShowAttackBackground(value)
-    local noop = function() return end
-
     local frame = PetFrameFlash
 
     if frame then
         if (value) then
-            frame.Show = originalValues[frame:GetName()]
+            self:Unhook(frame, "Show")
 
             if (UnitAffectingCombat("player")) then
                 frame:Show()
             end
         else
             frame:Hide()
-            frame.Show = noop
+
+            self:SecureHook(frame, "Show", OnShowHookScript)
         end
     end
 end

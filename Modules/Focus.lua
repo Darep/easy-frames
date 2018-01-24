@@ -23,12 +23,16 @@ local MODULE_NAME = "Focus"
 local Focus = EasyFrames:NewModule(MODULE_NAME, "AceHook-3.0")
 
 local db
-local originalValues = {}
 
 local UpdateHealthValues = EasyFrames.Utils.UpdateHealthValues
 local UpdateManaValues = EasyFrames.Utils.UpdateManaValues
 local ClassPortraits = EasyFrames.Utils.ClassPortraits
 local DefaultPortraits = EasyFrames.Utils.DefaultPortraits
+
+local OnShowHookScript = function(frame)
+    frame:Hide()
+end
+
 
 function Focus:OnInitialize()
     self.db = EasyFrames.db
@@ -36,8 +40,6 @@ function Focus:OnInitialize()
 end
 
 function Focus:OnEnable()
-    self:GetOriginalValues()
-
     self:SetScale(db.focus.scaleFrame)
     self:ShowFocusFrameToT()
     self:ShowName(db.focus.showName)
@@ -74,10 +76,6 @@ function Focus:OnProfileChanged(newDB)
     self:UpdateTextStringWithValues()
 end
 
-
-function Focus:GetOriginalValues()
-    originalValues["FocusFrameFlash"] = FocusFrameFlash.Show
-end
 
 function Focus:SetScale(value)
     FocusFrame:SetScale(value)
@@ -186,20 +184,19 @@ function Focus:ReverseDirectionLosingHP(value)
 end
 
 function Focus:ShowAttackBackground(value)
-    local noop = function() return end
-
     local frame = FocusFrameFlash
 
     if frame then
         if (value) then
-            frame.Show = originalValues[frame:GetName()]
+            self:Unhook(frame, "Show")
 
             if (UnitAffectingCombat("focus")) then
                 frame:Show()
             end
         else
             frame:Hide()
-            frame.Show = noop
+
+            self:SecureHook(frame, "Show", OnShowHookScript)
         end
     end
 end
