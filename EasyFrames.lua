@@ -506,18 +506,6 @@ function EasyFrames.Utils.GetPartyFrames()
 end
 
 function EasyFrames.Utils.ClassPortraits(frame)
---    if (UnitIsPlayer(frame.unit) and db.general.classPortraits) then
---        local t = CLASS_ICON_TCOORDS[select(2, UnitClass(frame.unit))]
---
---        if t then
---            frame.portrait:SetTexture("Interface\\TargetingFrame\\UI-Classes-Circles")
---            frame.portrait:SetTexCoord(unpack(t))
---        end
---    else
---        SetPortraitTexture(frame.portrait, frame.unit)
---        frame.portrait:SetTexCoord(0, 0, 0, 1, 1, 0, 1, 1)
---    end
-
     local _, unitClass = UnitClass(frame.unit)
     if (unitClass and UnitIsPlayer(frame.unit)) then
         frame.portrait:SetTexture("Interface\\TargetingFrame\\UI-Classes-Circles")
