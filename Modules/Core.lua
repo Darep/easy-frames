@@ -28,9 +28,9 @@ local PartyIterator = EasyFrames.Helpers.Iterator(EasyFrames.Utils.GetPartyFrame
 local OnSetPointHookScript = function(point, relativeTo, relativePoint, xOffset, yOffset)
     return function(frame, _, _, _, _, _, flag)
         if flag ~= "EasyFramesHookSetPoint" then
-            if InCombatLockdown() then
-                return
-            end
+--            if InCombatLockdown() then
+--                return
+--            end
 
             frame:ClearAllPoints()
             frame:SetPoint(point, relativeTo, relativePoint, xOffset, yOffset, "EasyFramesHookSetPoint")

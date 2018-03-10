@@ -113,6 +113,10 @@ function Pet:PetFrameUpdate(frame, override)
                 frame:SetPoint(unpack(db.pet.customPoints))
             end
         else
+            if InCombatLockdown() then
+                return
+            end
+
             frame:Hide();
         end
     end
