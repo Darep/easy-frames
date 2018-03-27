@@ -35,7 +35,9 @@ L["Font size"] = true
 L["Healthbar font size"] = true
 L["Manabar font size"] = true
 L["Font family"] = true
+L["Healthbar font style"] = true
 L["Healthbar font family"] = true
+L["Manabar font style"] = true
 L["Manabar font family"] = true
 L["Font style"] = true
 

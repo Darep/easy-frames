@@ -24,6 +24,7 @@ local db
 local DEFAULT_BAR_FONT_FAMILY = "Friz Quadrata TT"
 local DEFAULT_BAR_FONT_SIZE = 10
 local DEFAULT_BAR_SMALL_FONT_SIZE = 9
+local DEFAULT_BAR_FONT_STYLE = "OUTLINE"
 
 local DEFAULT_CUSTOM_FORMAT = "%CURRENT% / %MAX% (%PERCENT%%)"
 
@@ -121,6 +122,7 @@ local defaults = {
             portrait = "2",
             -- Custom HP format.
             healthFormat = "3",
+            healthBarFontStyle = DEFAULT_BAR_FONT_STYLE,
             healthBarFontFamily = DEFAULT_BAR_FONT_FAMILY,
             healthBarFontSize = DEFAULT_BAR_FONT_SIZE,
             useHealthFormatFullValues = false,
@@ -128,6 +130,7 @@ local defaults = {
             customHealthFormat = DEFAULT_CUSTOM_FORMAT,
             -- Custom mana format.
             manaFormat = "2",
+            manaBarFontStyle = DEFAULT_BAR_FONT_STYLE,
             manaBarFontFamily = DEFAULT_BAR_FONT_FAMILY,
             manaBarFontSize = DEFAULT_BAR_FONT_SIZE,
             useManaFormatFullValues = false,
@@ -154,6 +157,7 @@ local defaults = {
             portrait = "2",
             -- Custom HP format.
             healthFormat = "3",
+            healthBarFontStyle = DEFAULT_BAR_FONT_STYLE,
             healthBarFontFamily = DEFAULT_BAR_FONT_FAMILY,
             healthBarFontSize = DEFAULT_BAR_FONT_SIZE,
             useHealthFormatFullValues = false,
@@ -162,6 +166,7 @@ local defaults = {
             customHealthFormat = DEFAULT_CUSTOM_FORMAT,
             -- Custom mana format.
             manaFormat = "2",
+            manaBarFontStyle = DEFAULT_BAR_FONT_STYLE,
             manaBarFontFamily = DEFAULT_BAR_FONT_FAMILY,
             manaBarFontSize = DEFAULT_BAR_FONT_SIZE,
             useManaFormatFullValues = false,
@@ -184,6 +189,7 @@ local defaults = {
             portrait = "2",
             -- Custom HP format.
             healthFormat = "3",
+            healthBarFontStyle = DEFAULT_BAR_FONT_STYLE,
             healthBarFontFamily = DEFAULT_BAR_FONT_FAMILY,
             healthBarFontSize = DEFAULT_BAR_FONT_SIZE,
             useHealthFormatFullValues = false,
@@ -192,6 +198,7 @@ local defaults = {
             customHealthFormat = DEFAULT_CUSTOM_FORMAT,
             -- Custom mana format.
             manaFormat = "2",
+            manaBarFontStyle = DEFAULT_BAR_FONT_STYLE,
             manaBarFontFamily = DEFAULT_BAR_FONT_FAMILY,
             manaBarFontSize = DEFAULT_BAR_FONT_SIZE,
             useManaFormatFullValues = false,
@@ -214,6 +221,7 @@ local defaults = {
             customPoints = false,
             -- Custom HP format.
             healthFormat = "2",
+            healthBarFontStyle = DEFAULT_BAR_FONT_STYLE,
             healthBarFontFamily = DEFAULT_BAR_FONT_FAMILY,
             healthBarFontSize = DEFAULT_BAR_SMALL_FONT_SIZE,
             useHealthFormatFullValues = false,
@@ -221,6 +229,7 @@ local defaults = {
             customHealthFormat = DEFAULT_CUSTOM_FORMAT,
             -- Custom mana format.
             manaFormat = "2",
+            manaBarFontStyle = DEFAULT_BAR_FONT_STYLE,
             manaBarFontFamily = DEFAULT_BAR_FONT_FAMILY,
             manaBarFontSize = DEFAULT_BAR_SMALL_FONT_SIZE,
             useManaFormatFullValues = false,
@@ -241,6 +250,7 @@ local defaults = {
             scaleFrame = 1.2,
             -- Custom HP format.
             healthFormat = "2",
+            healthBarFontStyle = DEFAULT_BAR_FONT_STYLE,
             healthBarFontFamily = DEFAULT_BAR_FONT_FAMILY,
             healthBarFontSize = DEFAULT_BAR_SMALL_FONT_SIZE,
             useHealthFormatFullValues = false,
@@ -248,6 +258,7 @@ local defaults = {
             customHealthFormat = DEFAULT_CUSTOM_FORMAT,
             -- Custom mana format.
             manaFormat = "2",
+            manaBarFontStyle = DEFAULT_BAR_FONT_STYLE,
             manaBarFontFamily = DEFAULT_BAR_FONT_FAMILY,
             manaBarFontSize = DEFAULT_BAR_SMALL_FONT_SIZE,
             useManaFormatFullValues = false,

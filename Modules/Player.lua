@@ -216,16 +216,18 @@ end
 function Player:SetHealthBarsFont()
     local fontSize = db.player.healthBarFontSize
     local fontFamily = Media:Fetch("font", db.player.healthBarFontFamily)
+    local fontStyle = db.player.healthBarFontStyle
 
-    PlayerFrameHealthBar.TextString:SetFont(fontFamily, fontSize, "OUTLINE")
+    PlayerFrameHealthBar.TextString:SetFont(fontFamily, fontSize, fontStyle)
 end
 
 function Player:SetManaBarsFont()
     local fontSize = db.player.manaBarFontSize
     local fontFamily = Media:Fetch("font", db.player.manaBarFontFamily)
+    local fontStyle = db.player.manaBarFontStyle
 
-    PlayerFrameManaBar.TextString:SetFont(fontFamily, fontSize, "OUTLINE")
-    PlayerFrameAlternateManaBar.TextString:SetFont(fontFamily, fontSize, "OUTLINE")
+    PlayerFrameManaBar.TextString:SetFont(fontFamily, fontSize, fontStyle)
+    PlayerFrameAlternateManaBar.TextString:SetFont(fontFamily, fontSize, fontStyle)
 end
 
 function Player:SetFrameNameFont()

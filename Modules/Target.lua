@@ -159,15 +159,17 @@ end
 function Target:SetHealthBarsFont()
     local fontSize = db.target.healthBarFontSize
     local fontFamily = Media:Fetch("font", db.target.healthBarFontFamily)
+    local fontStyle = db.target.healthBarFontStyle
 
-    TargetFrameHealthBar.TextString:SetFont(fontFamily, fontSize, "OUTLINE")
+    TargetFrameHealthBar.TextString:SetFont(fontFamily, fontSize, fontStyle)
 end
 
 function Target:SetManaBarsFont()
     local fontSize = db.target.manaBarFontSize
     local fontFamily = Media:Fetch("font", db.target.manaBarFontFamily)
+    local fontStyle = db.target.manaBarFontStyle
 
-    TargetFrameManaBar.TextString:SetFont(fontFamily, fontSize, "OUTLINE")
+    TargetFrameManaBar.TextString:SetFont(fontFamily, fontSize, fontStyle)
 end
 
 function Target:SetFrameNameFont()

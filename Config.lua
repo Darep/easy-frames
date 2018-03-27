@@ -661,8 +661,27 @@ local playerOptions = {
                     arg = "player"
                 },
 
-                healthBarFontFamily = {
+                newLine = {
+                    type = "description",
                     order = 3,
+                    name = "",
+                },
+
+                healthBarFontStyle = {
+                    type = "select",
+                    order = 4,
+                    name = L["Font style"],
+                    desc = L["Healthbar font style"],
+                    values = fontStyle,
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Player"):SetHealthBarsFont()
+                    end,
+                    arg = "player"
+                },
+
+                healthBarFontFamily = {
+                    order = 5,
                     name = L["Font family"],
                     desc = L["Healthbar font family"],
                     type = "select",
@@ -677,7 +696,7 @@ local playerOptions = {
 
                 healthBarFontSize = {
                     type = "range",
-                    order = 4,
+                    order = 6,
                     name = L["Font size"],
                     desc = L["Healthbar font size"],
                     min = MIN_RANGE,
@@ -692,7 +711,7 @@ local playerOptions = {
 
                 manaFormat = {
                     type = "select",
-                    order = 5,
+                    order = 7,
                     name = L["Player manabar text format"],
                     desc = L["Set the player manabar text format"],
                     values = manaFormat,
@@ -703,8 +722,27 @@ local playerOptions = {
                     arg = "player"
                 },
 
+                newLine2 = {
+                    type = "description",
+                    order = 8,
+                    name = "",
+                },
+
+                manaBarFontStyle = {
+                    type = "select",
+                    order = 9,
+                    name = L["Font style"],
+                    desc = L["Manabar font style"],
+                    values = fontStyle,
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Player"):SetManaBarsFont()
+                    end,
+                    arg = "player"
+                },
+
                 manaBarFontFamily = {
-                    order = 6,
+                    order = 10,
                     name = L["Font family"],
                     desc = L["Manabar font family"],
                     type = "select",
@@ -719,7 +757,7 @@ local playerOptions = {
 
                 manaBarFontSize = {
                     type = "range",
-                    order = 7,
+                    order = 11,
                     name = L["Font size"],
                     desc = L["Manabar font size"],
                     min = MIN_RANGE,
@@ -1320,8 +1358,27 @@ local targetOptions = {
                     arg = "target"
                 },
 
-                healthBarFontFamily = {
+                newLine = {
+                    type = "description",
                     order = 3,
+                    name = "",
+                },
+
+                healthBarFontStyle = {
+                    type = "select",
+                    order = 4,
+                    name = L["Font style"],
+                    desc = L["Healthbar font style"],
+                    values = fontStyle,
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Target"):SetHealthBarsFont()
+                    end,
+                    arg = "target"
+                },
+
+                healthBarFontFamily = {
+                    order = 5,
                     name = L["Font family"],
                     desc = L["Healthbar font family"],
                     type = "select",
@@ -1336,7 +1393,7 @@ local targetOptions = {
 
                 healthBarFontSize = {
                     type = "range",
-                    order = 4,
+                    order = 6,
                     name = L["Font size"],
                     desc = L["Healthbar font size"],
                     min = MIN_RANGE,
@@ -1351,7 +1408,7 @@ local targetOptions = {
 
                 manaFormat = {
                     type = "select",
-                    order = 5,
+                    order = 7,
                     name = L["Target manabar text format"],
                     desc = L["Set the target manabar text format"],
                     values = manaFormat,
@@ -1362,8 +1419,27 @@ local targetOptions = {
                     arg = "target"
                 },
 
+                newLine2 = {
+                    type = "description",
+                    order = 8,
+                    name = "",
+                },
+
+                manaBarFontStyle = {
+                    type = "select",
+                    order = 9,
+                    name = L["Font style"],
+                    desc = L["Manabar font style"],
+                    values = fontStyle,
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Target"):SetManaBarsFont()
+                    end,
+                    arg = "target"
+                },
+
                 manaBarFontFamily = {
-                    order = 6,
+                    order = 10,
                     name = L["Font family"],
                     desc = L["Manabar font family"],
                     type = "select",
@@ -1378,7 +1454,7 @@ local targetOptions = {
 
                 manaBarFontSize = {
                     type = "range",
-                    order = 7,
+                    order = 11,
                     name = L["Font size"],
                     desc = L["Manabar font size"],
                     min = MIN_RANGE,
@@ -1393,7 +1469,7 @@ local targetOptions = {
 
                 reverseDirectionLosingHP = {
                     type = "toggle",
-                    order = 8,
+                    order = 12,
                     width = "double",
                     name = L["Reverse the direction of losing health/mana"],
                     desc = L["By default direction starting from right to left. If checked direction of losing health/mana will be from left to right"],
@@ -1939,8 +2015,27 @@ local focusOptions = {
                     arg = "focus"
                 },
 
-                healthBarFontFamily = {
+                newLine = {
+                    type = "description",
                     order = 3,
+                    name = "",
+                },
+
+                healthBarFontStyle = {
+                    type = "select",
+                    order = 4,
+                    name = L["Font style"],
+                    desc = L["Healthbar font style"],
+                    values = fontStyle,
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Focus"):SetHealthBarsFont()
+                    end,
+                    arg = "focus"
+                },
+
+                healthBarFontFamily = {
+                    order = 5,
                     name = L["Font family"],
                     desc = L["Healthbar font family"],
                     type = "select",
@@ -1955,7 +2050,7 @@ local focusOptions = {
 
                 healthBarFontSize = {
                     type = "range",
-                    order = 4,
+                    order = 6,
                     name = L["Font size"],
                     desc = L["Healthbar font size"],
                     min = MIN_RANGE,
@@ -1970,7 +2065,7 @@ local focusOptions = {
 
                 manaFormat = {
                     type = "select",
-                    order = 5,
+                    order = 7,
                     name = L["Focus manabar text format"],
                     desc = L["Set the focus manabar text format"],
                     values = manaFormat,
@@ -1981,8 +2076,27 @@ local focusOptions = {
                     arg = "focus"
                 },
 
+                newLine2 = {
+                    type = "description",
+                    order = 8,
+                    name = "",
+                },
+
+                manaBarFontStyle = {
+                    type = "select",
+                    order = 9,
+                    name = L["Font style"],
+                    desc = L["Manabar font style"],
+                    values = fontStyle,
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Focus"):SetManaBarsFont()
+                    end,
+                    arg = "focus"
+                },
+
                 manaBarFontFamily = {
-                    order = 6,
+                    order = 10,
                     name = L["Font family"],
                     desc = L["Manabar font family"],
                     type = "select",
@@ -1997,7 +2111,7 @@ local focusOptions = {
 
                 manaBarFontSize = {
                     type = "range",
-                    order = 7,
+                    order = 11,
                     name = L["Font size"],
                     desc = L["Manabar font size"],
                     min = MIN_RANGE,
@@ -2012,7 +2126,7 @@ local focusOptions = {
 
                 reverseDirectionLosingHP = {
                     type = "toggle",
-                    order = 8,
+                    order = 12,
                     width = "double",
                     name = L["Reverse the direction of losing health/mana"],
                     desc = L["By default direction starting from right to left. If checked direction of losing health/mana will be from left to right"],
@@ -2553,8 +2667,27 @@ local petOptions = {
                     arg = "pet"
                 },
 
-                healthBarFontFamily = {
+                newLine = {
+                    type = "description",
                     order = 3,
+                    name = "",
+                },
+
+                healthBarFontStyle = {
+                    type = "select",
+                    order = 4,
+                    name = L["Font style"],
+                    desc = L["Healthbar font style"],
+                    values = fontStyle,
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Pet"):SetHealthBarsFont()
+                    end,
+                    arg = "pet"
+                },
+
+                healthBarFontFamily = {
+                    order = 5,
                     name = L["Font family"],
                     desc = L["Healthbar font family"],
                     type = "select",
@@ -2569,7 +2702,7 @@ local petOptions = {
 
                 healthBarFontSize = {
                     type = "range",
-                    order = 4,
+                    order = 6,
                     name = L["Font size"],
                     desc = L["Healthbar font size"],
                     min = MIN_RANGE,
@@ -2584,7 +2717,7 @@ local petOptions = {
 
                 manaFormat = {
                     type = "select",
-                    order = 5,
+                    order = 7,
                     name = L["Pet manabar text format"],
                     desc = L["Set the pet manabar text format"],
                     values = manaFormat,
@@ -2595,8 +2728,27 @@ local petOptions = {
                     arg = "pet"
                 },
 
+                newLine2 = {
+                    type = "description",
+                    order = 8,
+                    name = "",
+                },
+
+                manaBarFontStyle = {
+                    type = "select",
+                    order = 9,
+                    name = L["Font style"],
+                    desc = L["Manabar font style"],
+                    values = fontStyle,
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Pet"):SetManaBarsFont()
+                    end,
+                    arg = "pet"
+                },
+
                 manaBarFontFamily = {
-                    order = 6,
+                    order = 10,
                     name = L["Font family"],
                     desc = L["Manabar font family"],
                     type = "select",
@@ -2604,14 +2756,14 @@ local petOptions = {
                     values = Media:HashTable("font"),
                     set = function(info, value)
                         setOpt(info, value)
-                        EasyFrames:GetModule("Pet"):SetManaBarsFont(PetFrameManaBar)
+                        EasyFrames:GetModule("Pet"):SetManaBarsFont()
                     end,
                     arg = "pet"
                 },
 
                 manaBarFontSize = {
                     type = "range",
-                    order = 7,
+                    order = 11,
                     name = L["Font size"],
                     desc = L["Manabar font size"],
                     min = MIN_RANGE,
@@ -2619,7 +2771,7 @@ local petOptions = {
                     step = 1,
                     set = function(info, value)
                         setOpt(info, value)
-                        EasyFrames:GetModule("Pet"):SetManaBarsFont(PetFrameManaBar)
+                        EasyFrames:GetModule("Pet"):SetManaBarsFont()
                     end,
                     arg = "pet"
                 },
@@ -3129,8 +3281,27 @@ local partyOptions = {
                     arg = "party"
                 },
 
-                healthBarFontFamily = {
+                newLine = {
+                    type = "description",
                     order = 3,
+                    name = "",
+                },
+
+                healthBarFontStyle = {
+                    type = "select",
+                    order = 4,
+                    name = L["Font style"],
+                    desc = L["Healthbar font style"],
+                    values = fontStyle,
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Party"):SetHealthBarsFont()
+                    end,
+                    arg = "party"
+                },
+
+                healthBarFontFamily = {
+                    order = 5,
                     name = L["Font family"],
                     desc = L["Healthbar font family"],
                     type = "select",
@@ -3145,7 +3316,7 @@ local partyOptions = {
 
                 healthBarFontSize = {
                     type = "range",
-                    order = 4,
+                    order = 6,
                     name = L["Font size"],
                     desc = L["Healthbar font size"],
                     min = MIN_RANGE,
@@ -3160,7 +3331,7 @@ local partyOptions = {
 
                 manaFormat = {
                     type = "select",
-                    order = 5,
+                    order = 7,
                     name = L["Party manabar text format"],
                     desc = L["Set the party manabar text format"],
                     values = manaFormat,
@@ -3171,8 +3342,27 @@ local partyOptions = {
                     arg = "party"
                 },
 
+                newLine2 = {
+                    type = "description",
+                    order = 8,
+                    name = "",
+                },
+
+                manaBarFontStyle = {
+                    type = "select",
+                    order = 9,
+                    name = L["Font style"],
+                    desc = L["Manabar font style"],
+                    values = fontStyle,
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Party"):SetManaBarsFont()
+                    end,
+                    arg = "party"
+                },
+
                 manaBarFontFamily = {
-                    order = 6,
+                    order = 10,
                     name = L["Font family"],
                     desc = L["Manabar font family"],
                     type = "select",
@@ -3187,7 +3377,7 @@ local partyOptions = {
 
                 manaBarFontSize = {
                     type = "range",
-                    order = 7,
+                    order = 11,
                     name = L["Font size"],
                     desc = L["Manabar font size"],
                     min = MIN_RANGE,

@@ -159,15 +159,17 @@ end
 function Focus:SetHealthBarsFont()
     local fontSize = db.focus.healthBarFontSize
     local fontFamily = Media:Fetch("font", db.focus.healthBarFontFamily)
+    local fontStyle = db.focus.healthBarFontStyle
 
-    FocusFrameHealthBar.TextString:SetFont(fontFamily, fontSize, "OUTLINE")
+    FocusFrameHealthBar.TextString:SetFont(fontFamily, fontSize, fontStyle)
 end
 
 function Focus:SetManaBarsFont()
     local fontSize = db.focus.manaBarFontSize
     local fontFamily = Media:Fetch("font", db.focus.manaBarFontFamily)
+    local fontStyle = db.focus.manaBarFontStyle
 
-    FocusFrameManaBar.TextString:SetFont(fontFamily, fontSize, "OUTLINE")
+    FocusFrameManaBar.TextString:SetFont(fontFamily, fontSize, fontStyle)
 end
 
 function Focus:SetFrameNameFont()

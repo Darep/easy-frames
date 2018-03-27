@@ -99,22 +99,24 @@ end
 function Party:SetHealthBarsFont()
     local fontSize = db.party.healthBarFontSize
     local fontFamily = Media:Fetch("font", db.party.healthBarFontFamily)
+    local fontStyle = db.party.healthBarFontStyle
 
     PartyIterator(function(frame)
         local healthBar = _G[frame:GetName() .. "HealthBar"]
 
-        healthBar.TextString:SetFont(fontFamily, fontSize, "OUTLINE")
+        healthBar.TextString:SetFont(fontFamily, fontSize, fontStyle)
     end)
 end
 
 function Party:SetManaBarsFont()
     local fontSize = db.party.manaBarFontSize
     local fontFamily = Media:Fetch("font", db.party.manaBarFontFamily)
+    local fontStyle = db.party.manaBarFontStyle
 
     PartyIterator(function(frame)
         local manaBar = _G[frame:GetName() .. "ManaBar"]
 
-        manaBar.TextString:SetFont(fontFamily, fontSize, "OUTLINE")
+        manaBar.TextString:SetFont(fontFamily, fontSize, fontStyle)
     end)
 end
 

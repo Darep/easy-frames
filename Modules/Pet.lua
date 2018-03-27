@@ -189,15 +189,17 @@ end
 function Pet:SetHealthBarsFont()
     local fontSize = db.pet.healthBarFontSize
     local fontFamily = Media:Fetch("font", db.pet.healthBarFontFamily)
+    local fontStyle = db.pet.healthBarFontStyle
 
-    PetFrameHealthBar.TextString:SetFont(fontFamily, fontSize, "OUTLINE")
+    PetFrameHealthBar.TextString:SetFont(fontFamily, fontSize, fontStyle)
 end
 
 function Pet:SetManaBarsFont()
     local fontSize = db.pet.manaBarFontSize
     local fontFamily = Media:Fetch("font", db.pet.manaBarFontFamily)
+    local fontStyle = db.pet.manaBarFontStyle
 
-    PetFrameManaBar.TextString:SetFont(fontFamily, fontSize, "OUTLINE")
+    PetFrameManaBar.TextString:SetFont(fontFamily, fontSize, fontStyle)
 end
 
 function Pet:ShowName(value)
