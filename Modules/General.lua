@@ -190,7 +190,7 @@ function General:SetFramesColored()
 end
 
 function General:MakeFramesColored(statusbar, unit)
-    if (unit ~= mouseover) then
+    if (unit) then
         if (UnitIsConnected(unit) and unit == statusbar.unit) then
             ClassColored(statusbar, unit)
         end
