@@ -126,6 +126,10 @@ L["Bright frames border"] = true
 L["You can set frames border bright/dark color. From bright to dark. 0 - dark, 100 - bright"] = true
 L["Use a light texture"] = true
 L["Use a brighter texture (like Blizzard's default texture)"] = true
+L["Set the manabar texture by force"] = true
+L["Use a force manabar texture setter. The Blizzard UI resets to default manabar texture each time an addon tries to modify it. " ..
+        "With this option, the texture setter will set texture by force.\n\n" ..
+        "IMPORTANT. When this option is enabled the addon will use a more CPU. More information in the issue #28"] = true
 
 L["Frames colors"] = true
 L["In this section you can set the default colors for friendly, enemy and neutral frames"] = true

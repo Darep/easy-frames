@@ -131,6 +131,13 @@ L["Use a light texture"] = "Использовать светлые тексту
 L["Use a brighter texture (like Blizzard's default texture)"] = "Использовать светлые текстуры (как текстуры Blizzard по умолчанию)"
 L["Bright frames border"] = "Светлые границы фреймов"
 L["You can set frames border bright/dark color. From bright to dark. 0 - dark, 100 - bright"] = "Вы можете установить свет границ фреймов. От светлого к темному. 0 - темные границы, 100 - светлые"
+L["Set the manabar texture by force"] = "Принудительно установить текстуру для фрейма маны"
+L["Use a force manabar texture setter. The Blizzard UI resets to default manabar texture each time an addon tries to modify it. " ..
+        "With this option, the texture setter will set texture by force.\n\n" ..
+        "IMPORTANT. When this option is enabled the addon will use a more CPU. More information in the issue #28"] = "Использовать принудительную установку текстуры для мана фрейма. " ..
+            "Blizzard UI сбрасывает текстуру фрейма маны каждый раз когда аддон пытается изменить ее. " ..
+            "Используя эту опцию текстура будет установлена принудительно.\n\n" ..
+                "ВАЖНО. Включив данную опцию аддон будет использовать больше CPU. Подробности на сайте проекта (issue #28)"
 
 L["Frames colors"] = "Цвета фреймов"
 L["In this section you can set the default colors for friendly, enemy and neutral frames"] = "В этом разделе вы можете установить цвета фреймов по умолчанию для дружественных, враждебных или нейтральных целей"

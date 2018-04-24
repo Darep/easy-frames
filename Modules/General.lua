@@ -256,6 +256,22 @@ function General:SetFrameBarTexture(value)
     for _, manabar in pairs(manaBars) do
         manabar:SetStatusBarTexture(texture)
     end
+
+    if (db.general.forceManaBarTexture) then
+        local function manaBarTextureSetter(manaBar)
+            if (db.general.forceManaBarTexture) then
+                manaBar:SetStatusBarTexture(PlayerFrameManaBar.EasyFramesTexture)
+            end
+        end
+
+        PlayerFrameManaBar.EasyFramesTexture = texture
+
+        if(not PlayerFrameManaBar.EasyFramesHookUpdateType) then
+            hooksecurefunc("UnitFrameManaBar_UpdateType", manaBarTextureSetter)
+
+            PlayerFrameManaBar.EasyFramesHookUpdateType = true
+        end
+    end
 end
 
 

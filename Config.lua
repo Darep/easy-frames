@@ -270,6 +270,20 @@ local generalOptions = {
                     isPercent = true,
                     arg = "general"
                 },
+
+                forceManaBarTexture = {
+                    type = "toggle",
+                    order = 13,
+                    name = L["Set the manabar texture by force"],
+                    desc = L["Use a force manabar texture setter. The Blizzard UI resets to default manabar texture each time an addon tries to modify it. " ..
+                        "With this option, the texture setter will set texture by force.\n\n" ..
+                        "IMPORTANT. When this option is enabled the addon will use a more CPU. More information in the issue #28"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("General"):SetFrameBarTexture(EasyFrames.db.profile.general.barTexture)
+                    end,
+                    arg = "general"
+                },
             }
         },
 

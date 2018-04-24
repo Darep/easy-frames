@@ -108,6 +108,7 @@ local defaults = {
             hideOutOfCombatWithFullHP = false,
             hideOutOfCombatOpacity = 0.1,
             barTexture = "Blizzard",
+            forceManaBarTexture = false,
             brightFrameBorder = 1,
             lightTexture = false,
             friendlyFrameDefaultColors = {0, 1, 0},
