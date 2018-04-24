@@ -189,9 +189,9 @@ function Target:ShowAttackBackground(value)
     local frame = TargetFrameFlash
 
     if frame then
-        if (value) then
-            self:Unhook(frame, "Show")
+        self:Unhook(frame, "Show")
 
+        if (value) then
             if (UnitAffectingCombat("target")) then
                 frame:Show()
             end

@@ -189,9 +189,9 @@ function Focus:ShowAttackBackground(value)
     local frame = FocusFrameFlash
 
     if frame then
-        if (value) then
-            self:Unhook(frame, "Show")
+        self:Unhook(frame, "Show")
 
+        if (value) then
             if (UnitAffectingCombat("focus")) then
                 frame:Show()
             end

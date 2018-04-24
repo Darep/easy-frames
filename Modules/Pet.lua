@@ -235,9 +235,9 @@ function Pet:ShowStatusTexture(value)
     local frame = PetAttackModeTexture
 
     if frame then
-        if (value) then
-            self:Unhook(frame, "Show")
+        self:Unhook(frame, "Show")
 
+        if (value) then
             if (UnitAffectingCombat("player")) then
                 frame:Show()
             end
@@ -253,9 +253,9 @@ function Pet:ShowAttackBackground(value)
     local frame = PetFrameFlash
 
     if frame then
-        if (value) then
-            self:Unhook(frame, "Show")
+        self:Unhook(frame, "Show")
 
+        if (value) then
             if (UnitAffectingCombat("player")) then
                 frame:Show()
             end

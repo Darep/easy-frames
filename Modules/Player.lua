@@ -179,9 +179,9 @@ function Player:ShowSpecialbar(value)
     end
 
     if (frame) then
-        if (value) then
-            self:Unhook(frame, "OnShow")
+        self:Unhook(frame, "OnShow")
 
+        if (value) then
             frame:Show()
         else
             frame:Hide()
@@ -244,9 +244,9 @@ function Player:ShowRestIcon(value)
         PlayerRestIcon,
     }) do
         if frame then
-            if (value) then
-                self:Unhook(frame, "Show")
+            self:Unhook(frame, "Show")
 
+            if (value) then
                 if (IsResting("player")) then
                     frame:Show()
                 end
@@ -265,9 +265,9 @@ function Player:ShowStatusTexture(value)
         PlayerStatusTexture,
     }) do
         if frame then
-            if (value) then
-                self:Unhook(frame, "Show")
+            self:Unhook(frame, "Show")
 
+            if (value) then
                 if (IsResting("player") or UnitAffectingCombat("player")) then
                     frame:Show()
                 end
@@ -288,9 +288,9 @@ function Player:ShowAttackBackground(value)
         PlayerFrameFlash,
     }) do
         if frame then
-            if (value) then
-                self:Unhook(frame, "Show")
+            self:Unhook(frame, "Show")
 
+            if (value) then
                 if (UnitAffectingCombat("player")) then
                     frame:Show()
                 end
@@ -311,9 +311,9 @@ function Player:ShowGroupIndicator(value)
     local frame = PlayerFrameGroupIndicator
 
     if frame then
-        if (value) then
-            self:Unhook(frame, "Show")
+        self:Unhook(frame, "Show")
 
+        if (value) then
             if (IsInRaid("player")) then
                 frame:Show()
             end
@@ -329,9 +329,9 @@ function Player:ShowRoleIcon(value)
     local frame = PlayerFrameRoleIcon
 
     if frame then
-        if (value) then
-            self:Unhook(frame, "Show")
+        self:Unhook(frame, "Show")
 
+        if (value) then
             if (IsInGroup("player")) then
                 frame:Show()
             end
