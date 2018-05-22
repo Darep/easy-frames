@@ -58,7 +58,7 @@ function Core:OnEnable()
     self:MoveFocusFrameBars()
     self:MovePetFrameBars()
     self:MovePartyFrameBars()
-    self:MovePartyPetFrames()
+--    self:MovePartyPetFrames() -- #31, #32
 
     self:MovePlayerFramesBarsTextString()
     self:MoveTargetFramesBarsTextString()
