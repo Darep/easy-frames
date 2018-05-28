@@ -58,7 +58,6 @@ function Core:OnEnable()
     self:MoveFocusFrameBars()
     self:MovePetFrameBars()
     self:MovePartyFrameBars()
---    self:MovePartyPetFrames() -- #31, #32
 
     self:MovePlayerFramesBarsTextString()
     self:MoveTargetFramesBarsTextString()
@@ -253,12 +252,6 @@ function Core:MovePartyFrameBars()
         Core:MoveRegion(manaBar.TextString, "CENTER", manaBar, "CENTER", 0, 0)
         Core:MoveRegion(manaBar.RightText, "RIGHT", frame, "RIGHT", -12, -8)
         Core:MoveRegion(manaBar.LeftText, "LEFT", frame, "LEFT", 46, -8)
-    end)
-end
-
-function Core:MovePartyPetFrames()
-    PartyIterator(function(frame)
-        Core:MoveRegion(_G[frame:GetName() .. "PetFrame"], "TOPLEFT", frame, "TOPLEFT", 23, -37)
     end)
 end
 
