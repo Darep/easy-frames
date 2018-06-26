@@ -307,6 +307,8 @@ function General:SetTexture()
         PetFrameTexture:SetTexture(Media:Fetch("frames", "nomana"))
     else
         PetFrameTexture:SetTexture(Media:Fetch("frames", "smalltarget"))
+
+--        PetFrameFlash:SetTexture(Media:Fetch("misc", "player-status"))
     end
 
     -- Party
@@ -358,7 +360,7 @@ function General:SetCustomBuffSize(value)
 --        end
 
         for i = 1, MAX_TARGET_BUFFS do
-            _, _, icon, _, _, _, _, caster = UnitBuff(frame.unit, i)
+            _, icon, _, _, _, _, caster = UnitBuff(frame.unit, i)
             frameName = selfName .. 'Buff' .. i
 
             if (icon and (not frame.maxBuffs or i <= frame.maxBuffs)) then
@@ -431,7 +433,7 @@ function General:TargetFrame_UpdateAuras(frame, forceHide)
     local isEnemy = UnitIsEnemy(PlayerFrame.unit, frame.unit)
 
     for i = 1, MAX_TARGET_BUFFS do
-        _, _, icon, _, debuffType, _, _, _, isStealable = UnitBuff(frame.unit, i)
+        _, icon, _, debuffType, _, _, _, isStealable = UnitBuff(frame.unit, i)
 
         if (icon and (not frame.maxBuffs or i <= frame.maxBuffs)) then
             local frameName = selfName .. 'Buff' .. i

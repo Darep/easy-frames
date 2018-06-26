@@ -410,18 +410,22 @@ function EasyFrames.Utils.UpdateManaValues(frame, manaFormat, customManaFormat, 
     local unit = frame.unit
     local manabar = frame
 
+    local ManaPercent = 0
+
+    if (UnitPowerMax(unit) > 0) then
+        ManaPercent = (UnitPower(unit) / UnitPowerMax(unit)) * 100
+    end
+
     if (manaFormat == "1") then
         -- Percent
         if (UnitPower(unit) > 0) then
-            local ManaPercent = (UnitPower(unit) / UnitPowerMax(unit)) * 100
-
             manabar.TextString:SetText(format("%.0f", ManaPercent) .. "%")
         end
 
     elseif (manaFormat == "2") then
         -- Smart
         if (UnitPowerType(unit) == 0) then --mana
-            manabar.TextString:SetText(string.format("%.0f%%", (UnitPower(unit) / UnitPowerMax(unit)) * 100))
+            manabar.TextString:SetText(string.format("%.0f%%", ManaPercent))
         elseif (UnitPowerType(unit) == 1 or UnitPowerType(unit) == 2 or UnitPowerType(unit) == 3 or UnitPowerType(unit) == 6) then
             manabar.TextString:SetText(AbbreviateLargeNumbers(UnitPower(unit)))
         end
@@ -436,7 +440,6 @@ function EasyFrames.Utils.UpdateManaValues(frame, manaFormat, customManaFormat, 
         if (UnitPower(unit) > 0) then
             local Mana = UnitPower(unit)
             local ManaMax = UnitPowerMax(unit)
-            local ManaPercent = (UnitPower(unit) / UnitPowerMax(unit)) * 100
 
             local useFullValues = false
             if (useManaFormatFullValues) then
