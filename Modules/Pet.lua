@@ -107,6 +107,9 @@ function Pet:PetFrameUpdate(frame, override)
             RefreshDebuffs(frame, frame.unit, nil, nil, true);
 
             PetFrame.portrait:SetTexCoord(0, 1, 0, 1)
+            if (frame.unit == "player") then
+                EasyFrames:GetModule("Player"):MakeClassPortraits(frame)
+            end
 
             if (db.pet.customPoints) then
                 frame:ClearAllPoints()

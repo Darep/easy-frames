@@ -93,6 +93,12 @@ function Player:SetScale(value)
 end
 
 function Player:MakeClassPortraits(frame)
+    if (frame.unit == "vehicle") then
+        DefaultPortraits(frame)
+
+        return
+    end
+
     if (frame.unit == "player" and frame.portrait) then
         if (db.player.portrait == "2") then
             ClassPortraits(frame)
