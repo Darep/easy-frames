@@ -162,7 +162,7 @@ function Pet:ResetFramePosition()
     local frame = PetFrame;
 
     frame:ClearAllPoints()
-    frame:SetPoint("TOPLEFT", PlayerFrame, "TOPLEFT", 90, -65)
+    frame:SetPoint("TOPLEFT", PlayerFrame, "TOPLEFT", 60, -75)
 
     db.pet.customPoints = false
 end
