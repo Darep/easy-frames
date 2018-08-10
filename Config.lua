@@ -411,21 +411,22 @@ local generalOptions = {
                     arg = "general"
                 },
 
---                showOnlyMyDebuff = {
---                    type = "toggle",
---                    order = 9,
---                    name = L["Show only my debuffs"],
---                    desc = L["Show only my debuffs (which the player creates)"],
---                    set = function(info, value)
---                        setOpt(info, value)
---                        EasyFrames:GetModule("General"):TargetFrame_UpdateAuras(TargetFrame)
---                    end,
---                    arg = "general"
---                },
+                showOnlyMyDebuff = {
+                    type = "toggle",
+                    order = 9,
+                    name = L["Show only my debuffs"],
+                    desc = L["When you change this option you need to reload your UI (because it's Blizzard config variable). \n\nCommand /reload"],
+                    set = function(info, value)
+                        setOpt(info, value)
+
+                        SetCVar("noBuffDebuffFilterOnTarget", (value and 0 or 1))
+                    end,
+                    arg = "general"
+                },
 
                 maxBuffCount = {
                     type = "range",
-                    order = 9,
+                    order = 10,
                     name = L["Max buffs count"],
                     desc = L["How many buffs you can see on target/focus frames"],
                     min = 0,
@@ -440,7 +441,7 @@ local generalOptions = {
 
                 maxDebuffCount = {
                     type = "range",
-                    order = 10,
+                    order = 11,
                     name = L["Max debuffs count"],
                     desc = L["How many debuffs you can see on target/focus frames"],
                     min = 0,
