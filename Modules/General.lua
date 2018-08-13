@@ -379,9 +379,9 @@ function General:SetCustomBuffSize(value)
     end
 end
 
-function General:MakeCustomBuffSize(frame, auraName, numAuras, numOppositeAuras, largeAuraList, updateFunc, maxRowWidth, _, mirrorAurasVertically)
+function General:MakeCustomBuffSize(frame, auraName, numAuras, numOppositeAuras, largeAuraList, updateFunc, maxRowWidth, offsetX, mirrorAurasVertically)
     if (db.general.customBuffSize) then
-        local AURA_OFFSET = 2
+        local AURA_OFFSET = 3
         local LARGE_AURA_SIZE = db.general.selfBuffSize
         local SMALL_AURA_SIZE = db.general.buffSize
         local size
@@ -393,23 +393,23 @@ function General:MakeCustomBuffSize(frame, auraName, numAuras, numOppositeAuras,
         for i = 1, numAuras do
             if (largeAuraList[i]) then
                 size = LARGE_AURA_SIZE
-                offsetY = AURA_OFFSET + 1
-                offsetX = AURA_OFFSET + 1
+                offsetY = AURA_OFFSET
+                offsetX = AURA_OFFSET
             else
                 size = SMALL_AURA_SIZE
             end
 
             if (i == 1) then
                 rowWidth = size
-                frame.auraRows = frame.auraRows + 1
+--                frame.auraRows = frame.auraRows + 1
             else
                 rowWidth = rowWidth + size + offsetX
             end
 
-            if (rowWidth > maxRowWidth) then
+            if (rowWidth > 121) then
                 updateFunc(frame, auraName, i, numOppositeAuras, firstBuffOnRow, size, offsetX, offsetY, mirrorAurasVertically)
                 rowWidth = size
-                frame.auraRows = frame.auraRows + 1
+--                frame.auraRows = frame.auraRows + 1
                 firstBuffOnRow = i
                 offsetY = AURA_OFFSET
             else
