@@ -491,11 +491,19 @@ end
 function EasyFrames.Utils.GetFramesHealthBar()
     return {
         PlayerFrameHealthBar,
+        PetFrameHealthBar,
+
         TargetFrameHealthBar,
         TargetFrameToTHealthBar,
+
         FocusFrameHealthBar,
         FocusFrameToTHealthBar,
-        PetFrameHealthBar,
+
+        PartyMemberFrame1HealthBar,
+        PartyMemberFrame2HealthBar,
+        PartyMemberFrame3HealthBar,
+        PartyMemberFrame4HealthBar,
+
     }
 end
 
@@ -503,11 +511,18 @@ function EasyFrames.Utils.GetFramesManaBar()
     return {
         PlayerFrameManaBar,
         PlayerFrameAlternateManaBar,
+        PetFrameManaBar,
+
         TargetFrameManaBar,
         TargetFrameToTManaBar,
+
         FocusFrameManaBar,
         FocusFrameToTManaBar,
-        PetFrameManaBar,
+
+        PartyMemberFrame1ManaBar,
+        PartyMemberFrame2ManaBar,
+        PartyMemberFrame3ManaBar,
+        PartyMemberFrame4ManaBar,
     }
 end
 
