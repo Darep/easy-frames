@@ -27,6 +27,7 @@ Localization\ruRU.lua
 Localization\deDE.lua
 Localization\koKR.lua
 Localization\zhTW.lua
+Localization\zhCN.lua
 
 
 EasyFrames.lua
