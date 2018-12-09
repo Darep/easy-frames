@@ -191,6 +191,8 @@ L["Show player group number"] = "Показывать номер группы"
 L["Show or hide player group number when player is in a raid group (over portrait)"] = "Показывать номер группы когда игрок в рейде (над портретом)"
 L["Show player role icon"] = "Показывать иконку роли игрока"
 L["Show or hide player role icon when player is in a group"] = "Показывать иконку роли когда игрок в группе"
+L["Show player PVP icon"] = "Показывать PVP иконку игрока"
+L["Show or hide player PVP icon"] = "Показывать PVP иконку игрока"
 
 
 L["Target"] = "Цель"
@@ -213,6 +215,8 @@ L["Show target combat texture (outside the frame)"] = "Показывать фо
 L["Show or hide target red background texture (blinking red glow outside the frame in combat)"] = "Показывать красную текстуру в бою (мигающая рамка снаружи фрейма во время боя)"
 L["Show blizzard's target castbar"] = "Показывать у цели castbar Blizzard"
 L["When you change this option you need to reload your UI (because it's Blizzard config variable). \n\nCommand /reload"] = "После установки данной опции вам необходимо перезагрузить UI (т.к. это внутренние настройки Blizzard). \n\nКоманда /reload"
+L["Show target PVP icon"] = "Показывать PVP иконку цели"
+L["Show or hide target PVP icon"] = "Показывать PVP иконку цели"
 
 
 L["Focus"] = "Фокус"
@@ -233,6 +237,8 @@ L["Show name of focus frame"] = "Показывать имя фокус фрей
 L["Show name of focus frame inside the frame"] = "Показывать имя фокус фрейма внутри фрейма"
 L["Show focus combat texture (outside the frame)"] = "Показывать фоновую текстуру фокус фрейма (снаружи фрейма)"
 L["Show or hide focus red background texture (blinking red glow outside the frame in combat)"] = "Показывать красную текстуру в бою (мигающая рамка снаружи фрейма во время боя)"
+L["Show focus PVP icon"] = "Показывать PVP иконку фокус фрейма"
+L["Show or hide focus PVP icon"] = "Показывать PVP иконку фокус фрейма"
 
 
 L["Pet"] = "Питомец"

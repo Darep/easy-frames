@@ -60,6 +60,7 @@ function Player:OnEnable()
     self:SetAttackBackgroundOpacity(db.player.attackBackgroundOpacity)
     self:ShowGroupIndicator(db.player.showGroupIndicator)
     self:ShowRoleIcon(db.player.showRoleIcon)
+    self:ShowPVPIcon(db.player.showPVPIcon)
 
     self:SecureHook("TextStatusBar_UpdateTextStringWithValues", "UpdateTextStringWithValues")
     self:SecureHook("UnitFramePortrait_Update", "MakeClassPortraits")
@@ -83,6 +84,7 @@ function Player:OnProfileChanged(newDB)
     self:SetAttackBackgroundOpacity(db.player.attackBackgroundOpacity)
     self:ShowGroupIndicator(db.player.showGroupIndicator)
     self:ShowRoleIcon(db.player.showRoleIcon)
+    self:ShowPVPIcon(db.player.showPVPIcon)
 
     self:UpdateTextStringWithValues()
 end
@@ -341,6 +343,22 @@ function Player:ShowRoleIcon(value)
             if (IsInGroup("player")) then
                 frame:Show()
             end
+        else
+            frame:Hide()
+
+            self:SecureHook(frame, "Show", OnShowHookScript)
+        end
+    end
+end
+
+function Player:ShowPVPIcon(value)
+    local frame = PlayerPVPIcon
+
+    if frame then
+        self:Unhook(frame, "Show")
+
+        if (value) then
+            frame:Show()
         else
             frame:Hide()
 

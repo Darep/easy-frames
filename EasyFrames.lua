@@ -151,6 +151,7 @@ local defaults = {
             attackBackgroundOpacity = 0.7,
             showGroupIndicator = true,
             showRoleIcon = false,
+            showPVPIcon = true,
         },
 
         target = {
@@ -183,6 +184,7 @@ local defaults = {
             showAttackBackground = false,
             attackBackgroundOpacity = 0.7,
             showTargetCastbar = false,
+            showPVPIcon = true,
         },
 
         focus = {
@@ -214,6 +216,7 @@ local defaults = {
             showToTFrame = true,
             showAttackBackground = false,
             attackBackgroundOpacity = 0.7,
+            showPVPIcon = true,
         },
 
         pet = {

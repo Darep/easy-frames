@@ -1304,6 +1304,18 @@ local playerOptions = {
                     arg = "player"
                 },
 
+                showPVPIcon = {
+                    type = "toggle",
+                    order = 10,
+                    width = "double",
+                    name = L["Show player PVP icon"],
+                    desc = L["Show or hide player PVP icon"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Player"):ShowPVPIcon(value)
+                    end,
+                    arg = "player"
+                },
             }
         },
     },
@@ -1961,6 +1973,19 @@ local targetOptions = {
                     isPercent = true,
                     arg = "target"
                 },
+
+                showPVPIcon = {
+                    type = "toggle",
+                    order = 6,
+                    width = "double",
+                    name = L["Show target PVP icon"],
+                    desc = L["Show or hide target PVP icon"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Target"):ShowPVPIcon(value)
+                    end,
+                    arg = "target"
+                },
             },
         },
     },
@@ -2603,6 +2628,19 @@ local focusOptions = {
                         end
                     end,
                     isPercent = true,
+                    arg = "focus"
+                },
+
+                showPVPIcon = {
+                    type = "toggle",
+                    order = 5,
+                    width = "double",
+                    name = L["Show focus PVP icon"],
+                    desc = L["Show or hide focus PVP icon"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Focus"):ShowPVPIcon(value)
+                    end,
                     arg = "focus"
                 },
             },

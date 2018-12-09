@@ -182,6 +182,8 @@ L["Show player group number"] = true
 L["Show or hide player group number when player is in a raid group (over portrait)"] = true
 L["Show player role icon"] = true
 L["Show or hide player role icon when player is in a group"] = true
+L["Show player PVP icon"] = true
+L["Show or hide player PVP icon"] = true
 
 
 L["Target"] = true
@@ -204,6 +206,8 @@ L["Show target combat texture (outside the frame)"] = true
 L["Show or hide target red background texture (blinking red glow outside the frame in combat)"] = true
 L["Show blizzard's target castbar"] = true
 L["When you change this option you need to reload your UI (because it's Blizzard config variable). \n\nCommand /reload"] = true
+L["Show target PVP icon"] = true
+L["Show or hide target PVP icon"] = true
 
 
 L["Focus"] = true
@@ -224,6 +228,8 @@ L["Show name of focus frame"] = true
 L["Show name of focus frame inside the frame"] = true
 L["Show focus combat texture (outside the frame)"] = true
 L["Show or hide focus red background texture (blinking red glow outside the frame in combat)"] = true
+L["Show focus PVP icon"] = true
+L["Show or hide focus PVP icon"] = true
 
 
 L["Pet"] = true

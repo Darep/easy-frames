@@ -51,6 +51,7 @@ function Target:OnEnable()
 
     self:ShowAttackBackground(db.target.showAttackBackground)
     self:SetAttackBackgroundOpacity(db.target.attackBackgroundOpacity)
+    self:ShowPVPIcon(db.target.showPVPIcon)
 
     self:SecureHook("TextStatusBar_UpdateTextStringWithValues", "UpdateTextStringWithValues")
     self:SecureHook("UnitFramePortrait_Update", "MakeClassPortraits")
@@ -72,6 +73,7 @@ function Target:OnProfileChanged(newDB)
 
     self:ShowAttackBackground(db.target.showAttackBackground)
     self:SetAttackBackgroundOpacity(db.target.attackBackgroundOpacity)
+    self:ShowPVPIcon(db.target.showPVPIcon)
 
     self:UpdateTextStringWithValues()
 end
@@ -205,4 +207,20 @@ end
 
 function Target:SetAttackBackgroundOpacity(value)
     TargetFrameFlash:SetAlpha(value)
+end
+
+function Target:ShowPVPIcon(value)
+    local frame = TargetFrameTextureFramePVPIcon
+
+    if frame then
+        self:Unhook(frame, "Show")
+
+        if (value) then
+            frame:Show()
+        else
+            frame:Hide()
+
+            self:SecureHook(frame, "Show", OnShowHookScript)
+        end
+    end
 end

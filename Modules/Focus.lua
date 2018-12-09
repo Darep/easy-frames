@@ -51,6 +51,7 @@ function Focus:OnEnable()
 
     self:ShowAttackBackground(db.focus.showAttackBackground)
     self:SetAttackBackgroundOpacity(db.focus.attackBackgroundOpacity)
+    self:ShowPVPIcon(db.focus.showPVPIcon)
 
     self:SecureHook("TextStatusBar_UpdateTextStringWithValues", "UpdateTextStringWithValues")
     self:SecureHook("UnitFramePortrait_Update", "MakeClassPortraits")
@@ -72,6 +73,7 @@ function Focus:OnProfileChanged(newDB)
 
     self:ShowAttackBackground(db.focus.showAttackBackground)
     self:SetAttackBackgroundOpacity(db.focus.attackBackgroundOpacity)
+    self:ShowPVPIcon(db.focus.showPVPIcon)
 
     self:UpdateTextStringWithValues()
 end
@@ -205,4 +207,20 @@ end
 
 function Focus:SetAttackBackgroundOpacity(value)
     FocusFrameFlash:SetAlpha(value)
+end
+
+function Focus:ShowPVPIcon(value)
+    local frame = FocusFrameTextureFramePVPIcon
+
+    if frame then
+        self:Unhook(frame, "Show")
+
+        if (value) then
+            frame:Show()
+        else
+            frame:Hide()
+
+            self:SecureHook(frame, "Show", OnShowHookScript)
+        end
+    end
 end
