@@ -352,17 +352,20 @@ function Player:ShowRoleIcon(value)
 end
 
 function Player:ShowPVPIcon(value)
-    local frame = PlayerPVPIcon
+    for _, frame in pairs({
+        PlayerPVPIcon,
+        PlayerPVPTimerText,
+    }) do
+        if frame then
+            self:Unhook(frame, "Show")
 
-    if frame then
-        self:Unhook(frame, "Show")
+            if (value) then
+                frame:Show()
+            else
+                frame:Hide()
 
-        if (value) then
-            frame:Show()
-        else
-            frame:Hide()
-
-            self:SecureHook(frame, "Show", OnShowHookScript)
+                self:SecureHook(frame, "Show", OnShowHookScript)
+            end
         end
     end
 end
