@@ -355,6 +355,8 @@ function Player:ShowPVPIcon(value)
     for _, frame in pairs({
         PlayerPVPIcon,
         PlayerPVPTimerText,
+        PlayerPrestigeBadge,
+        PlayerPrestigePortrait,
     }) do
         if frame then
             self:Unhook(frame, "Show")

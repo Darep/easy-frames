@@ -210,17 +210,21 @@ function Target:SetAttackBackgroundOpacity(value)
 end
 
 function Target:ShowPVPIcon(value)
-    local frame = TargetFrameTextureFramePVPIcon
+    for _, frame in pairs({
+        TargetFrameTextureFramePVPIcon,
+        TargetFrameTextureFramePrestigeBadge,
+        TargetFrameTextureFramePrestigePortrait,
+    }) do
+        if frame then
+            self:Unhook(frame, "Show")
 
-    if frame then
-        self:Unhook(frame, "Show")
+            if (value) then
+                frame:Show()
+            else
+                frame:Hide()
 
-        if (value) then
-            frame:Show()
-        else
-            frame:Hide()
-
-            self:SecureHook(frame, "Show", OnShowHookScript)
+                self:SecureHook(frame, "Show", OnShowHookScript)
+            end
         end
     end
 end
