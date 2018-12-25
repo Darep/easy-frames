@@ -511,3 +511,11 @@ function General:RestoreFramesPoints()
         end
     end
 end
+
+function General:SetFramePoints(frame, x, y)
+    local point, relativeTo, relativePoint = frame:GetPoint()
+
+    frame:ClearAllPoints()
+    frame:SetPoint(point, relativeTo, relativePoint, x, y)
+    frame:SetUserPlaced(true)
+end

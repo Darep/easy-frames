@@ -151,6 +151,13 @@ L["Restore positions of frames from current profile"] = true
 L["Saved"] = true
 L["Restored"] = true
 
+L["Frame"] = true
+L["Select the frame you want to set the position"] = true
+L["X"] = true
+L["X coordinate"] = true
+L["Y"] = true
+L["Y coordinate"] = true
+
 
 L["Player"] = true
 L["In player options you can set scale player frame, healthbar text format, etc"] = true

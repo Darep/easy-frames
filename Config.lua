@@ -22,7 +22,7 @@ local AceConfig = LibStub("AceConfig-3.0")
 local AceConfigDialog = LibStub("AceConfigDialog-3.0")
 
 
-local pairs, unpack, type = pairs, unpack, type
+local unpack, type, tostring = unpack, type, tostring
 
 local function getOpt(info)
     local ns = info.arg
@@ -92,6 +92,12 @@ local portrait = {
     ["1"] = L["Default"],
     ["2"] = L["Class portraits"],
 --    ["3"] = L["Hide"],
+}
+
+local frames = {
+    ["player"] = L["Player"],
+    ["target"] = L["Target"],
+    ["focus"] = L["Focus"],
 }
 
 local MIN_RANGE = 6
@@ -594,6 +600,13 @@ local generalOptions = {
                     order = 6,
                     name = L["Restore positions of frames from current profile"],
 
+                    disabled = function()
+                        local diabled = EasyFrames.db.profile.general.framesPoints
+                        if (diabled == false) then
+                            return true
+                        end
+                    end,
+
                     func = function(info)
                         info.options.args.otherGroup.args.framesPointsLog.name = L["Restored"]
 
@@ -606,6 +619,55 @@ local generalOptions = {
                     type = "description",
                     name = "",
                     width = "default",
+                },
+
+                frameToSetPoints = {
+                    type = "select",
+                    order = 8,
+                    name = L["Frame"],
+                    desc = L["Select the frame you want to set the position"],
+                    values = frames,
+                    arg = "general"
+                },
+
+                frameToSetPointX = {
+                    type = "input",
+                    order = 9,
+                    name = L["X"],
+                    desc = L["X coordinate"],
+                    get = function()
+                        local frame = EasyFrames.Utils.GetFrameByUnit(EasyFrames.db.profile.general.frameToSetPoints)
+                        local _, _, _, x = frame:GetPoint()
+
+                        return tostring(x)
+                    end,
+
+                    set = function(_, value)
+                        local frame = EasyFrames.Utils.GetFrameByUnit(EasyFrames.db.profile.general.frameToSetPoints)
+                        local _, _, _, _, y = frame:GetPoint()
+
+                        EasyFrames:GetModule("General"):SetFramePoints(frame, value, y)
+                    end
+                },
+
+                frameToSetPointY = {
+                    type = "input",
+                    order = 10,
+                    name = L["Y"],
+                    desc = L["Y coordinate"],
+                    get = function()
+                        local frame = EasyFrames.Utils.GetFrameByUnit(EasyFrames.db.profile.general.frameToSetPoints)
+                        local _, _, _, _, y = frame:GetPoint()
+
+                        return tostring(y)
+                    end,
+
+                    set = function(_, value)
+                        local frame = EasyFrames.Utils.GetFrameByUnit(EasyFrames.db.profile.general.frameToSetPoints)
+                        local _, _, _, x = frame:GetPoint()
+
+                        EasyFrames:GetModule("General"):SetFramePoints(frame, x, value)
+                    end
                 },
             }
         },

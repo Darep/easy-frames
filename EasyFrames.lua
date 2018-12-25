@@ -114,8 +114,10 @@ local defaults = {
             friendlyFrameDefaultColors = {0, 1, 0},
             enemyFrameDefaultColors = {1, 0, 0},
             neutralFrameDefaultColors = {1, 1, 0},
+
             showWelcomeMessage = true,
             framesPoints = false,
+            frameToSetPoints = "player"
         },
 
         player = {
@@ -536,6 +538,10 @@ function EasyFrames.Utils.GetPartyFrames()
         PartyMemberFrame3,
         PartyMemberFrame4
     }
+end
+
+function EasyFrames.Utils.GetFrameByUnit(unit)
+    return _G[unit:gsub("^%l", string.upper) .. "Frame"]
 end
 
 function EasyFrames.Utils.ClassPortraits(frame)

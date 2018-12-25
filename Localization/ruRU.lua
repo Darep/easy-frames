@@ -160,6 +160,11 @@ L["Restore positions of frames from current profile"] = "Восстановит�
 L["Saved"] = "Сохранены"
 L["Restored"] = "Восстановлены"
 
+L["Frame"] = "Фрейм"
+L["Select the frame you want to set the position"] = "Фрейм которому необходимо установить позицию"
+L["X coordinate"] = "X позиция"
+L["Y coordinate"] = "Y позиция"
+
 
 L["Player"] = "Игрок"
 L["In player options you can set scale player frame, healthbar text format, etc"] = "В разделе Игрок вы можете установить размер (scale) фрейма игрока, установить формат HP и другие"
