@@ -131,7 +131,7 @@ function Core:MoveTargetFrameName(point, relativeTo, relativePoint, xOffset, yOf
 end
 
 function Core:MoveFocusFrameName(point, relativeTo, relativePoint, xOffset, yOffset)
-    self:MoveRegion(FocusFrame.name, point or "CENTER", relativeTo or FocusFrame, relativePoint or "CENTER", xOffset or -45, yOffset or 35)
+    self:MoveRegion(FocusFrame.name, point or "CENTER", relativeTo or FocusFrame, relativePoint or "CENTER", xOffset or -50, yOffset or 35)
 end
 
 function Core:MoveFramesNames()
