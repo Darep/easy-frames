@@ -219,7 +219,9 @@ function Focus:ShowPVPIcon(value)
             self:Unhook(frame, "Show")
 
             if (value) then
-                frame:Show()
+                if (UnitIsPVP("focus")) then
+                    frame:Show()
+                end
             else
                 frame:Hide()
 

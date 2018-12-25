@@ -219,7 +219,9 @@ function Target:ShowPVPIcon(value)
             self:Unhook(frame, "Show")
 
             if (value) then
-                frame:Show()
+                if (UnitIsPVP("target")) then
+                    frame:Show()
+                end
             else
                 frame:Hide()
 
