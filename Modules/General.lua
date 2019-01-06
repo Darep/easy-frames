@@ -432,6 +432,20 @@ function General:TargetFrame_UpdateAuras(frame, forceHide)
     local selfName = frame:GetName()
     local isEnemy = UnitIsEnemy(PlayerFrame.unit, frame.unit)
 
+    -- Debuffs on top
+    if (frame.maxDebuffs > 0 and frame.buffsOnTop) then
+        local _, fisrtDebuffIcon = UnitDebuff(frame.unit, 1)
+        local _, fisrtBuffIcon = UnitBuff(frame.unit, 1)
+
+        if (fisrtDebuffIcon and not fisrtBuffIcon) then
+            local firstDebuffFrame = _G[selfName .. 'Debuff1']
+            local point, relativeTo, relativePoint, xOffset, yOffset = firstDebuffFrame:GetPoint()
+
+            firstDebuffFrame:ClearAllPoints()
+            firstDebuffFrame:SetPoint(point, relativeTo, relativePoint, xOffset, yOffset + 8)
+        end
+    end
+
     for i = 1, MAX_TARGET_BUFFS do
         _, icon, _, debuffType, _, _, _, isStealable = UnitBuff(frame.unit, i)
 
