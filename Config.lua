@@ -51,8 +51,6 @@ local function setColor(info, r, g, b)
     local key = info[#info]
     local color = {r, g, b}
     EasyFrames.db.profile[ns][key] = color
-
-    EasyFrames:GetModule("General"):SetFramesColored()
 end
 
 local function getDeepOpt(info)
@@ -468,7 +466,10 @@ local generalOptions = {
             inline = true,
             name = "",
             get = getColor,
-            set = setColor,
+            set = function(info, r, g, b)
+                setColor(info, r, g, b)
+                EasyFrames:GetModule("General"):SetFramesColored()
+            end,
             disabled = function()
                 if (EasyFrames.db.profile.general.colorBasedOnCurrentHealth) then
                     return true
@@ -1239,6 +1240,30 @@ local playerOptions = {
                     arg = "player"
                 },
 
+                playerNameColor = {
+                    type = "color",
+                    order = 8,
+                    width = "double",
+                    name = L["Player name color"],
+                    desc = L["Set the color of the frame name"],
+                    get = getColor,
+                    set = function(info, r, g, b)
+                        setColor(info, r, g, b)
+                        EasyFrames:GetModule("Player"):SetFrameNameColor()
+                    end,
+                    arg = "player"
+                },
+
+                playerNameColorReset = {
+                    type = "execute",
+                    order = 9,
+                    name = L["Reset color to default"],
+
+                    func = function()
+                        EasyFrames:GetModule("Player"):ResetFrameNameColor()
+                        EasyFrames:GetModule("Player"):SetFrameNameColor()
+                    end,
+                },
             }
         },
 
@@ -1961,6 +1986,30 @@ local targetOptions = {
                     arg = "target"
                 },
 
+                targetNameColor = {
+                    type = "color",
+                    order = 8,
+                    width = "double",
+                    name = L["Target name color"],
+                    desc = L["Set the color of the frame name"],
+                    get = getColor,
+                    set = function(info, r, g, b)
+                        setColor(info, r, g, b)
+                        EasyFrames:GetModule("Target"):SetFrameNameColor()
+                    end,
+                    arg = "target"
+                },
+
+                targetNameColorReset = {
+                    type = "execute",
+                    order = 9,
+                    name = L["Reset color to default"],
+
+                    func = function()
+                        EasyFrames:GetModule("Target"):ResetFrameNameColor()
+                        EasyFrames:GetModule("Target"):SetFrameNameColor()
+                    end,
+                },
             }
         },
 
@@ -2631,6 +2680,30 @@ local focusOptions = {
                     arg = "focus"
                 },
 
+                focusNameColor = {
+                    type = "color",
+                    order = 8,
+                    width = "double",
+                    name = L["Focus name color"],
+                    desc = L["Set the color of the frame name"],
+                    get = getColor,
+                    set = function(info, r, g, b)
+                        setColor(info, r, g, b)
+                        EasyFrames:GetModule("Focus"):SetFrameNameColor()
+                    end,
+                    arg = "focus"
+                },
+
+                focusNameColorReset = {
+                    type = "execute",
+                    order = 9,
+                    name = L["Reset color to default"],
+
+                    func = function()
+                        EasyFrames:GetModule("Focus"):ResetFrameNameColor()
+                        EasyFrames:GetModule("Focus"):SetFrameNameColor()
+                    end,
+                },
             }
         },
 
@@ -3266,6 +3339,30 @@ local petOptions = {
                     arg = "pet"
                 },
 
+                petNameColor = {
+                    type = "color",
+                    order = 7,
+                    width = "double",
+                    name = L["Pet name color"],
+                    desc = L["Set the color of the frame name"],
+                    get = getColor,
+                    set = function(info, r, g, b)
+                        setColor(info, r, g, b)
+                        EasyFrames:GetModule("Pet"):SetFrameNameColor()
+                    end,
+                    arg = "pet"
+                },
+
+                petNameColorReset = {
+                    type = "execute",
+                    order = 8,
+                    name = L["Reset color to default"],
+
+                    func = function()
+                        EasyFrames:GetModule("Pet"):ResetFrameNameColor()
+                        EasyFrames:GetModule("Pet"):SetFrameNameColor()
+                    end,
+                },
             }
         },
 
@@ -3879,6 +3976,30 @@ local partyOptions = {
                     arg = "party"
                 },
 
+                partyNameColor = {
+                    type = "color",
+                    order = 8,
+                    width = "double",
+                    name = L["Party names color"],
+                    desc = L["Set the color of the frame name"],
+                    get = getColor,
+                    set = function(info, r, g, b)
+                        setColor(info, r, g, b)
+                        EasyFrames:GetModule("Party"):SetFrameNameColor()
+                    end,
+                    arg = "party"
+                },
+
+                partyNameColorReset = {
+                    type = "execute",
+                    order = 9,
+                    name = L["Reset color to default"],
+
+                    func = function()
+                        EasyFrames:GetModule("Party"):ResetFrameNameColor()
+                        EasyFrames:GetModule("Party"):SetFrameNameColor()
+                    end,
+                },
             }
         },
 

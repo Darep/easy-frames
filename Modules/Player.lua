@@ -50,6 +50,7 @@ function Player:OnEnable()
     self:SetScale(db.player.scaleFrame)
     self:ShowName(db.player.showName)
     self:SetFrameNameFont()
+    self:SetFrameNameColor()
     self:SetHealthBarsFont()
     self:SetManaBarsFont()
     self:ShowHitIndicator(db.player.showHitIndicator)
@@ -74,6 +75,7 @@ function Player:OnProfileChanged(newDB)
     self:MakeClassPortraits(PlayerFrame)
     self:ShowName(db.player.showName)
     self:SetFrameNameFont()
+    self:SetFrameNameColor()
     self:SetHealthBarsFont()
     self:SetManaBarsFont()
     self:ShowHitIndicator(db.player.showHitIndicator)
@@ -244,6 +246,16 @@ function Player:SetFrameNameFont()
     local fontStyle = db.player.playerNameFontStyle
 
     PlayerName:SetFont(fontFamily, fontSize, fontStyle)
+end
+
+function Player:SetFrameNameColor()
+    local color = db.player.playerNameColor
+
+    EasyFrames.Utils.SetTextColor(PlayerName, color)
+end
+
+function Player:ResetFrameNameColor()
+    EasyFrames.db.profile.player.playerNameColor = {unpack(EasyFrames.Const.DEFAULT_FRAMES_NAME_COLOR)}
 end
 
 function Player:ShowRestIcon(value)

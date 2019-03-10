@@ -44,6 +44,7 @@ function Focus:OnEnable()
     self:ShowFocusFrameToT()
     self:ShowName(db.focus.showName)
     self:SetFrameNameFont()
+    self:SetFrameNameColor()
     self:SetHealthBarsFont()
     self:SetManaBarsFont()
 
@@ -66,6 +67,7 @@ function Focus:OnProfileChanged(newDB)
     self:ShowFocusFrameToT()
     self:ShowName(db.focus.showName)
     self:SetFrameNameFont()
+    self:SetFrameNameColor()
     self:SetHealthBarsFont()
     self:SetManaBarsFont()
 
@@ -180,6 +182,16 @@ function Focus:SetFrameNameFont()
     local fontStyle = db.focus.focusNameFontStyle
 
     FocusFrame.name:SetFont(fontFamily, fontSize, fontStyle)
+end
+
+function Focus:SetFrameNameColor()
+    local color = db.focus.focusNameColor
+
+    EasyFrames.Utils.SetTextColor(FocusFrame.name, color)
+end
+
+function Focus:ResetFrameNameColor()
+    EasyFrames.db.profile.focus.focusNameColor = {unpack(EasyFrames.Const.DEFAULT_FRAMES_NAME_COLOR)}
 end
 
 function Focus:ReverseDirectionLosingHP(value)

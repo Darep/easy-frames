@@ -52,6 +52,7 @@ function Pet:OnEnable()
 
     self:ShowName(db.pet.showName)
     self:SetFrameNameFont()
+    self:SetFrameNameColor()
     self:SetManaBarsFont()
     self:ShowHitIndicator(db.pet.showHitIndicator)
 
@@ -75,6 +76,7 @@ function Pet:OnProfileChanged(newDB)
 
     self:ShowName(db.pet.showName)
     self:SetFrameNameFont()
+    self:SetFrameNameColor()
     self:SetManaBarsFont()
     self:ShowHitIndicator(db.pet.showHitIndicator)
 
@@ -219,6 +221,16 @@ function Pet:SetFrameNameFont()
     local fontStyle = db.pet.petNameFontStyle
 
     PetName:SetFont(fontFamily, fontSize, fontStyle)
+end
+
+function Pet:SetFrameNameColor()
+    local color = db.pet.petNameColor
+
+    EasyFrames.Utils.SetTextColor(PetName, color)
+end
+
+function Pet:ResetFrameNameColor()
+    EasyFrames.db.profile.pet.petNameColor = {unpack(EasyFrames.Const.DEFAULT_FRAMES_NAME_COLOR)}
 end
 
 function Pet:ShowHitIndicator(value)

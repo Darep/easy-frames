@@ -37,6 +37,7 @@ function Party:OnEnable()
     self:SetScale(db.party.scaleFrame)
     self:ShowName(db.party.showName)
     self:SetFrameNameFont()
+    self:SetFrameNameColor()
     self:SetHealthBarsFont()
     self:SetManaBarsFont()
 --    self:ShowPetFrames(db.party.showPetFrames)
@@ -51,6 +52,7 @@ function Party:OnProfileChanged(newDB)
     self:SetScale(db.party.scaleFrame)
     self:ShowName(db.party.showName)
     self:SetFrameNameFont()
+    self:SetFrameNameColor()
     self:SetHealthBarsFont()
     self:SetManaBarsFont()
 --    self:ShowPetFrames(db.party.showPetFrames)
@@ -128,6 +130,18 @@ function Party:SetFrameNameFont()
     PartyIterator(function(frame)
         frame.name:SetFont(fontFamily, fontSize, fontStyle)
     end)
+end
+
+function Party:SetFrameNameColor()
+    local color = db.party.partyNameColor
+
+    PartyIterator(function(frame)
+        EasyFrames.Utils.SetTextColor(frame.name, color)
+    end)
+end
+
+function Party:ResetFrameNameColor()
+    EasyFrames.db.profile.party.partyNameColor = {unpack(EasyFrames.Const.DEFAULT_FRAMES_NAME_COLOR)}
 end
 
 function Party:ShowPetFrames(value)

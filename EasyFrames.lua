@@ -26,6 +26,8 @@ local DEFAULT_BAR_FONT_SIZE = 10
 local DEFAULT_BAR_SMALL_FONT_SIZE = 9
 local DEFAULT_BAR_FONT_STYLE = "OUTLINE"
 
+local DEFAULT_FRAMES_NAME_COLOR = {1, 0.82, 0}
+
 local DEFAULT_CUSTOM_FORMAT = "%CURRENT% / %MAX% (%PERCENT%%)"
 
 local DefaultCustomFormatFormulas = function()
@@ -145,6 +147,8 @@ local defaults = {
             playerNameFontFamily = DEFAULT_BAR_FONT_FAMILY,
             playerNameFontSize = DEFAULT_BAR_FONT_SIZE,
             playerNameFontStyle = "NONE",
+            playerNameColor = {unpack(DEFAULT_FRAMES_NAME_COLOR)},
+
             showHitIndicator = true,
             showSpecialbar = true,
             showRestIcon = true,
@@ -182,6 +186,8 @@ local defaults = {
             targetNameFontFamily = DEFAULT_BAR_FONT_FAMILY,
             targetNameFontSize = DEFAULT_BAR_FONT_SIZE,
             targetNameFontStyle = "NONE",
+            targetNameColor = {unpack(DEFAULT_FRAMES_NAME_COLOR)},
+
             showToTFrame = true,
             showAttackBackground = false,
             attackBackgroundOpacity = 0.7,
@@ -215,6 +221,8 @@ local defaults = {
             focusNameFontFamily = DEFAULT_BAR_FONT_FAMILY,
             focusNameFontSize = DEFAULT_BAR_FONT_SIZE,
             focusNameFontStyle = "NONE",
+            focusNameColor = {unpack(DEFAULT_FRAMES_NAME_COLOR)},
+
             showToTFrame = true,
             showAttackBackground = false,
             attackBackgroundOpacity = 0.7,
@@ -246,6 +254,8 @@ local defaults = {
             petNameFontFamily = DEFAULT_BAR_FONT_FAMILY,
             petNameFontSize = DEFAULT_BAR_FONT_SIZE,
             petNameFontStyle = "NONE",
+            petNameColor = {unpack(DEFAULT_FRAMES_NAME_COLOR)},
+
             showHitIndicator = true,
             showStatusTexture = true,
             showAttackBackground = true,
@@ -275,6 +285,8 @@ local defaults = {
             partyNameFontFamily = DEFAULT_BAR_FONT_FAMILY,
             partyNameFontSize = DEFAULT_BAR_FONT_SIZE,
             partyNameFontStyle = "NONE",
+            partyNameColor = {unpack(DEFAULT_FRAMES_NAME_COLOR)},
+
             showPetFrames = true,
         },
     }
@@ -544,6 +556,10 @@ function EasyFrames.Utils.GetFrameByUnit(unit)
     return _G[unit:gsub("^%l", string.upper) .. "Frame"]
 end
 
+function EasyFrames.Utils.SetTextColor(string, colors)
+    string:SetTextColor(colors[1], colors[2], colors[3])
+end
+
 function EasyFrames.Utils.ClassPortraits(frame)
     local _, unitClass = UnitClass(frame.unit)
     if (unitClass and UnitIsPlayer(frame.unit)) then
@@ -570,4 +586,7 @@ function EasyFrames.Helpers.Iterator(object)
     return iterator
 end
 
+EasyFrames.Const = {
+    DEFAULT_FRAMES_NAME_COLOR = DEFAULT_FRAMES_NAME_COLOR
+}
 

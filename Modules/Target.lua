@@ -44,6 +44,7 @@ function Target:OnEnable()
     self:ShowTargetFrameToT()
     self:ShowName(db.target.showName)
     self:SetFrameNameFont()
+    self:SetFrameNameColor()
     self:SetHealthBarsFont()
     self:SetManaBarsFont()
 
@@ -66,6 +67,7 @@ function Target:OnProfileChanged(newDB)
     self:ShowTargetFrameToT()
     self:ShowName(db.target.showName)
     self:SetFrameNameFont()
+    self:SetFrameNameColor()
     self:SetHealthBarsFont()
     self:SetManaBarsFont()
 
@@ -180,6 +182,16 @@ function Target:SetFrameNameFont()
     local fontStyle = db.target.targetNameFontStyle
 
     TargetFrame.name:SetFont(fontFamily, fontSize, fontStyle)
+end
+
+function Target:SetFrameNameColor()
+    local color = db.target.targetNameColor
+
+    EasyFrames.Utils.SetTextColor(TargetFrame.name, color)
+end
+
+function Target:ResetFrameNameColor()
+    EasyFrames.db.profile.target.targetNameColor = {unpack(EasyFrames.Const.DEFAULT_FRAMES_NAME_COLOR)}
 end
 
 function Target:ReverseDirectionLosingHP(value)
