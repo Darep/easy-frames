@@ -1,5 +1,5 @@
 ## Title: Easy Frames
-## Interface: 80100
+## Interface: 80200
 ## Notes: Make your unit frames colored and glorious.
 ## Author: Usoltsev
 ## SavedVariables: EasyFramesDB
