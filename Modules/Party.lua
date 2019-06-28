@@ -58,6 +58,7 @@ function Party:OnProfileChanged(newDB)
 --    self:ShowPetFrames(db.party.showPetFrames)
 
     self:UpdateTextStringWithValues()
+    self:UpdateTextStringWithValues(PartyMemberFrame1ManaBar)
 end
 
 function Party:SetScale(value)
@@ -71,19 +72,23 @@ function Party:UpdateTextStringWithValues(statusBar)
 
     if (frame.unit == "party1" or frame.unit == "party2" or frame.unit == "party3" or frame.unit == "party4") then
         if (string.find(frame:GetName(), 'HealthBar')) then
-            local healthFormat = db.party.healthFormat
-            local customHealthFormat = db.party.customHealthFormat
-            local customHealthFormatFormulas = db.party.customHealthFormatFormulas
-            local useHealthFormatFullValues = db.party.useHealthFormatFullValues
-
-            UpdateHealthValues(frame, healthFormat, customHealthFormat, customHealthFormatFormulas, useHealthFormatFullValues)
+            UpdateHealthValues(
+                frame,
+                db.party.healthFormat,
+                db.party.customHealthFormat,
+                db.party.customHealthFormatFormulas,
+                db.party.useHealthFormatFullValues,
+                db.party.useChineseNumeralsHealthFormat
+            )
         elseif (string.find(frame:GetName(), 'ManaBar')) then
-            local manaFormat = db.party.manaFormat
-            local customManaFormat = db.party.customManaFormat
-            local customManaFormatFormulas = db.party.customManaFormatFormulas
-            local useManaFormatFullValues = db.party.useManaFormatFullValues
-
-            UpdateManaValues(frame, manaFormat, customManaFormat, customManaFormatFormulas, useManaFormatFullValues)
+            UpdateManaValues(
+                frame,
+                db.party.manaFormat,
+                db.party.customManaFormat,
+                db.party.customManaFormatFormulas,
+                db.party.useManaFormatFullValues,
+                db.party.useChineseNumeralsManaFormat
+            )
         end
     end
 end

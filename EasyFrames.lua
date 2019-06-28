@@ -26,7 +26,7 @@ local DEFAULT_BAR_FONT_SIZE = 10
 local DEFAULT_BAR_SMALL_FONT_SIZE = 9
 local DEFAULT_BAR_FONT_STYLE = "OUTLINE"
 
-local DEFAULT_FRAMES_NAME_COLOR = {1, 0.82, 0}
+local DEFAULT_FRAMES_NAME_COLOR = { 1, 0.82, 0 }
 
 local DEFAULT_CUSTOM_FORMAT = "%CURRENT% / %MAX% (%PERCENT%%)"
 
@@ -40,7 +40,6 @@ local DefaultCustomFormatFormulas = function()
         ["gt1B"] = "%.fB",
     }
 end
-
 
 local function CustomReadableNumber(num, format, useFullValues)
     local ret
@@ -61,6 +60,29 @@ local function CustomReadableNumber(num, format, useFullValues)
         ret = string.format(format["gt1T"], num / (useFullValues or 1000)) -- num > 1000
     else
         ret = num -- num < 1000
+    end
+    return ret
+end
+
+local function CustomChineseReadableNumber(num, format)
+    local ret
+
+    if not num then
+        return 0
+    elseif num >= 1000000000 then
+        ret = string.format(format["gt1B"], num / 100000000)  -- num > 1 000 000 000
+    elseif num >= 100000000 then
+        ret = string.format(format["gt100M"], num / 100000000) -- num > 100 000 000
+    elseif num >= 10000000 then
+        ret = string.format(format["gt10M"], num / 10000) -- num > 10 000 000
+    elseif num >= 1000000 then
+        ret = string.format(format["gt1M"], num / 10000) -- num > 1 000 000
+    elseif num >= 100000 then
+        ret = string.format(format["gt100T"], num / 10000) -- num > 100 000
+    elseif num >= 10000 then
+        ret = string.format(format["gt1T"], num / 10000) -- num > 10000
+    else
+        ret = num -- num < 10000
     end
     return ret
 end
@@ -88,7 +110,6 @@ local function ReadableNumber(num)
     return ret
 end
 
-
 local defaults = {
     profile = {
         general = {
@@ -113,9 +134,9 @@ local defaults = {
             forceManaBarTexture = false,
             brightFrameBorder = 1,
             lightTexture = false,
-            friendlyFrameDefaultColors = {0, 1, 0},
-            enemyFrameDefaultColors = {1, 0, 0},
-            neutralFrameDefaultColors = {1, 1, 0},
+            friendlyFrameDefaultColors = { 0, 1, 0 },
+            enemyFrameDefaultColors = { 1, 0, 0 },
+            neutralFrameDefaultColors = { 1, 1, 0 },
 
             showWelcomeMessage = true,
             framesPoints = false,
@@ -133,6 +154,7 @@ local defaults = {
             useHealthFormatFullValues = false,
             customHealthFormatFormulas = DefaultCustomFormatFormulas(),
             customHealthFormat = DEFAULT_CUSTOM_FORMAT,
+            useChineseNumeralsHealthFormat = false,
             -- Custom mana format.
             manaFormat = "2",
             manaBarFontStyle = DEFAULT_BAR_FONT_STYLE,
@@ -141,13 +163,14 @@ local defaults = {
             useManaFormatFullValues = false,
             customManaFormatFormulas = DefaultCustomFormatFormulas(),
             customManaFormat = DEFAULT_CUSTOM_FORMAT,
+            useChineseNumeralsManaFormat = false,
             -- Name
             showName = true,
             showNameInsideFrame = false,
             playerNameFontFamily = DEFAULT_BAR_FONT_FAMILY,
             playerNameFontSize = DEFAULT_BAR_FONT_SIZE,
             playerNameFontStyle = "NONE",
-            playerNameColor = {unpack(DEFAULT_FRAMES_NAME_COLOR)},
+            playerNameColor = { unpack(DEFAULT_FRAMES_NAME_COLOR) },
 
             showHitIndicator = true,
             showSpecialbar = true,
@@ -172,6 +195,7 @@ local defaults = {
             reverseDirectionLosingHP = false,
             customHealthFormatFormulas = DefaultCustomFormatFormulas(),
             customHealthFormat = DEFAULT_CUSTOM_FORMAT,
+            useChineseNumeralsHealthFormat = false,
             -- Custom mana format.
             manaFormat = "2",
             manaBarFontStyle = DEFAULT_BAR_FONT_STYLE,
@@ -180,13 +204,14 @@ local defaults = {
             useManaFormatFullValues = false,
             customManaFormatFormulas = DefaultCustomFormatFormulas(),
             customManaFormat = DEFAULT_CUSTOM_FORMAT,
+            useChineseNumeralsManaFormat = false,
             -- Name.
             showName = true,
             showNameInsideFrame = false,
             targetNameFontFamily = DEFAULT_BAR_FONT_FAMILY,
             targetNameFontSize = DEFAULT_BAR_FONT_SIZE,
             targetNameFontStyle = "NONE",
-            targetNameColor = {unpack(DEFAULT_FRAMES_NAME_COLOR)},
+            targetNameColor = { unpack(DEFAULT_FRAMES_NAME_COLOR) },
 
             showToTFrame = true,
             showAttackBackground = false,
@@ -207,6 +232,7 @@ local defaults = {
             reverseDirectionLosingHP = false,
             customHealthFormatFormulas = DefaultCustomFormatFormulas(),
             customHealthFormat = DEFAULT_CUSTOM_FORMAT,
+            useChineseNumeralsHealthFormat = false,
             -- Custom mana format.
             manaFormat = "2",
             manaBarFontStyle = DEFAULT_BAR_FONT_STYLE,
@@ -215,13 +241,14 @@ local defaults = {
             useManaFormatFullValues = false,
             customManaFormatFormulas = DefaultCustomFormatFormulas(),
             customManaFormat = DEFAULT_CUSTOM_FORMAT,
+            useChineseNumeralsManaFormat = false,
             -- Name.
             showName = true,
             showNameInsideFrame = false,
             focusNameFontFamily = DEFAULT_BAR_FONT_FAMILY,
             focusNameFontSize = DEFAULT_BAR_FONT_SIZE,
             focusNameFontStyle = "NONE",
-            focusNameColor = {unpack(DEFAULT_FRAMES_NAME_COLOR)},
+            focusNameColor = { unpack(DEFAULT_FRAMES_NAME_COLOR) },
 
             showToTFrame = true,
             showAttackBackground = false,
@@ -241,6 +268,7 @@ local defaults = {
             useHealthFormatFullValues = false,
             customHealthFormatFormulas = DefaultCustomFormatFormulas(),
             customHealthFormat = DEFAULT_CUSTOM_FORMAT,
+            useChineseNumeralsHealthFormat = false,
             -- Custom mana format.
             manaFormat = "2",
             manaBarFontStyle = DEFAULT_BAR_FONT_STYLE,
@@ -249,12 +277,13 @@ local defaults = {
             useManaFormatFullValues = false,
             customManaFormatFormulas = DefaultCustomFormatFormulas(),
             customManaFormat = DEFAULT_CUSTOM_FORMAT,
+            useChineseNumeralsManaFormat = false,
             -- Name.
             showName = true,
             petNameFontFamily = DEFAULT_BAR_FONT_FAMILY,
             petNameFontSize = DEFAULT_BAR_FONT_SIZE,
             petNameFontStyle = "NONE",
-            petNameColor = {unpack(DEFAULT_FRAMES_NAME_COLOR)},
+            petNameColor = { unpack(DEFAULT_FRAMES_NAME_COLOR) },
 
             showHitIndicator = true,
             showStatusTexture = true,
@@ -272,6 +301,7 @@ local defaults = {
             useHealthFormatFullValues = false,
             customHealthFormatFormulas = DefaultCustomFormatFormulas(),
             customHealthFormat = DEFAULT_CUSTOM_FORMAT,
+            useChineseNumeralsHealthFormat = false,
             -- Custom mana format.
             manaFormat = "2",
             manaBarFontStyle = DEFAULT_BAR_FONT_STYLE,
@@ -280,12 +310,13 @@ local defaults = {
             useManaFormatFullValues = false,
             customManaFormatFormulas = DefaultCustomFormatFormulas(),
             customManaFormat = DEFAULT_CUSTOM_FORMAT,
+            useChineseNumeralsManaFormat = false,
             -- Name.
             showName = true,
             partyNameFontFamily = DEFAULT_BAR_FONT_FAMILY,
             partyNameFontSize = DEFAULT_BAR_FONT_SIZE,
             partyNameFontStyle = "NONE",
-            partyNameColor = {unpack(DEFAULT_FRAMES_NAME_COLOR)},
+            partyNameColor = { unpack(DEFAULT_FRAMES_NAME_COLOR) },
 
             showPetFrames = true,
         },
@@ -306,7 +337,6 @@ Media:Register("statusbar", "Smooth", "Interface\\AddOns\\EasyFrames\\Textures\\
 Media:Register("statusbar", "Striped", "Interface\\AddOns\\EasyFrames\\Textures\\StatusBarTexture\\striped")
 Media:Register("statusbar", "Swag", "Interface\\AddOns\\EasyFrames\\Textures\\StatusBarTexture\\swag")
 
-
 Media:Register("frames", "default", "Interface\\AddOns\\EasyFrames\\Textures\\TargetingFrame\\UI-TargetingFrame")
 Media:Register("frames", "minus", "Interface\\AddOns\\EasyFrames\\Textures\\TargetingFrame\\UI-TargetingFrame-Minus")
 Media:Register("frames", "elite", "Interface\\AddOns\\EasyFrames\\Textures\\TargetingFrame\\UI-TargetingFrame-Elite")
@@ -315,9 +345,7 @@ Media:Register("frames", "rare", "Interface\\AddOns\\EasyFrames\\Textures\\Targe
 Media:Register("frames", "smalltarget", "Interface\\AddOns\\EasyFrames\\Textures\\TargetingFrame\\UI-SmallTargetingFramex")
 Media:Register("frames", "nomana", "Interface\\AddOns\\EasyFrames\\Textures\\TargetingFrame\\UI-SmallTargetingFramex-NoMana")
 
-
 Media:Register("misc", "player-status", "Interface\\AddOns\\EasyFrames\\Textures\\TargetingFrame\\UI-Player-Status")
-
 
 function EasyFrames:OnInitialize()
     self.db = LibStub("AceDB-3.0"):New("EasyFramesDB", defaults, true)
@@ -331,7 +359,6 @@ function EasyFrames:OnInitialize()
     self:SetupOptions()
 end
 
-
 function EasyFrames:OnProfileChanged(event, database, newProfileKey)
     self.db = database
     db = self.db.profile
@@ -344,11 +371,47 @@ function EasyFrames:OnProfileChanged(event, database, newProfileKey)
 end
 
 EasyFrames.Utils = {};
-function EasyFrames.Utils.UpdateHealthValues(frame, healthFormat, customHealthFormat, customHealthFormatFormulas, useHealthFormatFullValues)
+function EasyFrames.Utils.UpdateHealthValues(frame, healthFormat, customHealthFormat, customHealthFormatFormulas, useHealthFormatFullValues, useChineseNumeralsHealthFormat)
     local unit = frame.unit
     local healthbar = frame:GetParent().healthbar
 
-    if (healthFormat == "1") then
+    if (healthFormat == "custom") then
+        -- Own format
+        if (UnitHealth(unit) > 0) then
+            local Health = UnitHealth(unit)
+            local HealthMax = UnitHealthMax(unit)
+            local HealthPercent = (UnitHealth(unit) / UnitHealthMax(unit)) * 100
+
+            local useFullValues = false
+            if (useHealthFormatFullValues) then
+                useFullValues = 1
+            end
+
+            if not useChineseNumeralsHealthFormat then
+                Health = CustomReadableNumber(Health, customHealthFormatFormulas, useFullValues)
+                HealthMax = CustomReadableNumber(HealthMax, customHealthFormatFormulas, useFullValues)
+            else
+                Health = CustomChineseReadableNumber(Health, customHealthFormatFormulas)
+                HealthMax = CustomChineseReadableNumber(HealthMax, customHealthFormatFormulas)
+            end
+
+            local Result = string.gsub(
+                string.gsub(
+                    string.gsub(
+                        customHealthFormat,
+                        "%%PERCENT%%",
+                        string.format("%.0f", HealthPercent)
+                    ),
+                    "%%MAX%%",
+                    HealthMax
+                ),
+                "%%CURRENT%%",
+                Health
+            )
+
+            healthbar.TextString:SetText(Result);
+        end
+    elseif (healthFormat == "1") then
         -- Percent
         if (UnitHealth(unit) > 0) then
             local HealthPercent = (UnitHealth(unit) / UnitHealthMax(unit)) * 100
@@ -386,44 +449,10 @@ function EasyFrames.Utils.UpdateHealthValues(frame, healthFormat, customHealthFo
 
             healthbar.TextString:SetText(ReadableNumber(Health) .. " (" .. string.format("%.0f", HealthPercent) .. "%)");
         end
-
-    elseif (healthFormat == "custom") then
-        -- Own format
-
-        if (UnitHealth(unit) > 0) then
-            local Health = UnitHealth(unit)
-            local HealthMax = UnitHealthMax(unit)
-            local HealthPercent = (UnitHealth(unit) / UnitHealthMax(unit)) * 100
-
-            local useFullValues = false
-            if (useHealthFormatFullValues) then
-                useFullValues = 1
-            end
-
-            Health = CustomReadableNumber(Health, customHealthFormatFormulas, useFullValues)
-            HealthMax = CustomReadableNumber(HealthMax, customHealthFormatFormulas, useFullValues)
-
-            local Result = string.gsub(
-                string.gsub(
-                    string.gsub(
-                        customHealthFormat,
-                        "%%PERCENT%%",
-                        string.format("%.0f", HealthPercent)
-                    ),
-                    "%%MAX%%",
-                    HealthMax
-                ),
-                "%%CURRENT%%",
-                Health
-            )
-
-            healthbar.TextString:SetText( Result );
-        end
-
     end
 end
 
-function EasyFrames.Utils.UpdateManaValues(frame, manaFormat, customManaFormat, customManaFormatFormulas, useManaFormatFullValues)
+function EasyFrames.Utils.UpdateManaValues(frame, manaFormat, customManaFormat, customManaFormatFormulas, useManaFormatFullValues, useChineseNumeralsManaFormat)
     local unit = frame.unit
     local manabar = frame
 
@@ -441,7 +470,8 @@ function EasyFrames.Utils.UpdateManaValues(frame, manaFormat, customManaFormat, 
 
     elseif (manaFormat == "2") then
         -- Smart
-        if (UnitPowerType(unit) == 0) then --mana
+        if (UnitPowerType(unit) == 0) then
+            --mana
             manabar.TextString:SetText(string.format("%.0f%%", ManaPercent))
         elseif (UnitPowerType(unit) == 1 or UnitPowerType(unit) == 2 or UnitPowerType(unit) == 3 or UnitPowerType(unit) == 6) then
             manabar.TextString:SetText(AbbreviateLargeNumbers(UnitPower(unit)))
@@ -463,8 +493,13 @@ function EasyFrames.Utils.UpdateManaValues(frame, manaFormat, customManaFormat, 
                 useFullValues = 1
             end
 
-            Mana = CustomReadableNumber(Mana, customManaFormatFormulas, useFullValues)
-            ManaMax = CustomReadableNumber(ManaMax, customManaFormatFormulas, useFullValues)
+            if not useChineseNumeralsManaFormat then
+                Mana = CustomReadableNumber(Mana, customManaFormatFormulas, useFullValues)
+                ManaMax = CustomReadableNumber(ManaMax, customManaFormatFormulas, useFullValues)
+            else
+                Mana = CustomChineseReadableNumber(Mana, customManaFormatFormulas)
+                ManaMax = CustomChineseReadableNumber(ManaMax, customManaFormatFormulas)
+            end
 
             local Result = string.gsub(
                 string.gsub(
@@ -480,7 +515,7 @@ function EasyFrames.Utils.UpdateManaValues(frame, manaFormat, customManaFormat, 
                 Mana
             )
 
-            manabar.TextString:SetText( Result );
+            manabar.TextString:SetText(Result);
         end
 
     end

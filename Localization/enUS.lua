@@ -66,6 +66,18 @@ L["You can use patterns:\n\n" ..
     "%MAX% - return maximum of health\n" ..
     "%PERCENT% - return percent of current/max health\n\n" ..
     "All values are returned from formulas. For set abbreviation use formulas' fields"] = true
+L["Use Chinese numerals format"] = true
+L["By default all formulas use divider (for value eq 1000 and more is 1000, for 1 000 000 and more is 1 000 000, etc).\n" ..
+    "But with this option divider eq 10 000 and 100 000 000.\n\n" ..
+    "The description of the formulas remains the same, so the description of the formulas is not correct with this parameter, but the formulas work correctly.\n\n" ..
+    "Use these formulas for Chinese numerals:\n" ..
+    "Value greater than 1000 -> '%.2f万', and '%.2f萬' for zhTW.\n" ..
+    "Value greater than 100 000 -> '%.1f万', and '%.1f萬' for zhTW.\n" ..
+    "Value greater than 1 000 000 -> '%.1f万', and '%.1f萬' for zhTW.\n" ..
+    "Value greater than 10 000 000 -> '%.0f万', and '%.0f萬' for zhTW.\n" ..
+    "Value greater than 100 000 000 -> '%.2f亿', and '%.2f億' for zhTW.\n" ..
+    "Value greater than 1 000 000 000 -> '%.2f亿', and '%.2f億' for zhTW.\n\n" ..
+    "More information about Chinese numerals format you can read on project site"] = true
 
 L["Custom format of mana"] = true
 L["You can set custom mana format. More information about custom mana format you can read on project site.\n\n" ..

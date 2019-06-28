@@ -305,10 +305,10 @@ function General:SetTexture()
     -- Pet
     if (UnitPowerMax("pet") == 0) then
         PetFrameTexture:SetTexture(Media:Fetch("frames", "nomana"))
+        --PetFrameFlash:SetTexture(Media:Fetch("frames", "nomana"))
     else
         PetFrameTexture:SetTexture(Media:Fetch("frames", "smalltarget"))
-
---        PetFrameFlash:SetTexture(Media:Fetch("misc", "player-status"))
+        --PetFrameFlash:SetTexture(Media:Fetch("frames", "smalltarget"))
     end
 
     -- Party

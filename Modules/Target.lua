@@ -78,6 +78,7 @@ function Target:OnProfileChanged(newDB)
     self:ShowPVPIcon(db.target.showPVPIcon)
 
     self:UpdateTextStringWithValues()
+    self:UpdateTextStringWithValues(TargetFrameManaBar)
 end
 
 
@@ -100,19 +101,23 @@ function Target:UpdateTextStringWithValues(statusBar)
 
     if (frame.unit == "target") then
         if (frame == TargetFrameHealthBar) then
-            local healthFormat = db.target.healthFormat
-            local customHealthFormat = db.target.customHealthFormat
-            local customHealthFormatFormulas = db.target.customHealthFormatFormulas
-            local useHealthFormatFullValues = db.target.useHealthFormatFullValues
-
-            UpdateHealthValues(frame, healthFormat, customHealthFormat, customHealthFormatFormulas, useHealthFormatFullValues)
+            UpdateHealthValues(
+                frame,
+                db.target.healthFormat,
+                db.target.customHealthFormat,
+                db.target.customHealthFormatFormulas,
+                db.target.useHealthFormatFullValues,
+                db.target.useChineseNumeralsHealthFormat
+            )
         elseif (frame == TargetFrameManaBar) then
-            local manaFormat = db.target.manaFormat
-            local customManaFormat = db.target.customManaFormat
-            local customManaFormatFormulas = db.target.customManaFormatFormulas
-            local useManaFormatFullValues = db.target.useManaFormatFullValues
-
-            UpdateManaValues(frame, manaFormat, customManaFormat, customManaFormatFormulas, useManaFormatFullValues)
+            UpdateManaValues(
+                frame,
+                db.target.manaFormat,
+                db.target.customManaFormat,
+                db.target.customManaFormatFormulas,
+                db.target.useManaFormatFullValues,
+                db.target.useChineseNumeralsManaFormat
+            )
         end
     end
 end

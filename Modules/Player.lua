@@ -89,6 +89,7 @@ function Player:OnProfileChanged(newDB)
     self:ShowPVPIcon(db.player.showPVPIcon)
 
     self:UpdateTextStringWithValues()
+    self:UpdateTextStringWithValues(PlayerFrameManaBar)
 end
 
 
@@ -206,19 +207,23 @@ function Player:UpdateTextStringWithValues(statusBar)
 
     if (frame.unit == "player") then
         if (frame == PlayerFrameHealthBar) then
-            local healthFormat = db.player.healthFormat
-            local customHealthFormat = db.player.customHealthFormat
-            local customHealthFormatFormulas = db.player.customHealthFormatFormulas
-            local useHealthFormatFullValues = db.player.useHealthFormatFullValues
-
-            UpdateHealthValues(frame, healthFormat, customHealthFormat, customHealthFormatFormulas, useHealthFormatFullValues)
+            UpdateHealthValues(
+                frame,
+                db.player.healthFormat,
+                db.player.customHealthFormat,
+                db.player.customHealthFormatFormulas,
+                db.player.useHealthFormatFullValues,
+                db.player.useChineseNumeralsHealthFormat
+            )
         elseif (frame == PlayerFrameManaBar) then
-            local manaFormat = db.player.manaFormat
-            local customManaFormat = db.player.customManaFormat
-            local customManaFormatFormulas = db.player.customManaFormatFormulas
-            local useManaFormatFullValues = db.player.useManaFormatFullValues
-
-            UpdateManaValues(frame, manaFormat, customManaFormat, customManaFormatFormulas, useManaFormatFullValues)
+            UpdateManaValues(
+                frame,
+                db.player.manaFormat,
+                db.player.customManaFormat,
+                db.player.customManaFormatFormulas,
+                db.player.useManaFormatFullValues,
+                db.player.useChineseNumeralsManaFormat
+            )
         end
     end
 end

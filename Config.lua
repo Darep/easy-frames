@@ -988,6 +988,28 @@ local playerOptions = {
                     end,
                     arg = "player"
                 },
+
+                useChineseNumeralsHealthFormat = {
+                    type = "toggle",
+                    order = 6,
+                    name = L["Use Chinese numerals format"],
+                    desc = L["By default all formulas use divider (for value eq 1000 and more is 1000, for 1 000 000 and more is 1 000 000, etc).\n" ..
+                        "But with this option divider eq 10 000 and 100 000 000.\n\n" ..
+                        "The description of the formulas remains the same, so the description of the formulas is not correct with this parameter, but the formulas work correctly.\n\n" ..
+                        "Use these formulas for Chinese numerals:\n" ..
+                        "Value greater than 1000 -> '%.2f万', and '%.2f萬' for zhTW.\n" ..
+                        "Value greater than 100 000 -> '%.1f万', and '%.1f萬' for zhTW.\n" ..
+                        "Value greater than 1 000 000 -> '%.1f万', and '%.1f萬' for zhTW.\n" ..
+                        "Value greater than 10 000 000 -> '%.0f万', and '%.0f萬' for zhTW.\n" ..
+                        "Value greater than 100 000 000 -> '%.2f亿', and '%.2f億' for zhTW.\n" ..
+                        "Value greater than 1 000 000 000 -> '%.2f亿', and '%.2f億' for zhTW.\n\n" ..
+                        "More information about Chinese numerals format you can read on project site"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Player"):UpdateTextStringWithValues()
+                    end,
+                    arg = "player",
+                },
             }
         },
 
@@ -1128,6 +1150,28 @@ local playerOptions = {
                         EasyFrames:GetModule("Player"):UpdateTextStringWithValues(PlayerFrameManaBar)
                     end,
                     arg = "player"
+                },
+
+                useChineseNumeralsManaFormat = {
+                    type = "toggle",
+                    order = 6,
+                    name = L["Use Chinese numerals format"],
+                    desc = L["By default all formulas use divider (for value eq 1000 and more is 1000, for 1 000 000 and more is 1 000 000, etc).\n" ..
+                        "But with this option divider eq 10 000 and 100 000 000.\n\n" ..
+                        "The description of the formulas remains the same, so the description of the formulas is not correct with this parameter, but the formulas work correctly.\n\n" ..
+                        "Use these formulas for Chinese numerals:\n" ..
+                        "Value greater than 1000 -> '%.2f万', and '%.2f萬' for zhTW.\n" ..
+                        "Value greater than 100 000 -> '%.1f万', and '%.1f萬' for zhTW.\n" ..
+                        "Value greater than 1 000 000 -> '%.1f万', and '%.1f萬' for zhTW.\n" ..
+                        "Value greater than 10 000 000 -> '%.0f万', and '%.0f萬' for zhTW.\n" ..
+                        "Value greater than 100 000 000 -> '%.2f亿', and '%.2f億' for zhTW.\n" ..
+                        "Value greater than 1 000 000 000 -> '%.2f亿', and '%.2f億' for zhTW.\n\n" ..
+                        "More information about Chinese numerals format you can read on project site"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Player"):UpdateTextStringWithValues(PlayerFrameManaBar)
+                    end,
+                    arg = "player",
                 },
             }
         },
@@ -1734,6 +1778,28 @@ local targetOptions = {
                     end,
                     arg = "target"
                 },
+
+                useChineseNumeralsHealthFormat = {
+                    type = "toggle",
+                    order = 6,
+                    name = L["Use Chinese numerals format"],
+                    desc = L["By default all formulas use divider (for value eq 1000 and more is 1000, for 1 000 000 and more is 1 000 000, etc).\n" ..
+                        "But with this option divider eq 10 000 and 100 000 000.\n\n" ..
+                        "The description of the formulas remains the same, so the description of the formulas is not correct with this parameter, but the formulas work correctly.\n\n" ..
+                        "Use these formulas for Chinese numerals:\n" ..
+                        "Value greater than 1000 -> '%.2f万', and '%.2f萬' for zhTW.\n" ..
+                        "Value greater than 100 000 -> '%.1f万', and '%.1f萬' for zhTW.\n" ..
+                        "Value greater than 1 000 000 -> '%.1f万', and '%.1f萬' for zhTW.\n" ..
+                        "Value greater than 10 000 000 -> '%.0f万', and '%.0f萬' for zhTW.\n" ..
+                        "Value greater than 100 000 000 -> '%.2f亿', and '%.2f億' for zhTW.\n" ..
+                        "Value greater than 1 000 000 000 -> '%.2f亿', and '%.2f億' for zhTW.\n\n" ..
+                        "More information about Chinese numerals format you can read on project site"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Target"):UpdateTextStringWithValues()
+                    end,
+                    arg = "target",
+                },
             }
         },
 
@@ -1874,6 +1940,28 @@ local targetOptions = {
                         EasyFrames:GetModule("Target"):UpdateTextStringWithValues(TargetFrameManaBar)
                     end,
                     arg = "target"
+                },
+
+                useChineseNumeralsManaFormat = {
+                    type = "toggle",
+                    order = 6,
+                    name = L["Use Chinese numerals format"],
+                    desc = L["By default all formulas use divider (for value eq 1000 and more is 1000, for 1 000 000 and more is 1 000 000, etc).\n" ..
+                        "But with this option divider eq 10 000 and 100 000 000.\n\n" ..
+                        "The description of the formulas remains the same, so the description of the formulas is not correct with this parameter, but the formulas work correctly.\n\n" ..
+                        "Use these formulas for Chinese numerals:\n" ..
+                        "Value greater than 1000 -> '%.2f万', and '%.2f萬' for zhTW.\n" ..
+                        "Value greater than 100 000 -> '%.1f万', and '%.1f萬' for zhTW.\n" ..
+                        "Value greater than 1 000 000 -> '%.1f万', and '%.1f萬' for zhTW.\n" ..
+                        "Value greater than 10 000 000 -> '%.0f万', and '%.0f萬' for zhTW.\n" ..
+                        "Value greater than 100 000 000 -> '%.2f亿', and '%.2f億' for zhTW.\n" ..
+                        "Value greater than 1 000 000 000 -> '%.2f亿', and '%.2f億' for zhTW.\n\n" ..
+                        "More information about Chinese numerals format you can read on project site"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Target"):UpdateTextStringWithValues(TargetFrameManaBar)
+                    end,
+                    arg = "target",
                 },
             }
         },
@@ -2428,6 +2516,28 @@ local focusOptions = {
                     end,
                     arg = "focus"
                 },
+
+                useChineseNumeralsHealthFormat = {
+                    type = "toggle",
+                    order = 6,
+                    name = L["Use Chinese numerals format"],
+                    desc = L["By default all formulas use divider (for value eq 1000 and more is 1000, for 1 000 000 and more is 1 000 000, etc).\n" ..
+                        "But with this option divider eq 10 000 and 100 000 000.\n\n" ..
+                        "The description of the formulas remains the same, so the description of the formulas is not correct with this parameter, but the formulas work correctly.\n\n" ..
+                        "Use these formulas for Chinese numerals:\n" ..
+                        "Value greater than 1000 -> '%.2f万', and '%.2f萬' for zhTW.\n" ..
+                        "Value greater than 100 000 -> '%.1f万', and '%.1f萬' for zhTW.\n" ..
+                        "Value greater than 1 000 000 -> '%.1f万', and '%.1f萬' for zhTW.\n" ..
+                        "Value greater than 10 000 000 -> '%.0f万', and '%.0f萬' for zhTW.\n" ..
+                        "Value greater than 100 000 000 -> '%.2f亿', and '%.2f億' for zhTW.\n" ..
+                        "Value greater than 1 000 000 000 -> '%.2f亿', and '%.2f億' for zhTW.\n\n" ..
+                        "More information about Chinese numerals format you can read on project site"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Focus"):UpdateTextStringWithValues()
+                    end,
+                    arg = "focus",
+                },
             }
         },
 
@@ -2568,6 +2678,28 @@ local focusOptions = {
                         EasyFrames:GetModule("Focus"):UpdateTextStringWithValues(FocusFrameManaBar)
                     end,
                     arg = "focus"
+                },
+
+                useChineseNumeralsManaFormat = {
+                    type = "toggle",
+                    order = 6,
+                    name = L["Use Chinese numerals format"],
+                    desc = L["By default all formulas use divider (for value eq 1000 and more is 1000, for 1 000 000 and more is 1 000 000, etc).\n" ..
+                        "But with this option divider eq 10 000 and 100 000 000.\n\n" ..
+                        "The description of the formulas remains the same, so the description of the formulas is not correct with this parameter, but the formulas work correctly.\n\n" ..
+                        "Use these formulas for Chinese numerals:\n" ..
+                        "Value greater than 1000 -> '%.2f万', and '%.2f萬' for zhTW.\n" ..
+                        "Value greater than 100 000 -> '%.1f万', and '%.1f萬' for zhTW.\n" ..
+                        "Value greater than 1 000 000 -> '%.1f万', and '%.1f萬' for zhTW.\n" ..
+                        "Value greater than 10 000 000 -> '%.0f万', and '%.0f萬' for zhTW.\n" ..
+                        "Value greater than 100 000 000 -> '%.2f亿', and '%.2f億' for zhTW.\n" ..
+                        "Value greater than 1 000 000 000 -> '%.2f亿', and '%.2f億' for zhTW.\n\n" ..
+                        "More information about Chinese numerals format you can read on project site"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Focus"):UpdateTextStringWithValues(FocusFrameManaBar)
+                    end,
+                    arg = "focus",
                 },
             }
         },
@@ -3104,6 +3236,28 @@ local petOptions = {
                     end,
                     arg = "pet"
                 },
+
+                useChineseNumeralsHealthFormat = {
+                    type = "toggle",
+                    order = 6,
+                    name = L["Use Chinese numerals format"],
+                    desc = L["By default all formulas use divider (for value eq 1000 and more is 1000, for 1 000 000 and more is 1 000 000, etc).\n" ..
+                        "But with this option divider eq 10 000 and 100 000 000.\n\n" ..
+                        "The description of the formulas remains the same, so the description of the formulas is not correct with this parameter, but the formulas work correctly.\n\n" ..
+                        "Use these formulas for Chinese numerals:\n" ..
+                        "Value greater than 1000 -> '%.2f万', and '%.2f萬' for zhTW.\n" ..
+                        "Value greater than 100 000 -> '%.1f万', and '%.1f萬' for zhTW.\n" ..
+                        "Value greater than 1 000 000 -> '%.1f万', and '%.1f萬' for zhTW.\n" ..
+                        "Value greater than 10 000 000 -> '%.0f万', and '%.0f萬' for zhTW.\n" ..
+                        "Value greater than 100 000 000 -> '%.2f亿', and '%.2f億' for zhTW.\n" ..
+                        "Value greater than 1 000 000 000 -> '%.2f亿', and '%.2f億' for zhTW.\n\n" ..
+                        "More information about Chinese numerals format you can read on project site"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Pet"):UpdateTextStringWithValues()
+                    end,
+                    arg = "pet",
+                },
             }
         },
 
@@ -3244,6 +3398,28 @@ local petOptions = {
                         EasyFrames:GetModule("Pet"):UpdateTextStringWithValues(PetFrameManaBar)
                     end,
                     arg = "pet"
+                },
+
+                useChineseNumeralsManaFormat = {
+                    type = "toggle",
+                    order = 6,
+                    name = L["Use Chinese numerals format"],
+                    desc = L["By default all formulas use divider (for value eq 1000 and more is 1000, for 1 000 000 and more is 1 000 000, etc).\n" ..
+                        "But with this option divider eq 10 000 and 100 000 000.\n\n" ..
+                        "The description of the formulas remains the same, so the description of the formulas is not correct with this parameter, but the formulas work correctly.\n\n" ..
+                        "Use these formulas for Chinese numerals:\n" ..
+                        "Value greater than 1000 -> '%.2f万', and '%.2f萬' for zhTW.\n" ..
+                        "Value greater than 100 000 -> '%.1f万', and '%.1f萬' for zhTW.\n" ..
+                        "Value greater than 1 000 000 -> '%.1f万', and '%.1f萬' for zhTW.\n" ..
+                        "Value greater than 10 000 000 -> '%.0f万', and '%.0f萬' for zhTW.\n" ..
+                        "Value greater than 100 000 000 -> '%.2f亿', and '%.2f億' for zhTW.\n" ..
+                        "Value greater than 1 000 000 000 -> '%.2f亿', and '%.2f億' for zhTW.\n\n" ..
+                        "More information about Chinese numerals format you can read on project site"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Pet"):UpdateTextStringWithValues(PetFrameManaBar)
+                    end,
+                    arg = "pet",
                 },
             }
         },
@@ -3742,6 +3918,28 @@ local partyOptions = {
                     end,
                     arg = "party"
                 },
+
+                useChineseNumeralsHealthFormat = {
+                    type = "toggle",
+                    order = 6,
+                    name = L["Use Chinese numerals format"],
+                    desc = L["By default all formulas use divider (for value eq 1000 and more is 1000, for 1 000 000 and more is 1 000 000, etc).\n" ..
+                        "But with this option divider eq 10 000 and 100 000 000.\n\n" ..
+                        "The description of the formulas remains the same, so the description of the formulas is not correct with this parameter, but the formulas work correctly.\n\n" ..
+                        "Use these formulas for Chinese numerals:\n" ..
+                        "Value greater than 1000 -> '%.2f万', and '%.2f萬' for zhTW.\n" ..
+                        "Value greater than 100 000 -> '%.1f万', and '%.1f萬' for zhTW.\n" ..
+                        "Value greater than 1 000 000 -> '%.1f万', and '%.1f萬' for zhTW.\n" ..
+                        "Value greater than 10 000 000 -> '%.0f万', and '%.0f萬' for zhTW.\n" ..
+                        "Value greater than 100 000 000 -> '%.2f亿', and '%.2f億' for zhTW.\n" ..
+                        "Value greater than 1 000 000 000 -> '%.2f亿', and '%.2f億' for zhTW.\n\n" ..
+                        "More information about Chinese numerals format you can read on project site"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Party"):UpdateTextStringWithValues()
+                    end,
+                    arg = "party",
+                },
             }
         },
 
@@ -3882,6 +4080,28 @@ local partyOptions = {
                         EasyFrames:GetModule("Party"):UpdateTextStringWithValues(PartyMemberFrame1ManaBar)
                     end,
                     arg = "party"
+                },
+
+                useChineseNumeralsManaFormat = {
+                    type = "toggle",
+                    order = 6,
+                    name = L["Use Chinese numerals format"],
+                    desc = L["By default all formulas use divider (for value eq 1000 and more is 1000, for 1 000 000 and more is 1 000 000, etc).\n" ..
+                        "But with this option divider eq 10 000 and 100 000 000.\n\n" ..
+                        "The description of the formulas remains the same, so the description of the formulas is not correct with this parameter, but the formulas work correctly.\n\n" ..
+                        "Use these formulas for Chinese numerals:\n" ..
+                        "Value greater than 1000 -> '%.2f万', and '%.2f萬' for zhTW.\n" ..
+                        "Value greater than 100 000 -> '%.1f万', and '%.1f萬' for zhTW.\n" ..
+                        "Value greater than 1 000 000 -> '%.1f万', and '%.1f萬' for zhTW.\n" ..
+                        "Value greater than 10 000 000 -> '%.0f万', and '%.0f萬' for zhTW.\n" ..
+                        "Value greater than 100 000 000 -> '%.2f亿', and '%.2f億' for zhTW.\n" ..
+                        "Value greater than 1 000 000 000 -> '%.2f亿', and '%.2f億' for zhTW.\n\n" ..
+                        "More information about Chinese numerals format you can read on project site"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Party"):UpdateTextStringWithValues(PartyMemberFrame1ManaBar)
+                    end,
+                    arg = "party",
                 },
             }
         },

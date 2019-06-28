@@ -85,6 +85,7 @@ function Pet:OnProfileChanged(newDB)
     self:SetAttackBackgroundOpacity(db.pet.attackBackgroundOpacity)
 
     self:UpdateTextStringWithValues()
+    self:UpdateTextStringWithValues(PetFrameManaBar)
 end
 
 
@@ -174,19 +175,23 @@ function Pet:UpdateTextStringWithValues(statusBar)
 
     if (frame.unit == "pet") then
         if (frame == PetFrameHealthBar) then
-            local healthFormat = db.pet.healthFormat
-            local customHealthFormat = db.pet.customHealthFormat
-            local customHealthFormatFormulas = db.pet.customHealthFormatFormulas
-            local useHealthFormatFullValues = db.pet.useHealthFormatFullValues
-
-            UpdateHealthValues(frame, healthFormat, customHealthFormat, customHealthFormatFormulas, useHealthFormatFullValues)
+            UpdateHealthValues(
+                frame,
+                db.pet.healthFormat,
+                db.pet.customHealthFormat,
+                db.pet.customHealthFormatFormulas,
+                db.pet.useHealthFormatFullValues,
+                db.pet.useChineseNumeralsHealthFormat
+            )
         elseif (frame == PetFrameManaBar) then
-            local manaFormat = db.pet.manaFormat
-            local customManaFormat = db.pet.customManaFormat
-            local customManaFormatFormulas = db.pet.customManaFormatFormulas
-            local useManaFormatFullValues = db.pet.useManaFormatFullValues
-
-            UpdateManaValues(frame, manaFormat, customManaFormat, customManaFormatFormulas, useManaFormatFullValues)
+            UpdateManaValues(
+                frame,
+                db.pet.manaFormat,
+                db.pet.customManaFormat,
+                db.pet.customManaFormatFormulas,
+                db.pet.useManaFormatFullValues,
+                db.pet.useChineseNumeralsManaFormat
+            )
         end
     end
 end

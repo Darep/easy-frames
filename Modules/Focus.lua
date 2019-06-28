@@ -78,6 +78,7 @@ function Focus:OnProfileChanged(newDB)
     self:ShowPVPIcon(db.focus.showPVPIcon)
 
     self:UpdateTextStringWithValues()
+    self:UpdateTextStringWithValues(FocusFrameManaBar)
 end
 
 
@@ -100,19 +101,23 @@ function Focus:UpdateTextStringWithValues(statusBar)
 
     if (frame.unit == "focus") then
         if (frame == FocusFrameHealthBar) then
-            local healthFormat = db.focus.healthFormat
-            local customHealthFormat = db.focus.customHealthFormat
-            local customHealthFormatFormulas = db.focus.customHealthFormatFormulas
-            local useHealthFormatFullValues = db.focus.useHealthFormatFullValues
-
-            UpdateHealthValues(frame, healthFormat, customHealthFormat, customHealthFormatFormulas, useHealthFormatFullValues)
+            UpdateHealthValues(
+                frame,
+                db.focus.healthFormat,
+                db.focus.customHealthFormat,
+                db.focus.customHealthFormatFormulas,
+                db.focus.useHealthFormatFullValues,
+                db.focus.useChineseNumeralsHealthFormat
+            )
         elseif (frame == FocusFrameManaBar) then
-            local manaFormat = db.focus.manaFormat
-            local customManaFormat = db.focus.customManaFormat
-            local customManaFormatFormulas = db.focus.customManaFormatFormulas
-            local useManaFormatFullValues = db.focus.useManaFormatFullValues
-
-            UpdateManaValues(frame, manaFormat, customManaFormat, customManaFormatFormulas, useManaFormatFullValues)
+            UpdateManaValues(
+                frame,
+                db.focus.manaFormat,
+                db.focus.customManaFormat,
+                db.focus.customManaFormatFormulas,
+                db.focus.useManaFormatFullValues,
+                db.focus.useChineseNumeralsManaFormat
+            )
         end
     end
 end

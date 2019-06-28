@@ -66,6 +66,7 @@ L["You can use patterns:\n\n" ..
             "%MAX% - возвращает максимальное значение здоровья\n" ..
             "%PERCENT% - возвращает проценты от текущее/максимальное значение здоровья\n\n" ..
             "Все значения возвращаются с формул. Для установки аббревиатур используйте поля формул"
+L["Use Chinese numerals format"] = "Использовать Китайскую систему счисления"
 
 L["Custom format of mana"] = "Свой формат маны"
 L["You can set custom mana format. More information about custom mana format you can read on project site.\n\n" ..
