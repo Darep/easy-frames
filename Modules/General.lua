@@ -28,8 +28,9 @@ local GetFramesHealthBar = EasyFrames.Utils.GetFramesHealthBar
 local GetFramesManaBar = EasyFrames.Utils.GetFramesManaBar
 local GetAllFrames = EasyFrames.Utils.GetAllFrames
 
-local PartyIterator = EasyFrames.Helpers.Iterator(EasyFrames.Utils.GetPartyFrames())
 local AllFramesIterator = EasyFrames.Helpers.Iterator(GetAllFrames())
+local PartyIterator = EasyFrames.Helpers.Iterator(EasyFrames.Utils.GetPartyFrames())
+local BossIterator = EasyFrames.Helpers.Iterator(EasyFrames.Utils.GetBossFrames())
 
 local DEFAULT_BUFF_SIZE = 17
 
@@ -316,6 +317,11 @@ function General:SetTexture()
         _G[frame:GetName() .. "Texture"]:SetTexture(Media:Fetch("frames", "smalltarget"))
 
 --        _G[frame:GetName() .. "PetFrameTexture"]:SetTexture(Media:Fetch("frames", "smalltarget"))
+    end)
+
+    -- Boss
+    BossIterator(function(frame)
+        frame.borderTexture:SetTexture(Media:Fetch("frames", "boss"))
     end)
 end
 

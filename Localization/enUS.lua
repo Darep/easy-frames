@@ -294,3 +294,8 @@ L["Party names font size"] = true
 L["Party names font style"] = true
 L["Party names color"] = true
 L["Show party pet frames"] = true
+
+L["Boss"] = true
+L["In boss options you can set scale boss frames, healthbar text format, etc"] = true
+L["Boss frames scale"] = true
+L["Scale of boss unit frames"] = true

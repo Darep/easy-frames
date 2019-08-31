@@ -320,6 +320,10 @@ local defaults = {
 
             showPetFrames = true,
         },
+
+        boss = {
+            scaleFrame = 1.2,
+        },
     }
 }
 
@@ -344,6 +348,7 @@ Media:Register("frames", "rareelite", "Interface\\AddOns\\EasyFrames\\Textures\\
 Media:Register("frames", "rare", "Interface\\AddOns\\EasyFrames\\Textures\\TargetingFrame\\UI-TargetingFrame-Rare")
 Media:Register("frames", "smalltarget", "Interface\\AddOns\\EasyFrames\\Textures\\TargetingFrame\\UI-SmallTargetingFramex")
 Media:Register("frames", "nomana", "Interface\\AddOns\\EasyFrames\\Textures\\TargetingFrame\\UI-SmallTargetingFramex-NoMana")
+Media:Register("frames", "boss", "Interface\\AddOns\\EasyFrames\\Textures\\TargetingFrame\\UI-UnitFrame-Boss")
 
 Media:Register("misc", "player-status", "Interface\\AddOns\\EasyFrames\\Textures\\TargetingFrame\\UI-Player-Status")
 
@@ -584,6 +589,16 @@ function EasyFrames.Utils.GetPartyFrames()
         PartyMemberFrame2,
         PartyMemberFrame3,
         PartyMemberFrame4
+    }
+end
+
+function EasyFrames.Utils.GetBossFrames()
+    return {
+        Boss1TargetFrame,
+        Boss2TargetFrame,
+        Boss3TargetFrame,
+        Boss4TargetFrame,
+        Boss5TargetFrame,
     }
 end
 
