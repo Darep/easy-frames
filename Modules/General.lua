@@ -282,7 +282,8 @@ function General:SetBrightFramesBorder(value)
         TargetFrameTextureFrameTexture, TargetFrameToTTextureFrameTexture,
         PetFrameTexture, FocusFrameTextureFrameTexture, FocusFrameToTTextureFrameTexture,
         PartyMemberFrame1Texture, PartyMemberFrame2Texture, PartyMemberFrame3Texture, PartyMemberFrame4Texture,
-        PartyMemberFrame1PetFrameTexture, PartyMemberFrame2PetFrameTexture, PartyMemberFrame3PetFrameTexture, PartyMemberFrame4PetFrameTexture
+        PartyMemberFrame1PetFrameTexture, PartyMemberFrame2PetFrameTexture, PartyMemberFrame3PetFrameTexture, PartyMemberFrame4PetFrameTexture,
+        Boss1TargetFrameTextureFrameTexture, Boss2TargetFrameTextureFrameTexture, Boss3TargetFrameTextureFrameTexture, Boss4TargetFrameTextureFrameTexture, Boss5TargetFrameTextureFrameTexture
     }) do
         t:SetVertexColor(value, value, value)
     end

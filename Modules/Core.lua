@@ -268,20 +268,13 @@ function Core:MoveBossFrameBars()
         frame.nameBackground:Hide()
 
         local healthBar = _G[frame:GetName() .. "HealthBar"]
-        --local manaBar = _G[frame:GetName() .. "ManaBar"]
-        --
+
         healthBar:SetHeight(27)
-        --print(healthBar.LeftText:GetPoint())
-        --
+
         Core:MoveRegion(healthBar, "TOPRIGHT", frame, "TOPRIGHT", -106, -25)
         Core:MoveRegion(healthBar.TextString, "CENTER", frame, "CENTER", -50, 12)
         Core:MoveRegion(healthBar.RightText, "RIGHT", frame, "RIGHT", -110, 12)
         Core:MoveRegion(healthBar.LeftText, "LEFT", frame, "LEFT", 8, 12)
-        --
-        --Core:MoveRegion(manaBar, "CENTER", frame, "CENTER", 16, -8)
-        --Core:MoveRegion(manaBar.TextString, "CENTER", manaBar, "CENTER", 0, 0)
-        --Core:MoveRegion(manaBar.RightText, "RIGHT", frame, "RIGHT", -12, -8)
-        --Core:MoveRegion(manaBar.LeftText, "LEFT", frame, "LEFT", 46, -8)
     end)
 end
 

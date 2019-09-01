@@ -23,6 +23,7 @@ local db
 
 local DEFAULT_BAR_FONT_FAMILY = "Friz Quadrata TT"
 local DEFAULT_BAR_FONT_SIZE = 10
+local DEFAULT_BAR_LARGE_FONT_SIZE = 11
 local DEFAULT_BAR_SMALL_FONT_SIZE = 9
 local DEFAULT_BAR_FONT_STYLE = "OUTLINE"
 
@@ -322,7 +323,32 @@ local defaults = {
         },
 
         boss = {
-            scaleFrame = 1.2,
+            scaleFrame = 0.9,
+            -- Custom HP format.
+            healthFormat = "2",
+            healthBarFontStyle = DEFAULT_BAR_FONT_STYLE,
+            healthBarFontFamily = DEFAULT_BAR_FONT_FAMILY,
+            healthBarFontSize = DEFAULT_BAR_LARGE_FONT_SIZE,
+            useHealthFormatFullValues = false,
+            customHealthFormatFormulas = DefaultCustomFormatFormulas(),
+            customHealthFormat = DEFAULT_CUSTOM_FORMAT,
+            useChineseNumeralsHealthFormat = false,
+            -- Custom mana format.
+            manaFormat = "2",
+            manaBarFontStyle = DEFAULT_BAR_FONT_STYLE,
+            manaBarFontFamily = DEFAULT_BAR_FONT_FAMILY,
+            manaBarFontSize = DEFAULT_BAR_LARGE_FONT_SIZE,
+            useManaFormatFullValues = false,
+            customManaFormatFormulas = DefaultCustomFormatFormulas(),
+            customManaFormat = DEFAULT_CUSTOM_FORMAT,
+            useChineseNumeralsManaFormat = false,
+            -- Name.
+            showName = true,
+            showNameInsideFrame = false,
+            bossNameFontFamily = DEFAULT_BAR_FONT_FAMILY,
+            bossNameFontSize = DEFAULT_BAR_FONT_SIZE,
+            bossNameFontStyle = "NONE",
+            bossNameColor = { unpack(DEFAULT_FRAMES_NAME_COLOR) },
         },
     }
 }
@@ -561,6 +587,11 @@ function EasyFrames.Utils.GetFramesHealthBar()
         PartyMemberFrame3HealthBar,
         PartyMemberFrame4HealthBar,
 
+        Boss1TargetFrameHealthBar,
+        Boss2TargetFrameHealthBar,
+        Boss3TargetFrameHealthBar,
+        Boss4TargetFrameHealthBar,
+        Boss5TargetFrameHealthBar,
     }
 end
 
@@ -588,7 +619,7 @@ function EasyFrames.Utils.GetPartyFrames()
         PartyMemberFrame1,
         PartyMemberFrame2,
         PartyMemberFrame3,
-        PartyMemberFrame4
+        PartyMemberFrame4,
     }
 end
 

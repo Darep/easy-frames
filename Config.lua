@@ -4295,14 +4295,14 @@ local bossOptions = {
                 healthFormat = {
                     type = "select",
                     order = 2,
-                    name = L["Party healthbar text format"],
-                    desc = L["Set the party healthbar text format"],
+                    name = L["Boss healthbar text format"],
+                    desc = L["Set the boss healthbar text format"],
                     values = healthFormat,
                     set = function(info, value)
                         setOpt(info, value)
-                        EasyFrames:GetModule("Party"):UpdateTextStringWithValues()
+                        EasyFrames:GetModule("Boss"):UpdateTextStringWithValues()
                     end,
-                    arg = "party"
+                    arg = "boss"
                 },
 
                 newLine = {
@@ -4319,9 +4319,9 @@ local bossOptions = {
                     values = fontStyle,
                     set = function(info, value)
                         setOpt(info, value)
-                        EasyFrames:GetModule("Party"):SetHealthBarsFont()
+                        EasyFrames:GetModule("Boss"):SetHealthBarsFont()
                     end,
-                    arg = "party"
+                    arg = "boss"
                 },
 
                 healthBarFontFamily = {
@@ -4333,9 +4333,9 @@ local bossOptions = {
                     values = Media:HashTable("font"),
                     set = function(info, value)
                         setOpt(info, value)
-                        EasyFrames:GetModule("Party"):SetHealthBarsFont()
+                        EasyFrames:GetModule("Boss"):SetHealthBarsFont()
                     end,
-                    arg = "party"
+                    arg = "boss"
                 },
 
                 healthBarFontSize = {
@@ -4348,22 +4348,22 @@ local bossOptions = {
                     step = 1,
                     set = function(info, value)
                         setOpt(info, value)
-                        EasyFrames:GetModule("Party"):SetHealthBarsFont()
+                        EasyFrames:GetModule("Boss"):SetHealthBarsFont()
                     end,
-                    arg = "party"
+                    arg = "boss"
                 },
 
                 manaFormat = {
                     type = "select",
                     order = 7,
-                    name = L["Party manabar text format"],
-                    desc = L["Set the party manabar text format"],
+                    name = L["Boss manabar text format"],
+                    desc = L["Set the boss manabar text format"],
                     values = manaFormat,
                     set = function(info, value)
                         setOpt(info, value)
-                        EasyFrames:GetModule("Party"):UpdateTextStringWithValues(PartyMemberFrame1ManaBar)
+                        EasyFrames:GetModule("Boss"):UpdateTextStringWithValues(Boss1TargetFrameManaBar)
                     end,
-                    arg = "party"
+                    arg = "boss"
                 },
 
                 newLine2 = {
@@ -4380,9 +4380,9 @@ local bossOptions = {
                     values = fontStyle,
                     set = function(info, value)
                         setOpt(info, value)
-                        EasyFrames:GetModule("Party"):SetManaBarsFont()
+                        EasyFrames:GetModule("Boss"):SetManaBarsFont()
                     end,
-                    arg = "party"
+                    arg = "boss"
                 },
 
                 manaBarFontFamily = {
@@ -4394,9 +4394,9 @@ local bossOptions = {
                     values = Media:HashTable("font"),
                     set = function(info, value)
                         setOpt(info, value)
-                        EasyFrames:GetModule("Party"):SetManaBarsFont()
+                        EasyFrames:GetModule("Boss"):SetManaBarsFont()
                     end,
-                    arg = "party"
+                    arg = "boss"
                 },
 
                 manaBarFontSize = {
@@ -4409,9 +4409,9 @@ local bossOptions = {
                     step = 1,
                     set = function(info, value)
                         setOpt(info, value)
-                        EasyFrames:GetModule("Party"):SetManaBarsFont()
+                        EasyFrames:GetModule("Boss"):SetManaBarsFont()
                     end,
-                    arg = "party"
+                    arg = "boss"
                 },
             },
         },
@@ -4422,7 +4422,7 @@ local bossOptions = {
             inline = true,
             name = "",
             hidden = function()
-                local healthFormat = EasyFrames.db.profile.party.healthFormat
+                local healthFormat = EasyFrames.db.profile.boss.healthFormat
                 if (healthFormat == "custom") then
                     return false
                 end
@@ -4454,7 +4454,7 @@ local bossOptions = {
                         local key = info[#info]
                         EasyFrames.db.profile[ns][opt][key] = value
 
-                        EasyFrames:GetModule("Party"):UpdateTextStringWithValues()
+                        EasyFrames:GetModule("Boss"):UpdateTextStringWithValues()
                     end,
                     args = {
                         gt1T = {
@@ -4466,7 +4466,7 @@ local bossOptions = {
                                     "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
                                     "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
 
-                            arg = "party.customHealthFormatFormulas"
+                            arg = "boss.customHealthFormatFormulas"
                         },
                         gt100T = {
                             type = "input",
@@ -4476,7 +4476,7 @@ local bossOptions = {
                                     "Description: for example formula is '%.fM'.\n" ..
                                     "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
                                     "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
-                            arg = "party.customHealthFormatFormulas"
+                            arg = "boss.customHealthFormatFormulas"
                         },
 
                         gt1M = {
@@ -4487,7 +4487,7 @@ local bossOptions = {
                                     "Description: for example formula is '%.fM'.\n" ..
                                     "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
                                     "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
-                            arg = "party.customHealthFormatFormulas"
+                            arg = "boss.customHealthFormatFormulas"
                         },
 
                         gt10M = {
@@ -4498,7 +4498,7 @@ local bossOptions = {
                                     "Description: for example formula is '%.fM'.\n" ..
                                     "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
                                     "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
-                            arg = "party.customHealthFormatFormulas"
+                            arg = "boss.customHealthFormatFormulas"
                         },
 
                         gt100M = {
@@ -4509,7 +4509,7 @@ local bossOptions = {
                                     "Description: for example formula is '%.fM'.\n" ..
                                     "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
                                     "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
-                            arg = "party.customHealthFormatFormulas"
+                            arg = "boss.customHealthFormatFormulas"
                         },
 
                         gt1B = {
@@ -4520,7 +4520,7 @@ local bossOptions = {
                                     "Description: for example formula is '%.fM'.\n" ..
                                     "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
                                     "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
-                            arg = "party.customHealthFormatFormulas"
+                            arg = "boss.customHealthFormatFormulas"
                         },
                     }
                 },
@@ -4531,10 +4531,10 @@ local bossOptions = {
                     name = L["Use full values of health"],
                     desc = L["By default all formulas use divider (for value eq 1000 and more it's 1000, for 1 000 000 and more it's 1 000 000, etc).\n\n" ..
                             "If checked formulas will use full values of HP (without divider)"],
-                    arg = "party",
+                    arg = "boss",
                     set = function(info, value)
                         setOpt(info, value)
-                        EasyFrames:GetModule("Party"):UpdateTextStringWithValues()
+                        EasyFrames:GetModule("Boss"):UpdateTextStringWithValues()
                     end,
                 },
 
@@ -4550,9 +4550,9 @@ local bossOptions = {
                             "All values are returned from formulas. For set abbreviation use formulas' fields"],
                     set = function(info, value)
                         setOpt(info, value)
-                        EasyFrames:GetModule("Party"):UpdateTextStringWithValues()
+                        EasyFrames:GetModule("Boss"):UpdateTextStringWithValues()
                     end,
-                    arg = "party"
+                    arg = "boss"
                 },
 
                 useChineseNumeralsHealthFormat = {
@@ -4572,9 +4572,9 @@ local bossOptions = {
                             "More information about Chinese numerals format you can read on project site"],
                     set = function(info, value)
                         setOpt(info, value)
-                        EasyFrames:GetModule("Party"):UpdateTextStringWithValues()
+                        EasyFrames:GetModule("Boss"):UpdateTextStringWithValues()
                     end,
-                    arg = "party",
+                    arg = "boss",
                 },
             }
         },
@@ -4585,7 +4585,7 @@ local bossOptions = {
             inline = true,
             name = "",
             hidden = function()
-                local manaFormat = EasyFrames.db.profile.party.manaFormat
+                local manaFormat = EasyFrames.db.profile.boss.manaFormat
                 if (manaFormat == "custom") then
                     return false
                 end
@@ -4617,7 +4617,7 @@ local bossOptions = {
                         local key = info[#info]
                         EasyFrames.db.profile[ns][opt][key] = value
 
-                        EasyFrames:GetModule("Party"):UpdateTextStringWithValues(PartyMemberFrame1ManaBar)
+                        EasyFrames:GetModule("Boss"):UpdateTextStringWithValues(Boss1TargetFrameManaBar)
                     end,
                     args = {
                         gt1T = {
@@ -4629,7 +4629,7 @@ local bossOptions = {
                                     "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
                                     "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
 
-                            arg = "party.customManaFormatFormulas"
+                            arg = "boss.customManaFormatFormulas"
                         },
                         gt100T = {
                             type = "input",
@@ -4639,7 +4639,7 @@ local bossOptions = {
                                     "Description: for example formula is '%.fM'.\n" ..
                                     "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
                                     "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
-                            arg = "party.customManaFormatFormulas"
+                            arg = "boss.customManaFormatFormulas"
                         },
 
                         gt1M = {
@@ -4650,7 +4650,7 @@ local bossOptions = {
                                     "Description: for example formula is '%.fM'.\n" ..
                                     "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
                                     "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
-                            arg = "party.customManaFormatFormulas"
+                            arg = "boss.customManaFormatFormulas"
                         },
 
                         gt10M = {
@@ -4661,7 +4661,7 @@ local bossOptions = {
                                     "Description: for example formula is '%.fM'.\n" ..
                                     "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
                                     "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
-                            arg = "party.customManaFormatFormulas"
+                            arg = "boss.customManaFormatFormulas"
                         },
 
                         gt100M = {
@@ -4672,7 +4672,7 @@ local bossOptions = {
                                     "Description: for example formula is '%.fM'.\n" ..
                                     "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
                                     "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
-                            arg = "party.customManaFormatFormulas"
+                            arg = "boss.customManaFormatFormulas"
                         },
 
                         gt1B = {
@@ -4683,7 +4683,7 @@ local bossOptions = {
                                     "Description: for example formula is '%.fM'.\n" ..
                                     "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
                                     "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
-                            arg = "party.customManaFormatFormulas"
+                            arg = "boss.customManaFormatFormulas"
                         },
                     }
                 },
@@ -4694,10 +4694,10 @@ local bossOptions = {
                     name = L["Use full values of mana"],
                     desc = L["By default all formulas use divider (for value eq 1000 and more it's 1000, for 1 000 000 and more it's 1 000 000, etc).\n\n" ..
                             "If checked formulas will use full values of mana (without divider)"],
-                    arg = "party",
+                    arg = "boss",
                     set = function(info, value)
                         setOpt(info, value)
-                        EasyFrames:GetModule("Party"):UpdateTextStringWithValues(PartyMemberFrame1ManaBar)
+                        EasyFrames:GetModule("Boss"):UpdateTextStringWithValues(Boss1TargetFrameManaBar)
                     end,
                 },
 
@@ -4713,9 +4713,9 @@ local bossOptions = {
                             "All values are returned from formulas. For set abbreviation use formulas' fields"],
                     set = function(info, value)
                         setOpt(info, value)
-                        EasyFrames:GetModule("Party"):UpdateTextStringWithValues(PartyMemberFrame1ManaBar)
+                        EasyFrames:GetModule("Boss"):UpdateTextStringWithValues(Boss1TargetFrameManaBar)
                     end,
-                    arg = "party"
+                    arg = "boss"
                 },
 
                 useChineseNumeralsManaFormat = {
@@ -4735,9 +4735,9 @@ local bossOptions = {
                             "More information about Chinese numerals format you can read on project site"],
                     set = function(info, value)
                         setOpt(info, value)
-                        EasyFrames:GetModule("Party"):UpdateTextStringWithValues(PartyMemberFrame1ManaBar)
+                        EasyFrames:GetModule("Boss"):UpdateTextStringWithValues(Boss1TargetFrameManaBar)
                     end,
-                    arg = "party",
+                    arg = "boss",
                 },
             }
         },
@@ -4751,19 +4751,37 @@ local bossOptions = {
                 header = {
                     type = "header",
                     order = 1,
-                    name = L["Party frames names"],
+                    name = L["Boss frames names"],
                 },
 
                 showName = {
                     type = "toggle",
                     order = 2,
-                    name = L["Show names of party frames"],
-                    desc = L["Show names of party frames"],
+                    name = L["Show names of boss frames"],
+                    desc = L["Show names of boss frames"],
                     set = function(info, value)
                         setOpt(info, value)
-                        EasyFrames:GetModule("Party"):ShowName(value)
+                        EasyFrames:GetModule("Boss"):ShowName(value)
                     end,
-                    arg = "party"
+                    arg = "boss"
+                },
+
+                showNameInsideFrame = {
+                    type = "toggle",
+                    order = 3,
+                    name = L["Show names of boss frames inside the frame"],
+                    desc = L["Show names of boss frames inside the frame"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Boss"):ShowNameInsideFrame(value)
+                    end,
+                    disabled = function()
+                        local diabled = EasyFrames.db.profile.boss.showName
+                        if (diabled == false) then
+                            return true
+                        end
+                    end,
+                    arg = "boss"
                 },
 
                 newLine = {
@@ -4772,88 +4790,88 @@ local bossOptions = {
                     name = "",
                 },
 
-                partyNameFontStyle = {
+                bossNameFontStyle = {
                     type = "select",
                     order = 5,
                     name = L["Font style"],
-                    desc = L["Party names font style"],
+                    desc = L["Boss names font style"],
                     values = fontStyle,
                     set = function(info, value)
                         setOpt(info, value)
-                        EasyFrames:GetModule("Party"):SetFrameNameFont()
+                        EasyFrames:GetModule("Boss"):SetFrameNameFont()
                     end,
                     disabled = function()
-                        local diabled = EasyFrames.db.profile.party.showName
+                        local diabled = EasyFrames.db.profile.boss.showName
                         if (diabled == false) then
                             return true
                         end
                     end,
-                    arg = "party"
+                    arg = "boss"
                 },
 
-                partyNameFontFamily = {
+                bossNameFontFamily = {
                     order = 6,
                     name = L["Font family"],
-                    desc = L["Party names font family"],
+                    desc = L["Boss names font family"],
                     type = "select",
                     dialogControl = 'LSM30_Font',
                     values = Media:HashTable("font"),
                     set = function(info, value)
                         setOpt(info, value)
-                        EasyFrames:GetModule("Party"):SetFrameNameFont()
+                        EasyFrames:GetModule("Boss"):SetFrameNameFont()
                     end,
                     disabled = function()
-                        local diabled = EasyFrames.db.profile.party.showName
+                        local diabled = EasyFrames.db.profile.boss.showName
                         if (diabled == false) then
                             return true
                         end
                     end,
-                    arg = "party"
+                    arg = "boss"
                 },
 
-                partyNameFontSize = {
+                bossNameFontSize = {
                     type = "range",
                     order = 7,
                     name = L["Font size"],
-                    desc = L["Party names font size"],
+                    desc = L["Boss names font size"],
                     min = MIN_RANGE,
                     max = MAX_RANGE,
                     step = 1,
                     set = function(info, value)
                         setOpt(info, value)
-                        EasyFrames:GetModule("Party"):SetFrameNameFont()
+                        EasyFrames:GetModule("Boss"):SetFrameNameFont()
                     end,
                     disabled = function()
-                        local diabled = EasyFrames.db.profile.party.showName
+                        local diabled = EasyFrames.db.profile.boss.showName
                         if (diabled == false) then
                             return true
                         end
                     end,
-                    arg = "party"
+                    arg = "boss"
                 },
 
-                partyNameColor = {
+                bossNameColor = {
                     type = "color",
                     order = 8,
                     width = "double",
-                    name = L["Party names color"],
+                    name = L["Boss names color"],
                     desc = L["Set the color of the frame name"],
                     get = getColor,
                     set = function(info, r, g, b)
                         setColor(info, r, g, b)
-                        EasyFrames:GetModule("Party"):SetFrameNameColor()
+                        EasyFrames:GetModule("Boss"):SetFrameNameColor()
                     end,
-                    arg = "party"
+                    arg = "boss"
                 },
 
-                partyNameColorReset = {
+                bossNameColorReset = {
                     type = "execute",
                     order = 9,
                     name = L["Reset color to default"],
 
                     func = function()
-                        EasyFrames:GetModule("Party"):ResetFrameNameColor()
-                        EasyFrames:GetModule("Party"):SetFrameNameColor()
+                        EasyFrames:GetModule("Boss"):ResetFrameNameColor()
+                        EasyFrames:GetModule("Boss"):SetFrameNameColor()
                     end,
                 },
             }
