@@ -62,7 +62,7 @@ function Boss:OnProfileChanged(newDB)
 end
 
 function Boss:SetScale(value)
-    BOSS_FRAME_CASTBAR_HEIGHT = (value * 16 + 10) / 0.7
+    BOSS_FRAME_CASTBAR_HEIGHT = (value * (16 + 10)) / 0.7
 
     BossIterator(function(frame)
         frame:SetScale(value)
