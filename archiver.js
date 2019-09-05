@@ -23,7 +23,7 @@ function deleteFolderRecursive(path) {
 }
 
 // create a file to stream archive data to.
-const output = fs.createWriteStream(`${__dirname}/easy-frames-${pjson.version}.zip`);
+const output = fs.createWriteStream(`${__dirname}/easy-frames-classic-${pjson.version}.zip`);
 const archive = archiver('zip');
 
 // listen for all archive data to be written

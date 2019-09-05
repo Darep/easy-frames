@@ -1,7 +1,7 @@
 --[[
     Appreciate what others people do. (c) Usoltsev
 
-    Copyright (c) <2016-2018>, Usoltsev <alexander.usolcev@gmail.com> All rights reserved.
+    Copyright (c) <2016-2019>, Usoltsev <alexander.usolcev@gmail.com> All rights reserved.
 
     Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
     Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
@@ -252,7 +252,7 @@ function General:SetFrameBarTexture(value)
         healthbar:SetStatusBarTexture(texture)
     end
 
-    PlayerFrameHealthBar.AnimatedLossBar:SetStatusBarTexture(texture) -- fix for blinking red texture
+    --PlayerFrameHealthBar.AnimatedLossBar:SetStatusBarTexture(texture) -- fix for blinking red texture
 
     for _, manabar in pairs(manaBars) do
         manabar:SetStatusBarTexture(texture)
@@ -280,7 +280,7 @@ function General:SetBrightFramesBorder(value)
     for _, t in pairs({
         PlayerFrameTexture, PlayerFrameAlternateManaBarBorder, PlayerFrameAlternateManaBarRightBorder, PlayerFrameAlternateManaBarLeftBorder,
         TargetFrameTextureFrameTexture, TargetFrameToTTextureFrameTexture,
-        PetFrameTexture, FocusFrameTextureFrameTexture, FocusFrameToTTextureFrameTexture,
+        PetFrameTexture,
         PartyMemberFrame1Texture, PartyMemberFrame2Texture, PartyMemberFrame3Texture, PartyMemberFrame4Texture,
         PartyMemberFrame1PetFrameTexture, PartyMemberFrame2PetFrameTexture, PartyMemberFrame3PetFrameTexture, PartyMemberFrame4PetFrameTexture,
         Boss1TargetFrameTextureFrameTexture, Boss2TargetFrameTextureFrameTexture, Boss3TargetFrameTextureFrameTexture, Boss4TargetFrameTextureFrameTexture, Boss5TargetFrameTextureFrameTexture
@@ -294,10 +294,9 @@ function General:SetTexture()
     PlayerFrameTexture:SetTexture(Media:Fetch("frames", "default"))
     PlayerStatusTexture:SetTexture(Media:Fetch("misc", "player-status"))
 
-    -- Target, Focus
+    -- Target
     local targetFrames = {
         TargetFrame,
-        FocusFrame,
     }
 
     for _, frame in pairs(targetFrames) do
@@ -344,7 +343,6 @@ function General:SetCustomBuffSize(value)
 
     local frames = {
         TargetFrame,
-        FocusFrame
     }
 
     for _, frame in pairs(frames) do
@@ -357,14 +355,6 @@ function General:SetCustomBuffSize(value)
         local caster
         local _
         local selfName = frame:GetName()
-
---        if (frame.unit == 'target') then
---            buffSize = DEFAULT_BUFF_SIZE * db.target.scaleFrame
---        end
-
---        if (frame.unit == 'focus') then
---            buffSize = DEFAULT_BUFF_SIZE * db.focus.scaleFrame
---        end
 
         for i = 1, MAX_TARGET_BUFFS do
             _, icon, _, _, _, _, caster = UnitBuff(frame.unit, i)
@@ -503,19 +493,16 @@ end
 
 function General:SetMaxBuffCount(value)
     TargetFrame.maxBuffs = value
-    FocusFrame.maxBuffs = value
 end
 
 function General:SetMaxDebuffCount(value)
     TargetFrame.maxDebuffs = value
-    FocusFrame.maxDebuffs = value
 end
 
 function General:SaveFramesPoints()
     db.general.framesPoints = {
         player = {PlayerFrame:GetPoint()},
         target = {TargetFrame:GetPoint()},
-        focus = {FocusFrame:GetPoint()},
     }
 end
 
@@ -524,7 +511,6 @@ function General:RestoreFramesPoints()
         for _, frame in pairs({
             PlayerFrame,
             TargetFrame,
-            FocusFrame
         }) do
             frame:ClearAllPoints()
             frame:SetPoint(unpack(db.general.framesPoints[frame.unit]))

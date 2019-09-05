@@ -1,7 +1,7 @@
 --[[
     Appreciate what others people do. (c) Usoltsev
 
-    Copyright (c) <2016-2018>, Usoltsev <alexander.usolcev@gmail.com> All rights reserved.
+    Copyright (c) <2016-2019>, Usoltsev <alexander.usolcev@gmail.com> All rights reserved.
 
     Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
     Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
@@ -38,11 +38,10 @@ function Party:OnEnable()
     self:ShowName(db.party.showName)
     self:SetFrameNameFont()
     self:SetFrameNameColor()
-    self:SetHealthBarsFont()
-    self:SetManaBarsFont()
---    self:ShowPetFrames(db.party.showPetFrames)
+    --self:SetHealthBarsFont()
+    --self:SetManaBarsFont()
 
-    self:SecureHook("TextStatusBar_UpdateTextStringWithValues", "UpdateTextStringWithValues")
+    --self:SecureHook("TextStatusBar_UpdateTextStringWithValues", "UpdateTextStringWithValues")
 end
 
 function Party:OnProfileChanged(newDB)
@@ -53,12 +52,11 @@ function Party:OnProfileChanged(newDB)
     self:ShowName(db.party.showName)
     self:SetFrameNameFont()
     self:SetFrameNameColor()
-    self:SetHealthBarsFont()
-    self:SetManaBarsFont()
---    self:ShowPetFrames(db.party.showPetFrames)
+    --self:SetHealthBarsFont()
+    --self:SetManaBarsFont()
 
-    self:UpdateTextStringWithValues()
-    self:UpdateTextStringWithValues(PartyMemberFrame1ManaBar)
+    --self:UpdateTextStringWithValues()
+    --self:UpdateTextStringWithValues(PartyMemberFrame1ManaBar)
 end
 
 function Party:SetScale(value)
@@ -67,31 +65,31 @@ function Party:SetScale(value)
     end)
 end
 
-function Party:UpdateTextStringWithValues(statusBar)
-    local frame = statusBar or PartyMemberFrame1HealthBar
-
-    if (frame.unit == "party1" or frame.unit == "party2" or frame.unit == "party3" or frame.unit == "party4") then
-        if (string.find(frame:GetName(), 'HealthBar')) then
-            UpdateHealthValues(
-                frame,
-                db.party.healthFormat,
-                db.party.customHealthFormat,
-                db.party.customHealthFormatFormulas,
-                db.party.useHealthFormatFullValues,
-                db.party.useChineseNumeralsHealthFormat
-            )
-        elseif (string.find(frame:GetName(), 'ManaBar')) then
-            UpdateManaValues(
-                frame,
-                db.party.manaFormat,
-                db.party.customManaFormat,
-                db.party.customManaFormatFormulas,
-                db.party.useManaFormatFullValues,
-                db.party.useChineseNumeralsManaFormat
-            )
-        end
-    end
-end
+--function Party:UpdateTextStringWithValues(statusBar)
+--    local frame = statusBar or PartyMemberFrame1HealthBar
+--
+--    if (frame.unit == "party1" or frame.unit == "party2" or frame.unit == "party3" or frame.unit == "party4") then
+--        if (string.find(frame:GetName(), 'HealthBar')) then
+--            UpdateHealthValues(
+--                frame,
+--                db.party.healthFormat,
+--                db.party.customHealthFormat,
+--                db.party.customHealthFormatFormulas,
+--                db.party.useHealthFormatFullValues,
+--                db.party.useChineseNumeralsHealthFormat
+--            )
+--        elseif (string.find(frame:GetName(), 'ManaBar')) then
+--            UpdateManaValues(
+--                frame,
+--                db.party.manaFormat,
+--                db.party.customManaFormat,
+--                db.party.customManaFormatFormulas,
+--                db.party.useManaFormatFullValues,
+--                db.party.useChineseNumeralsManaFormat
+--            )
+--        end
+--    end
+--end
 
 function Party:ShowName(value)
     PartyIterator(function(frame)
@@ -103,29 +101,29 @@ function Party:ShowName(value)
     end)
 end
 
-function Party:SetHealthBarsFont()
-    local fontSize = db.party.healthBarFontSize
-    local fontFamily = Media:Fetch("font", db.party.healthBarFontFamily)
-    local fontStyle = db.party.healthBarFontStyle
+--function Party:SetHealthBarsFont()
+--    local fontSize = db.party.healthBarFontSize
+--    local fontFamily = Media:Fetch("font", db.party.healthBarFontFamily)
+--    local fontStyle = db.party.healthBarFontStyle
+--
+--    PartyIterator(function(frame)
+--        local healthBar = _G[frame:GetName() .. "HealthBar"]
+--
+--        healthBar.TextString:SetFont(fontFamily, fontSize, fontStyle)
+--    end)
+--end
 
-    PartyIterator(function(frame)
-        local healthBar = _G[frame:GetName() .. "HealthBar"]
-
-        healthBar.TextString:SetFont(fontFamily, fontSize, fontStyle)
-    end)
-end
-
-function Party:SetManaBarsFont()
-    local fontSize = db.party.manaBarFontSize
-    local fontFamily = Media:Fetch("font", db.party.manaBarFontFamily)
-    local fontStyle = db.party.manaBarFontStyle
-
-    PartyIterator(function(frame)
-        local manaBar = _G[frame:GetName() .. "ManaBar"]
-
-        manaBar.TextString:SetFont(fontFamily, fontSize, fontStyle)
-    end)
-end
+--function Party:SetManaBarsFont()
+--    local fontSize = db.party.manaBarFontSize
+--    local fontFamily = Media:Fetch("font", db.party.manaBarFontFamily)
+--    local fontStyle = db.party.manaBarFontStyle
+--
+--    PartyIterator(function(frame)
+--        local manaBar = _G[frame:GetName() .. "ManaBar"]
+--
+--        manaBar.TextString:SetFont(fontFamily, fontSize, fontStyle)
+--    end)
+--end
 
 function Party:SetFrameNameFont()
     local fontFamily = Media:Fetch("font", db.party.partyNameFontFamily)

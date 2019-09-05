@@ -1,7 +1,7 @@
 --[[
     Appreciate what others people do. (c) Usoltsev
 
-    Copyright (c) <2016-2018>, Usoltsev <alexander.usolcev@gmail.com> All rights reserved.
+    Copyright (c) <2016-2019>, Usoltsev <alexander.usolcev@gmail.com> All rights reserved.
 
     Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
     Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
@@ -40,6 +40,8 @@ function Target:OnInitialize()
 end
 
 function Target:OnEnable()
+    self:CreateNumericFrame()
+
     self:SetScale(db.target.scaleFrame)
     self:ShowTargetFrameToT()
     self:ShowName(db.target.showName)
@@ -51,10 +53,10 @@ function Target:OnEnable()
     self:ReverseDirectionLosingHP(db.target.reverseDirectionLosingHP)
 
     self:ShowAttackBackground(db.target.showAttackBackground)
-    self:SetAttackBackgroundOpacity(db.target.attackBackgroundOpacity)
+    --self:SetAttackBackgroundOpacity(db.target.attackBackgroundOpacity)
     self:ShowPVPIcon(db.target.showPVPIcon)
 
-    self:SecureHook("TextStatusBar_UpdateTextStringWithValues", "UpdateTextStringWithValues")
+    self:SecureHook("TextStatusBar_UpdateTextString", "UpdateTextStringWithValues")
     self:SecureHook("UnitFramePortrait_Update", "MakeClassPortraits")
 end
 
@@ -74,13 +76,32 @@ function Target:OnProfileChanged(newDB)
     self:ReverseDirectionLosingHP(db.target.reverseDirectionLosingHP)
 
     self:ShowAttackBackground(db.target.showAttackBackground)
-    self:SetAttackBackgroundOpacity(db.target.attackBackgroundOpacity)
+    --self:SetAttackBackgroundOpacity(db.target.attackBackgroundOpacity)
     self:ShowPVPIcon(db.target.showPVPIcon)
 
     self:UpdateTextStringWithValues()
     self:UpdateTextStringWithValues(TargetFrameManaBar)
 end
 
+function Target:CreateNumericFrame()
+    local healthbarFrame = CreateFrame("Frame", nil, TargetFrame)
+    healthbarFrame:SetWidth(1)
+    healthbarFrame:SetHeight(27)
+    healthbarFrame:SetPoint("CENTER", TargetFrame, "CENTER", -51, 0)
+
+    TargetFrame.healthbar.TextString = healthbarFrame:CreateFontString(nil, "ARTWORK")
+    TargetFrame.healthbar.TextString:SetPoint("CENTER", 0, 0)
+    TargetFrame.healthbar.TextString:Show()
+
+    local manabarFrame = CreateFrame("Frame", nil, TargetFrame)
+    manabarFrame:SetWidth(1)
+    manabarFrame:SetHeight(27)
+    manabarFrame:SetPoint("CENTER", TargetFrame, "CENTER", -51, -8)
+
+    TargetFrameManaBar.TextString = manabarFrame:CreateFontString(nil, "ARTWORK")
+    TargetFrameManaBar.TextString:SetPoint("CENTER", 0, 0)
+    TargetFrameManaBar.TextString:Show()
+end
 
 function Target:SetScale(value)
     TargetFrame:SetScale(value)
@@ -170,7 +191,7 @@ function Target:SetHealthBarsFont()
     local fontFamily = Media:Fetch("font", db.target.healthBarFontFamily)
     local fontStyle = db.target.healthBarFontStyle
 
-    TargetFrameHealthBar.TextString:SetFont(fontFamily, fontSize, fontStyle)
+    TargetFrame.healthbar.TextString:SetFont(fontFamily, fontSize, fontStyle)
 end
 
 function Target:SetManaBarsFont()
@@ -222,9 +243,9 @@ function Target:ShowAttackBackground(value)
     end
 end
 
-function Target:SetAttackBackgroundOpacity(value)
-    TargetFrameFlash:SetAlpha(value)
-end
+--function Target:SetAttackBackgroundOpacity(value)
+--    TargetFrameFlash:SetAlpha(value)
+--end
 
 function Target:ShowPVPIcon(value)
     for _, frame in pairs({

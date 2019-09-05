@@ -1,7 +1,7 @@
 --[[
     Appreciate what others people do. (c) Usoltsev
 
-    Copyright (c) <2016-2018>, Usoltsev <alexander.usolcev@gmail.com> All rights reserved.
+    Copyright (c) <2016-2019>, Usoltsev <alexander.usolcev@gmail.com> All rights reserved.
 
     Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
     Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
@@ -95,7 +95,6 @@ local portrait = {
 local frames = {
     ["player"] = L["Player"],
     ["target"] = L["Target"],
-    ["focus"] = L["Focus"],
 }
 
 local MIN_RANGE = 6
@@ -186,24 +185,6 @@ local generalOptions = {
                             end,
                             arg = "general"
                         },
-
-                        --                hideOutOfCombatWithFullHP = {
-                        --                    type = "toggle",
-                        --                    order = 8,
-                        --                    name = L["Only if HP equal to 100%"],
-                        --                    desc = L["Hide frames out of combat only if HP equal to 100%"],
-                        --                    set = function(info, value)
-                        --                        setOpt(info, value)
-                        --                        EasyFrames:GetModule("General"):HideFramesOutOfCombat()
-                        --                    end,
-                        --                    disabled = function()
-                        --                        local diabled = EasyFrames.db.profile.general.hideOutOfCombat
-                        --                        if (diabled == false) then
-                        --                            return true
-                        --                        end
-                        --                    end,
-                        --                    arg = "general"
-                        --                },
 
                         hideOutOfCombatOpacity = {
                             type = "range",
@@ -1336,18 +1317,18 @@ local playerOptions = {
                     arg = "player"
                 },
 
-                showSpecialbar = {
-                    type = "toggle",
-                    order = 3,
-                    width = "double",
-                    name = L["Show player specialbar"],
-                    desc = L["Show or hide the player specialbar, like Paladin's holy power, Priest's orbs, Monk's harmony or Warlock's soul shards"],
-                    set = function(info, value)
-                        setOpt(info, value)
-                        EasyFrames:GetModule("Player"):ShowSpecialbar(value)
-                    end,
-                    arg = "player"
-                },
+                --showSpecialbar = {
+                --    type = "toggle",
+                --    order = 3,
+                --    width = "double",
+                --    name = L["Show player specialbar"],
+                --    desc = L["Show or hide the player specialbar, like Paladin's holy power, Priest's orbs, Monk's harmony or Warlock's soul shards"],
+                --    set = function(info, value)
+                --        setOpt(info, value)
+                --        EasyFrames:GetModule("Player"):ShowSpecialbar(value)
+                --    end,
+                --    arg = "player"
+                --},
 
                 showRestIcon = {
                     type = "toggle",
@@ -2190,731 +2171,6 @@ local targetOptions = {
     },
 }
 
-local focusOptions = {
-    name = getOptionName(L["Focus"]),
-    type = "group",
-    get = getOpt,
-    set = setOpt,
-    args = {
-        desc = {
-            type = "description",
-            order = 1,
-            name = L["In focus options you can set scale focus frame, healthbar text format, etc"],
-        },
-
-        scaleFrame = {
-            type = "range",
-            order = 2,
-            name = L["Focus frame scale"],
-            desc = L["Scale of focus unit frame"],
-            min = 0.5,
-            max = 2,
-            set = function(info, value)
-                setOpt(info, value)
-                EasyFrames:GetModule("Focus"):SetScale(value)
-            end,
-            arg = "focus"
-        },
-
-        portrait = {
-            type = "select",
-            order = 3,
-            name = L["Portrait"],
-            desc = L["Set the focus's portrait"],
-            values = portrait,
-            set = function(info, value)
-                setOpt(info, value)
-                EasyFrames:GetModule("Focus"):MakeClassPortraits(FocusFrame)
-            end,
-            arg = "focus"
-        },
-
-        HPManaFormatOptions = {
-            type = "group",
-            order = 4,
-            inline = true,
-            name = "",
-            args = {
-                header = {
-                    type = "header",
-                    order = 1,
-                    name = L["HP and MP bars"],
-                },
-
-                healthFormat = {
-                    type = "select",
-                    order = 2,
-                    name = L["Focus healthbar text format"],
-                    desc = L["Set the focus healthbar text format"],
-                    values = healthFormat,
-                    set = function(info, value)
-                        setOpt(info, value)
-                        EasyFrames:GetModule("Focus"):UpdateTextStringWithValues()
-                    end,
-                    arg = "focus"
-                },
-
-                newLine = {
-                    type = "description",
-                    order = 3,
-                    name = "",
-                },
-
-                healthBarFontStyle = {
-                    type = "select",
-                    order = 4,
-                    name = L["Font style"],
-                    desc = L["Healthbar font style"],
-                    values = fontStyle,
-                    set = function(info, value)
-                        setOpt(info, value)
-                        EasyFrames:GetModule("Focus"):SetHealthBarsFont()
-                    end,
-                    arg = "focus"
-                },
-
-                healthBarFontFamily = {
-                    order = 5,
-                    name = L["Font family"],
-                    desc = L["Healthbar font family"],
-                    type = "select",
-                    dialogControl = 'LSM30_Font',
-                    values = Media:HashTable("font"),
-                    set = function(info, value)
-                        setOpt(info, value)
-                        EasyFrames:GetModule("Focus"):SetHealthBarsFont()
-                    end,
-                    arg = "focus"
-                },
-
-                healthBarFontSize = {
-                    type = "range",
-                    order = 6,
-                    name = L["Font size"],
-                    desc = L["Healthbar font size"],
-                    min = MIN_RANGE,
-                    max = MAX_RANGE,
-                    step = 1,
-                    set = function(info, value)
-                        setOpt(info, value)
-                        EasyFrames:GetModule("Focus"):SetHealthBarsFont()
-                    end,
-                    arg = "focus"
-                },
-
-                manaFormat = {
-                    type = "select",
-                    order = 7,
-                    name = L["Focus manabar text format"],
-                    desc = L["Set the focus manabar text format"],
-                    values = manaFormat,
-                    set = function(info, value)
-                        setOpt(info, value)
-                        EasyFrames:GetModule("Focus"):UpdateTextStringWithValues(FocusFrameManaBar)
-                    end,
-                    arg = "focus"
-                },
-
-                newLine2 = {
-                    type = "description",
-                    order = 8,
-                    name = "",
-                },
-
-                manaBarFontStyle = {
-                    type = "select",
-                    order = 9,
-                    name = L["Font style"],
-                    desc = L["Manabar font style"],
-                    values = fontStyle,
-                    set = function(info, value)
-                        setOpt(info, value)
-                        EasyFrames:GetModule("Focus"):SetManaBarsFont()
-                    end,
-                    arg = "focus"
-                },
-
-                manaBarFontFamily = {
-                    order = 10,
-                    name = L["Font family"],
-                    desc = L["Manabar font family"],
-                    type = "select",
-                    dialogControl = 'LSM30_Font',
-                    values = Media:HashTable("font"),
-                    set = function(info, value)
-                        setOpt(info, value)
-                        EasyFrames:GetModule("Focus"):SetManaBarsFont()
-                    end,
-                    arg = "focus"
-                },
-
-                manaBarFontSize = {
-                    type = "range",
-                    order = 11,
-                    name = L["Font size"],
-                    desc = L["Manabar font size"],
-                    min = MIN_RANGE,
-                    max = MAX_RANGE,
-                    step = 1,
-                    set = function(info, value)
-                        setOpt(info, value)
-                        EasyFrames:GetModule("Focus"):SetManaBarsFont()
-                    end,
-                    arg = "focus"
-                },
-
-                reverseDirectionLosingHP = {
-                    type = "toggle",
-                    order = 12,
-                    width = "double",
-                    name = L["Reverse the direction of losing health/mana"],
-                    desc = L["By default direction starting from right to left. If checked direction of losing health/mana will be from left to right"],
-                    set = function(info, value)
-                        setOpt(info, value)
-                        EasyFrames:GetModule("Focus"):ReverseDirectionLosingHP(value)
-                    end,
-                    arg = "focus"
-                },
-            },
-        },
-
-        HPFormat = {
-            type = "group",
-            order = 5,
-            inline = true,
-            name = "",
-            hidden = function()
-                local healthFormat = EasyFrames.db.profile.focus.healthFormat
-                if (healthFormat == "custom") then
-                    return false
-                end
-
-                return true
-            end,
-            args = {
-                header = {
-                    type = "header",
-                    order = 1,
-                    name = L["Custom format of HP"],
-                },
-
-                desc = {
-                    type = "description",
-                    order = 2,
-                    name = L["You can set custom HP format. More information about custom HP format you can read on project site.\n\n" ..
-                            "Formulas:"],
-                },
-
-                customHealthFormatFormulas = {
-                    type = "group",
-                    order = 3,
-                    inline = true,
-                    name = "",
-                    get = getDeepOpt,
-                    set = function(info, value)
-                        local ns, opt = string.split(".", info.arg)
-                        local key = info[#info]
-                        EasyFrames.db.profile[ns][opt][key] = value
-
-                        EasyFrames:GetModule("Focus"):UpdateTextStringWithValues()
-                    end,
-                    args = {
-                        gt1T = {
-                            type = "input",
-                            order = 1,
-                            name = L["Value greater than 1000"],
-                            desc = L["Formula converts the original value to the specified value.\n\n" ..
-                                    "Description: for example formula is '%.fM'.\n" ..
-                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
-                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
-
-                            arg = "focus.customHealthFormatFormulas"
-                        },
-                        gt100T = {
-                            type = "input",
-                            order = 2,
-                            name = L["Value greater than 100 000"],
-                            desc = L["Formula converts the original value to the specified value.\n\n" ..
-                                    "Description: for example formula is '%.fM'.\n" ..
-                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
-                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
-                            arg = "focus.customHealthFormatFormulas"
-                        },
-
-                        gt1M = {
-                            type = "input",
-                            order = 3,
-                            name = L["Value greater than 1 000 000"],
-                            desc = L["Formula converts the original value to the specified value.\n\n" ..
-                                    "Description: for example formula is '%.fM'.\n" ..
-                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
-                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
-                            arg = "focus.customHealthFormatFormulas"
-                        },
-
-                        gt10M = {
-                            type = "input",
-                            order = 4,
-                            name = L["Value greater than 10 000 000"],
-                            desc = L["Formula converts the original value to the specified value.\n\n" ..
-                                    "Description: for example formula is '%.fM'.\n" ..
-                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
-                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
-                            arg = "focus.customHealthFormatFormulas"
-                        },
-
-                        gt100M = {
-                            type = "input",
-                            order = 5,
-                            name = L["Value greater than 100 000 000"],
-                            desc = L["Formula converts the original value to the specified value.\n\n" ..
-                                    "Description: for example formula is '%.fM'.\n" ..
-                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
-                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
-                            arg = "focus.customHealthFormatFormulas"
-                        },
-
-                        gt1B = {
-                            type = "input",
-                            order = 6,
-                            name = L["Value greater than 1 000 000 000"],
-                            desc = L["Formula converts the original value to the specified value.\n\n" ..
-                                    "Description: for example formula is '%.fM'.\n" ..
-                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
-                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
-                            arg = "focus.customHealthFormatFormulas"
-                        },
-                    }
-                },
-
-                useHealthFormatFullValues = {
-                    type = "toggle",
-                    order = 4,
-                    name = L["Use full values of health"],
-                    desc = L["By default all formulas use divider (for value eq 1000 and more it's 1000, for 1 000 000 and more it's 1 000 000, etc).\n\n" ..
-                            "If checked formulas will use full values of HP (without divider)"],
-                    arg = "focus",
-                    set = function(info, value)
-                        setOpt(info, value)
-                        EasyFrames:GetModule("Focus"):UpdateTextStringWithValues()
-                    end,
-                },
-
-                customHealthFormat = {
-                    type = "input",
-                    order = 5,
-                    width = "double",
-                    name = L["Displayed HP by pattern"],
-                    desc = L["You can use patterns:\n\n" ..
-                            "%CURRENT% - return current health\n" ..
-                            "%MAX% - return maximum of health\n" ..
-                            "%PERCENT% - return percent of current/max health\n\n" ..
-                            "All values are returned from formulas. For set abbreviation use formulas' fields"],
-                    set = function(info, value)
-                        setOpt(info, value)
-                        EasyFrames:GetModule("Focus"):UpdateTextStringWithValues()
-                    end,
-                    arg = "focus"
-                },
-
-                useChineseNumeralsHealthFormat = {
-                    type = "toggle",
-                    order = 6,
-                    name = L["Use Chinese numerals format"],
-                    desc = L["By default all formulas use divider (for value eq 1000 and more is 1000, for 1 000 000 and more is 1 000 000, etc).\n" ..
-                        "But with this option divider eq 10 000 and 100 000 000.\n\n" ..
-                        "The description of the formulas remains the same, so the description of the formulas is not correct with this parameter, but the formulas work correctly.\n\n" ..
-                        "Use these formulas for Chinese numerals:\n" ..
-                        "Value greater than 1000 -> '%.2f万', and '%.2f萬' for zhTW.\n" ..
-                        "Value greater than 100 000 -> '%.1f万', and '%.1f萬' for zhTW.\n" ..
-                        "Value greater than 1 000 000 -> '%.1f万', and '%.1f萬' for zhTW.\n" ..
-                        "Value greater than 10 000 000 -> '%.0f万', and '%.0f萬' for zhTW.\n" ..
-                        "Value greater than 100 000 000 -> '%.2f亿', and '%.2f億' for zhTW.\n" ..
-                        "Value greater than 1 000 000 000 -> '%.2f亿', and '%.2f億' for zhTW.\n\n" ..
-                        "More information about Chinese numerals format you can read on project site"],
-                    set = function(info, value)
-                        setOpt(info, value)
-                        EasyFrames:GetModule("Focus"):UpdateTextStringWithValues()
-                    end,
-                    arg = "focus",
-                },
-            }
-        },
-
-        manaFormat = {
-            type = "group",
-            order = 6,
-            inline = true,
-            name = "",
-            hidden = function()
-                local manaFormat = EasyFrames.db.profile.focus.manaFormat
-                if (manaFormat == "custom") then
-                    return false
-                end
-
-                return true
-            end,
-            args = {
-                header = {
-                    type = "header",
-                    order = 1,
-                    name = L["Custom format of mana"],
-                },
-
-                desc = {
-                    type = "description",
-                    order = 2,
-                    name = L["You can set custom mana format. More information about custom mana format you can read on project site.\n\n" ..
-                            "Formulas:"],
-                },
-
-                customManaFormatFormulas = {
-                    type = "group",
-                    order = 3,
-                    inline = true,
-                    name = "",
-                    get = getDeepOpt,
-                    set = function(info, value)
-                        local ns, opt = string.split(".", info.arg)
-                        local key = info[#info]
-                        EasyFrames.db.profile[ns][opt][key] = value
-
-                        EasyFrames:GetModule("Focus"):UpdateTextStringWithValues(FocusFrameManaBar)
-                    end,
-                    args = {
-                        gt1T = {
-                            type = "input",
-                            order = 1,
-                            name = L["Value greater than 1000"],
-                            desc = L["Formula converts the original value to the specified value.\n\n" ..
-                                    "Description: for example formula is '%.fM'.\n" ..
-                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
-                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
-
-                            arg = "focus.customManaFormatFormulas"
-                        },
-                        gt100T = {
-                            type = "input",
-                            order = 2,
-                            name = L["Value greater than 100 000"],
-                            desc = L["Formula converts the original value to the specified value.\n\n" ..
-                                    "Description: for example formula is '%.fM'.\n" ..
-                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
-                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
-                            arg = "focus.customManaFormatFormulas"
-                        },
-
-                        gt1M = {
-                            type = "input",
-                            order = 3,
-                            name = L["Value greater than 1 000 000"],
-                            desc = L["Formula converts the original value to the specified value.\n\n" ..
-                                    "Description: for example formula is '%.fM'.\n" ..
-                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
-                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
-                            arg = "focus.customManaFormatFormulas"
-                        },
-
-                        gt10M = {
-                            type = "input",
-                            order = 4,
-                            name = L["Value greater than 10 000 000"],
-                            desc = L["Formula converts the original value to the specified value.\n\n" ..
-                                    "Description: for example formula is '%.fM'.\n" ..
-                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
-                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
-                            arg = "focus.customManaFormatFormulas"
-                        },
-
-                        gt100M = {
-                            type = "input",
-                            order = 5,
-                            name = L["Value greater than 100 000 000"],
-                            desc = L["Formula converts the original value to the specified value.\n\n" ..
-                                    "Description: for example formula is '%.fM'.\n" ..
-                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
-                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
-                            arg = "focus.customManaFormatFormulas"
-                        },
-
-                        gt1B = {
-                            type = "input",
-                            order = 6,
-                            name = L["Value greater than 1 000 000 000"],
-                            desc = L["Formula converts the original value to the specified value.\n\n" ..
-                                    "Description: for example formula is '%.fM'.\n" ..
-                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
-                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
-                            arg = "focus.customManaFormatFormulas"
-                        },
-                    }
-                },
-
-                useManaFormatFullValues = {
-                    type = "toggle",
-                    order = 4,
-                    name = L["Use full values of mana"],
-                    desc = L["By default all formulas use divider (for value eq 1000 and more it's 1000, for 1 000 000 and more it's 1 000 000, etc).\n\n" ..
-                            "If checked formulas will use full values of mana (without divider)"],
-                    arg = "focus",
-                    set = function(info, value)
-                        setOpt(info, value)
-                        EasyFrames:GetModule("Focus"):UpdateTextStringWithValues(FocusFrameManaBar)
-                    end,
-                },
-
-                customManaFormat = {
-                    type = "input",
-                    order = 5,
-                    width = "double",
-                    name = L["Displayed mana by pattern"],
-                    desc = L["You can use patterns:\n\n" ..
-                            "%CURRENT% - return current mana\n" ..
-                            "%MAX% - return maximum of mana\n" ..
-                            "%PERCENT% - return percent of current/max mana\n\n" ..
-                            "All values are returned from formulas. For set abbreviation use formulas' fields"],
-                    set = function(info, value)
-                        setOpt(info, value)
-                        EasyFrames:GetModule("Focus"):UpdateTextStringWithValues(FocusFrameManaBar)
-                    end,
-                    arg = "focus"
-                },
-
-                useChineseNumeralsManaFormat = {
-                    type = "toggle",
-                    order = 6,
-                    name = L["Use Chinese numerals format"],
-                    desc = L["By default all formulas use divider (for value eq 1000 and more is 1000, for 1 000 000 and more is 1 000 000, etc).\n" ..
-                        "But with this option divider eq 10 000 and 100 000 000.\n\n" ..
-                        "The description of the formulas remains the same, so the description of the formulas is not correct with this parameter, but the formulas work correctly.\n\n" ..
-                        "Use these formulas for Chinese numerals:\n" ..
-                        "Value greater than 1000 -> '%.2f万', and '%.2f萬' for zhTW.\n" ..
-                        "Value greater than 100 000 -> '%.1f万', and '%.1f萬' for zhTW.\n" ..
-                        "Value greater than 1 000 000 -> '%.1f万', and '%.1f萬' for zhTW.\n" ..
-                        "Value greater than 10 000 000 -> '%.0f万', and '%.0f萬' for zhTW.\n" ..
-                        "Value greater than 100 000 000 -> '%.2f亿', and '%.2f億' for zhTW.\n" ..
-                        "Value greater than 1 000 000 000 -> '%.2f亿', and '%.2f億' for zhTW.\n\n" ..
-                        "More information about Chinese numerals format you can read on project site"],
-                    set = function(info, value)
-                        setOpt(info, value)
-                        EasyFrames:GetModule("Focus"):UpdateTextStringWithValues(FocusFrameManaBar)
-                    end,
-                    arg = "focus",
-                },
-            }
-        },
-
-        frameName = {
-            type = "group",
-            order = 7,
-            inline = true,
-            name = "",
-            args = {
-                header = {
-                    type = "header",
-                    order = 1,
-                    name = L["Focus name"],
-                },
-
-                showName = {
-                    type = "toggle",
-                    order = 2,
-                    name = L["Show name of focus frame"],
-                    desc = L["Show name of focus frame"],
-                    set = function(info, value)
-                        setOpt(info, value)
-                        EasyFrames:GetModule("Focus"):ShowName(value)
-                    end,
-                    arg = "focus"
-                },
-
-                showNameInsideFrame = {
-                    type = "toggle",
-                    order = 3,
-                    name = L["Show name of focus frame inside the frame"],
-                    desc = L["Show name of focus frame inside the frame"],
-                    set = function(info, value)
-                        setOpt(info, value)
-                        EasyFrames:GetModule("Focus"):ShowNameInsideFrame(value)
-                    end,
-                    disabled = function()
-                        local diabled = EasyFrames.db.profile.focus.showName
-                        if (diabled == false) then
-                            return true
-                        end
-                    end,
-                    arg = "focus"
-                },
-
-                newLine = {
-                    type = "description",
-                    order = 4,
-                    name = "",
-                },
-
-                focusNameFontStyle = {
-                    type = "select",
-                    order = 5,
-                    name = L["Font style"],
-                    desc = L["Focus name font style"],
-                    values = fontStyle,
-                    set = function(info, value)
-                        setOpt(info, value)
-                        EasyFrames:GetModule("Focus"):SetFrameNameFont()
-                    end,
-                    disabled = function()
-                        local diabled = EasyFrames.db.profile.focus.showName
-                        if (diabled == false) then
-                            return true
-                        end
-                    end,
-                    arg = "focus"
-                },
-
-                focusNameFontFamily = {
-                    order = 6,
-                    name = L["Font family"],
-                    desc = L["Focus name font family"],
-                    type = "select",
-                    dialogControl = 'LSM30_Font',
-                    values = Media:HashTable("font"),
-                    set = function(info, value)
-                        setOpt(info, value)
-                        EasyFrames:GetModule("Focus"):SetFrameNameFont()
-                    end,
-                    disabled = function()
-                        local diabled = EasyFrames.db.profile.focus.showName
-                        if (diabled == false) then
-                            return true
-                        end
-                    end,
-                    arg = "focus"
-                },
-
-                focusNameFontSize = {
-                    type = "range",
-                    order = 7,
-                    name = L["Font size"],
-                    desc = L["Focus name font size"],
-                    min = MIN_RANGE,
-                    max = MAX_RANGE,
-                    step = 1,
-                    set = function(info, value)
-                        setOpt(info, value)
-                        EasyFrames:GetModule("Focus"):SetFrameNameFont()
-                    end,
-                    disabled = function()
-                        local diabled = EasyFrames.db.profile.focus.showName
-                        if (diabled == false) then
-                            return true
-                        end
-                    end,
-                    arg = "focus"
-                },
-
-                focusNameColor = {
-                    type = "color",
-                    order = 8,
-                    width = "double",
-                    name = L["Focus name color"],
-                    desc = L["Set the color of the frame name"],
-                    get = getColor,
-                    set = function(info, r, g, b)
-                        setColor(info, r, g, b)
-                        EasyFrames:GetModule("Focus"):SetFrameNameColor()
-                    end,
-                    arg = "focus"
-                },
-
-                focusNameColorReset = {
-                    type = "execute",
-                    order = 9,
-                    name = L["Reset color to default"],
-
-                    func = function()
-                        EasyFrames:GetModule("Focus"):ResetFrameNameColor()
-                        EasyFrames:GetModule("Focus"):SetFrameNameColor()
-                    end,
-                },
-            }
-        },
-
-        showHideElements = {
-            type = "group",
-            order = 8,
-            inline = true,
-            name = "",
-            args = {
-                header = {
-                    type = "header",
-                    order = 1,
-                    name = L["Show or hide some elements of frame"],
-                },
-
-                showToTFrame = {
-                    type = "toggle",
-                    order = 2,
-                    width = "double",
-                    name = L["Show target of focus frame"],
-                    desc = L["Show target of focus frame"],
-                    set = function(info, value)
-                        setOpt(info, value)
-                        EasyFrames:GetModule("Focus"):ShowFocusFrameToT()
-                    end,
-                    arg = "focus"
-                },
-
-                showAttackBackground = {
-                    type = "toggle",
-                    order = 3,
-                    width = "double",
-                    name = L["Show focus combat texture (outside the frame)"],
-                    desc = L["Show or hide focus red background texture (blinking red glow outside the frame in combat)"],
-                    set = function(info, value)
-                        setOpt(info, value)
-                        EasyFrames:GetModule("Focus"):ShowAttackBackground(value)
-                    end,
-                    arg = "focus"
-                },
-
-                attackBackgroundOpacity = {
-                    type = "range",
-                    order = 4,
-                    name = L["Opacity"],
-                    desc = L["Opacity of combat texture"],
-                    min = 0.1,
-                    max = 1,
-                    set = function(info, value)
-                        setOpt(info, value)
-                        EasyFrames:GetModule("Focus"):SetAttackBackgroundOpacity(value)
-                    end,
-                    disabled = function()
-                        local diabled = EasyFrames.db.profile.focus.showAttackBackground
-                        if (diabled == false) then
-                            return true
-                        end
-                    end,
-                    isPercent = true,
-                    arg = "focus"
-                },
-
-                showPVPIcon = {
-                    type = "toggle",
-                    order = 5,
-                    width = "double",
-                    name = L["Show focus PVP icon"],
-                    desc = L["Show or hide focus PVP icon"],
-                    set = function(info, value)
-                        setOpt(info, value)
-                        EasyFrames:GetModule("Focus"):ShowPVPIcon(value)
-                    end,
-                    arg = "focus"
-                },
-            },
-        },
-    },
-}
-
 local petOptions = {
     name = getOptionName(L["Pet"]),
     type = "group",
@@ -3644,467 +2900,467 @@ local partyOptions = {
             arg = "party"
         },
 
-        HPManaFormatOptions = {
-            type = "group",
-            order = 3,
-            inline = true,
-            name = "",
-            args = {
-                header = {
-                    type = "header",
-                    order = 1,
-                    name = L["HP and MP bars"],
-                },
-
-                healthFormat = {
-                    type = "select",
-                    order = 2,
-                    name = L["Party healthbar text format"],
-                    desc = L["Set the party healthbar text format"],
-                    values = healthFormat,
-                    set = function(info, value)
-                        setOpt(info, value)
-                        EasyFrames:GetModule("Party"):UpdateTextStringWithValues()
-                    end,
-                    arg = "party"
-                },
-
-                newLine = {
-                    type = "description",
-                    order = 3,
-                    name = "",
-                },
-
-                healthBarFontStyle = {
-                    type = "select",
-                    order = 4,
-                    name = L["Font style"],
-                    desc = L["Healthbar font style"],
-                    values = fontStyle,
-                    set = function(info, value)
-                        setOpt(info, value)
-                        EasyFrames:GetModule("Party"):SetHealthBarsFont()
-                    end,
-                    arg = "party"
-                },
-
-                healthBarFontFamily = {
-                    order = 5,
-                    name = L["Font family"],
-                    desc = L["Healthbar font family"],
-                    type = "select",
-                    dialogControl = 'LSM30_Font',
-                    values = Media:HashTable("font"),
-                    set = function(info, value)
-                        setOpt(info, value)
-                        EasyFrames:GetModule("Party"):SetHealthBarsFont()
-                    end,
-                    arg = "party"
-                },
-
-                healthBarFontSize = {
-                    type = "range",
-                    order = 6,
-                    name = L["Font size"],
-                    desc = L["Healthbar font size"],
-                    min = MIN_RANGE,
-                    max = MAX_RANGE,
-                    step = 1,
-                    set = function(info, value)
-                        setOpt(info, value)
-                        EasyFrames:GetModule("Party"):SetHealthBarsFont()
-                    end,
-                    arg = "party"
-                },
-
-                manaFormat = {
-                    type = "select",
-                    order = 7,
-                    name = L["Party manabar text format"],
-                    desc = L["Set the party manabar text format"],
-                    values = manaFormat,
-                    set = function(info, value)
-                        setOpt(info, value)
-                        EasyFrames:GetModule("Party"):UpdateTextStringWithValues(PartyMemberFrame1ManaBar)
-                    end,
-                    arg = "party"
-                },
-
-                newLine2 = {
-                    type = "description",
-                    order = 8,
-                    name = "",
-                },
-
-                manaBarFontStyle = {
-                    type = "select",
-                    order = 9,
-                    name = L["Font style"],
-                    desc = L["Manabar font style"],
-                    values = fontStyle,
-                    set = function(info, value)
-                        setOpt(info, value)
-                        EasyFrames:GetModule("Party"):SetManaBarsFont()
-                    end,
-                    arg = "party"
-                },
-
-                manaBarFontFamily = {
-                    order = 10,
-                    name = L["Font family"],
-                    desc = L["Manabar font family"],
-                    type = "select",
-                    dialogControl = 'LSM30_Font',
-                    values = Media:HashTable("font"),
-                    set = function(info, value)
-                        setOpt(info, value)
-                        EasyFrames:GetModule("Party"):SetManaBarsFont()
-                    end,
-                    arg = "party"
-                },
-
-                manaBarFontSize = {
-                    type = "range",
-                    order = 11,
-                    name = L["Font size"],
-                    desc = L["Manabar font size"],
-                    min = MIN_RANGE,
-                    max = MAX_RANGE,
-                    step = 1,
-                    set = function(info, value)
-                        setOpt(info, value)
-                        EasyFrames:GetModule("Party"):SetManaBarsFont()
-                    end,
-                    arg = "party"
-                },
-            },
-        },
-
-        HPFormat = {
-            type = "group",
-            order = 4,
-            inline = true,
-            name = "",
-            hidden = function()
-                local healthFormat = EasyFrames.db.profile.party.healthFormat
-                if (healthFormat == "custom") then
-                    return false
-                end
-
-                return true
-            end,
-            args = {
-                header = {
-                    type = "header",
-                    order = 1,
-                    name = L["Custom format of HP"],
-                },
-
-                desc = {
-                    type = "description",
-                    order = 2,
-                    name = L["You can set custom HP format. More information about custom HP format you can read on project site.\n\n" ..
-                            "Formulas:"],
-                },
-
-                customHealthFormatFormulas = {
-                    type = "group",
-                    order = 3,
-                    inline = true,
-                    name = "",
-                    get = getDeepOpt,
-                    set = function(info, value)
-                        local ns, opt = string.split(".", info.arg)
-                        local key = info[#info]
-                        EasyFrames.db.profile[ns][opt][key] = value
-
-                        EasyFrames:GetModule("Party"):UpdateTextStringWithValues()
-                    end,
-                    args = {
-                        gt1T = {
-                            type = "input",
-                            order = 1,
-                            name = L["Value greater than 1000"],
-                            desc = L["Formula converts the original value to the specified value.\n\n" ..
-                                    "Description: for example formula is '%.fM'.\n" ..
-                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
-                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
-
-                            arg = "party.customHealthFormatFormulas"
-                        },
-                        gt100T = {
-                            type = "input",
-                            order = 2,
-                            name = L["Value greater than 100 000"],
-                            desc = L["Formula converts the original value to the specified value.\n\n" ..
-                                    "Description: for example formula is '%.fM'.\n" ..
-                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
-                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
-                            arg = "party.customHealthFormatFormulas"
-                        },
-
-                        gt1M = {
-                            type = "input",
-                            order = 3,
-                            name = L["Value greater than 1 000 000"],
-                            desc = L["Formula converts the original value to the specified value.\n\n" ..
-                                    "Description: for example formula is '%.fM'.\n" ..
-                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
-                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
-                            arg = "party.customHealthFormatFormulas"
-                        },
-
-                        gt10M = {
-                            type = "input",
-                            order = 4,
-                            name = L["Value greater than 10 000 000"],
-                            desc = L["Formula converts the original value to the specified value.\n\n" ..
-                                    "Description: for example formula is '%.fM'.\n" ..
-                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
-                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
-                            arg = "party.customHealthFormatFormulas"
-                        },
-
-                        gt100M = {
-                            type = "input",
-                            order = 5,
-                            name = L["Value greater than 100 000 000"],
-                            desc = L["Formula converts the original value to the specified value.\n\n" ..
-                                    "Description: for example formula is '%.fM'.\n" ..
-                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
-                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
-                            arg = "party.customHealthFormatFormulas"
-                        },
-
-                        gt1B = {
-                            type = "input",
-                            order = 6,
-                            name = L["Value greater than 1 000 000 000"],
-                            desc = L["Formula converts the original value to the specified value.\n\n" ..
-                                    "Description: for example formula is '%.fM'.\n" ..
-                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
-                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
-                            arg = "party.customHealthFormatFormulas"
-                        },
-                    }
-                },
-
-                useHealthFormatFullValues = {
-                    type = "toggle",
-                    order = 4,
-                    name = L["Use full values of health"],
-                    desc = L["By default all formulas use divider (for value eq 1000 and more it's 1000, for 1 000 000 and more it's 1 000 000, etc).\n\n" ..
-                            "If checked formulas will use full values of HP (without divider)"],
-                    arg = "party",
-                    set = function(info, value)
-                        setOpt(info, value)
-                        EasyFrames:GetModule("Party"):UpdateTextStringWithValues()
-                    end,
-                },
-
-                customHealthFormat = {
-                    type = "input",
-                    order = 5,
-                    width = "double",
-                    name = L["Displayed HP by pattern"],
-                    desc = L["You can use patterns:\n\n" ..
-                            "%CURRENT% - return current health\n" ..
-                            "%MAX% - return maximum of health\n" ..
-                            "%PERCENT% - return percent of current/max health\n\n" ..
-                            "All values are returned from formulas. For set abbreviation use formulas' fields"],
-                    set = function(info, value)
-                        setOpt(info, value)
-                        EasyFrames:GetModule("Party"):UpdateTextStringWithValues()
-                    end,
-                    arg = "party"
-                },
-
-                useChineseNumeralsHealthFormat = {
-                    type = "toggle",
-                    order = 6,
-                    name = L["Use Chinese numerals format"],
-                    desc = L["By default all formulas use divider (for value eq 1000 and more is 1000, for 1 000 000 and more is 1 000 000, etc).\n" ..
-                        "But with this option divider eq 10 000 and 100 000 000.\n\n" ..
-                        "The description of the formulas remains the same, so the description of the formulas is not correct with this parameter, but the formulas work correctly.\n\n" ..
-                        "Use these formulas for Chinese numerals:\n" ..
-                        "Value greater than 1000 -> '%.2f万', and '%.2f萬' for zhTW.\n" ..
-                        "Value greater than 100 000 -> '%.1f万', and '%.1f萬' for zhTW.\n" ..
-                        "Value greater than 1 000 000 -> '%.1f万', and '%.1f萬' for zhTW.\n" ..
-                        "Value greater than 10 000 000 -> '%.0f万', and '%.0f萬' for zhTW.\n" ..
-                        "Value greater than 100 000 000 -> '%.2f亿', and '%.2f億' for zhTW.\n" ..
-                        "Value greater than 1 000 000 000 -> '%.2f亿', and '%.2f億' for zhTW.\n\n" ..
-                        "More information about Chinese numerals format you can read on project site"],
-                    set = function(info, value)
-                        setOpt(info, value)
-                        EasyFrames:GetModule("Party"):UpdateTextStringWithValues()
-                    end,
-                    arg = "party",
-                },
-            }
-        },
-
-        manaFormat = {
-            type = "group",
-            order = 5,
-            inline = true,
-            name = "",
-            hidden = function()
-                local manaFormat = EasyFrames.db.profile.party.manaFormat
-                if (manaFormat == "custom") then
-                    return false
-                end
-
-                return true
-            end,
-            args = {
-                header = {
-                    type = "header",
-                    order = 1,
-                    name = L["Custom format of mana"],
-                },
-
-                desc = {
-                    type = "description",
-                    order = 2,
-                    name = L["You can set custom mana format. More information about custom mana format you can read on project site.\n\n" ..
-                            "Formulas:"],
-                },
-
-                customManaFormatFormulas = {
-                    type = "group",
-                    order = 3,
-                    inline = true,
-                    name = "",
-                    get = getDeepOpt,
-                    set = function(info, value)
-                        local ns, opt = string.split(".", info.arg)
-                        local key = info[#info]
-                        EasyFrames.db.profile[ns][opt][key] = value
-
-                        EasyFrames:GetModule("Party"):UpdateTextStringWithValues(PartyMemberFrame1ManaBar)
-                    end,
-                    args = {
-                        gt1T = {
-                            type = "input",
-                            order = 1,
-                            name = L["Value greater than 1000"],
-                            desc = L["Formula converts the original value to the specified value.\n\n" ..
-                                    "Description: for example formula is '%.fM'.\n" ..
-                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
-                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
-
-                            arg = "party.customManaFormatFormulas"
-                        },
-                        gt100T = {
-                            type = "input",
-                            order = 2,
-                            name = L["Value greater than 100 000"],
-                            desc = L["Formula converts the original value to the specified value.\n\n" ..
-                                    "Description: for example formula is '%.fM'.\n" ..
-                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
-                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
-                            arg = "party.customManaFormatFormulas"
-                        },
-
-                        gt1M = {
-                            type = "input",
-                            order = 3,
-                            name = L["Value greater than 1 000 000"],
-                            desc = L["Formula converts the original value to the specified value.\n\n" ..
-                                    "Description: for example formula is '%.fM'.\n" ..
-                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
-                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
-                            arg = "party.customManaFormatFormulas"
-                        },
-
-                        gt10M = {
-                            type = "input",
-                            order = 4,
-                            name = L["Value greater than 10 000 000"],
-                            desc = L["Formula converts the original value to the specified value.\n\n" ..
-                                    "Description: for example formula is '%.fM'.\n" ..
-                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
-                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
-                            arg = "party.customManaFormatFormulas"
-                        },
-
-                        gt100M = {
-                            type = "input",
-                            order = 5,
-                            name = L["Value greater than 100 000 000"],
-                            desc = L["Formula converts the original value to the specified value.\n\n" ..
-                                    "Description: for example formula is '%.fM'.\n" ..
-                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
-                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
-                            arg = "party.customManaFormatFormulas"
-                        },
-
-                        gt1B = {
-                            type = "input",
-                            order = 6,
-                            name = L["Value greater than 1 000 000 000"],
-                            desc = L["Formula converts the original value to the specified value.\n\n" ..
-                                    "Description: for example formula is '%.fM'.\n" ..
-                                    "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
-                                    "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
-                            arg = "party.customManaFormatFormulas"
-                        },
-                    }
-                },
-
-                useManaFormatFullValues = {
-                    type = "toggle",
-                    order = 4,
-                    name = L["Use full values of mana"],
-                    desc = L["By default all formulas use divider (for value eq 1000 and more it's 1000, for 1 000 000 and more it's 1 000 000, etc).\n\n" ..
-                            "If checked formulas will use full values of mana (without divider)"],
-                    arg = "party",
-                    set = function(info, value)
-                        setOpt(info, value)
-                        EasyFrames:GetModule("Party"):UpdateTextStringWithValues(PartyMemberFrame1ManaBar)
-                    end,
-                },
-
-                customManaFormat = {
-                    type = "input",
-                    order = 5,
-                    width = "double",
-                    name = L["Displayed mana by pattern"],
-                    desc = L["You can use patterns:\n\n" ..
-                            "%CURRENT% - return current mana\n" ..
-                            "%MAX% - return maximum of mana\n" ..
-                            "%PERCENT% - return percent of current/max mana\n\n" ..
-                            "All values are returned from formulas. For set abbreviation use formulas' fields"],
-                    set = function(info, value)
-                        setOpt(info, value)
-                        EasyFrames:GetModule("Party"):UpdateTextStringWithValues(PartyMemberFrame1ManaBar)
-                    end,
-                    arg = "party"
-                },
-
-                useChineseNumeralsManaFormat = {
-                    type = "toggle",
-                    order = 6,
-                    name = L["Use Chinese numerals format"],
-                    desc = L["By default all formulas use divider (for value eq 1000 and more is 1000, for 1 000 000 and more is 1 000 000, etc).\n" ..
-                        "But with this option divider eq 10 000 and 100 000 000.\n\n" ..
-                        "The description of the formulas remains the same, so the description of the formulas is not correct with this parameter, but the formulas work correctly.\n\n" ..
-                        "Use these formulas for Chinese numerals:\n" ..
-                        "Value greater than 1000 -> '%.2f万', and '%.2f萬' for zhTW.\n" ..
-                        "Value greater than 100 000 -> '%.1f万', and '%.1f萬' for zhTW.\n" ..
-                        "Value greater than 1 000 000 -> '%.1f万', and '%.1f萬' for zhTW.\n" ..
-                        "Value greater than 10 000 000 -> '%.0f万', and '%.0f萬' for zhTW.\n" ..
-                        "Value greater than 100 000 000 -> '%.2f亿', and '%.2f億' for zhTW.\n" ..
-                        "Value greater than 1 000 000 000 -> '%.2f亿', and '%.2f億' for zhTW.\n\n" ..
-                        "More information about Chinese numerals format you can read on project site"],
-                    set = function(info, value)
-                        setOpt(info, value)
-                        EasyFrames:GetModule("Party"):UpdateTextStringWithValues(PartyMemberFrame1ManaBar)
-                    end,
-                    arg = "party",
-                },
-            }
-        },
+        --HPManaFormatOptions = {
+        --    type = "group",
+        --    order = 3,
+        --    inline = true,
+        --    name = "",
+        --    args = {
+        --        header = {
+        --            type = "header",
+        --            order = 1,
+        --            name = L["HP and MP bars"],
+        --        },
+        --
+        --        healthFormat = {
+        --            type = "select",
+        --            order = 2,
+        --            name = L["Party healthbar text format"],
+        --            desc = L["Set the party healthbar text format"],
+        --            values = healthFormat,
+        --            set = function(info, value)
+        --                setOpt(info, value)
+        --                EasyFrames:GetModule("Party"):UpdateTextStringWithValues()
+        --            end,
+        --            arg = "party"
+        --        },
+        --
+        --        newLine = {
+        --            type = "description",
+        --            order = 3,
+        --            name = "",
+        --        },
+        --
+        --        healthBarFontStyle = {
+        --            type = "select",
+        --            order = 4,
+        --            name = L["Font style"],
+        --            desc = L["Healthbar font style"],
+        --            values = fontStyle,
+        --            set = function(info, value)
+        --                setOpt(info, value)
+        --                EasyFrames:GetModule("Party"):SetHealthBarsFont()
+        --            end,
+        --            arg = "party"
+        --        },
+        --
+        --        healthBarFontFamily = {
+        --            order = 5,
+        --            name = L["Font family"],
+        --            desc = L["Healthbar font family"],
+        --            type = "select",
+        --            dialogControl = 'LSM30_Font',
+        --            values = Media:HashTable("font"),
+        --            set = function(info, value)
+        --                setOpt(info, value)
+        --                EasyFrames:GetModule("Party"):SetHealthBarsFont()
+        --            end,
+        --            arg = "party"
+        --        },
+        --
+        --        healthBarFontSize = {
+        --            type = "range",
+        --            order = 6,
+        --            name = L["Font size"],
+        --            desc = L["Healthbar font size"],
+        --            min = MIN_RANGE,
+        --            max = MAX_RANGE,
+        --            step = 1,
+        --            set = function(info, value)
+        --                setOpt(info, value)
+        --                EasyFrames:GetModule("Party"):SetHealthBarsFont()
+        --            end,
+        --            arg = "party"
+        --        },
+        --
+        --        manaFormat = {
+        --            type = "select",
+        --            order = 7,
+        --            name = L["Party manabar text format"],
+        --            desc = L["Set the party manabar text format"],
+        --            values = manaFormat,
+        --            set = function(info, value)
+        --                setOpt(info, value)
+        --                EasyFrames:GetModule("Party"):UpdateTextStringWithValues(PartyMemberFrame1ManaBar)
+        --            end,
+        --            arg = "party"
+        --        },
+        --
+        --        newLine2 = {
+        --            type = "description",
+        --            order = 8,
+        --            name = "",
+        --        },
+        --
+        --        manaBarFontStyle = {
+        --            type = "select",
+        --            order = 9,
+        --            name = L["Font style"],
+        --            desc = L["Manabar font style"],
+        --            values = fontStyle,
+        --            set = function(info, value)
+        --                setOpt(info, value)
+        --                EasyFrames:GetModule("Party"):SetManaBarsFont()
+        --            end,
+        --            arg = "party"
+        --        },
+        --
+        --        manaBarFontFamily = {
+        --            order = 10,
+        --            name = L["Font family"],
+        --            desc = L["Manabar font family"],
+        --            type = "select",
+        --            dialogControl = 'LSM30_Font',
+        --            values = Media:HashTable("font"),
+        --            set = function(info, value)
+        --                setOpt(info, value)
+        --                EasyFrames:GetModule("Party"):SetManaBarsFont()
+        --            end,
+        --            arg = "party"
+        --        },
+        --
+        --        manaBarFontSize = {
+        --            type = "range",
+        --            order = 11,
+        --            name = L["Font size"],
+        --            desc = L["Manabar font size"],
+        --            min = MIN_RANGE,
+        --            max = MAX_RANGE,
+        --            step = 1,
+        --            set = function(info, value)
+        --                setOpt(info, value)
+        --                EasyFrames:GetModule("Party"):SetManaBarsFont()
+        --            end,
+        --            arg = "party"
+        --        },
+        --    },
+        --},
+        --
+        --HPFormat = {
+        --    type = "group",
+        --    order = 4,
+        --    inline = true,
+        --    name = "",
+        --    hidden = function()
+        --        local healthFormat = EasyFrames.db.profile.party.healthFormat
+        --        if (healthFormat == "custom") then
+        --            return false
+        --        end
+        --
+        --        return true
+        --    end,
+        --    args = {
+        --        header = {
+        --            type = "header",
+        --            order = 1,
+        --            name = L["Custom format of HP"],
+        --        },
+        --
+        --        desc = {
+        --            type = "description",
+        --            order = 2,
+        --            name = L["You can set custom HP format. More information about custom HP format you can read on project site.\n\n" ..
+        --                    "Formulas:"],
+        --        },
+        --
+        --        customHealthFormatFormulas = {
+        --            type = "group",
+        --            order = 3,
+        --            inline = true,
+        --            name = "",
+        --            get = getDeepOpt,
+        --            set = function(info, value)
+        --                local ns, opt = string.split(".", info.arg)
+        --                local key = info[#info]
+        --                EasyFrames.db.profile[ns][opt][key] = value
+        --
+        --                EasyFrames:GetModule("Party"):UpdateTextStringWithValues()
+        --            end,
+        --            args = {
+        --                gt1T = {
+        --                    type = "input",
+        --                    order = 1,
+        --                    name = L["Value greater than 1000"],
+        --                    desc = L["Formula converts the original value to the specified value.\n\n" ..
+        --                            "Description: for example formula is '%.fM'.\n" ..
+        --                            "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+        --                            "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+        --
+        --                    arg = "party.customHealthFormatFormulas"
+        --                },
+        --                gt100T = {
+        --                    type = "input",
+        --                    order = 2,
+        --                    name = L["Value greater than 100 000"],
+        --                    desc = L["Formula converts the original value to the specified value.\n\n" ..
+        --                            "Description: for example formula is '%.fM'.\n" ..
+        --                            "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+        --                            "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+        --                    arg = "party.customHealthFormatFormulas"
+        --                },
+        --
+        --                gt1M = {
+        --                    type = "input",
+        --                    order = 3,
+        --                    name = L["Value greater than 1 000 000"],
+        --                    desc = L["Formula converts the original value to the specified value.\n\n" ..
+        --                            "Description: for example formula is '%.fM'.\n" ..
+        --                            "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+        --                            "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+        --                    arg = "party.customHealthFormatFormulas"
+        --                },
+        --
+        --                gt10M = {
+        --                    type = "input",
+        --                    order = 4,
+        --                    name = L["Value greater than 10 000 000"],
+        --                    desc = L["Formula converts the original value to the specified value.\n\n" ..
+        --                            "Description: for example formula is '%.fM'.\n" ..
+        --                            "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+        --                            "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+        --                    arg = "party.customHealthFormatFormulas"
+        --                },
+        --
+        --                gt100M = {
+        --                    type = "input",
+        --                    order = 5,
+        --                    name = L["Value greater than 100 000 000"],
+        --                    desc = L["Formula converts the original value to the specified value.\n\n" ..
+        --                            "Description: for example formula is '%.fM'.\n" ..
+        --                            "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+        --                            "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+        --                    arg = "party.customHealthFormatFormulas"
+        --                },
+        --
+        --                gt1B = {
+        --                    type = "input",
+        --                    order = 6,
+        --                    name = L["Value greater than 1 000 000 000"],
+        --                    desc = L["Formula converts the original value to the specified value.\n\n" ..
+        --                            "Description: for example formula is '%.fM'.\n" ..
+        --                            "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+        --                            "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+        --                    arg = "party.customHealthFormatFormulas"
+        --                },
+        --            }
+        --        },
+        --
+        --        useHealthFormatFullValues = {
+        --            type = "toggle",
+        --            order = 4,
+        --            name = L["Use full values of health"],
+        --            desc = L["By default all formulas use divider (for value eq 1000 and more it's 1000, for 1 000 000 and more it's 1 000 000, etc).\n\n" ..
+        --                    "If checked formulas will use full values of HP (without divider)"],
+        --            arg = "party",
+        --            set = function(info, value)
+        --                setOpt(info, value)
+        --                EasyFrames:GetModule("Party"):UpdateTextStringWithValues()
+        --            end,
+        --        },
+        --
+        --        customHealthFormat = {
+        --            type = "input",
+        --            order = 5,
+        --            width = "double",
+        --            name = L["Displayed HP by pattern"],
+        --            desc = L["You can use patterns:\n\n" ..
+        --                    "%CURRENT% - return current health\n" ..
+        --                    "%MAX% - return maximum of health\n" ..
+        --                    "%PERCENT% - return percent of current/max health\n\n" ..
+        --                    "All values are returned from formulas. For set abbreviation use formulas' fields"],
+        --            set = function(info, value)
+        --                setOpt(info, value)
+        --                EasyFrames:GetModule("Party"):UpdateTextStringWithValues()
+        --            end,
+        --            arg = "party"
+        --        },
+        --
+        --        useChineseNumeralsHealthFormat = {
+        --            type = "toggle",
+        --            order = 6,
+        --            name = L["Use Chinese numerals format"],
+        --            desc = L["By default all formulas use divider (for value eq 1000 and more is 1000, for 1 000 000 and more is 1 000 000, etc).\n" ..
+        --                "But with this option divider eq 10 000 and 100 000 000.\n\n" ..
+        --                "The description of the formulas remains the same, so the description of the formulas is not correct with this parameter, but the formulas work correctly.\n\n" ..
+        --                "Use these formulas for Chinese numerals:\n" ..
+        --                "Value greater than 1000 -> '%.2f万', and '%.2f萬' for zhTW.\n" ..
+        --                "Value greater than 100 000 -> '%.1f万', and '%.1f萬' for zhTW.\n" ..
+        --                "Value greater than 1 000 000 -> '%.1f万', and '%.1f萬' for zhTW.\n" ..
+        --                "Value greater than 10 000 000 -> '%.0f万', and '%.0f萬' for zhTW.\n" ..
+        --                "Value greater than 100 000 000 -> '%.2f亿', and '%.2f億' for zhTW.\n" ..
+        --                "Value greater than 1 000 000 000 -> '%.2f亿', and '%.2f億' for zhTW.\n\n" ..
+        --                "More information about Chinese numerals format you can read on project site"],
+        --            set = function(info, value)
+        --                setOpt(info, value)
+        --                EasyFrames:GetModule("Party"):UpdateTextStringWithValues()
+        --            end,
+        --            arg = "party",
+        --        },
+        --    }
+        --},
+        --
+        --manaFormat = {
+        --    type = "group",
+        --    order = 5,
+        --    inline = true,
+        --    name = "",
+        --    hidden = function()
+        --        local manaFormat = EasyFrames.db.profile.party.manaFormat
+        --        if (manaFormat == "custom") then
+        --            return false
+        --        end
+        --
+        --        return true
+        --    end,
+        --    args = {
+        --        header = {
+        --            type = "header",
+        --            order = 1,
+        --            name = L["Custom format of mana"],
+        --        },
+        --
+        --        desc = {
+        --            type = "description",
+        --            order = 2,
+        --            name = L["You can set custom mana format. More information about custom mana format you can read on project site.\n\n" ..
+        --                    "Formulas:"],
+        --        },
+        --
+        --        customManaFormatFormulas = {
+        --            type = "group",
+        --            order = 3,
+        --            inline = true,
+        --            name = "",
+        --            get = getDeepOpt,
+        --            set = function(info, value)
+        --                local ns, opt = string.split(".", info.arg)
+        --                local key = info[#info]
+        --                EasyFrames.db.profile[ns][opt][key] = value
+        --
+        --                EasyFrames:GetModule("Party"):UpdateTextStringWithValues(PartyMemberFrame1ManaBar)
+        --            end,
+        --            args = {
+        --                gt1T = {
+        --                    type = "input",
+        --                    order = 1,
+        --                    name = L["Value greater than 1000"],
+        --                    desc = L["Formula converts the original value to the specified value.\n\n" ..
+        --                            "Description: for example formula is '%.fM'.\n" ..
+        --                            "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+        --                            "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+        --
+        --                    arg = "party.customManaFormatFormulas"
+        --                },
+        --                gt100T = {
+        --                    type = "input",
+        --                    order = 2,
+        --                    name = L["Value greater than 100 000"],
+        --                    desc = L["Formula converts the original value to the specified value.\n\n" ..
+        --                            "Description: for example formula is '%.fM'.\n" ..
+        --                            "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+        --                            "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+        --                    arg = "party.customManaFormatFormulas"
+        --                },
+        --
+        --                gt1M = {
+        --                    type = "input",
+        --                    order = 3,
+        --                    name = L["Value greater than 1 000 000"],
+        --                    desc = L["Formula converts the original value to the specified value.\n\n" ..
+        --                            "Description: for example formula is '%.fM'.\n" ..
+        --                            "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+        --                            "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+        --                    arg = "party.customManaFormatFormulas"
+        --                },
+        --
+        --                gt10M = {
+        --                    type = "input",
+        --                    order = 4,
+        --                    name = L["Value greater than 10 000 000"],
+        --                    desc = L["Formula converts the original value to the specified value.\n\n" ..
+        --                            "Description: for example formula is '%.fM'.\n" ..
+        --                            "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+        --                            "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+        --                    arg = "party.customManaFormatFormulas"
+        --                },
+        --
+        --                gt100M = {
+        --                    type = "input",
+        --                    order = 5,
+        --                    name = L["Value greater than 100 000 000"],
+        --                    desc = L["Formula converts the original value to the specified value.\n\n" ..
+        --                            "Description: for example formula is '%.fM'.\n" ..
+        --                            "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+        --                            "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+        --                    arg = "party.customManaFormatFormulas"
+        --                },
+        --
+        --                gt1B = {
+        --                    type = "input",
+        --                    order = 6,
+        --                    name = L["Value greater than 1 000 000 000"],
+        --                    desc = L["Formula converts the original value to the specified value.\n\n" ..
+        --                            "Description: for example formula is '%.fM'.\n" ..
+        --                            "The first part '%.f' is the formula itself, the second part 'M' is the abbreviation\n\n" ..
+        --                            "Example, value is 150550. '%.f' will be converted to '151' and '%.1f' to '150.6'"],
+        --                    arg = "party.customManaFormatFormulas"
+        --                },
+        --            }
+        --        },
+        --
+        --        useManaFormatFullValues = {
+        --            type = "toggle",
+        --            order = 4,
+        --            name = L["Use full values of mana"],
+        --            desc = L["By default all formulas use divider (for value eq 1000 and more it's 1000, for 1 000 000 and more it's 1 000 000, etc).\n\n" ..
+        --                    "If checked formulas will use full values of mana (without divider)"],
+        --            arg = "party",
+        --            set = function(info, value)
+        --                setOpt(info, value)
+        --                EasyFrames:GetModule("Party"):UpdateTextStringWithValues(PartyMemberFrame1ManaBar)
+        --            end,
+        --        },
+        --
+        --        customManaFormat = {
+        --            type = "input",
+        --            order = 5,
+        --            width = "double",
+        --            name = L["Displayed mana by pattern"],
+        --            desc = L["You can use patterns:\n\n" ..
+        --                    "%CURRENT% - return current mana\n" ..
+        --                    "%MAX% - return maximum of mana\n" ..
+        --                    "%PERCENT% - return percent of current/max mana\n\n" ..
+        --                    "All values are returned from formulas. For set abbreviation use formulas' fields"],
+        --            set = function(info, value)
+        --                setOpt(info, value)
+        --                EasyFrames:GetModule("Party"):UpdateTextStringWithValues(PartyMemberFrame1ManaBar)
+        --            end,
+        --            arg = "party"
+        --        },
+        --
+        --        useChineseNumeralsManaFormat = {
+        --            type = "toggle",
+        --            order = 6,
+        --            name = L["Use Chinese numerals format"],
+        --            desc = L["By default all formulas use divider (for value eq 1000 and more is 1000, for 1 000 000 and more is 1 000 000, etc).\n" ..
+        --                "But with this option divider eq 10 000 and 100 000 000.\n\n" ..
+        --                "The description of the formulas remains the same, so the description of the formulas is not correct with this parameter, but the formulas work correctly.\n\n" ..
+        --                "Use these formulas for Chinese numerals:\n" ..
+        --                "Value greater than 1000 -> '%.2f万', and '%.2f萬' for zhTW.\n" ..
+        --                "Value greater than 100 000 -> '%.1f万', and '%.1f萬' for zhTW.\n" ..
+        --                "Value greater than 1 000 000 -> '%.1f万', and '%.1f萬' for zhTW.\n" ..
+        --                "Value greater than 10 000 000 -> '%.0f万', and '%.0f萬' for zhTW.\n" ..
+        --                "Value greater than 100 000 000 -> '%.2f亿', and '%.2f億' for zhTW.\n" ..
+        --                "Value greater than 1 000 000 000 -> '%.2f亿', and '%.2f億' for zhTW.\n\n" ..
+        --                "More information about Chinese numerals format you can read on project site"],
+        --            set = function(info, value)
+        --                setOpt(info, value)
+        --                EasyFrames:GetModule("Party"):UpdateTextStringWithValues(PartyMemberFrame1ManaBar)
+        --            end,
+        --            arg = "party",
+        --        },
+        --    }
+        --},
 
         frameName = {
             type = "group",
@@ -4903,9 +4159,6 @@ function EasyFrames:SetupOptions()
     -- Target
     self:RegisterModuleOptions("Target", targetOptions, L["Target"])
 
-    -- Focus
-    self:RegisterModuleOptions("Focus", focusOptions, L["Focus"])
-
     -- Pet
     self:RegisterModuleOptions("Pet", petOptions, L["Pet"])
 
@@ -4913,7 +4166,7 @@ function EasyFrames:SetupOptions()
     self:RegisterModuleOptions("Party", partyOptions, L["Party"])
 
     -- Boss
-    self:RegisterModuleOptions("Boss", bossOptions, L["Boss"])
+    --self:RegisterModuleOptions("Boss", bossOptions, L["Boss"])
 
     -- Profiles
     self:RegisterModuleOptions("Profiles", LibStub("AceDBOptions-3.0"):GetOptionsTable(self.db))

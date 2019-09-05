@@ -1,7 +1,7 @@
 --[[
     Appreciate what others people do. (c) Usoltsev
 
-    Copyright (c) <2016-2018>, Usoltsev <alexander.usolcev@gmail.com> All rights reserved.
+    Copyright (c) <2016-2019>, Usoltsev <alexander.usolcev@gmail.com> All rights reserved.
 
     Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
     Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
@@ -145,7 +145,7 @@ local defaults = {
         },
 
         player = {
-            scaleFrame = 1.2,
+            scaleFrame = 1,
             portrait = "2",
             -- Custom HP format.
             healthFormat = "3",
@@ -176,7 +176,7 @@ local defaults = {
             showHitIndicator = true,
             showSpecialbar = true,
             showRestIcon = true,
-            showStatusTexture = false,
+            showStatusTexture = true,
             showAttackBackground = true,
             attackBackgroundOpacity = 0.7,
             showGroupIndicator = true,
@@ -185,7 +185,7 @@ local defaults = {
         },
 
         target = {
-            scaleFrame = 1.2,
+            scaleFrame = 1,
             portrait = "2",
             -- Custom HP format.
             healthFormat = "3",
@@ -215,45 +215,9 @@ local defaults = {
             targetNameColor = { unpack(DEFAULT_FRAMES_NAME_COLOR) },
 
             showToTFrame = true,
-            showAttackBackground = false,
+            showAttackBackground = true,
             attackBackgroundOpacity = 0.7,
             showTargetCastbar = false,
-            showPVPIcon = true,
-        },
-
-        focus = {
-            scaleFrame = 1.2,
-            portrait = "2",
-            -- Custom HP format.
-            healthFormat = "3",
-            healthBarFontStyle = DEFAULT_BAR_FONT_STYLE,
-            healthBarFontFamily = DEFAULT_BAR_FONT_FAMILY,
-            healthBarFontSize = DEFAULT_BAR_FONT_SIZE,
-            useHealthFormatFullValues = false,
-            reverseDirectionLosingHP = false,
-            customHealthFormatFormulas = DefaultCustomFormatFormulas(),
-            customHealthFormat = DEFAULT_CUSTOM_FORMAT,
-            useChineseNumeralsHealthFormat = false,
-            -- Custom mana format.
-            manaFormat = "2",
-            manaBarFontStyle = DEFAULT_BAR_FONT_STYLE,
-            manaBarFontFamily = DEFAULT_BAR_FONT_FAMILY,
-            manaBarFontSize = DEFAULT_BAR_FONT_SIZE,
-            useManaFormatFullValues = false,
-            customManaFormatFormulas = DefaultCustomFormatFormulas(),
-            customManaFormat = DEFAULT_CUSTOM_FORMAT,
-            useChineseNumeralsManaFormat = false,
-            -- Name.
-            showName = true,
-            showNameInsideFrame = false,
-            focusNameFontFamily = DEFAULT_BAR_FONT_FAMILY,
-            focusNameFontSize = DEFAULT_BAR_FONT_SIZE,
-            focusNameFontStyle = "NONE",
-            focusNameColor = { unpack(DEFAULT_FRAMES_NAME_COLOR) },
-
-            showToTFrame = true,
-            showAttackBackground = false,
-            attackBackgroundOpacity = 0.7,
             showPVPIcon = true,
         },
 
@@ -293,7 +257,7 @@ local defaults = {
         },
 
         party = {
-            scaleFrame = 1.2,
+            scaleFrame = 1,
             -- Custom HP format.
             healthFormat = "2",
             healthBarFontStyle = DEFAULT_BAR_FONT_STYLE,
@@ -320,35 +284,6 @@ local defaults = {
             partyNameColor = { unpack(DEFAULT_FRAMES_NAME_COLOR) },
 
             showPetFrames = true,
-        },
-
-        boss = {
-            scaleFrame = 0.9,
-            -- Custom HP format.
-            healthFormat = "2",
-            healthBarFontStyle = DEFAULT_BAR_FONT_STYLE,
-            healthBarFontFamily = DEFAULT_BAR_FONT_FAMILY,
-            healthBarFontSize = DEFAULT_BAR_LARGE_FONT_SIZE,
-            useHealthFormatFullValues = false,
-            customHealthFormatFormulas = DefaultCustomFormatFormulas(),
-            customHealthFormat = DEFAULT_CUSTOM_FORMAT,
-            useChineseNumeralsHealthFormat = false,
-            -- Custom mana format.
-            manaFormat = "2",
-            manaBarFontStyle = DEFAULT_BAR_FONT_STYLE,
-            manaBarFontFamily = DEFAULT_BAR_FONT_FAMILY,
-            manaBarFontSize = DEFAULT_BAR_LARGE_FONT_SIZE,
-            useManaFormatFullValues = false,
-            customManaFormatFormulas = DefaultCustomFormatFormulas(),
-            customManaFormat = DEFAULT_CUSTOM_FORMAT,
-            useChineseNumeralsManaFormat = false,
-            -- Name.
-            showName = true,
-            showNameInsideFrame = false,
-            bossNameFontFamily = DEFAULT_BAR_FONT_FAMILY,
-            bossNameFontSize = DEFAULT_BAR_FONT_SIZE,
-            bossNameFontStyle = "NONE",
-            bossNameColor = { unpack(DEFAULT_FRAMES_NAME_COLOR) },
         },
     }
 }
@@ -559,9 +494,6 @@ function EasyFrames.Utils.GetAllFrames()
         TargetFrame,
         TargetFrameToT,
 
-        FocusFrame,
-        FocusFrameToT,
-
         PetFrame,
 
         PartyMemberFrame1,
@@ -578,9 +510,6 @@ function EasyFrames.Utils.GetFramesHealthBar()
 
         TargetFrameHealthBar,
         TargetFrameToTHealthBar,
-
-        FocusFrameHealthBar,
-        FocusFrameToTHealthBar,
 
         PartyMemberFrame1HealthBar,
         PartyMemberFrame2HealthBar,
@@ -603,9 +532,6 @@ function EasyFrames.Utils.GetFramesManaBar()
 
         TargetFrameManaBar,
         TargetFrameToTManaBar,
-
-        FocusFrameManaBar,
-        FocusFrameToTManaBar,
 
         PartyMemberFrame1ManaBar,
         PartyMemberFrame2ManaBar,

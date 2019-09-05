@@ -1,7 +1,7 @@
 --[[
     Appreciate what others people do. (c) Usoltsev
 
-    Copyright (c) <2016-2018>, Usoltsev <alexander.usolcev@gmail.com> All rights reserved.
+    Copyright (c) <2016-2019>, Usoltsev <alexander.usolcev@gmail.com> All rights reserved.
 
     Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
     Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
@@ -54,11 +54,11 @@ function Player:OnEnable()
     self:SetHealthBarsFont()
     self:SetManaBarsFont()
     self:ShowHitIndicator(db.player.showHitIndicator)
-    self:ShowSpecialbar(db.player.showSpecialbar)
+    --self:ShowSpecialbar(db.player.showSpecialbar)
     self:ShowRestIcon(db.player.showRestIcon)
     self:ShowStatusTexture(db.player.showStatusTexture)
     self:ShowAttackBackground(db.player.showAttackBackground)
-    self:SetAttackBackgroundOpacity(db.player.attackBackgroundOpacity)
+    --self:SetAttackBackgroundOpacity(db.player.attackBackgroundOpacity)
     self:ShowGroupIndicator(db.player.showGroupIndicator)
     self:ShowRoleIcon(db.player.showRoleIcon)
     self:ShowPVPIcon(db.player.showPVPIcon)
@@ -79,11 +79,11 @@ function Player:OnProfileChanged(newDB)
     self:SetHealthBarsFont()
     self:SetManaBarsFont()
     self:ShowHitIndicator(db.player.showHitIndicator)
-    self:ShowSpecialbar(db.player.showSpecialbar)
+    --self:ShowSpecialbar(db.player.showSpecialbar)
     self:ShowRestIcon(db.player.showRestIcon)
     self:ShowStatusTexture(db.player.showStatusTexture)
     self:ShowAttackBackground(db.player.showAttackBackground)
-    self:SetAttackBackgroundOpacity(db.player.attackBackgroundOpacity)
+    --self:SetAttackBackgroundOpacity(db.player.attackBackgroundOpacity)
     self:ShowGroupIndicator(db.player.showGroupIndicator)
     self:ShowRoleIcon(db.player.showRoleIcon)
     self:ShowPVPIcon(db.player.showPVPIcon)
@@ -160,47 +160,47 @@ function Player:ShowHitIndicator(value)
     end
 end
 
-function Player:ShowSpecialbar(value)
-    local SpecialbarOnShow = function(frame)
-        frame:Hide()
-    end
-
-    local _, englishClass = UnitClass("player")
-    local playerSpec = GetSpecialization()
-    local frame
-
-    if (englishClass == "SHAMAN") then
-        frame = TotemFrame
-    elseif (englishClass == "DEATHKNIGHT") then
-        frame = RuneFrame
-    elseif (englishClass == "MAGE" and playerSpec == SPEC_MAGE_ARCANE) then
-        frame = MageArcaneChargesFrame
-    elseif (englishClass == "MONK" ) then
-        if (playerSpec == SPEC_MONK_BREWMASTER) then
-            frame = MonkStaggerBar
-        elseif (playerSpec == SPEC_MONK_WINDWALKER) then
-            frame = MonkHarmonyBarFrame
-        end
-    elseif (englishClass == "PALADIN" and playerSpec == SPEC_PALADIN_RETRIBUTION) then
-        frame = PaladinPowerBarFrame
-    elseif (englishClass == "ROGUE") then
-        frame = ComboPointPlayerFrame
-    elseif (englishClass == "WARLOCK") then
-        frame = WarlockPowerFrame
-    end
-
-    if (frame) then
-        self:Unhook(frame, "OnShow")
-
-        if (value) then
-            frame:Show()
-        else
-            frame:Hide()
-
-            self:HookScript(frame, "OnShow", SpecialbarOnShow)
-        end
-    end
-end
+--function Player:ShowSpecialbar(value)
+--    local SpecialbarOnShow = function(frame)
+--        frame:Hide()
+--    end
+--
+--    local _, englishClass = UnitClass("player")
+--    local playerSpec = GetSpecialization()
+--    local frame
+--
+--    if (englishClass == "SHAMAN") then
+--        frame = TotemFrame
+--    elseif (englishClass == "DEATHKNIGHT") then
+--        frame = RuneFrame
+--    elseif (englishClass == "MAGE" and playerSpec == SPEC_MAGE_ARCANE) then
+--        frame = MageArcaneChargesFrame
+--    elseif (englishClass == "MONK" ) then
+--        if (playerSpec == SPEC_MONK_BREWMASTER) then
+--            frame = MonkStaggerBar
+--        elseif (playerSpec == SPEC_MONK_WINDWALKER) then
+--            frame = MonkHarmonyBarFrame
+--        end
+--    elseif (englishClass == "PALADIN" and playerSpec == SPEC_PALADIN_RETRIBUTION) then
+--        frame = PaladinPowerBarFrame
+--    elseif (englishClass == "ROGUE") then
+--        frame = ComboPointPlayerFrame
+--    elseif (englishClass == "WARLOCK") then
+--        frame = WarlockPowerFrame
+--    end
+--
+--    if (frame) then
+--        self:Unhook(frame, "OnShow")
+--
+--        if (value) then
+--            frame:Show()
+--        else
+--            frame:Hide()
+--
+--            self:HookScript(frame, "OnShow", SpecialbarOnShow)
+--        end
+--    end
+--end
 
 function Player:UpdateTextStringWithValues(statusBar)
     local frame = statusBar or PlayerFrameHealthBar
@@ -242,7 +242,7 @@ function Player:SetManaBarsFont()
     local fontStyle = db.player.manaBarFontStyle
 
     PlayerFrameManaBar.TextString:SetFont(fontFamily, fontSize, fontStyle)
-    PlayerFrameAlternateManaBar.TextString:SetFont(fontFamily, fontSize, fontStyle)
+    --PlayerFrameAlternateManaBar.TextString:SetFont(fontFamily, fontSize, fontStyle)
 end
 
 function Player:SetFrameNameFont()
@@ -310,7 +310,7 @@ function Player:ShowAttackBackground(value)
     for _, frame in pairs({
         PlayerAttackGlow,
         PlayerAttackBackground,
-        PlayerFrameFlash,
+        --PlayerFrameFlash,
     }) do
         if frame then
             self:Unhook(frame, "Show")
@@ -328,9 +328,9 @@ function Player:ShowAttackBackground(value)
     end
 end
 
-function Player:SetAttackBackgroundOpacity(value)
-    PlayerFrameFlash:SetAlpha(value)
-end
+--function Player:SetAttackBackgroundOpacity(value)
+--    PlayerFrameFlash:SetAlpha(value)
+--end
 
 function Player:ShowGroupIndicator(value)
     local frame = PlayerFrameGroupIndicator
