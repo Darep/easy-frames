@@ -194,6 +194,7 @@ local defaults = {
             healthBarFontSize = DEFAULT_BAR_FONT_SIZE,
             useHealthFormatFullValues = false,
             reverseDirectionLosingHP = false,
+            useThirdPartyAddonToGetHP = false,
             customHealthFormatFormulas = DefaultCustomFormatFormulas(),
             customHealthFormat = DEFAULT_CUSTOM_FORMAT,
             useChineseNumeralsHealthFormat = false,
@@ -484,6 +485,68 @@ function EasyFrames.Utils.UpdateManaValues(frame, manaFormat, customManaFormat, 
             manabar.TextString:SetText(Result);
         end
 
+    end
+end
+
+function EasyFrames.Utils.UpdateHealthValuesFromThirdParty(frame, healthFormat, customHealthFormat, customHealthFormatFormulas, useHealthFormatFullValues, useChineseNumeralsHealthFormat)
+    local unit = frame.unit
+    local healthbar = frame:GetParent().healthbar
+
+    if (not RealMobHealth) then
+        return
+    end
+
+    local Health, HealthMax = RealMobHealth.GetUnitHealth(unit)
+
+    if (Health > 0) then
+        local HealthPercent = (Health / HealthMax) * 100
+
+        if (healthFormat == "custom") then
+            -- Own format
+            local useFullValues = false
+            if (useHealthFormatFullValues) then
+                useFullValues = 1
+            end
+
+            if not useChineseNumeralsHealthFormat then
+                Health = CustomReadableNumber(Health, customHealthFormatFormulas, useFullValues)
+                HealthMax = CustomReadableNumber(HealthMax, customHealthFormatFormulas, useFullValues)
+            else
+                Health = CustomChineseReadableNumber(Health, customHealthFormatFormulas)
+                HealthMax = CustomChineseReadableNumber(HealthMax, customHealthFormatFormulas)
+            end
+
+            local Result = string.gsub(
+                string.gsub(
+                    string.gsub(
+                        customHealthFormat,
+                        "%%PERCENT%%",
+                        string.format("%.0f", HealthPercent)
+                    ),
+                    "%%MAX%%",
+                    HealthMax
+                ),
+                "%%CURRENT%%",
+                Health
+            )
+
+            healthbar.TextString:SetText(Result);
+        elseif (healthFormat == "1") then
+            -- Percent
+            healthbar.TextString:SetText(format("%.0f", HealthPercent) .. "%")
+        elseif (healthFormat == "2") then
+            -- Current + Max
+
+            healthbar.TextString:SetText(ReadableNumber(Health) .. " / " .. ReadableNumber(HealthMax));
+        elseif (healthFormat == "3") then
+            -- Current + Max + Percent
+
+            healthbar.TextString:SetText(ReadableNumber(Health) .. " / " .. ReadableNumber(HealthMax) .. " (" .. string.format("%.0f", HealthPercent) .. "%)");
+        elseif (healthFormat == "4") then
+            -- Current + Percent
+
+            healthbar.TextString:SetText(ReadableNumber(Health) .. " (" .. string.format("%.0f", HealthPercent) .. "%)");
+        end
     end
 end
 

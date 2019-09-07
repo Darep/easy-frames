@@ -425,9 +425,13 @@ function General:SetHighlightDispelledBuff()
 end
 
 function General:TargetFrame_UpdateAuras(frame, forceHide)
-    local buffFrame, frameStealable, icon, debuffType, isStealable, _
+    local buffFrame, frameStealable, icon, debuffType, caster, isStealable, _
     local selfName = frame:GetName()
     local isEnemy = UnitIsEnemy(PlayerFrame.unit, frame.unit)
+
+    local LARGE_AURA_SIZE = db.general.selfBuffSize
+    local SMALL_AURA_SIZE = db.general.buffSize
+    local buffSize = DEFAULT_BUFF_SIZE
 
     -- Debuffs on top
     if (frame.maxDebuffs > 0 and frame.buffsOnTop) then
@@ -444,12 +448,26 @@ function General:TargetFrame_UpdateAuras(frame, forceHide)
     end
 
     for i = 1, MAX_TARGET_BUFFS do
-        _, icon, _, debuffType, _, _, _, isStealable = UnitBuff(frame.unit, i)
+        _, icon, _, debuffType, _, _, caster, isStealable = UnitBuff(frame.unit, i)
 
         if (icon and (not frame.maxBuffs or i <= frame.maxBuffs)) then
             local frameName = selfName .. 'Buff' .. i
 
             buffFrame = _G[frameName]
+
+            -- Custom buff size
+            if (icon and (not frame.maxBuffs or i <= frame.maxBuffs)) then
+                if (db.general.customBuffSize) then
+                    if (caster == 'player') then
+                        buffSize = LARGE_AURA_SIZE
+                    else
+                        buffSize = SMALL_AURA_SIZE
+                    end
+                end
+
+                buffFrame:SetHeight(buffSize)
+                buffFrame:SetWidth(buffSize)
+            end
 
             -- Buffs on top
             if (i == 1 and frame.buffsOnTop) then

@@ -1618,6 +1618,19 @@ local targetOptions = {
                     end,
                     arg = "target"
                 },
+
+                useThirdPartyAddonToGetHP = {
+                    type = "toggle",
+                    order = 13,
+                    width = "double",
+                    name = L["Use a third-party addon to get HP (for example, with Real Mob Health)"],
+                    desc = L["If using this option, don't forget to install the Real Mob Health addon"],
+                    set = function(info, value)
+                        setOpt(info, value)
+                        EasyFrames:GetModule("Target"):UpdateTextStringWithValues()
+                    end,
+                    arg = "target"
+                },
             }
         },
 

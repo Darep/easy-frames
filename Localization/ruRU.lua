@@ -35,6 +35,9 @@ L["Font style"] = "Стиль шрифта"
 L["Reverse the direction of losing health/mana"] = "Изменить направление потери здоровья/маны"
 L["By default direction starting from right to left. If checked direction of losing health/mana will be from left to right"] = "По умолчанию направление потери здоровья/маны идет справа налево. Если установлено направление будет обратное - слева направо"
 
+L["Use a third-party addon to get HP (for example, with Real Mob Health)"] = "Использовать сторонние аддоны для подсчета HP (например, с помощью Real Mob Health)"
+L["If using this option, don't forget to install the Real Mob Health addon"] = "Если включена данная опция, не забудьте установить Real Mob Health аддон"
+
 L["Custom format of HP"] = "Свой формат HP"
 L["You can set custom HP format. More information about custom HP format you can read on project site.\n\n" ..
         "Formulas:"] = "Вы можете установить свой формат HP. Больше информации о данном формате HP можно прочитать на сайте проекта.\n\n" ..

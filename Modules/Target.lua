@@ -25,6 +25,7 @@ local Target = EasyFrames:NewModule(MODULE_NAME, "AceHook-3.0")
 local db
 
 local UpdateHealthValues = EasyFrames.Utils.UpdateHealthValues
+local UpdateHealthValuesFromThirdParty = EasyFrames.Utils.UpdateHealthValuesFromThirdParty
 local UpdateManaValues = EasyFrames.Utils.UpdateManaValues
 local ClassPortraits = EasyFrames.Utils.ClassPortraits
 local DefaultPortraits = EasyFrames.Utils.DefaultPortraits
@@ -119,10 +120,17 @@ end
 
 function Target:UpdateTextStringWithValues(statusBar)
     local frame = statusBar or TargetFrameHealthBar
+    local UpdateHealthValuesFunc
+
+    if (db.target.useThirdPartyAddonToGetHP) then
+        UpdateHealthValuesFunc = UpdateHealthValuesFromThirdParty
+    else
+        UpdateHealthValuesFunc = UpdateHealthValues
+    end
 
     if (frame.unit == "target") then
         if (frame == TargetFrameHealthBar) then
-            UpdateHealthValues(
+            UpdateHealthValuesFunc(
                 frame,
                 db.target.healthFormat,
                 db.target.customHealthFormat,
