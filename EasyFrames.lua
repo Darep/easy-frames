@@ -498,7 +498,7 @@ function EasyFrames.Utils.UpdateHealthValuesFromThirdParty(frame, healthFormat, 
 
     local Health, HealthMax = RealMobHealth.GetUnitHealth(unit)
 
-    if (Health > 0) then
+    if (Health and Health > 0) then
         local HealthPercent = (Health / HealthMax) * 100
 
         if (healthFormat == "custom") then
