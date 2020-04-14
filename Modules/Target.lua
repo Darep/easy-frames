@@ -180,12 +180,12 @@ function Target:ShowNameInsideFrame(value)
     }
 
     for _, healthBar in pairs(HealthBarTexts) do
-        local point, relativeTo, relativePoint, xOffset, yOffset = healthBar:GetPoint()
+        local point, relativeTo, relativePoint, xOffset = healthBar:GetPoint()
 
         if (value and db.target.showName) then
             Core:MoveTargetFrameName(nil, nil, nil, nil, 20)
 
-            Core:MoveRegion(healthBar, point, relativeTo, relativePoint, xOffset, yOffset - 4)
+            Core:MoveRegion(healthBar, point, relativeTo, relativePoint, xOffset, 8)
         else
             Core:MoveTargetFrameName()
 
