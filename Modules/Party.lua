@@ -41,6 +41,8 @@ function Party:OnEnable()
     --self:SetHealthBarsFont()
     --self:SetManaBarsFont()
 
+    self:SecureHook("PartyMemberFrame_OnEvent", "PartyFrame_UpdateAuras")
+
     --self:SecureHook("TextStatusBar_UpdateTextStringWithValues", "UpdateTextStringWithValues")
 end
 
@@ -155,4 +157,19 @@ function Party:ShowPetFrames(value)
             _G[frame:GetName() .. "PetFrame"]:Hide()
         end
     end)
+end
+
+function Party:PartyFrame_UpdateAuras(frame, event)
+    if (event == "UNIT_AURA") then
+        local selfName = frame:GetName()
+
+        local firstDebuffFrame = _G[selfName .. 'Debuff1']
+
+        if (firstDebuffFrame) then
+            local point, relativeTo, relativePoint, xOffset, _ = firstDebuffFrame:GetPoint()
+
+            firstDebuffFrame:ClearAllPoints()
+            firstDebuffFrame:SetPoint(point, relativeTo, relativePoint, xOffset, -44)
+        end
+    end
 end
