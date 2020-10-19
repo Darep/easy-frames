@@ -310,6 +310,7 @@ Media:Register("frames", "nomana", "Interface\\AddOns\\EasyFrames\\Textures\\Tar
 Media:Register("frames", "boss", "Interface\\AddOns\\EasyFrames\\Textures\\TargetingFrame\\UI-UnitFrame-Boss")
 
 Media:Register("misc", "player-status", "Interface\\AddOns\\EasyFrames\\Textures\\TargetingFrame\\UI-Player-Status")
+Media:Register("misc", "pet-frame-flash", "Interface\\AddOns\\EasyFrames\\Textures\\TargetingFrame\\UI-PartyFrame-Flash")
 
 function EasyFrames:OnInitialize()
     self.db = LibStub("AceDB-3.0"):New("EasyFramesDB", defaults, true)

@@ -309,7 +309,7 @@ function General:SetTexture()
         --PetFrameFlash:SetTexture(Media:Fetch("frames", "nomana"))
     else
         PetFrameTexture:SetTexture(Media:Fetch("frames", "smalltarget"))
-        --PetFrameFlash:SetTexture(Media:Fetch("frames", "smalltarget"))
+        PetFrameFlash:SetTexture(Media:Fetch("misc", "pet-frame-flash"))
     end
 
     -- Party

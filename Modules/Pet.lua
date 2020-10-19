@@ -100,6 +100,7 @@ function Pet:PetFrameUpdate(frame, override)
                 PetFrameManaBarText:Hide();
             else
                 PetFrameTexture:SetTexture(Media:Fetch("frames", "smalltarget"));
+                PetFrameFlash:SetTexture(Media:Fetch("misc", "pet-frame-flash"));
             end
             PetAttackModeTexture:Hide();
 
