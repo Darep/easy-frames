@@ -2197,27 +2197,6 @@ local petOptions = {
             arg = "pet"
         },
 
-        lockedMovableFrame = {
-            type = "toggle",
-            order = 3,
-            name = L["Lock pet frame"],
-            desc = L["Lock or unlock pet frame. When unlocked you can move frame using your mouse (draggable)"],
-            set = function(info, value)
-                setOpt(info, value)
-                EasyFrames:GetModule("Pet"):SetMovable(value)
-            end,
-            arg = "pet"
-        },
-
-        resetPosition = {
-            type = "execute",
-            order = 4,
-            name = L["Reset position to default"],
-            func = function()
-                EasyFrames:GetModule("Pet"):ResetFramePosition()
-            end,
-        },
-
         HPManaFormatOptions = {
             type = "group",
             order = 5,

@@ -223,8 +223,6 @@ local defaults = {
 
         pet = {
             scaleFrame = 1,
-            lockedMovableFrame = true,
-            customPoints = false,
             -- Custom HP format.
             healthFormat = "2",
             healthBarFontStyle = DEFAULT_BAR_FONT_STYLE,

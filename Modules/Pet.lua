@@ -45,8 +45,6 @@ end
 
 function Pet:OnEnable()
     self:SetScale(db.pet.scaleFrame)
-    self:PreSetMovable()
-    self:SetMovable(db.pet.lockedMovableFrame)
 
     self:SetHealthBarsFont()
 
@@ -69,8 +67,6 @@ function Pet:OnProfileChanged(newDB)
     db = self.db.profile
 
     self:SetScale(db.pet.scaleFrame)
-    self:PreSetMovable()
-    self:SetMovable(db.pet.lockedMovableFrame)
 
     self:SetHealthBarsFont()
 
@@ -111,11 +107,6 @@ function Pet:PetFrameUpdate(frame, override)
             if (frame.unit == "player") then
                 EasyFrames:GetModule("Player"):MakeClassPortraits(frame)
             end
-
-            if (db.pet.customPoints) then
-                frame:ClearAllPoints()
-                frame:SetPoint(unpack(db.pet.customPoints))
-            end
         else
             if InCombatLockdown() then
                 return
@@ -128,44 +119,6 @@ end
 
 function Pet:SetScale(value)
     PetFrame:SetScale(value)
-end
-
-function Pet:PreSetMovable()
-    local frame = PetFrame
-
-    frame:SetScript("OnMouseDown", function(frame, button)
-        if not db.pet.lockedMovableFrame and button == "LeftButton" and not frame.isMoving then
-            frame:StartMoving();
-            frame.isMoving = true;
-        end
-    end)
-    frame:SetScript("OnMouseUp", function(frame, button)
-        if not db.pet.lockedMovableFrame and button == "LeftButton" and frame.isMoving then
-            frame:StopMovingOrSizing();
-            frame.isMoving = false;
-
-            db.pet.customPoints = {frame:GetPoint()}
-        end
-    end)
-    frame:SetScript("OnHide", function(frame)
-        if ( not db.pet.lockedMovableFrame and frame.isMoving ) then
-            frame:StopMovingOrSizing();
-            frame.isMoving = false;
-        end
-    end)
-end
-
-function Pet:SetMovable(value)
-    PetFrame:SetMovable(not value)
-end
-
-function Pet:ResetFramePosition()
-    local frame = PetFrame;
-
-    frame:ClearAllPoints()
-    frame:SetPoint("TOPLEFT", PlayerFrame, "TOPLEFT", 60, -75)
-
-    db.pet.customPoints = false
 end
 
 function Pet:UpdateTextStringWithValues(statusBar)
