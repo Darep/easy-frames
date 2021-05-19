@@ -434,7 +434,7 @@ function General:TargetFrame_UpdateAuras(frame, forceHide)
     local buffSize = DEFAULT_BUFF_SIZE
 
     -- Debuffs on top
-    if (frame.maxDebuffs > 0 and frame.buffsOnTop) then
+    if (frame.maxDebuffs ~= nil and frame.maxDebuffs > 0 and frame.buffsOnTop) then
         local _, fisrtDebuffIcon = UnitDebuff(frame.unit, 1)
         local _, fisrtBuffIcon = UnitBuff(frame.unit, 1)
 
